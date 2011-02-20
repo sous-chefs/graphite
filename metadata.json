@@ -1,0 +1,38 @@
+{
+  "name": "graphite",
+  "description": "Installs/Configures graphite",
+  "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n= CAVEATS:\n\nI didn't see an easy way to set Graphite's credentials easily.\nI set those to root/root with an email address going no where.\n",
+  "maintainer": "Heavy Water Software Inc.",
+  "maintainer_email": "darrin@heavywater.ca",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": [
+
+    ]
+  },
+  "dependencies": {
+    "python": [
+
+    ],
+    "apache2": [
+
+    ]
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+  },
+  "version": "0.0.1"
+}

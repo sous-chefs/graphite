@@ -1,0 +1,12 @@
+= DESCRIPTION:
+
+= REQUIREMENTS:
+
+= ATTRIBUTES:
+
+= USAGE:
+
+= CAVEATS:
+
+I didn't see an easy way to set Graphite's credentials easily.
+I set those to root/root with an email address going no where.
