@@ -1,6 +1,10 @@
 = DESCRIPTION:
 
+Installs and configures Graphite http://graphite.wikidot.com/
+
 = REQUIREMENTS:
+
+Ubuntu 10.04 (Lucid)
 
 = ATTRIBUTES:
 
