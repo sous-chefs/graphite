@@ -1,3 +1,5 @@
+package "python-twisted"
+
 remote_file "/usr/src/carbon-#{node.graphite.carbon.version}.tar.gz" do
   source node.graphite.carbon.uri
   checksum node.graphite.carbon.checksum
