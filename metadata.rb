@@ -7,4 +7,5 @@ version          "0.0.2"
 
 depends  "python"
 depends  "apache2"
+depends  "ganglia"
 supports "ubuntu"
