@@ -27,13 +27,13 @@ MAX_UPDATES_PER_SECOND = 1000
 # the files quickly but at the risk of slowing I/O down considerably for a while.
 MAX_CREATES_PER_MINUTE = inf
 
-LINE_RECEIVER_INTERFACE = 0.0.0.0
+LINE_RECEIVER_INTERFACE = <%= @line_receiver_interface %>
 LINE_RECEIVER_PORT = 2003
 
-PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+PICKLE_RECEIVER_INTERFACE = <%= @pickle_receiver_interface %>
 PICKLE_RECEIVER_PORT = 2004
 
-CACHE_QUERY_INTERFACE = 0.0.0.0
+CACHE_QUERY_INTERFACE = <%= @cache_query_interface %>
 CACHE_QUERY_PORT = 7002
 
 # By default, carbon-cache will log every whisper update. This can be excessive and
@@ -68,12 +68,12 @@ LOG_UPDATES = True
 # with the default configuration, you have to specify a distinict
 # interfaces and ports for the listeners.
 
-[relay]
-LINE_RECEIVER_INTERFACE = 0.0.0.0
-LINE_RECEIVER_PORT = 2003
+#[relay]
+#LINE_RECEIVER_INTERFACE = 0.0.0.0
+#LINE_RECEIVER_PORT = 2003
 
-PICKLE_RECEIVER_INTERFACE = 0.0.0.0
-PICKLE_RECEIVER_PORT = 2004
+#PICKLE_RECEIVER_INTERFACE = 0.0.0.0
+#PICKLE_RECEIVER_PORT = 2004
 
-CACHE_SERVERS = server1, server2, server3
-MAX_QUEUE_SIZE = 10000
+#CACHE_SERVERS = server1, server2, server3
+#MAX_QUEUE_SIZE = 10000
