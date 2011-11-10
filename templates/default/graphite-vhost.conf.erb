@@ -29,6 +29,12 @@ NameVirtualHost *:80
                 SetHandler None
         </Location>
 
+        <% if node[:recipes].include? "ganglia::web" -%>
+	<Location "/ganglia/">
+	        SetHandler None
+	</Location>
+        <% end -%>
+
 	# NOTE: In order for the django admin site media to work you
 	# must change @DJANGO_ROOT@ to be the path to your django
 	# installation, which is probably something like:
