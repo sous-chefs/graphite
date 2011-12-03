@@ -12,3 +12,5 @@ default[:graphite][:graphite_web][:checksum] = "cc78bab7fb26b"
 default[:graphite][:carbon][:line_receiver_interface] =   "127.0.0.1"
 default[:graphite][:carbon][:pickle_receiver_interface] = "127.0.0.1"
 default[:graphite][:carbon][:cache_query_interface] =     "127.0.0.1"
+
+default[:graphite][:password] = "change_me"
