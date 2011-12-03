@@ -1,0 +1,11 @@
+description "Graphite Carbon Cache Daemon"
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+expect daemon
+respawn
+
+env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+exec sudo -u www-data /opt/graphite/bin/carbon-cache.py start
