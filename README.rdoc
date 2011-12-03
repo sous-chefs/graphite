@@ -8,6 +8,9 @@ Ubuntu 10.04 (Lucid)
 
 = ATTRIBUTES:
 
+node[:graphite][:password] sets the default password for graphite
+"root" user.
+
 = USAGE:
 
 recipe[graphite] should build a stand-alone Graphite installation.
@@ -17,9 +20,6 @@ least one monitor node (i.e. recipe[ganglia]) node to be running
 to use it.
 
 = CAVEATS:
-
-I didn't see an easy way to set Graphite's credentials easily.
-I set those to root/root with an email address going no where.
 
 Ships with two default schemas, stats.* (for Etsy's statsd) and a
 catchall that matches anything. The catchall retains minutely data for
