@@ -1,25 +1,29 @@
-= DESCRIPTION:
+Description
+===========
 
 Installs and configures Graphite http://graphite.wikidot.com/
 
-= REQUIREMENTS:
+Requirements
+============
 
-Ubuntu 10.04 (Lucid)
+* Ubuntu 10.04 (Lucid)
 
-= ATTRIBUTES:
+Attributes
+==========
 
-node[:graphite][:password] sets the default password for graphite
-"root" user.
+* `node[:graphite][:password]` sets the default password for graphite "root" user.
 
-= USAGE:
+Usage
+=====
 
-recipe[graphite] should build a stand-alone Graphite installation.
+`recipe[graphite]` should build a stand-alone Graphite installation.
 
-recipe[graphite::ganglia] integrates with Ganglia. You'll want at
+`recipe[graphite::ganglia]` integrates with Ganglia. You'll want at
 least one monitor node (i.e. recipe[ganglia]) node to be running
 to use it.
 
-= CAVEATS:
+Caveats
+=======
 
 Ships with two default schemas, stats.* (for Etsy's statsd) and a
 catchall that matches anything. The catchall retains minutely data for
