@@ -50,6 +50,11 @@ directory "/opt/graphite/storage" do
   group "www-data"
 end
 
+directory "/opt/graphite/storage/whisper" do
+  owner "www-data"
+  group "www-data"
+end
+
 cookbook_file "/opt/graphite/bin/set_admin_passwd.py" do
   mode "755"
 end
