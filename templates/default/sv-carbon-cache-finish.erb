@@ -1,0 +1,6 @@
+#!/bin/sh
+PIDFILE="/opt/graphite/storage/carbon-cache-a.pid"
+
+if [ -e $PIDFILE ]; then
+    rm -v $PIDFILE
+fi
