@@ -33,11 +33,12 @@ template "/opt/graphite/conf/storage-schemas.conf" do
   group "www-data"
 end
 
-template "/etc/init/carbon-cache.conf" do
-  source "carbon-cache.conf.erb"
-  owner "www-data"
-  group "www-data"
-  notifies :restart, "service[carbon-cache]"
+execute "carbon: change graphite storage permissions to www-data" do
+  command "chown -R www-data:www-data /opt/graphite/storage"
+  only_if do
+    f = File.stat("/opt/graphite/storage")
+    f.uid == 0 and f.gid == 0
+  end
 end
 
 directory "/opt/graphite/lib/twisted/plugins/" do
@@ -45,8 +46,6 @@ directory "/opt/graphite/lib/twisted/plugins/" do
   group "www-data"
 end
 
-service "carbon-cache" do
-  provider Chef::Provider::Service::Upstart
-  supports :status => true, :restart => true
-  action [ :enable, :start ]
+runit_service "carbon-cache" do
+  finish_script true
 end

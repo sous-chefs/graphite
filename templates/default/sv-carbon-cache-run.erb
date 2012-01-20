@@ -1,0 +1,3 @@
+#!/bin/sh
+exec 2>&1
+exec chpst -u www-data:www-data -l /opt/graphite/storage/carbon-cache.lock -- /opt/graphite/bin/carbon-cache.py --debug start
