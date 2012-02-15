@@ -1,4 +1,5 @@
 package "python-twisted"
+package "python-simplejson"
 
 version = node[:graphite][:version]
 
