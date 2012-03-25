@@ -31,24 +31,16 @@ end
 
 apache_site "graphite"
 
-directory "/opt/graphite/storage/log" do
-  owner node['apache']['user']
-  group node['apache']['group']
-end
-
-directory "/opt/graphite/storage/log/webapp" do
-  owner node['apache']['user']
-  group node['apache']['group']
-end
-
 directory "/opt/graphite/storage" do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
-directory "/opt/graphite/storage/whisper" do
-  owner node['apache']['user']
-  group node['apache']['group']
+%w{ log webapp whisper }.each do |dir|
+  directory "/opt/graphite/storage/#{dir}" do
+    owner node['apache']['user']
+    group node['apache']['group']
+  end
 end
 
 cookbook_file "/opt/graphite/bin/set_admin_passwd.py" do

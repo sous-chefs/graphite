@@ -21,8 +21,8 @@ execute "install carbon" do
 end
 
 template "/opt/graphite/conf/carbon.conf" do
-  owner "www-data"
-  group "www-data"
+  owner node['apache']['user']
+  group node['apache']['group']
   variables( :line_receiver_interface => node[:graphite][:carbon][:line_receiver_interface],
              :pickle_receiver_interface => node[:graphite][:carbon][:pickle_receiver_interface],
              :cache_query_interface => node[:graphite][:carbon][:cache_query_interface] )
@@ -30,12 +30,12 @@ template "/opt/graphite/conf/carbon.conf" do
 end
 
 template "/opt/graphite/conf/storage-schemas.conf" do
-  owner "www-data"
-  group "www-data"
+  owner node['apache']['user']
+  group node['apache']['group']
 end
 
-execute "carbon: change graphite storage permissions to www-data" do
-  command "chown -R www-data:www-data /opt/graphite/storage"
+execute "carbon: change graphite storage permissions to apache user" do
+  command "chown -R #{node['apache']['user']}:#{node['apache']['group']} /opt/graphite/storage"
   only_if do
     f = File.stat("/opt/graphite/storage")
     f.uid == 0 and f.gid == 0
@@ -43,8 +43,8 @@ execute "carbon: change graphite storage permissions to www-data" do
 end
 
 directory "/opt/graphite/lib/twisted/plugins/" do
-  owner "www-data"
-  group "www-data"
+  owner node['apache']['user']
+  group node['apache']['group']
 end
 
 runit_service "carbon-cache" do
