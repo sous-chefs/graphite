@@ -1,4 +1,5 @@
 default[:graphite][:version] = "0.9.9"
+default[:graphite][:python_version] = "2.6"
 
 default[:graphite][:carbon][:uri] = "http://launchpadlibrarian.net/82112362/carbon-#{node[:graphite][:version]}.tar.gz"
 default[:graphite][:carbon][:checksum] = "b3d42e3b93c09"

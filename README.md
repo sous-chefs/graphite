@@ -6,7 +6,8 @@ Installs and configures Graphite http://graphite.wikidot.com/
 Requirements
 ============
 
-* Ubuntu 10.04 (Lucid)
+* Ubuntu 10.04 (Lucid) - with default settings
+* Ubuntu 11.10 (Oneiric) - change node[:graphite][:python_version] to "2.7"
 
 Attributes
 ==========
