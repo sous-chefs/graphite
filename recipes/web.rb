@@ -1,6 +1,7 @@
 include_recipe "apache2::mod_python"
 
 version = node[:graphite][:version]
+pyver = node[:graphite][:python_version]
 
 package "python-cairo-dev"
 package "python-django"
@@ -21,7 +22,7 @@ end
 
 execute "install graphite-web" do
   command "python setup.py install"
-  creates "/opt/graphite/webapp/graphite_web-#{version}-py2.6.egg-info"
+  creates "/opt/graphite/webapp/graphite_web-#{version}-py#{pyver}.egg-info"
   cwd "/usr/src/graphite-web-#{version}"
 end
 

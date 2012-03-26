@@ -2,6 +2,7 @@ package "python-twisted"
 package "python-simplejson"
 
 version = node[:graphite][:version]
+pyver = node[:graphite][:python_version]
 
 remote_file "/usr/src/carbon-#{version}.tar.gz" do
   source node[:graphite][:carbon][:uri]
@@ -16,7 +17,7 @@ end
 
 execute "install carbon" do
   command "python setup.py install"
-  creates "/opt/graphite/lib/carbon-#{version}-py2.6.egg-info"
+  creates "/opt/graphite/lib/carbon-#{version}-py#{pyver}.egg-info"
   cwd "/usr/src/carbon-#{version}"
 end
 
