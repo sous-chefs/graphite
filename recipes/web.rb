@@ -37,8 +37,13 @@ directory "/opt/graphite/storage" do
   group node['apache']['group']
 end
 
-%w{ log webapp whisper }.each do |dir|
-  directory "/opt/graphite/storage/#{dir}" do
+directory '/opt/graphite/storage/log' do
+  owner node['apache']['user']
+  group node['apache']['group']
+end
+
+%w{ webapp whisper }.each do |dir|
+  directory "/opt/graphite/storage/log/#{dir}" do
     owner node['apache']['user']
     group node['apache']['group']
   end
