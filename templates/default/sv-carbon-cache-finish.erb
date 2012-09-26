@@ -1,5 +1,5 @@
 #!/bin/sh
-PIDFILE="/opt/graphite/storage/carbon-cache-a.pid"
+PIDFILE="<%= node['graphite']['base_dir'] %>/storage/carbon-cache-a.pid"
 
 if [ -e $PIDFILE ]; then
     rm -v $PIDFILE
