@@ -1,7 +1,8 @@
 include_recipe "apache2::mod_python"
 
-version = node[:graphite][:version]
-pyver = node[:graphite][:python_version]
+basedir = node['graphite']['base_dir']
+version = node['graphite']['version']
+pyver = node['graphite']['python_version']
 
 package "python-cairo-dev"
 package "python-django"
@@ -10,8 +11,8 @@ package "python-memcache"
 package "python-rrdtool"
 
 remote_file "/usr/src/graphite-web-#{version}.tar.gz" do
-  source node[:graphite][:graphite_web][:uri]
-  checksum node[:graphite][:graphite_web][:checksum]
+  source node['graphite']['graphite_web']['uri']
+  checksum node['graphite']['graphite_web']['checksum']
 end
 
 execute "untar graphite-web" do
@@ -22,7 +23,7 @@ end
 
 execute "install graphite-web" do
   command "python setup.py install"
-  creates "/opt/graphite/webapp/graphite_web-#{version}-py#{pyver}.egg-info"
+  creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
   cwd "/usr/src/graphite-web-#{version}"
 end
 
@@ -32,39 +33,40 @@ end
 
 apache_site "graphite"
 
-directory "/opt/graphite/storage" do
+directory "#{basedir}/storage" do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
-directory '/opt/graphite/storage/log' do
+directory "#{basedir}/storage/log" do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
 %w{ webapp whisper }.each do |dir|
-  directory "/opt/graphite/storage/log/#{dir}" do
+  directory "#{basedir}/storage/log/#{dir}" do
     owner node['apache']['user']
     group node['apache']['group']
   end
 end
 
-cookbook_file "/opt/graphite/bin/set_admin_passwd.py" do
-  mode "755"
+template "#{basedir}/bin/set_admin_passwd.py" do
+  source "set_admin_passwd.py.erb"
+  mode 00755
 end
 
-cookbook_file "/opt/graphite/storage/graphite.db" do
+cookbook_file "#{basedir}/storage/graphite.db" do
   action :create_if_missing
   notifies :run, "execute[set admin password]"
 end
 
 execute "set admin password" do
-  command "/opt/graphite/bin/set_admin_passwd.py root #{node[:graphite][:password]}"
+  command "#{basedir}/bin/set_admin_passwd.py root #{node['graphite']['password']}"
   action :nothing
 end
 
-file "/opt/graphite/storage/graphite.db" do
+file "#{basedir}/storage/graphite.db" do
   owner node['apache']['user']
   group node['apache']['group']
-  mode "644"
+  mode 00644
 end

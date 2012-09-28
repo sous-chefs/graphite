@@ -1,9 +1,9 @@
-version = node[:graphite][:version]
-pyver = node[:graphite][:python_version]
+version = node['graphite']['version']
+pyver = node['graphite']['python_version']
 
 remote_file "/usr/src/whisper-#{version}.tar.gz" do
-  source node[:graphite][:whisper][:uri]
-  checksum node[:graphite][:whisper][:checksum]
+  source node['graphite']['whisper']['uri']
+  checksum node['graphite']['whisper']['checksum']
 end
 
 execute "untar whisper" do
