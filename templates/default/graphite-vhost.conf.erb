@@ -10,6 +10,9 @@
 
 <VirtualHost *:80>
         ServerName <%= node[:graphite][:url] %>
+        <% if node[:graphite][:url_aliases] %>
+        ServerAlias <%= [*node[:graphite][:url_aliases]].join " " %>
+        <% end %>
         DocumentRoot "/opt/graphite/webapp"
         ErrorLog /opt/graphite/storage/log/webapp/error.log
         CustomLog /opt/graphite/storage/log/webapp/access.log common
