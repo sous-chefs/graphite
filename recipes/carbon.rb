@@ -1,3 +1,5 @@
+include_recipe "#{cookbook_name}::whisper"
+
 package "python-twisted"
 package "python-simplejson"
 
@@ -30,7 +32,6 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
              :log_updates => node['graphite']['carbon']['log_updates']
              )
-  notifies :restart, "service[carbon-cache]"
 end
 
 template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
