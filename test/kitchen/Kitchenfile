@@ -10,8 +10,8 @@ platform :ubuntu do
 end
 
 cookbook "graphite" do
-  configuration "carbon"
+  # configuration "carbon"
   configuration "carbon_runit"
-  configuration "carbon_runit_twistd"
+  # configuration "carbon_runit_twistd"
   runtimes []
 end
