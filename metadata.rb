@@ -9,9 +9,12 @@ supports "ubuntu"
 
 depends "python"
 depends "apache2"
+depends "runit"
 
-suggests "runit"
+suggests "discovery"
 suggests "systemd"
 suggests "s6"
 
-suggests "graphiti"
+recommends "graphiti"
+recommends "descartes"
+recommends "gdash"

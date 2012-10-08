@@ -1,3 +1,4 @@
 #!/bin/sh
 exec 2>&1
-exec chpst -u <%= node['apache']['user'] %>:<%= node['apache']['group'] %> -l <%= node['graphite']['base_dir'] %>/storage/carbon-cache.lock -- <%= node['graphite']['base_dir']%>/bin/carbon-cache.py --debug start
+source <%= node['graphite']['base_dir'] %>/.venv/bin/activate
+exec chpst -u <%= node['graphite']['carbon']['user'] %>:<%= node['graphite']['carbon']['group'] %> -l <%= node['graphite']['base_dir'] %>/storage/carbon-cache.lock -- <%= node['graphite']['base_dir']%>/bin/carbon-cache.py --debug start

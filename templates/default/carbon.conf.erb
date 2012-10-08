@@ -38,7 +38,7 @@ CACHE_QUERY_PORT = 7002
 
 # By default, carbon-cache will log every whisper update. This can be excessive and
 # degrade performance if logging on the same volume as the whisper data is stored.
-LOG_UPDATES = True
+LOG_UPDATES = <%= @log_updates.to_s.capitalize %>
 
 
 # Enable AMQP if you want to receve metrics using an amqp broker
