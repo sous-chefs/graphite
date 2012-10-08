@@ -16,7 +16,7 @@ default['graphite']['carbon']['cache_query_interface'] =     "127.0.0.1"
 
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
-default[:graphite][:url_aliases] = []
+default['graphite']['url_aliases'] = []
 default['graphite']['listen_port'] = "80"
 default['graphite']['base_dir'] = "/opt/graphite"
 default['graphite']['doc_root'] = "/opt/graphite/webapp"
