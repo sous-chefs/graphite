@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+
+platform :centos do
+end
+
+platform :redhat do
+end
+
+platform :ubuntu do
+  version "12.04" do
+  end
+end
+
+cookbook "graphite" do
+  runtimes []
+end
