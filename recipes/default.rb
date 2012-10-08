@@ -2,6 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: default
 #
+# Copyright 2012, Heavy Water Operations, LLC (OR)
 # Copyright 2011, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +18,5 @@
 # limitations under the License.
 #
 
-include_recipe "python"
-
-include_recipe "graphite::whisper"
 include_recipe "graphite::carbon"
 include_recipe "graphite::web"

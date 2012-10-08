@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_runit
+# Recipe:: default
 #
 # Copyright 2012, Heavy Water Operations, LLC (OR)
 # Copyright 2011, Heavy Water Software Inc.
@@ -18,10 +18,11 @@
 # limitations under the License.
 #
 
-include_recipe "#{cookbook_name}::carbon"
+include_recipe "python"
 
-runit_service "carbon-cache" do
-  finish_script true
-  subscribes( :restart,
-              "template[#{node['graphite']['base_dir']}/conf/carbon.conf" )
+python_virtualenv node['graphite']['base_dir'] do
+  interpreter node['graphite']['virtualenv']['interpreter']
+  owner node['graphite']['virtualenv']['owner']
+  group node['graphite']['virtualenv']['group']
+  options "--system-site-packages"
 end
