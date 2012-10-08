@@ -20,9 +20,27 @@
 
 include_recipe "python"
 
+%w[conf storage].each do |graphite_directory|
+  directory ::File.join(node['graphite']['base_dir'],
+                        graphite_directory) do
+    owner node['graphite']['virtualenv']['owner']
+    group node['graphite']['virtualenv']['group']
+    recursive true
+  end
+end
+
 python_virtualenv node['graphite']['base_dir'] do
   interpreter node['graphite']['virtualenv']['interpreter']
   owner node['graphite']['virtualenv']['owner']
   group node['graphite']['virtualenv']['group']
   options "--system-site-packages"
+  action :create
+end
+
+%w[whisper carbon graphite-web].each do |graphite_pip_pkg|
+  python_pip graphite_pip_pkg do
+    version node['graphite']['version']
+    virtualenv node['graphite']['base_dir']
+    action :install
+  end
 end
