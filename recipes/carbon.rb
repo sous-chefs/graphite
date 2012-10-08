@@ -48,6 +48,5 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   group node['apache']['group']
 end
 
-runit_service "carbon-cache" do
-  finish_script true
-end
+service_type = node['graphite']['carbon']['service_type']
+include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
