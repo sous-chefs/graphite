@@ -7,7 +7,7 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
 <VirtualHost *:<%= node['graphite']['listen_port']%>>
         ServerName <%= node['graphite']['url'] %>
         <% unless node['graphite']['url_aliases'].empty? %>
-        ServerAlias <%= [node[:graphite][:url_aliases]].flatten.compact.join " " %>
+        ServerAlias <%= [node['graphite']['url_aliases']].flatten.compact.join(" ") %>
         <% end %>
         DocumentRoot "<%= node['graphite']['doc_root'] %>"
         ErrorLog <%= node['graphite']['base_dir'] %>/storage/log/webapp/error.log
