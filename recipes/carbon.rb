@@ -24,9 +24,12 @@ end
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['apache']['user']
   group node['apache']['group']
-  variables( :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
+  variables( :carbon => node['graphite']['carbon'].to_hash,
+             :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
-             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'] )
+             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
+             :log_updates => node['graphite']['carbon']['log_updates']
+             )
   notifies :restart, "service[carbon-cache]"
 end
 
