@@ -13,4 +13,8 @@ cookbook "graphite" do
   configuration "carbon_runit"
   configuration "carbon_runit_twistd"
   runtimes []
+  # You can test this from the CLI if you like -- probably won't work
+  # if a machine has been converged with carbon_runit (service may be
+  # running, binding to the same ports)
+  exclude :platform => :ubuntu, :configuration => "carbon_runit_twistd"
 end

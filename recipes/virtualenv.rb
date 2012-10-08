@@ -20,11 +20,19 @@
 
 include_recipe "python"
 
-%w[conf storage lib].each do |graphite_directory|
+directory node['graphite']['base_dir'] do
+  owner node['graphite']['virtualenv']['owner']
+  group node['graphite']['virtualenv']['group']
+  mode "00755"
+end
+
+# Will this ever end
+%w[conf storage lib include].each do |graphite_directory|
   directory ::File.join(node['graphite']['base_dir'],
                         graphite_directory) do
     owner node['graphite']['virtualenv']['owner']
     group node['graphite']['virtualenv']['group']
+    mode "00755"
     recursive true
   end
 end
@@ -33,7 +41,7 @@ python_virtualenv node['graphite']['base_dir'] do
   interpreter node['graphite']['virtualenv']['interpreter']
   owner node['graphite']['virtualenv']['owner']
   group node['graphite']['virtualenv']['group']
-  options "--system-site-packages"
+  # options "--system-site-packages"
   action :create
 end
 
