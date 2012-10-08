@@ -1,4 +1,6 @@
 #!/bin/sh
 exec 2>&1
 source <%= node['graphite']['base_dir'] %>/.venv/bin/activate
-exec chpst -u <%= node['apache']['user'] %>:<%= node['apache']['group'] %> -l <%= node['graphite']['base_dir'] %>/storage/carbon-cache.lock -- bash -c twistd --nodaemon --umask=0022 carbon-cache -c <%= node['graphite']['base_dir']%>/conf/carbon.conf --instance=a start
+# Long Carbon is long
+exec chpst -u <%= node['graphite']['carbon']['user'] %>:<%= node['graphite']['carbon']['group'] %> -l <%= node['graphite']['base_dir'] %>/storage/carbon-cache.lock \
+    -- bash -c twistd --nodaemon --umask=0022 carbon-cache -c <%= node['graphite']['base_dir']%>/conf/carbon.conf --instance=a start

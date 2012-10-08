@@ -21,8 +21,8 @@
 include_recipe "#{cookbook_name}::virtualenv"
 
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['carbon']['user']
+  group node['graphite']['carbon']['group']
   variables( :carbon => node['graphite']['carbon'].to_hash,
              :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
@@ -32,8 +32,8 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
 end
 
 template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['carbon']['user']
+  group node['graphite']['carbon']['group']
 end
 
 service_type = node['graphite']['carbon']['service_type']

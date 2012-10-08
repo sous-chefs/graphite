@@ -17,6 +17,8 @@ default['graphite']['virtualenv']['interpreter'] = "python2.7"
 default['graphite']['virtualenv']['owner'] = "nobody"
 default['graphite']['virtualenv']['group'] = "nogroup"
 
+default['graphite']['carbon']['user'] = "nobody"
+default['graphite']['carbon']['group'] = "nogroup"
 default['graphite']['carbon']['line_receiver_interface'] =   "127.0.0.1"
 default['graphite']['carbon']['pickle_receiver_interface'] = "127.0.0.1"
 default['graphite']['carbon']['cache_query_interface'] =     "127.0.0.1"
