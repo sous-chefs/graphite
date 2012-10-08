@@ -20,7 +20,7 @@
 
 include_recipe "python"
 
-%w[conf storage].each do |graphite_directory|
+%w[conf storage lib].each do |graphite_directory|
   directory ::File.join(node['graphite']['base_dir'],
                         graphite_directory) do
     owner node['graphite']['virtualenv']['owner']
