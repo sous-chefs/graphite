@@ -10,9 +10,15 @@ default['graphite']['whisper']['checksum'] = "66c05eafe8d86"
 default['graphite']['graphite_web']['uri'] = "http://launchpadlibrarian.net/82112308/graphite-web-#{node['graphite']['version']}.tar.gz"
 default['graphite']['graphite_web']['checksum'] = "cc78bab7fb26b"
 
-default['graphite']['carbon']['line_receiver_interface'] =   "127.0.0.1"
-default['graphite']['carbon']['pickle_receiver_interface'] = "127.0.0.1"
-default['graphite']['carbon']['cache_query_interface'] =     "127.0.0.1"
+if carbon_interface = node['graphite']['carbon']['interface']
+  ip_address = node['network']["ipaddress_#{carbon_interface}"]
+else
+  ip_address = "127.0.0.1"
+end
+
+default['graphite']['carbon']['line_receiver_interface'] = ip_address
+default['graphite']['carbon']['pickle_receiver_interface'] = ip_address
+default['graphite']['carbon']['cache_query_interface'] = ip_address
 default['graphite']['carbon']['service_type'] = "runit"
 
 default['graphite']['password'] = "change_me"
