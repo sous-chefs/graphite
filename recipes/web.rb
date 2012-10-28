@@ -8,7 +8,7 @@ if Chef::Config[:solo]
   Chef::Log.warn "This recipe uses encrypted data bags. Chef Solo does not support this."
 else
   if data_bag_name = node['graphite']['encrypted_data_bag']['name']
-    password = Chef::EncryptedDataBagItem.load(data_bag_name, "password")
+    password = Chef::EncryptedDataBagItem.load(data_bag_name, "graphite")
   else
     password = node['graphite']['password']
   end
