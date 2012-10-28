@@ -4,6 +4,16 @@ basedir = node['graphite']['base_dir']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
+if Chef::Config[:solo]
+  Chef::Log.warn "This recipe uses encrypted data bags. Chef Solo does not support this."
+else
+  if data_bag_name = node['graphite']['encrypted_data_bag']['name']
+    password = Chef::EncryptedDataBagItem.load(data_bag_name, "graphite")
+  else
+    password = node['graphite']['password']
+  end
+end
+
 package "python-cairo-dev"
 package "python-django"
 package "python-django-tagging"
@@ -61,7 +71,7 @@ cookbook_file "#{basedir}/storage/graphite.db" do
 end
 
 execute "set admin password" do
-  command "#{basedir}/bin/set_admin_passwd.py root #{node['graphite']['password']}"
+  command "#{basedir}/bin/set_admin_passwd.py root #{password}"
   action :nothing
 end
 
