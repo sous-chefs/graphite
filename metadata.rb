@@ -9,7 +9,6 @@ supports "ubuntu"
 
 depends "python"
 depends "apache2"
-depends "logrotate"
 
 suggests "runit"
 suggests "systemd"

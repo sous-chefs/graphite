@@ -69,13 +69,6 @@ execute "set admin password" do
   action :nothing
 end
 
-logrotate_app "graphite-web" do
-  path [ "/opt/graphite/storage/log/webapp/error.log", "/opt/graphite/storage/log/webapp/access.log", "/opt/graphite/storage/log/webapp/info.log", "/opt/graphite/storage/log/webapp/exception.log" ]
-  options ["missingok", "notifempty"]
-  frequency "daily"
-  rotate 7
-end
-
 file "#{basedir}/storage/graphite.db" do
   owner node['apache']['user']
   group node['apache']['group']
