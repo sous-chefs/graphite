@@ -36,7 +36,7 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
 end
 
 execute "carbon: change graphite storage permissions to apache user" do
-  command "chown -R www-data:www-data #{node['graphite']['base_dir']}/storage"
+  command "chown -R #{node['apache']['user']}:#{node['apache']['group']} #{node['graphite']['base_dir']}/storage"
   only_if do
     f = File.stat("#{node['graphite']['base_dir']}/storage")
     f.uid == 0 and f.gid == 0
