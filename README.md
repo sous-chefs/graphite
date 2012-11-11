@@ -7,21 +7,37 @@ Requirements
 ============
 
 * Ubuntu 10.04 (Lucid) - with default settings
-* Ubuntu 11.10 (Oneiric) - change node[:graphite][:python_version] to "2.7"
+* Ubuntu 11.10 (Oneiric) - change node['graphite']['python_version'] to "2.7"
 
 Attributes
 ==========
 
-* `node[:graphite][:password]` sets the default password for graphite "root" user.
+* `node['graphite']['password']` - Sets the default password for the graphite
+  "root" user.
+* `node['graphite']['carbon']['interface']` - The interface to bind carbon to.
+  Will discover the interface's IPv4 address, otherwise will use `127.0.0.1` or
+  appropriate `node['graphite']['carbon']['*_interface']` value.  Requires the
+  [Network Addr](https://gist.github.com/1040543) Ohai plugin.
 
 Usage
 =====
 
-`recipe[graphite]` should build a stand-alone Graphite installation.
+Build a stand-alone Graphite installation.
 
-`recipe[graphite::ganglia]` integrates with Ganglia. You'll want at
-least one monitor node (i.e. recipe[ganglia]) node to be running
-to use it.
+```json
+"run_list": [
+    "recipe[graphite]"
+]
+```
+
+Integrate with Ganglia. You'll want at least one monitor node
+(i.e. `recipe[ganglia]`) node to be running to use it.
+
+```json
+"run_list": [
+    "recipe[graphite::ganglia]"
+]
+```
 
 Caveats
 =======
