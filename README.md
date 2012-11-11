@@ -7,12 +7,12 @@ Requirements
 ============
 
 * Ubuntu 10.04 (Lucid) - with default settings
-* Ubuntu 11.10 (Oneiric) - change node[:graphite][:python_version] to "2.7"
+* Ubuntu 11.10 (Oneiric) - change node['graphite']['python_version'] to "2.7"
 
 Attributes
 ==========
 
-* `node[:graphite][:password]` - Sets the default password for the graphite
+* `node['graphite']['password']` - Sets the default password for the graphite
   "root" user.
 * `node['graphite']['carbon']['interface']` - The interface to bind carbon to.
   Will discover the interface's IPv4 address, otherwise will use `127.0.0.1` or
