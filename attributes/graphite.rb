@@ -16,6 +16,12 @@ default['graphite']['carbon']['cache_query_interface'] =     "127.0.0.1"
 default['graphite']['carbon']['service_type'] = "runit"
 default['graphite']['carbon']['log_updates'] = false
 
+default['graphite']['storage_schemas']['catchall'] = {
+  "priority"    => 0,
+  "pattern"     => "^.*",
+  "retentions"  => "60:100800,900:63000"
+}
+
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
 default['graphite']['url_aliases'] = []
