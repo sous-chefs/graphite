@@ -18,7 +18,7 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
 
         <Location "/">
                 SetHandler python-program
-                PythonPath "['<%= node['graphite']['base_dir'] %>/webapp'] + sys.path"
+                PythonPath "['<%= node['graphite']['doc_root'] %>'] + sys.path"
                 PythonHandler django.core.handlers.modpython
                 SetEnv DJANGO_SETTINGS_MODULE graphite.settings
                 PythonDebug Off
