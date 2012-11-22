@@ -29,3 +29,7 @@ default['graphite']['listen_address'] = "*"
 default['graphite']['listen_port'] = "80"
 default['graphite']['base_dir'] = "/opt/graphite"
 default['graphite']['doc_root'] = "/opt/graphite/webapp"
+
+default['graphite']['basic_authentication']['enabled'] = false
+default['graphite']['basic_authentication']['auth_name'] = "Authentication required"
+default['graphite']['basic_authentication']['htpasswd_location'] = "#{node['graphite']['doc_root']}/.htpasswd"
