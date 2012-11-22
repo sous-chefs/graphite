@@ -74,3 +74,11 @@ file "#{basedir}/storage/graphite.db" do
   group node['apache']['group']
   mode 00644
 end
+
+# set basic authentication if desired
+if node['graphite']['basic_authentication']['enabled'] == true do
+  htpasswd "#{node['graphite']['basic_authentication']['htpasswd_location']}" do
+    user node['graphite']['basic_authentication']['user']
+    password node['graphite']['basic_authentication']['password']
+  end
+end
