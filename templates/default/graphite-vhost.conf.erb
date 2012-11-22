@@ -25,7 +25,7 @@ Listen <%= node['graphite']['listen_address'] %>:<%= node['graphite']['listen_po
 
     AuthType basic
     AuthName "<%= node['graphite']['basic_authentication']['auth_name'] %>"
-    AuthUserFile node['graphite']['basic_authentication']['htpasswd_location']
+    AuthUserFile <%= node['graphite']['basic_authentication']['htpasswd_location'] %>
     require valid-user
 <% end -%>
   </Location>
