@@ -13,6 +13,10 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         ErrorLog <%= node['graphite']['storage_dir'] %>/log/webapp/error.log
         CustomLog <%= node['graphite']['storage_dir'] %>/log/webapp/access.log common
 
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "origin, authorization, accept"
+
         <Location "/">
                 SetHandler python-program
                 PythonPath "['<%= node['graphite']['doc_root'] %>'] + sys.path"
