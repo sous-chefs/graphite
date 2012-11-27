@@ -14,6 +14,7 @@ default['graphite']['carbon']['line_receiver_interface'] =   "127.0.0.1"
 default['graphite']['carbon']['pickle_receiver_interface'] = "127.0.0.1"
 default['graphite']['carbon']['cache_query_interface'] =     "127.0.0.1"
 default['graphite']['carbon']['service_type'] = "runit"
+default['graphite']['carbon']['local_data_dir'] = "/opt/graphite/storage/whisper/"
 
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
