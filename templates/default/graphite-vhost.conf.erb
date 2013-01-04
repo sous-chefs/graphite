@@ -15,7 +15,7 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
   DocumentRoot "<%= node['graphite']['doc_root'] %>"
   ErrorLog <%= node['graphite']['log_dir'] %>/webapp/error.log
   CustomLog <%= node['graphite']['log_dir'] %>/webapp/access.log common
-  
+
   <Location "/">
     SetHandler python-program
     PythonPath "['<%= node['graphite']['doc_root'] %>'] + sys.path"
@@ -23,7 +23,6 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
     SetEnv DJANGO_SETTINGS_MODULE graphite.settings
     PythonDebug Off
     PythonAutoReload Off
-  </Location>
 
 <% if node['graphite']['basic_authentication']['enabled'] == true -%>
     AuthType basic
