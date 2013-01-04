@@ -22,6 +22,7 @@ default['graphite']['storage_schemas']['catchall'] = {
   "retentions"  => "60:100800,900:63000"
 }
 
+default['graphite']['set_admin_password'] = true
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
 default['graphite']['url_aliases'] = []
@@ -29,6 +30,9 @@ default['graphite']['listen_address'] = "*"
 default['graphite']['listen_port'] = "80"
 default['graphite']['base_dir'] = "/opt/graphite"
 default['graphite']['doc_root'] = "/opt/graphite/webapp"
+default['graphite']['time_zone'] = "America/Los_Angeles"
+default['graphite']['storage_dir'] = "/opt/graphite/storage"
+default['graphite']['log_dir'] = "/opt/graphite/storage/log"
 
 default['graphite']['basic_authentication']['enabled'] = false
 default['graphite']['basic_authentication']['auth_name'] = "Authentication required"

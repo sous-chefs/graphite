@@ -1,6 +1,9 @@
 include_recipe "apache2::mod_python"
 
 basedir = node['graphite']['base_dir']
+storagedir = node['graphite']['storage_dir']
+logdir = node['graphite']['log_dir']
+timezone = node['graphite']['time_zone']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
@@ -22,7 +25,7 @@ execute "untar graphite-web" do
 end
 
 execute "install graphite-web" do
-  command "python setup.py install"
+  command "python setup.py install --prefix #{node['graphite']['base_dir']} --install-lib #{node['graphite']['doc_root']}"
   creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
   cwd "/usr/src/graphite-web-#{version}"
 end
@@ -37,18 +40,18 @@ end
 
 apache_site "graphite"
 
-directory "#{basedir}/storage" do
+directory storagedir do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
-directory "#{basedir}/storage/log" do
+directory logdir do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
 %w{ webapp whisper }.each do |dir|
-  directory "#{basedir}/storage/log/#{dir}" do
+  directory "#{logdir}/#{dir}" do
     owner node['apache']['user']
     group node['apache']['group']
   end
@@ -59,7 +62,17 @@ template "#{basedir}/bin/set_admin_passwd.py" do
   mode 00755
 end
 
-cookbook_file "#{basedir}/storage/graphite.db" do
+template "#{node['graphite']['doc_root']}/graphite/local_settings.py" do
+  owner node['apache']['user']
+  group node['apache']['group']
+  variables( :base_dir => basedir,
+             :storage_dir => storagedir,
+             :log_dir => logdir,
+             :time_zone => timezone )
+  notifies :restart, "service[apache2]"
+end
+
+cookbook_file "#{storagedir}/graphite.db" do
   action :create_if_missing
   notifies :run, "execute[set admin password]"
 end
@@ -67,18 +80,18 @@ end
 execute "set admin password" do
   command "#{basedir}/bin/set_admin_passwd.py root #{node['graphite']['password']}"
   action :nothing
+  only_if { node['graphite']['set_admin_password'] }
 end
 
-file "#{basedir}/storage/graphite.db" do
+file "#{storagedir}/graphite.db" do
   owner node['apache']['user']
   group node['apache']['group']
   mode 00644
 end
 
 # set basic authentication if desired
-if node['graphite']['basic_authentication']['enabled'] == true
-  htpasswd "#{node['graphite']['basic_authentication']['htpasswd_location']}" do
-    user node['graphite']['basic_authentication']['user']
-    password node['graphite']['basic_authentication']['password']
-  end
+htpasswd "#{node['graphite']['basic_authentication']['htpasswd_location']}" do
+  user node['graphite']['basic_authentication']['user']
+  password node['graphite']['basic_authentication']['password']
+  only_if { node['graphite']['basic_authentication']['enabled'] }
 end
