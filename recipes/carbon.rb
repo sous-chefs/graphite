@@ -26,6 +26,7 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   group node['apache']['group']
   variables( :carbon => node['graphite']['carbon'].to_hash,
              :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
+             :log_updates => node['graphite']['carbon']['log_updates'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
              :storage_dir => node['graphite']['storage_dir'],
              :time_zone => node['graphite']['time_zone'],
