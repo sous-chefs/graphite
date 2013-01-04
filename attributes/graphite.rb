@@ -22,6 +22,7 @@ default['graphite']['storage_schemas']['catchall'] = {
   "retentions"  => "60:100800,900:63000"
 }
 
+default['graphite']['set_admin_password'] = true
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
 default['graphite']['url_aliases'] = []

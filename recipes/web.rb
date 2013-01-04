@@ -62,6 +62,7 @@ end
 cookbook_file "#{basedir}/storage/graphite.db" do
   action :create_if_missing
   notifies :run, "execute[set admin password]"
+  only_if { node['graphite']['set_admin_password'] }
 end
 
 execute "set admin password" do
