@@ -25,7 +25,7 @@ execute "untar graphite-web" do
 end
 
 execute "install graphite-web" do
-  command "python setup.py install"
+  command "python setup.py install --prefix #{node['graphite']['base_dir']} --install-lib #{node['graphite']['doc_root']}"
   creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
   cwd "/usr/src/graphite-web-#{version}"
 end
