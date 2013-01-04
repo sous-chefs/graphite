@@ -1,6 +1,9 @@
 include_recipe "apache2::mod_python"
 
 basedir = node['graphite']['base_dir']
+storagedir = node['graphite']['storage_dir']
+logdir = node['graphite']['log_dir']
+timezone = node['graphite']['time_zone']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
@@ -37,18 +40,18 @@ end
 
 apache_site "graphite"
 
-directory "#{basedir}/storage" do
+directory storagedir do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
-directory "#{basedir}/storage/log" do
+directory logdir do
   owner node['apache']['user']
   group node['apache']['group']
 end
 
 %w{ webapp whisper }.each do |dir|
-  directory "#{basedir}/storage/log/#{dir}" do
+  directory "#{logdir}/#{dir}" do
     owner node['apache']['user']
     group node['apache']['group']
   end
@@ -59,7 +62,17 @@ template "#{basedir}/bin/set_admin_passwd.py" do
   mode 00755
 end
 
-cookbook_file "#{basedir}/storage/graphite.db" do
+template "#{node['graphite']['doc_root']}/graphite/local_settings.py" do
+  owner node['apache']['user']
+  group node['apache']['group']
+  variables( :base_dir => basedir,
+             :storage_dir => storagedir,
+             :log_dir => logdir,
+             :time_zone => timezone )
+  notifies :restart, "service[apache2]"
+end
+
+cookbook_file "#{storagedir}/graphite.db" do
   action :create_if_missing
   notifies :run, "execute[set admin password]"
   only_if { node['graphite']['set_admin_password'] }
@@ -70,7 +83,7 @@ execute "set admin password" do
   action :nothing
 end
 
-file "#{basedir}/storage/graphite.db" do
+file "#{storagedir}/graphite.db" do
   owner node['apache']['user']
   group node['apache']['group']
   mode 00644

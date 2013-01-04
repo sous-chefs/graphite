@@ -27,9 +27,9 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   variables( :carbon => node['graphite']['carbon'].to_hash,
              :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
-             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
-             :log_updates => node['graphite']['carbon']['log_updates']
-             )
+             :storage_dir => node['graphite']['storage_dir'],
+             :time_zone => node['graphite']['time_zone'],
+             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'] )
   notifies :restart, "service[carbon-cache]"
 end
 
@@ -39,9 +39,9 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
 end
 
 execute "carbon: change graphite storage permissions to apache user" do
-  command "chown -R www-data:www-data #{node['graphite']['base_dir']}/storage"
+  command "chown -R www-data:www-data #{node['graphite']['storage_dir']}"
   only_if do
-    f = File.stat("#{node['graphite']['base_dir']}/storage")
+    f = File.stat(node['graphite']['storage_dir'])
     f.uid == 0 and f.gid == 0
   end
 end

@@ -30,6 +30,9 @@ default['graphite']['listen_address'] = "*"
 default['graphite']['listen_port'] = "80"
 default['graphite']['base_dir'] = "/opt/graphite"
 default['graphite']['doc_root'] = "/opt/graphite/webapp"
+default['graphite']['time_zone'] = "America/Los_Angeles"
+default['graphite']['storage_dir'] = "/opt/graphite/storage"
+default['graphite']['log_dir'] = "/opt/graphite/storage/log"
 
 default['graphite']['basic_authentication']['enabled'] = false
 default['graphite']['basic_authentication']['auth_name'] = "Authentication required"
