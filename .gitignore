@@ -1,4 +1,10 @@
 .bundle
 .cache
 .kitchen
+checksums
+test
 bin
+Gemfile
+Vagrantfile
+Berksfile
+Berksfile.lock

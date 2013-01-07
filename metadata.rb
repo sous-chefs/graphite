@@ -9,6 +9,7 @@ supports "ubuntu"
 
 depends "python"
 depends "apache2"
+depends "htpasswd"
 
 suggests "runit"
 suggests "systemd"
