@@ -90,8 +90,10 @@ file "#{storagedir}/graphite.db" do
 end
 
 # set basic authentication if desired
-htpasswd "#{node['graphite']['basic_authentication']['htpasswd_location']}" do
-  user node['graphite']['basic_authentication']['user']
-  password node['graphite']['basic_authentication']['password']
-  only_if { node['graphite']['basic_authentication']['enabled'] }
+if node['graphite']['basic_authentication']['enabled'] == true
+  htpasswd "#{node['graphite']['basic_authentication']['htpasswd_location']}" do
+    user node['graphite']['basic_authentication']['user']
+    password node['graphite']['basic_authentication']['password']
+  end
 end
+
