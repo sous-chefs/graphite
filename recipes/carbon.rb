@@ -39,6 +39,11 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   group node['apache']['group']
 end
 
+template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
+  owner node['apache']['user']
+  group node['apache']['group']
+end
+
 execute "carbon: change graphite storage permissions to apache user" do
   command "chown -R www-data:www-data #{node['graphite']['storage_dir']}"
   only_if do
