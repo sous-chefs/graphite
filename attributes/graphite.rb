@@ -1,3 +1,8 @@
+#
+# Cookbook Name:: graphite
+# Attributes:: graphite
+#
+
 default['graphite']['version'] = "0.9.9"
 default['graphite']['python_version'] = "2.6"
 
