@@ -29,21 +29,21 @@ package "python-django-tagging"
 package "python-memcache"
 package "python-rrdtool"
 
-remote_file "/usr/src/graphite-web-#{version}.tar.gz" do
+remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" do
   source node['graphite']['graphite_web']['uri']
   checksum node['graphite']['graphite_web']['checksum']
 end
 
 execute "untar graphite-web" do
   command "tar xzf graphite-web-#{version}.tar.gz"
-  creates "/usr/src/graphite-web-#{version}"
-  cwd "/usr/src"
+  creates "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
+  cwd "#{Chef::Config[:file_cache_path]}"
 end
 
 execute "install graphite-web" do
   command "python setup.py install"
   creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
-  cwd "/usr/src/graphite-web-#{version}"
+  cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
 end
 
 template "/etc/apache2/sites-available/graphite" do

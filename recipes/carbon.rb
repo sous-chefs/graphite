@@ -23,21 +23,21 @@ package "python-simplejson"
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
-remote_file "/usr/src/carbon-#{version}.tar.gz" do
+remote_file "#{Chef::Config[:file_cache_path]}/carbon-#{version}.tar.gz" do
   source node['graphite']['carbon']['uri']
   checksum node['graphite']['carbon']['checksum']
 end
 
 execute "untar carbon" do
   command "tar xzf carbon-#{version}.tar.gz"
-  creates "/usr/src/carbon-#{version}"
-  cwd "/usr/src"
+  creates "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
+  cwd "#{Chef::Config[:file_cache_path]}"
 end
 
 execute "install carbon" do
   command "python setup.py install"
   creates "#{node['graphite']['base_dir']}/lib/carbon-#{version}-py#{pyver}.egg-info"
-  cwd "/usr/src/carbon-#{version}"
+  cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
