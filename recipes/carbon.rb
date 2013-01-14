@@ -65,6 +65,7 @@ end
 directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   owner node['apache']['user']
   group node['apache']['group']
+  recursive true
 end
 
 service_type = node['graphite']['carbon']['service_type']
