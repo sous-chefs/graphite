@@ -52,20 +52,11 @@ end
 
 apache_site "graphite"
 
-directory "#{basedir}/storage" do
-  owner node['apache']['user']
-  group node['apache']['group']
-end
-
-directory "#{basedir}/storage/log" do
-  owner node['apache']['user']
-  group node['apache']['group']
-end
-
 %w{ webapp whisper }.each do |dir|
   directory "#{basedir}/storage/log/#{dir}" do
     owner node['apache']['user']
     group node['apache']['group']
+    recursive true
   end
 end
 
