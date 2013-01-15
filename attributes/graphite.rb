@@ -23,6 +23,6 @@ default['graphite']['carbon']['service_type'] = "runit"
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
 default['graphite']['url_aliases'] = []
-default['graphite']['listen_port'] = "80"
+default['graphite']['listen_port'] = 80
 default['graphite']['base_dir'] = "/opt/graphite"
 default['graphite']['doc_root'] = "/opt/graphite/webapp"
