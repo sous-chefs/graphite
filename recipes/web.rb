@@ -23,7 +23,7 @@ end
 
 execute "install graphite-web" do
   command "python setup.py install"
-  creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
+  creates "#{node['graphite']['webapp_dir']}/graphite_web-#{version}-py#{pyver}.egg-info"
   cwd "/usr/src/graphite-web-#{version}"
 end
 
