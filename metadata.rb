@@ -8,10 +8,10 @@ version          "0.3.1"
 
 supports "ubuntu"
 
-depends "python"
-depends "apache2"
+depends  "python"
+depends  "apache2"
+depends  "runit"
 
-suggests "runit"
 suggests "systemd"
 suggests "s6"
 suggests "graphiti"
