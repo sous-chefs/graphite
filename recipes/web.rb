@@ -52,6 +52,10 @@ end
 
 apache_site "graphite"
 
+apache_site "000-default" do
+  enable false
+end
+
 %w{ webapp whisper }.each do |dir|
   directory "#{basedir}/storage/log/#{dir}" do
     owner node['apache']['user']
