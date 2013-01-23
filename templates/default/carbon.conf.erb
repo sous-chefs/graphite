@@ -1,5 +1,5 @@
 [cache]
-LOCAL_DATA_DIR = <%= node['graphite']['base_dir'] %>/storage/whisper/
+STORAGE_DIR = <%= @storage_dir %>
 
 # Specify the user to drop privileges to
 # If this is blank carbon runs as the user that invokes it
@@ -38,7 +38,7 @@ CACHE_QUERY_PORT = 7002
 
 # By default, carbon-cache will log every whisper update. This can be excessive and
 # degrade performance if logging on the same volume as the whisper data is stored.
-LOG_UPDATES = True
+LOG_UPDATES = <%= @log_updates.to_s.capitalize %>
 
 
 # Enable AMQP if you want to receve metrics using an amqp broker

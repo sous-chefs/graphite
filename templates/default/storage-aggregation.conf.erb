@@ -1,4 +1,4 @@
-<% node["graphite"]["storage_schemas"].each do |k, v| %>
+<% node["graphite"]["storage_aggregation"].each do |k, v| %>
 [<%= k %>]
   <% v.each do |prop, value| %>
 <%= prop %> = <%= value %>
