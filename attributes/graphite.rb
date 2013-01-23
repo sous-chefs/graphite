@@ -21,6 +21,28 @@ default['graphite']['storage_schemas']['catchall'] = {
   "pattern"     => "^.*",
   "retentions"  => "60:100800,900:63000"
 }
+default['graphite']['storage_aggregation'] = {
+  :min => {
+    :pattern => "\.min$",
+    :xFilesFactor => 0,
+    :aggregationMethod => "min"
+  },
+  :max => {
+    :pattern => "\.max$",
+    :xFilesFactor => 0,
+    :aggregationMethod => "max"
+  },
+  :sum => {
+    :pattern => "\.count$",
+    :xFilesFactor => 0,
+    :aggregationMethod => "sum"
+  },
+  :default => {
+    :pattern => ".*",
+    :xFilesFactor => 0,
+    :aggregationMethod => "average"
+  }
+}
 
 default['graphite']['set_admin_password'] = true
 default['graphite']['password'] = "change_me"

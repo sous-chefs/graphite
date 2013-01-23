@@ -1,19 +1,7 @@
-[min]
-pattern = \.min$
-xFilesFactor = 0.1
-aggregationMethod = min
+<% node["graphite"]["storage_aggregation"].each do |k, v| %>
+[<%= k %>]
+  <% v.each do |prop, value| %>
+<%= prop %> = <%= value %>
+  <% end %>
 
-[max]
-pattern = \.max$
-xFilesFactor = 0.1
-aggregationMethod = max
-
-[sum]
-pattern = \.count$
-xFilesFactor = 0
-aggregationMethod = sum
-
-[default_average]
-pattern = .*
-xFilesFactor = 0.3
-aggregationMethod = average
+<% end %>
