@@ -16,7 +16,7 @@ MAX_CACHE_SIZE = inf
 # prevent over-utilizing the disk and thus starving the rest of the system.
 # When the rate of required updates exceeds this, then carbon's caching will
 # take effect and increase the overall throughput accordingly.
-MAX_UPDATES_PER_SECOND = 1000
+MAX_UPDATES_PER_SECOND = <%= @max_updates_per_second %>
 
 # Softly limits the number of whisper files that get created each minute.
 # Setting this value low (like at 50) is a good way to ensure your graphite
@@ -28,13 +28,13 @@ MAX_UPDATES_PER_SECOND = 1000
 MAX_CREATES_PER_MINUTE = inf
 
 LINE_RECEIVER_INTERFACE = <%= @line_receiver_interface %>
-LINE_RECEIVER_PORT = 2003
+LINE_RECEIVER_PORT = <%= @line_receiver_port %>
 
 PICKLE_RECEIVER_INTERFACE = <%= @pickle_receiver_interface %>
-PICKLE_RECEIVER_PORT = 2004
+PICKLE_RECEIVER_PORT = <%= @pickle_receiver_port %>
 
 CACHE_QUERY_INTERFACE = <%= @cache_query_interface %>
-CACHE_QUERY_PORT = 7002
+CACHE_QUERY_PORT = <%= @cache_query_port %>
 
 # By default, carbon-cache will log every whisper update. This can be excessive and
 # degrade performance if logging on the same volume as the whisper data is stored.

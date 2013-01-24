@@ -44,8 +44,12 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['apache']['user']
   group node['apache']['group']
   variables( :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
+             :line_receiver_port => node['graphite']['carbon']['line_receiver_port'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
-             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'] )
+             :pickle_receiver_port => node['graphite']['carbon']['pickle_receiver_port'],
+             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
+             :cache_query_port => node['graphite']['carbon']['cache_query_port'],
+             :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'])
   notifies :restart, "service[carbon-cache]"
 end
 
