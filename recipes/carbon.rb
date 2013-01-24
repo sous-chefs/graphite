@@ -49,7 +49,9 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :pickle_receiver_port => node['graphite']['carbon']['pickle_receiver_port'],
              :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
              :cache_query_port => node['graphite']['carbon']['cache_query_port'],
-             :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'])
+             :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'],
+             :log_whisper_updates => node['graphite']['carbon']['log_whisper_updates'],
+             :local_data_dir => node['graphite']['carbon']['local_data_dir'])
   notifies :restart, "service[carbon-cache]"
 end
 
@@ -58,12 +60,10 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   group node['apache']['group']
 end
 
-execute "carbon: change graphite storage permissions to apache user" do
-  command "chown -R www-data:www-data #{node['graphite']['base_dir']}/storage"
-  only_if do
-    f = File.stat("#{node['graphite']['base_dir']}/storage")
-    f.uid == 0 and f.gid == 0
-  end
+directory node['graphite']['carbon']['local_data_dir'] do
+  owner node['apache']['user']
+  group node['apache']['group']
+  recursive true
 end
 
 directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
