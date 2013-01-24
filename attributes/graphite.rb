@@ -15,9 +15,9 @@ default['graphite']['whisper']['checksum'] = "36b5fa917526224678da0a530a6f276d00
 default['graphite']['graphite_web']['uri'] = "https://launchpad.net/graphite/0.9/#{node['graphite']['version']}/+download/graphite-web-#{node['graphite']['version']}.tar.gz"
 default['graphite']['graphite_web']['checksum'] = "4fd1d16cac3980fddc09dbf0a72243c7ae32444903258e1b65e28428a48948be"
 
-default['graphite']['carbon']['line_receiver_interface'] =   "127.0.0.1"
-default['graphite']['carbon']['pickle_receiver_interface'] = "127.0.0.1"
-default['graphite']['carbon']['cache_query_interface'] =     "127.0.0.1"
+default['graphite']['carbon']['line_receiver_interface'] =   "0.0.0.0"
+default['graphite']['carbon']['pickle_receiver_interface'] = "0.0.0.0"
+default['graphite']['carbon']['cache_query_interface'] =     "0.0.0.0"
 default['graphite']['carbon']['service_type'] = "runit"
 
 default['graphite']['password'] = "change_me"
