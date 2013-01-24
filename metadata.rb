@@ -11,6 +11,7 @@ supports "ubuntu"
 depends  "python"
 depends  "apache2"
 depends  "runit"
+depends  "memcached"
 
 suggests "systemd"
 suggests "s6"
