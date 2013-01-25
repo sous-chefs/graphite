@@ -10,8 +10,8 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         ServerAlias <%= [node['graphite']['url_aliases']].flatten.compact.join(" ") %>
         <% end %>
         DocumentRoot "<%= node['graphite']['doc_root'] %>"
-        ErrorLog <%= node['graphite']['base_dir'] %>/storage/log/webapp/error.log
-        CustomLog <%= node['graphite']['base_dir'] %>/storage/log/webapp/access.log common
+        ErrorLog <%= node['graphite']['storage_dir'] %>/log/webapp/error.log
+        CustomLog <%= node['graphite']['storage_dir'] %>/log/webapp/access.log common
 
         <Location "/">
                 SetHandler python-program

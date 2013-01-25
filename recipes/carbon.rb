@@ -51,7 +51,7 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :cache_query_port => node['graphite']['carbon']['cache_query_port'],
              :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'],
              :log_whisper_updates => node['graphite']['carbon']['log_whisper_updates'],
-             :local_data_dir => node['graphite']['carbon']['local_data_dir'])
+             :storage_dir => node['graphite']['storage_dir'])
   notifies :restart, "service[carbon-cache]"
 end
 
@@ -60,7 +60,7 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   group node['apache']['group']
 end
 
-directory node['graphite']['carbon']['local_data_dir'] do
+directory node['graphite']['storage_dir'] do
   owner node['apache']['user']
   group node['apache']['group']
   recursive true

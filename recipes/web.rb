@@ -20,6 +20,7 @@
 include_recipe "apache2::mod_python"
 
 basedir = node['graphite']['base_dir']
+storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
@@ -57,11 +58,24 @@ apache_site "000-default" do
 end
 
 %w{ webapp whisper }.each do |dir|
-  directory "#{basedir}/storage/log/#{dir}" do
+  directory "#{storagedir}/log/#{dir}" do
     owner node['apache']['user']
     group node['apache']['group']
     recursive true
   end
+end
+
+%w{ info.log exception.log access.log error.log }.each do |file|
+  file "#{storagedir}/log/webapp/#{file}" do
+    owner node['apache']['user']
+    group node['apache']['group']
+  end
+end
+
+template "#{basedir}/webapp/graphite/local_settings.py" do
+  source "local_settings.py.erb"
+  mode 00755
+  variables( :storage_dir => node['graphite']['storage_dir'] )
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do
@@ -69,7 +83,7 @@ template "#{basedir}/bin/set_admin_passwd.py" do
   mode 00755
 end
 
-cookbook_file "#{basedir}/storage/graphite.db" do
+cookbook_file "#{storagedir}/graphite.db" do
   action :create_if_missing
   notifies :run, "execute[set admin password]"
 end
@@ -79,7 +93,8 @@ execute "set admin password" do
   action :nothing
 end
 
-file "#{basedir}/storage/graphite.db" do
+# This is not done in the cookbook_file above to avoid triggering a password set on permissions changes
+file "#{storagedir}/graphite.db" do
   owner node['apache']['user']
   group node['apache']['group']
   mode 00644
