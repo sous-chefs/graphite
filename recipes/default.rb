@@ -18,6 +18,7 @@
 #
 
 include_recipe "python"
+include_recipe "memcached"
 
 include_recipe "graphite::whisper"
 include_recipe "graphite::carbon"
