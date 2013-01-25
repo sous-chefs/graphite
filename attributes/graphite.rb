@@ -11,6 +11,7 @@ default['graphite']['url_aliases'] = []
 default['graphite']['listen_port'] = 80
 default['graphite']['base_dir'] = "/opt/graphite"
 default['graphite']['doc_root'] = "/opt/graphite/webapp"
+default['graphite']['storage_dir'] = "/opt/graphite/storage"
 
 default['graphite']['whisper']['uri'] = "https://launchpad.net/graphite/0.9/#{node['graphite']['version']}/+download/whisper-#{node['graphite']['version']}.tar.gz"
 default['graphite']['whisper']['checksum'] = "36b5fa917526224678da0a530a6f276d00074f0aa98acd6e2412c79521f9c4ff"
@@ -28,5 +29,4 @@ default['graphite']['carbon']['cache_query_interface'] =     "0.0.0.0"
 default['graphite']['carbon']['cache_query_port'] = 7002
 default['graphite']['carbon']['max_updates_per_second'] = 1000
 default['graphite']['carbon']['service_type'] = "runit"
-default['graphite']['carbon']['local_data_dir'] = "/opt/graphite/storage/whisper/"
 default['graphite']['carbon']['log_whisper_updates'] = "False"
