@@ -1,30 +1,50 @@
+#
+# Cookbook Name:: graphite
+# Recipe:: web
+#
+# Copyright 2011, Heavy Water Software Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 include_recipe "apache2::mod_python"
 
 basedir = node['graphite']['base_dir']
+storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
 pyver = node['graphite']['python_version']
 
-package "python-cairo-dev"
-package "python-django"
-package "python-django-tagging"
-package "python-memcache"
-package "python-rrdtool"
+%{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
 
-remote_file "/usr/src/graphite-web-#{version}.tar.gz" do
+remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" do
   source node['graphite']['graphite_web']['uri']
   checksum node['graphite']['graphite_web']['checksum']
 end
 
 execute "untar graphite-web" do
   command "tar xzf graphite-web-#{version}.tar.gz"
-  creates "/usr/src/graphite-web-#{version}"
-  cwd "/usr/src"
+  creates "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
+  cwd "#{Chef::Config[:file_cache_path]}"
 end
 
 execute "install graphite-web" do
   command "python setup.py install"
   creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
-  cwd "/usr/src/graphite-web-#{version}"
+  cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
 end
 
 template "/etc/apache2/sites-available/graphite" do
@@ -33,21 +53,29 @@ end
 
 apache_site "graphite"
 
-directory "#{basedir}/storage" do
-  owner node['apache']['user']
-  group node['apache']['group']
-end
-
-directory "#{basedir}/storage/log" do
-  owner node['apache']['user']
-  group node['apache']['group']
+apache_site "000-default" do
+  enable false
 end
 
 %w{ webapp whisper }.each do |dir|
-  directory "#{basedir}/storage/log/#{dir}" do
+  directory "#{storagedir}/log/#{dir}" do
+    owner node['apache']['user']
+    group node['apache']['group']
+    recursive true
+  end
+end
+
+%w{ info.log exception.log access.log error.log }.each do |file|
+  file "#{storagedir}/log/webapp/#{file}" do
     owner node['apache']['user']
     group node['apache']['group']
   end
+end
+
+template "#{basedir}/webapp/graphite/local_settings.py" do
+  source "local_settings.py.erb"
+  mode 00755
+  variables( :storage_dir => node['graphite']['storage_dir'] )
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do
@@ -55,7 +83,7 @@ template "#{basedir}/bin/set_admin_passwd.py" do
   mode 00755
 end
 
-cookbook_file "#{basedir}/storage/graphite.db" do
+cookbook_file "#{storagedir}/graphite.db" do
   action :create_if_missing
   notifies :run, "execute[set admin password]"
 end
@@ -65,7 +93,8 @@ execute "set admin password" do
   action :nothing
 end
 
-file "#{basedir}/storage/graphite.db" do
+# This is not done in the cookbook_file above to avoid triggering a password set on permissions changes
+file "#{storagedir}/graphite.db" do
   owner node['apache']['user']
   group node['apache']['group']
   mode 00644

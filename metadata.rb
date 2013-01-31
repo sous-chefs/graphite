@@ -1,3 +1,4 @@
+name             "graphite"
 maintainer       "Heavy Water Software Inc."
 maintainer_email "ops@hw-ops.com"
 license          "Apache 2.0"
@@ -7,11 +8,11 @@ version          "0.3.1"
 
 supports "ubuntu"
 
-depends "python"
-depends "apache2"
+depends  "python"
+depends  "apache2"
+depends  "runit"
+depends  "memcached"
 
-suggests "runit"
 suggests "systemd"
 suggests "s6"
-
 suggests "graphiti"
