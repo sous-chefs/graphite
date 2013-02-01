@@ -12,7 +12,15 @@ Requirements
 Attributes
 ==========
 
-* `node[:graphite][:password]` sets the default password for graphite "root" user.
+The name of the encrypted data bag containing the default password for
+the graphite "root" user.  If this attribute is set it will not use
+`node[:graphite][:password]`.
+
+* `node['graphite']['encrypted_data_bag']['name']`
+
+The default password for graphite "root" user.
+
+* `node[:graphite][:password]`
 
 Usage
 =====
