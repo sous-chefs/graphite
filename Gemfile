@@ -1,3 +1,4 @@
 source :rubygems
 
-gem 'test-kitchen'
+gem 'jamie'
+gem 'jamie-vagrant', :group => :integration
