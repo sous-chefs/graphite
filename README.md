@@ -22,6 +22,10 @@ The default password for graphite "root" user.
 
 * `node[:graphite][:password]`
 
+Set the timezone for the graphite web interface, defaults to America/Los_Angeles
+
+* `node[:graphite][:timezone]`
+
 Usage
 =====
 
