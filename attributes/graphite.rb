@@ -4,7 +4,6 @@
 #
 
 default['graphite']['version'] = "0.9.10"
-default['graphite']['python_version'] = "2.6"
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
 default['graphite']['url_aliases'] = []
@@ -30,3 +29,5 @@ default['graphite']['carbon']['cache_query_port'] = 7002
 default['graphite']['carbon']['max_updates_per_second'] = 1000
 default['graphite']['carbon']['service_type'] = "runit"
 default['graphite']['carbon']['log_whisper_updates'] = "False"
+
+default['graphite']['encrypted_data_bag']['name'] = nil
