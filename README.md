@@ -45,6 +45,10 @@ the graphite "root" user.  If this attribute is set it will not use
 * `node['graphite']['carbon']['service_type']` - init service to use for carbon (defaults to runit)
 * `node['graphite']['carbon']['log_whisper_updates']` - log updates to whisper (defaults to false)
 
+Set the timezone for the graphite web interface, defaults to America/Los_Angeles
+
+* `node[:graphite][:timezone]`
+
 Usage
 =====
 
