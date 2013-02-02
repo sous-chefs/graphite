@@ -35,11 +35,11 @@ else
   end
 end
 
-package "python-cairo-dev"
-package "python-django"
-package "python-django-tagging"
-package "python-memcache"
-package "python-rrdtool"
+%{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
 
 remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" do
   source node['graphite']['graphite_web']['uri']
