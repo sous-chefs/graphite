@@ -26,6 +26,7 @@ the graphite "root" user.  If this attribute is set it will not use
 * `node['graphite']['base_dir']` = "/opt/graphite"
 * `node['graphite']['doc_root']` = "/opt/graphite/webapp"
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"
+* `node['graphite']['django_root']` = "@DJANGO_ROOT@" - configurable path to your django installation
 
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
