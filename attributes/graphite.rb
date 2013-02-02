@@ -4,7 +4,6 @@
 #
 
 default['graphite']['version'] = "0.9.10"
-default['graphite']['python_version'] = "2.6"
 default['graphite']['password'] = "change_me"
 default['graphite']['url'] = "graphite"
 default['graphite']['url_aliases'] = []

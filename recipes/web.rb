@@ -22,7 +22,7 @@ include_recipe "apache2::mod_python"
 basedir = node['graphite']['base_dir']
 storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
-pyver = node['graphite']['python_version']
+pyver = node['languages']['python']['version'][0..-3]
 
 if Chef::Config[:solo]
   Chef::Log.warn "This recipe uses encrypted data bags. Chef Solo does not support this."

@@ -18,7 +18,7 @@
 #
 
 version = node['graphite']['version']
-pyver = node['graphite']['python_version']
+pyver = node['languages']['python']['version'][0..-3]
 
 remote_file "#{Chef::Config[:file_cache_path]}/whisper-#{version}.tar.gz" do
   source node['graphite']['whisper']['uri']
