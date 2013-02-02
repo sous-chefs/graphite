@@ -29,3 +29,5 @@ default['graphite']['carbon']['cache_query_port'] = 7002
 default['graphite']['carbon']['max_updates_per_second'] = 1000
 default['graphite']['carbon']['service_type'] = "runit"
 default['graphite']['carbon']['log_whisper_updates'] = "False"
+
+default['graphite']['encrypted_data_bag']['name'] = nil

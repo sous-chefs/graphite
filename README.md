@@ -19,7 +19,7 @@ the graphite "root" user.  If this attribute is set it will not use
 
 
 * `node['graphite']['version']` - version of graphite to install (defaults to 0.9.10)
-* `node['graphite']['password']` - password for graphite root user(default to `change_me`)
+* `node['graphite']['password']` - password for graphite root user(default to `change_me` and is only used if encrypted databag isn't)
 * `node['graphite']['url']` - url of the graphite server (defaults to graphite)
 * `node['graphite']['url_aliases']` - array of url aliases (defaults to nil)
 * `node['graphite']['listen_port']` - port to listen on (defaults to 80)
