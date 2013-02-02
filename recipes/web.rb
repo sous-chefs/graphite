@@ -20,6 +20,7 @@
 include_recipe "apache2::mod_python"
 
 basedir = node['graphite']['base_dir']
+docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
 pyver = node['languages']['python']['version'][0..-3]
@@ -83,10 +84,13 @@ end
   end
 end
 
-template "#{basedir}/webapp/graphite/local_settings.py" do
+template "#{docroot}/graphite/local_settings.py" do
   source "local_settings.py.erb"
   mode 00755
-  variables( :storage_dir => node['graphite']['storage_dir'] )
+  variables(:timezone => node['graphite']['timzone'],
+            :base_dir => node['graphite']['base_dir'],
+            :doc_root => node['graphite']['doc_root'],
+            :storage_dir => node['graphite']['storage_dir'] )
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do

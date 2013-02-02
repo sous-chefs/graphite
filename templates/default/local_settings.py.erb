@@ -9,7 +9,7 @@
 # Set your local timezone (Django's default is America/Chicago)
 # If your graphs appear to be offset by a couple hours then this probably
 # needs to be explicitly set to your local timezone.
-TIME_ZONE = '<%= node['graphite']['timezone']  %>'
+TIME_ZONE = '<%= @timezone %>'
 
 # Override this to provide documentation specific to your Graphite deployment
 #DOCUMENTATION_URL = "http://graphite.readthedocs.org/"
@@ -43,28 +43,28 @@ MEMCACHE_HOSTS = ['127.0.0.1:11211']
 #####################################
 # Change only GRAPHITE_ROOT if your install is merely shifted from /opt/graphite
 # to somewhere else
-#GRAPHITE_ROOT = '/opt/graphite'
+#GRAPHITE_ROOT = '<%= @base_dir %>'
 # Most installs done outside of a separate tree such as /opt/graphite will only
 # need to change these three settings. Note that the default settings for each
 # of these is relative to GRAPHITE_ROOT
-#CONF_DIR = '/opt/graphite/conf'
+#CONF_DIR = '<%= @base_dir %>/conf'
 STORAGE_DIR = '<%= @storage_dir %>'
-#CONTENT_DIR = '/opt/graphite/webapp/content'
+#CONTENT_DIR = '<%= @doc_root %>/content'
 
 # To further or fully customize the paths, modify the following. Note that the
 # default settings for each of these are relative to CONF_DIR and STORAGE_DIR
 #
 ## Webapp config files
-#DASHBOARD_CONF = '/opt/graphite/conf/dashboard.conf'
-#GRAPHTEMPLATES_CONF = '/opt/graphite/conf/graphTemplates.conf'
+#DASHBOARD_CONF = '<%= @base_dir %>/conf/dashboard.conf'
+#GRAPHTEMPLATES_CONF = '<%= @base_dir %>/conf/graphTemplates.conf'
 
 ## Data directories
 # NOTE: If any directory is unreadable in DATA_DIRS it will break metric browsing
-#WHISPER_DIR = '/opt/graphite/storage/whisper'
-#RRD_DIR = '/opt/graphite/storage/rrd'
+#WHISPER_DIR = '<%= @storage_dir %>/whisper'
+#RRD_DIR = '<%= @storage_dir %>/rrd'
 #DATA_DIRS = [WHISPER_DIR, RRD_DIR] # Default: set from the above variables
-#LOG_DIR = '/opt/graphite/storage/log/webapp'
-#INDEX_FILE = '/opt/graphite/storage/index'  # Search index file
+#LOG_DIR = '<%= @storage_dir %>/log/webapp'
+#INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 
 
 #####################################
@@ -138,7 +138,7 @@ STORAGE_DIR = '<%= @storage_dir %>'
 # specification as the old database specification style is removed in 1.4
 #DATABASES = {
 #    'default': {
-#        'NAME': '/opt/graphite/storage/graphite.db',
+#        'NAME': '<%= @storage_dir %>/graphite.db',
 #        'ENGINE': 'django.db.backends.sqlite3',
 #        'USER': '',
 #        'PASSWORD': '',
