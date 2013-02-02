@@ -50,7 +50,7 @@ end
 execute "untar graphite-web" do
   command "tar xzf graphite-web-#{version}.tar.gz"
   creates "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
-  cwd "#{Chef::Config[:file_cache_path]}"
+  cwd Chef::Config[:file_cache_path]
 end
 
 execute "install graphite-web" do

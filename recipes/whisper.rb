@@ -28,7 +28,7 @@ end
 execute "untar whisper" do
   command "tar xzf whisper-#{version}.tar.gz"
   creates "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
-  cwd "#{Chef::Config[:file_cache_path]}"
+  cwd Chef::Config[:file_cache_path]
 end
 
 execute "install whisper" do

@@ -31,7 +31,7 @@ end
 execute "untar carbon" do
   command "tar xzf carbon-#{version}.tar.gz"
   creates "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
-  cwd "#{Chef::Config[:file_cache_path]}"
+  cwd Chef::Config[:file_cache_path]
 end
 
 execute "install carbon" do
