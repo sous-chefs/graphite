@@ -10,7 +10,7 @@ supports "ubuntu"
 
 depends  "python"
 depends  "apache2"
-depends  "runit"
+depends  "runit", "<= 0.16.2"
 depends  "memcached"
 
 suggests "systemd"
