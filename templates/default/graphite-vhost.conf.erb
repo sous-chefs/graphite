@@ -10,12 +10,12 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         ServerAlias <%= [node['graphite']['url_aliases']].flatten.compact.join(" ") %>
         <% end %>
         DocumentRoot "<%= node['graphite']['doc_root'] %>"
-        ErrorLog <%= node['graphite']['base_dir'] %>/storage/log/webapp/error.log
-        CustomLog <%= node['graphite']['base_dir'] %>/storage/log/webapp/access.log common
+        ErrorLog <%= node['graphite']['storage_dir'] %>/log/webapp/error.log
+        CustomLog <%= node['graphite']['storage_dir'] %>/log/webapp/access.log common
 
         <Location "/">
                 SetHandler python-program
-                PythonPath "['<%= node['graphite']['base_dir'] %>'] + sys.path"
+                PythonPath "['<%= node['graphite']['doc_root'] %>'] + sys.path"
                 PythonHandler django.core.handlers.modpython
                 SetEnv DJANGO_SETTINGS_MODULE graphite.settings
                 PythonDebug Off
@@ -40,6 +40,6 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
 	# must change @DJANGO_ROOT@ to be the path to your django
 	# installation, which is probably something like:
 	# /usr/lib/python2.6/site-packages/django
-        Alias /media/ "@DJANGO_ROOT@/contrib/admin/media/"
+        Alias /media/ "<%= node['graphite']['django_root'] %>/contrib/admin/media/"
 
 </VirtualHost>
