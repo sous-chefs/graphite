@@ -36,7 +36,7 @@ else
   end
 end
 
-%{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
+%w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
   package pkg do
     action :install
   end
@@ -87,7 +87,7 @@ end
 template "#{docroot}/graphite/local_settings.py" do
   source "local_settings.py.erb"
   mode 00755
-  variables(:timezone => node['graphite']['timzone'],
+  variables(:timezone => node['graphite']['timezone'],
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
             :storage_dir => node['graphite']['storage_dir'] )
