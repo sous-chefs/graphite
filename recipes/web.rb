@@ -25,15 +25,14 @@ storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
 pyver = node['languages']['python']['version'][0..-3]
 
+password = node['graphite']['password']
 if Chef::Config[:solo]
-  Chef::Log.warn "This recipe uses encrypted data bags. Chef Solo does not support this."
+  Chef::Log.warn "This recipe uses encrypted data bags, which are not supported on Chef Solo - fallback to node attribute."
+elsif node['graphite']['encrypted_data_bag']['name']
+  data_bag_name = node['graphite']['encrypted_data_bag']['name']
+  password = Chef::EncryptedDataBagItem.load(data_bag_name, "graphite")
 else
-  if node['graphite']['encrypted_data_bag']['name']
-    data_bag_name = node['graphite']['encrypted_data_bag']['name']
-    password = Chef::EncryptedDataBagItem.load(data_bag_name, "graphite")
-  else
-    password = node['graphite']['password']
-  end
+  Chef::Log.warn "This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute."
 end
 
 %w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
