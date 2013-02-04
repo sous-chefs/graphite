@@ -32,4 +32,14 @@ default['graphite']['carbon']['max_updates_per_second'] = 1000
 default['graphite']['carbon']['service_type'] = "runit"
 default['graphite']['carbon']['log_whisper_updates'] = "False"
 
+# Default carbon AMQP settings match the carbon default config
+default['graphite']['carbon']['enable_amqp'] = false
+default['graphite']['carbon']['amqp_host'] = "localhost"
+default['graphite']['carbon']['amqp_port'] = 5672
+default['graphite']['carbon']['amqp_vhost'] = "/"
+default['graphite']['carbon']['amqp_user'] = "guest"
+default['graphite']['carbon']['amqp_password'] = "guest"
+default['graphite']['carbon']['amqp_exchange'] = "graphite"
+default['graphite']['carbon']['amqp_metric_name_in_body'] = false
+
 default['graphite']['encrypted_data_bag']['name'] = nil

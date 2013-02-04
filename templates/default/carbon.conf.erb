@@ -42,18 +42,19 @@ LOG_UPDATES = <%= @log_whisper_updates %>
 
 
 # Enable AMQP if you want to receve metrics using an amqp broker
-# ENABLE_AMQP = False
+ENABLE_AMQP = <%= @enable_amqp ? "True" : "False" %>
 
 # Verbose means a line will be logged for every metric received
 # useful for testing
 # AMQP_VERBOSE = False
 
-# AMQP_HOST = localhost
-# AMQP_PORT = 5672
-# AMQP_VHOST = /
-# AMQP_USER = guest
-# AMQP_PASSWORD = guest
-# AMQP_EXCHANGE = graphite
+AMQP_HOST = <%= @amqp_host %>
+AMQP_PORT = <%= @amqp_port %>
+AMQP_VHOST = <%= @amqp_vhost %>
+AMQP_USER = <%= @amqp_user %>
+AMQP_PASSWORD = <%= @amqp_password %>
+AMQP_EXCHANGE = <%= @amqp_exchange %>
+AMQP_METRIC_NAME_IN_BODY = <%= @amqp_metric_name_in_body ? "True" : "False" %>
 
 # Patterns for all of the metrics this machine will store. Read more at
 # http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol#Bindings
