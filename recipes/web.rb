@@ -36,7 +36,7 @@ else
   end
 end
 
-%{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
+%w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
   package pkg do
     action :install
   end
