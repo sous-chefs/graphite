@@ -7,16 +7,18 @@ platforms:
     box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_chef-10.18.2.box
   run_list:
   - recipe[apt]
+- name: centos-6.3
+  driver_config:
+    box: opscode-centos-6.3
+    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-6.3.box
+
 suites:
 - name: carbon
   run_list:
-  - recipe[minitest-handler]
-  - recipe[graphite_test::carbon]
+  - recipe[graphite::carbon]
 - name: carbon_runit
   run_list:
-  - recipe[minitest-handler]
-  - recipe[graphite_test::carbon_runit]
+  - recipe[graphite::carbon_runit]
 - name: carbon_runit_twistd
   run_list:
-  - recipe[minitest-handler]
-  - recipe[graphite_test::carbon_runit_twistd]
+  - recipe[graphite::carbon_runit_twistd]
