@@ -20,6 +20,10 @@
 package "python-twisted"
 package "python-simplejson"
 
+if node['graphite']['carbon']['enable_amqp']
+    package "python-txamqp"
+end
+
 version = node['graphite']['version']
 pyver = node['languages']['python']['version'][0..-3]
 
@@ -51,6 +55,14 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :cache_query_port => node['graphite']['carbon']['cache_query_port'],
              :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'],
              :log_whisper_updates => node['graphite']['carbon']['log_whisper_updates'],
+             :enable_amqp => node['graphite']['carbon']['enable_amqp'],
+             :amqp_host => node['graphite']['carbon']['amqp_host'],
+             :amqp_port => node['graphite']['carbon']['amqp_port'],
+             :amqp_vhost => node['graphite']['carbon']['amqp_vhost'],
+             :amqp_user => node['graphite']['carbon']['amqp_user'],
+             :amqp_password => node['graphite']['carbon']['amqp_password'],
+             :amqp_exchange => node['graphite']['carbon']['amqp_exchange'],
+             :amqp_metric_name_in_body => node['graphite']['carbon']['amqp_metric_name_in_body'],
              :storage_dir => node['graphite']['storage_dir'])
   notifies :restart, "service[carbon-cache]"
 end
