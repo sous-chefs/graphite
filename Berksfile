@@ -1,4 +1,5 @@
 cookbook 'apt'
+cookbook 'yum'
 cookbook 'graphite', path: "."
 
 group :test do
