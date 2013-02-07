@@ -1,4 +1,4 @@
-template "/etc/init.d/carbon" do
+template "/etc/init.d/carbon-cache" do
   source "carbon.init.erb"
 end
 
