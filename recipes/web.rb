@@ -35,7 +35,13 @@ else
   Chef::Log.warn "This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute."
 end
 
-%w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }.each do |pkg|
+dep_packages = case node['platform_family']
+               when "debian"
+                 %w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }
+               when "rhel", "fedora"
+                 %w{ bitmap bitmap-fonts Django django-tagging pycairo-devel python-devel python-memcached mod_wsgi python-sqlite2 python-zope-interface }
+               end
+dep_packages.each do |pkg|
   package pkg do
     action :install
   end
@@ -58,7 +64,7 @@ execute "install graphite-web" do
   cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
 end
 
-template "/etc/apache2/sites-available/graphite" do
+template "#{node['apache']['dir']}/sites-available/graphite" do
   source "graphite-vhost.conf.erb"
 end
 
