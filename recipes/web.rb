@@ -39,7 +39,7 @@ dep_packages = case node['platform_family']
                when "debian"
                  %w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }
                when "rhel", "fedora"
-                 %w{ bitmap bitmap-fonts Django pycairo-devel python-devel python-memcached mod_wsgi python-sqlite2 python-zope-interface }
+                 %w{ bitmap bitmap-fonts Django django-tagging pycairo-devel python-devel python-memcached mod_wsgi python-sqlite2 python-zope-interface }
                end
 dep_packages.each do |pkg|
   package pkg do
