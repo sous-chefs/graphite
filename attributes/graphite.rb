@@ -29,7 +29,13 @@ default['graphite']['carbon']['pickle_receiver_port'] = 2004
 default['graphite']['carbon']['cache_query_interface'] =     "0.0.0.0"
 default['graphite']['carbon']['cache_query_port'] = 7002
 default['graphite']['carbon']['max_updates_per_second'] = 1000
-default['graphite']['carbon']['service_type'] = "runit"
+
+case node['platform_family']
+when "debian"
+  default['graphite']['carbon']['service_type'] = "runit"
+when "rhel","fedora"
+  default['graphite']['carbon']['service_type'] = "init"
+end
 default['graphite']['carbon']['log_whisper_updates'] = "False"
 
 # Default carbon AMQP settings match the carbon default config
