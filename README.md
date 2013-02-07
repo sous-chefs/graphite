@@ -7,6 +7,8 @@ Requirements
 ============
 
 * Ubuntu 10.04 / Ubuntu 12.04
+* Debian
+* RHEL/Centos
 
 Attributes
 ==========
