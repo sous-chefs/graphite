@@ -9,7 +9,7 @@ USER =
 # Limit the size of the cache to avoid swapping or becoming CPU bound.
 # Sorts and serving cache queries gets more expensive as the cache grows.
 # Use the value "inf" (infinity) for an unlimited cache size.
-MAX_CACHE_SIZE = inf
+MAX_CACHE_SIZE = <%= @max_cache_size %>
 
 # Limits the number of whisper update_many() calls per second, which effectively
 # means the number of write requests sent to the disk. This is intended to
@@ -25,7 +25,7 @@ MAX_UPDATES_PER_SECOND = <%= @max_updates_per_second %>
 # database files to all get created and thus longer until the data becomes usable.
 # Setting this value high (like "inf" for infinity) will cause graphite to create
 # the files quickly but at the risk of slowing I/O down considerably for a while.
-MAX_CREATES_PER_MINUTE = inf
+MAX_CREATES_PER_MINUTE = <%= @max_creates_per_second %>
 
 LINE_RECEIVER_INTERFACE = <%= @line_receiver_interface %>
 LINE_RECEIVER_PORT = <%= @line_receiver_port %>
