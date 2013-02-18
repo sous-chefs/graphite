@@ -39,7 +39,9 @@ Attributes
 * `node['graphite']['carbon']['pickle_receiver_port']` - pickle receiver port (defaults to 2004)
 * `node['graphite']['carbon']['cache_query_interface']` - cache query IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['cache_query_port']` - cache query port (defaults to 7002)
-* `node['graphite']['carbon']['max_updates_per_second']` - max updates to carbon per second (defaults to 1000)
+* `node['graphite']['carbon']['max_cache_size']` - max size of the carbon cache (defaults to "inf")
+* `node['graphite']['carbon']['max_creates_per_second']` - max number of new metrics to create per second (defaults to "inf")
+* `node['graphite']['carbon']['max_updates_per_second']` - max updates to carbon per second (defaults to "1000")
 * `node['graphite']['carbon']['service_type']` - init service to use for carbon (defaults to runit)
 * `node['graphite']['carbon']['log_whisper_updates']` - log updates to whisper (defaults to false)
 
