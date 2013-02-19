@@ -66,7 +66,7 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :amqp_exchange => node['graphite']['carbon']['amqp_exchange'],
              :amqp_metric_name_in_body => node['graphite']['carbon']['amqp_metric_name_in_body'],
              :storage_dir => node['graphite']['storage_dir'])
-  notifies :restart, "service[carbon-cache]"
+  notifies :restart, "runit_service[carbon-cache]"
 end
 
 template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
