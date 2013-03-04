@@ -74,12 +74,10 @@ apache_site "000-default" do
   enable false
 end
 
-%w{ webapp whisper }.each do |dir|
-  directory "#{storagedir}/log/#{dir}" do
-    owner node['apache']['user']
-    group node['apache']['group']
-    recursive true
-  end
+directory "#{storagedir}/log/webapp" do
+  owner node['apache']['user']
+  group node['apache']['group']
+  recursive true
 end
 
 %w{ info.log exception.log access.log error.log }.each do |file|
