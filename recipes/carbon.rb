@@ -44,6 +44,13 @@ execute "install carbon" do
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
+case node['platform_family']
+when "debian"
+  carbon_cache_service_resource = "runit_service[carbon-cache]"
+else
+  carbon_cache_service_resource = "service[carbon-cache]"
+end
+
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['apache']['user']
   group node['apache']['group']
@@ -66,7 +73,7 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :amqp_exchange => node['graphite']['carbon']['amqp_exchange'],
              :amqp_metric_name_in_body => node['graphite']['carbon']['amqp_metric_name_in_body'],
              :storage_dir => node['graphite']['storage_dir'])
-  notifies :restart, "runit_service[carbon-cache]"
+  notifies :restart, carbon_cache_service_resource
 end
 
 template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
