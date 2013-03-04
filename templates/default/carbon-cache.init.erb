@@ -43,6 +43,7 @@ start() {
   if [ $result -ne 0 ] ; then
     failure
     echo -e "Carbon-Cache did not start successfully"
+    echo "See $CC_LOG for details"
     exit 1
   else
     success
