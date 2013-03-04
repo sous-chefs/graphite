@@ -44,8 +44,8 @@ execute "install carbon" do
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
-case node['platform_family']
-when "debian"
+case node['graphite']['carbon']['service_type']
+when "runit"
   carbon_cache_service_resource = "runit_service[carbon-cache]"
 else
   carbon_cache_service_resource = "service[carbon-cache]"
