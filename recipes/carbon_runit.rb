@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe "runit"
+
 runit_service "carbon-cache" do
   finish true
 end
