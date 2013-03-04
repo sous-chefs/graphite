@@ -7,33 +7,24 @@
 # processname: carbon-cache
 
 
-PIDDIR="/var/run/carbon-cache"
-export PIDFILE="$PIDDIR/carbon-cache.pid"
 export CC_HOME="<%= @dir %>"
+export PIDFILE="$CC_HOME/storage/carbon-cache-a.pid"
 export CC_CONFIG="$CC_HOME/etc/carbon-cache.conf"
 CC_USER="<%= @user %>"
 LOGDIR="/var/log/carbon-cache"
-CC_LOG="<%= @log_dir %>/carbon-cache.log"
+CC_LOG="$LOGDIR/carbon-cache.log"
 BIN_SCRIPT="python $CC_HOME/bin/carbon-cache.py start >> $CC_LOG 2>&1"
 
-if [ -f /etc/init.d/functions ] ; then
-  . /etc/init.d/functions
-fi
+. /etc/init.d/functions
 
 start() {
-
-  if [ ! -d "$PIDDIR" ] ; then
-    mkdir "$PIDDIR"
-    chown -R $CC_USER:$CC_USER $PIDDIR
-  fi
 
   if [ ! -d "$LOGDIR" ] ; then
     mkdir "$LOGDIR"
   fi
 
-  chown -R $CC_USER:$CC_USER $LOGDIR $PIDDIR
-
-
+  chown -R $CC_USER:$CC_USER $LOGDIR
+  
   if [ -f $PIDFILE ]; then
     echo -e "\033[31;1mPID file found in $PIDFILE, already running?\033[0m"
     lj_pid="$(cat $PIDFILE)"
@@ -41,16 +32,13 @@ start() {
 
     if [ ! -z "$pid_running" ] ; then
       echo -e "\033[31;1mPID $lj_pid still alive, carbon-cache is already running. Doing nothing\033[0m"
-      return 1
+      return 0
     fi
   fi
 
   echo -e "\033[1mStarting carbon-cache...\033[0m"
-  sudo -u $CC_USER $BIN_SCRIPT &
-  lj_pid=$!
+  daemon --user $CC_USER $BIN_SCRIPT
   result=$?
-
-  echo $lj_pid > $PIDFILE
 
   if [ $result -ne 0 ] ; then
     failure
@@ -80,20 +68,21 @@ function stop() {
         return 0
       fi
     else
-      echo "\$PIDFILE was set ($PIDFILE) but the specified file does not exist. Is Carbon-Cache running? Assuming it has stopped and pro\
-        ceeding."
+      echo "PID file ($PIDFILE) does not exist. Assuming process has stopped."
       return 0
     fi
   fi
 
-  kill `cat $PIDFILE` >/dev/null 2>&1
+  PID=`cat $PIDFILE`
+  kill $PID >/dev/null 2>&1
 
   if [ ! -z "$PIDFILE" ]; then
     if [ -f "$PIDFILE" ]; then
       while [ $SHUTDOWN_WAIT -ge 0 ]; do
-        kill -0 `cat $PIDFILE` >/dev/null 2>&1
+        kill -0 $PID >/dev/null 2>&1
         if [ $? -gt 0 ]; then
-          rm $PIDFILE
+          success
+          echo -e "Carbon-Cache stopped successfully"
           break
         fi
         if [ $SHUTDOWN_WAIT -gt 0 ]; then
@@ -103,13 +92,13 @@ function stop() {
       done
       # still not dead, we may need to resort to drastic measures
       if [ -f "$PIDFILE" ]; then
-        kill -0 `cat $PIDFILE` >/dev/null 2>&1
+        kill -0 $PID >/dev/null 2>&1
         if [ $? -eq 0 ]; then
           echo "Application still alive, sleeping for 20 seconds before sending SIGKILL"
           sleep 20
-          kill -0 `cat $PIDFILE` >/dev/null 2>&1
+          kill -0 $PID >/dev/null 2>&1
           if [ $? -eq 0 ]; then
-            kill -9 `cat $PIDFILE` >/dev/null 2>&1
+            kill -9 $PID >/dev/null 2>&1
             echo "Killed with extreme prejudice"
           else
             echo "Application stopped, no need to use SIGKILL"

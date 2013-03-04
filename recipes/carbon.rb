@@ -80,10 +80,11 @@ directory node['graphite']['storage_dir'] do
   recursive true
 end
 
-directory "#{node['graphite']['storage_dir']}/whisper" do
-  owner node['apache']['user']
-  group node['apache']['group']
-  recursive true
+%w{ log whisper }.each do |dir|
+  directory "#{node['graphite']['storage_dir']}/#{dir}" do
+    owner node['apache']['user']
+    group node['apache']['group']
+  end
 end
 
 directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
