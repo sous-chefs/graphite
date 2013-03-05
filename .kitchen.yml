@@ -18,13 +18,16 @@ platforms:
     box: opscode-centos-6.3
     box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-6.3.box
   run_list:
-- name: centos-5.8
-  driver_config:
-    box: opscode-centos-5.8
-    box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-5.8.box
-  run_list:
+    - recipe[yum::epel]
+# - name: centos-5.8
+#   driver_config:
+#     box: opscode-centos-5.8
+#     box_url: https://opscode-vm.s3.amazonaws.com/vagrant/boxes/opscode-centos-5.8.box
+#   run_list:
+#     - recipe[yum::epel]
 suites:
 - name: default
   run_list:
+  - recipe[apache2]
   - recipe[graphite]
   attributes: {}
