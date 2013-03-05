@@ -1,7 +1,6 @@
 .bundle
 .cache
-.kitchen
 bin
-.jamie/
-.jamie.local.yml
 .vagrant
+.kitchen/
+.kitchen.local.yml
