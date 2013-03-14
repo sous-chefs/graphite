@@ -62,9 +62,9 @@ LINE_RECEIVER_PORT = <%= @line_receiver_port %>
 # Set this to True to enable the UDP listener. By default this is off
 # because it is very common to run multiple carbon daemons and managing
 # another (rarely used) port for every carbon instance is not fun.
-ENABLE_UDP_LISTENER = False
-UDP_RECEIVER_INTERFACE = 0.0.0.0
-UDP_RECEIVER_PORT = 2003
+ENABLE_UDP_LISTENER = <%= @enable_udp_listener %>
+UDP_RECEIVER_INTERFACE = <%= @udp_receiver_interface %>
+UDP_RECEIVER_PORT = <%= @udp_receiver_port %>
 
 PICKLE_RECEIVER_INTERFACE = <%= @pickle_receiver_interface %>
 PICKLE_RECEIVER_PORT = <%= @pickle_receiver_port %>
@@ -72,7 +72,7 @@ PICKLE_RECEIVER_PORT = <%= @pickle_receiver_port %>
 # Per security concerns outlined in Bug #817247 the pickle receiver
 # will use a more secure and slightly less efficient unpickler.
 # Set this to True to revert to the old-fashioned insecure unpickler.
-USE_INSECURE_UNPICKLER = False
+USE_INSECURE_UNPICKLER = <%= @use_insecure_unpickler %>
 
 CACHE_QUERY_INTERFACE = <%= @cache_query_interface %>
 CACHE_QUERY_PORT = <%= @cache_query_port %>
@@ -81,7 +81,7 @@ CACHE_QUERY_PORT = <%= @cache_query_port %>
 # reaches MAX_CACHE_SIZE. If this is True (the default) then sockets
 # over which metrics are received will temporarily stop accepting
 # data until the cache size falls below 95% MAX_CACHE_SIZE.
-USE_FLOW_CONTROL = True
+USE_FLOW_CONTROL = <%= @use_flow_control %>
 
 # By default, carbon-cache will log every whisper update. This can be excessive and
 # degrade performance if logging on the same volume as the whisper data is stored.
@@ -90,7 +90,7 @@ LOG_UPDATES = <%= @log_whisper_updates %>
 # On some systems it is desirable for whisper to write synchronously.
 # Set this option to True if you'd like to try this. Basically it will
 # shift the onus of buffering writes from the kernel into carbon's cache.
-WHISPER_AUTOFLUSH = False
+WHISPER_AUTOFLUSH = <%= @whisper_autoflush %>
 
 # By default new Whisper files are created pre-allocated with the data region
 # filled with zeros to prevent fragmentation and speed up contiguous reads and
@@ -179,20 +179,20 @@ AMQP_METRIC_NAME_IN_BODY = <%= @amqp_metric_name_in_body ? "True" : "False" %>
 
 
 [relay]
-LINE_RECEIVER_INTERFACE = 0.0.0.0
-LINE_RECEIVER_PORT = 2013
-PICKLE_RECEIVER_INTERFACE = 0.0.0.0
-PICKLE_RECEIVER_PORT = 2014
+LINE_RECEIVER_INTERFACE = <%= @relay_line_receiver_interface %>
+LINE_RECEIVER_PORT = <%= @relay_line_receiver_port %>
+PICKLE_RECEIVER_INTERFACE = <%= @relay_pickle_receiver_interface %>
+PICKLE_RECEIVER_PORT = <%= @relay_pickle_receiver_port %>
 
 # To use consistent hashing instead of the user defined relay-rules.conf,
 # change this to:
 # RELAY_METHOD = consistent-hashing
-RELAY_METHOD = rules
+RELAY_METHOD = <%= @relay_method %>
 
 # If you use consistent-hashing you may want to add redundancy
 # of your data by replicating every datapoint to more than
 # one machine.
-REPLICATION_FACTOR = 1
+REPLICATION_FACTOR = <%= @relay_replication_factor %>
 
 # This is a list of carbon daemons we will send any relayed or
 # generated metrics to. The default provided would send to a single
@@ -210,18 +210,22 @@ REPLICATION_FACTOR = 1
 #
 # If using RELAY_METHOD = rules, all destinations used in relay-rules.conf
 # must be defined in this list
+<% if @relay_destinations.length > 0 -%>
+DESTINATIONS = <%= @relay_destinations.join(', ') %>
+<% else -%>
 DESTINATIONS = 127.0.0.1:2004
+<% end -%>
 
 # This defines the maximum "message size" between carbon daemons.
 # You shouldn't need to tune this unless you really know what you're doing.
-MAX_DATAPOINTS_PER_MESSAGE = 500
-MAX_QUEUE_SIZE = 10000
+MAX_DATAPOINTS_PER_MESSAGE = <%= @relay_max_datapoints_per_message %>
+MAX_QUEUE_SIZE = <%= @relay_max_queue_size %>
 
 # Set this to False to drop datapoints when any send queue (sending datapoints
 # to a downstream carbon daemon) hits MAX_QUEUE_SIZE. If this is True (the
 # default) then sockets over which metrics are received will temporarily stop accepting
 # data until the send queues fall below 80% MAX_QUEUE_SIZE.
-USE_FLOW_CONTROL = True
+USE_FLOW_CONTROL = <%= @relay_use_flow_control %>
 
 # Set this to True to enable whitelisting and blacklisting of metrics in
 # CONF_DIR/whitelist and CONF_DIR/blacklist. If the whitelist is missing or
@@ -236,11 +240,11 @@ USE_FLOW_CONTROL = True
 
 
 [aggregator]
-LINE_RECEIVER_INTERFACE = 0.0.0.0
-LINE_RECEIVER_PORT = 2023
+LINE_RECEIVER_INTERFACE = <%= @aggregator_line_receiver_interface %>
+LINE_RECEIVER_PORT = <%= @aggregator_line_receiver_port %>
 
-PICKLE_RECEIVER_INTERFACE = 0.0.0.0
-PICKLE_RECEIVER_PORT = 2024
+PICKLE_RECEIVER_INTERFACE = <%= @aggregator_pickle_receiver_interface %>
+PICKLE_RECEIVER_PORT = <%= @aggregator_pickle_receiver_port %>
 
 # This is a list of carbon daemons we will send any relayed or
 # generated metrics to. The default provided would send to a single
@@ -255,32 +259,36 @@ PICKLE_RECEIVER_PORT = 2024
 # Note that if the destinations are all carbon-caches then this should
 # exactly match the webapp's CARBONLINK_HOSTS setting in terms of
 # instances listed (order matters!).
+<% if @aggregator_destinations.length > 0 -%>
+DESTINATIONS = <%= @aggregator_destinations.join(', ') %>
+<% else -%>
 DESTINATIONS = 127.0.0.1:2004
+<% end -%>
 
 # If you want to add redundancy to your data by replicating every
 # datapoint to more than one machine, increase this.
-REPLICATION_FACTOR = 1
+REPLICATION_FACTOR = <%= @aggregator_replication_factor %>
 
 # This is the maximum number of datapoints that can be queued up
 # for a single destination. Once this limit is hit, we will
 # stop accepting new data if USE_FLOW_CONTROL is True, otherwise
 # we will drop any subsequently received datapoints.
-MAX_QUEUE_SIZE = 10000
+MAX_QUEUE_SIZE = <%= @aggregator_max_queue_size %>
 
 # Set this to False to drop datapoints when any send queue (sending datapoints
 # to a downstream carbon daemon) hits MAX_QUEUE_SIZE. If this is True (the
 # default) then sockets over which metrics are received will temporarily stop accepting
 # data until the send queues fall below 80% MAX_QUEUE_SIZE.
-USE_FLOW_CONTROL = True
+USE_FLOW_CONTROL = <%= @aggregator_use_flow_control %>
 
 # This defines the maximum "message size" between carbon daemons.
 # You shouldn't need to tune this unless you really know what you're doing.
-MAX_DATAPOINTS_PER_MESSAGE = 500
+MAX_DATAPOINTS_PER_MESSAGE = <%= @aggregator_max_datapoints_per_message %>
 
 # This defines how many datapoints the aggregator remembers for
 # each metric. Aggregation only happens for datapoints that fall in
 # the past MAX_AGGREGATION_INTERVALS * intervalSize seconds.
-MAX_AGGREGATION_INTERVALS = 5
+MAX_AGGREGATION_INTERVALS = <%= @aggregator_max_aggregation_intervals %>
 
 # Set this to True to enable whitelisting and blacklisting of metrics in
 # CONF_DIR/whitelist and CONF_DIR/blacklist. If the whitelist is missing or
