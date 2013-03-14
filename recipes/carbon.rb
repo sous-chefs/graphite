@@ -113,6 +113,7 @@ end
 template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   owner node['apache']['user']
   group node['apache']['group']
+  variables( :storage_schemas => node['graphite']['storage_schemas'] )
 end
 
 directory node['graphite']['storage_dir'] do

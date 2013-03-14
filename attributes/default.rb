@@ -23,6 +23,8 @@ default['graphite']['graphite_web']['checksum'] = "4fd1d16cac3980fddc09dbf0a7224
 default['graphite']['carbon']['uri'] = "https://launchpad.net/graphite/0.9/#{node['graphite']['version']}/+download/carbon-#{node['graphite']['version']}.tar.gz"
 default['graphite']['carbon']['checksum'] = "4f37e00595b5b078edb9b3f5cae318f752f4446a82623ea4da97dd7d0f6a5072"
 
+default['graphite']['storage_schemas'] = {}
+
 # carbon-cache.py
 default['graphite']['carbon']['line_receiver_interface'] =   "0.0.0.0"
 default['graphite']['carbon']['line_receiver_port'] = 2003
