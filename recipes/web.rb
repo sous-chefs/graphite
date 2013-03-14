@@ -93,7 +93,9 @@ template "#{docroot}/graphite/local_settings.py" do
   variables(:timezone => node['graphite']['timezone'],
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
-            :storage_dir => node['graphite']['storage_dir'] )
+            :storage_dir => node['graphite']['storage_dir'],
+            :cluster_servers => node['graphite']['web']['cluster_servers'],
+            :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'] )
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do

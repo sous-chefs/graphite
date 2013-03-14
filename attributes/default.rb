@@ -86,5 +86,8 @@ default['graphite']['carbon']['aggregator']['use_flow_control'] = "True"
 default['graphite']['carbon']['aggregator']['max_datapoints_per_message'] = 500
 default['graphite']['carbon']['aggregator']['max_aggregation_intervals'] = 5
 
+# graphite-web
+default['graphite']['web']['cluster_servers'] = []
+default['graphite']['web']['carbonlink_hosts'] = []
 
 default['graphite']['encrypted_data_bag']['name'] = nil
