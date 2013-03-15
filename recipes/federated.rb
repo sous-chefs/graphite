@@ -42,11 +42,7 @@ if node['graphite']['chef_role']
     end
 
     node.default['graphite']['carbon']['relay']['destinations'] = destinations.map do |x|
-      if x != node['fqdn']
-        "#{x}:#{node['graphite']['carbon']['pickle_receiver_port']}:a"
-      else
-        "127.0.0.1:#{node['graphite']['carbon']['pickle_receiver_port']}:a"
-      end
+      "#{x}:#{node['graphite']['carbon']['pickle_receiver_port']}:a"
     end
 
     cluster_servers = destinations.map do |x|
