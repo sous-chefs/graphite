@@ -70,7 +70,8 @@ if int_instances.length > 0 and ext_instances.length > 0
     owner 'root'
     group 'root'
     mode '0755'
-    variables(:whisper_clean_py => "#{node['graphite']['base_dir']}/bin/whisper-clean.py",
+    variables(:graphite_lib_dir => "#{node['graphite']['base_dir']}/lib",
+              :whisper_clean_py => "#{node['graphite']['base_dir']}/bin/whisper-clean.py",
               :int_instances => int_instances,
               :ext_instances => ext_instances)
   end
