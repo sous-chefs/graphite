@@ -53,9 +53,9 @@ if node['graphite']['chef_role']
     end
 
     node.default['graphite']['carbon']['relay']['destinations'] = destinations
-    node.default['graphite']['web']['cluster_servers'] = cluster_servers
+    node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
 
-    node.default['graphite']['web']['carbonlink_hosts'] = [
+    node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
       "127.0.0.1:#{node['graphite']['carbon']['cache_query_port']}:a",
     ]
   end

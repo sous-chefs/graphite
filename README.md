@@ -29,9 +29,6 @@ Attributes
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
 
-* `node['graphite']['graphite_web']['uri']` - download url for the graphite web ui
-* `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
-
 * `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
 
 * `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
@@ -91,8 +88,11 @@ carbon-aggregator.py attributes
 graphite-web attributes
 -----------------------
 
-* `node['graphite']['web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
-* `node['graphite']['web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
+* `node['graphite']['graphite_web']['uri']` - download url for the graphite web ui
+* `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
+
+* `node['graphite']['graphite_web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
+* `node['graphite']['graphite_web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
 
 
 Data Bags

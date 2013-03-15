@@ -94,8 +94,8 @@ template "#{docroot}/graphite/local_settings.py" do
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
             :storage_dir => node['graphite']['storage_dir'],
-            :cluster_servers => node['graphite']['web']['cluster_servers'],
-            :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'] )
+            :cluster_servers => node['graphite']['graphite_web']['cluster_servers'],
+            :carbonlink_hosts => node['graphite']['graphite_web']['carbonlink_hosts'] )
   notifies :restart, 'service[apache2]'
 end
 
