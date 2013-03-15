@@ -96,6 +96,7 @@ template "#{docroot}/graphite/local_settings.py" do
             :storage_dir => node['graphite']['storage_dir'],
             :cluster_servers => node['graphite']['web']['cluster_servers'],
             :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'] )
+  notifies :restart, 'service[apache2]'
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do
