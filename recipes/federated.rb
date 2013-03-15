@@ -33,24 +33,27 @@ node.default['graphite']['carbon']['relay']['udp_receiver_port'] = 2003
 node.default['graphite']['carbon']['relay']['pickle_receiver_port'] = 2004
 node.default['graphite']['carbon']['relay']['relay_method'] = "consistent-hashing"
 
+int_instances = []
+ext_instances = []
+
 if node['graphite']['chef_role']
   graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}")
   if graphite_results
     destinations = []
+    cluster_servers = []
+
     graphite_results.each do |result|
-      destinations << result['fqdn']
-    end
-
-    node.default['graphite']['carbon']['relay']['destinations'] = destinations.map do |x|
-      "#{x}:#{node['graphite']['carbon']['pickle_receiver_port']}:a"
-    end
-
-    cluster_servers = destinations.map do |x|
-      if x != node['fqdn']
-        "#{x}:#{node['graphite']['listen_port']}"
+      destinations << "#{result['fqdn']}:#{result['graphite']['carbon']['pickle_receiver_port']}:a"
+      if result['fqdn'] != node['fqdn']
+        cluster_servers << "#{result['fqdn']}:#{node['graphite']['listen_port']}"
+        ext_instances << "#{result['fqdn']}:a"
+      else
+        int_instances << "#{result['fqdn']}:a"
       end
     end
-    node.default['graphite']['web']['cluster_servers'] = cluster_servers.compact
+
+    node.default['graphite']['carbon']['relay']['destinations'] = destinations
+    node.default['graphite']['web']['cluster_servers'] = cluster_servers
 
     node.default['graphite']['web']['carbonlink_hosts'] = [
       "127.0.0.1:#{node['graphite']['carbon']['cache_query_port']}:a",
@@ -60,4 +63,16 @@ end
 
 include_recipe "graphite::default"
 include_recipe "graphite::carbon_relay"
+
+if int_instances.length > 0 and ext_instances.length > 0
+  template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
+    source 'whisper-clean-this-node.sh.erb'
+    owner 'root'
+    group 'root'
+    mode '0755'
+    variables(:whisper_clean_py => "#{node['graphite']['base_dir']}/bin/whisper-clean.py",
+              :int_instances => int_instances,
+              :ext_instances => ext_instances)
+  end
+end
 

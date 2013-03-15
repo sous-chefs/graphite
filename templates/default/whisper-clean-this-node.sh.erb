@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PYTHONPATH='/opt/graphite/lib'
+DJANGO_SETTINGS_MODULE='graphite.settings'
+export PYTHONPATH DJANGO_SETTINGS_MODULE
+
+python <%= @whisper_clean_py %> \
+  <%= @int_instances.join(' ') %> \
+  <%= @ext_instances.map{ |x| "-#{x}" }.join(' ') %>
+
