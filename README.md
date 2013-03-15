@@ -15,7 +15,8 @@ Attributes
 ==========
 
 * `node['graphite']['version']` - version of graphite to install (defaults to 0.9.10)
-* `node['graphite']['password']` - password for graphite root user(default to `change_me` and is only used if encrypted databag isn't)
+* `node['graphite']['password']` - password for graphite root user (default to `change_me` and is only used if encrypted databag isn't)
+* `node['graphite']['chef_role']` - chef role name for graphite instances, used by the *federated* recipe (defaults to "graphite")
 * `node['graphite']['url']` - url of the graphite server (defaults to graphite)
 * `node['graphite']['url_aliases']` - array of url aliases (defaults to nil)
 * `node['graphite']['listen_port']` - port to listen on (defaults to 80)
@@ -23,7 +24,7 @@ Attributes
 * `node['graphite']['doc_root']` = "/opt/graphite/webapp"
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"
 * `node['graphite']['django_root']` = "@DJANGO_ROOT@" - configurable path to your django installation
-* `node['graphite']['timezone']` - Set the timezone for the graphite web interface, defaults to America/Los_Angeles
+* `node['graphite']['timezone']` - set the timezone for the graphite web interface, defaults to America/Los_Angeles
 
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
@@ -31,22 +32,67 @@ Attributes
 * `node['graphite']['graphite_web']['uri']` - download url for the graphite web ui
 * `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
 
+* `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
+
+* `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
+the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
+
+carbon-cache.py attributes
+--------------------------
+
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['line_receiver_port']` - line interface port (defaults to 2003)
+* `node['graphite']['carbon']['enable_udp_listener']` - set this to "True" to enable the UDP listener (defaults to "False")
+* `node['graphite']['carbon']['udp_receiver_interface'] - line interface IP for UDP listener (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['udp_receiver_port']` - line interface port for UDP listener (defaults to 2003)
 * `node['graphite']['carbon']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['pickle_receiver_port']` - pickle receiver port (defaults to 2004)
+* `node['graphite']['carbon']['use_insecure_unpickler']` - set this to "True" to use the old-fashioned insecure unpickler (defaults to "False")
 * `node['graphite']['carbon']['cache_query_interface']` - cache query IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['cache_query_port']` - cache query port (defaults to 7002)
+* `node['graphite']['carbon']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
 * `node['graphite']['carbon']['max_cache_size']` - max size of the carbon cache (defaults to "inf")
 * `node['graphite']['carbon']['max_creates_per_second']` - max number of new metrics to create per second (defaults to "inf")
 * `node['graphite']['carbon']['max_updates_per_second']` - max updates to carbon per second (defaults to "1000")
+* `node['graphite']['carbon']['log_whisper_updates']` - log updates to whisper (defaults to "False")
+* `node['graphite']['carbon']['whisper_autoflush']` - Set this option to "True" if you want whisper to write synchronously (defaults to "False")
 * `node['graphite']['carbon']['service_type']` - init service to use for carbon (defaults to runit)
-* `node['graphite']['carbon']['log_whisper_updates']` - log updates to whisper (defaults to false)
 
-* `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
-the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
+carbon-relay.py attributes
+--------------------------
+
+* `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
+* `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0) 
+* `node['graphite']['carbon']['relay']['pickle_receiver_port']` - pickle receiver port (defaults to 2014)
+* `node['graphite']['carbon']['relay']['relay_method']` - choose between *consistent-hashing* and *rules* (defaults to "rules")
+* `node['graphite']['carbon']['relay']['replication_factor']` - used to replicate datapoint data to more than one machine (defaults to 1)
+* `node['graphite']['carbon']['relay']['destinations']` - list of carbon daemons to send metrics to
+* `node['graphite']['carbon']['relay']['max_datapoints_per_message']` - maximum datapoints to send in a message between carbon daemons (defaults to 500)
+* `node['graphite']['carbon']['relay']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)
+* `node['graphite']['carbon']['relay']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
+
+carbon-aggregator.py attributes
+-------------------------------
+
+* `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
+* `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['aggregator']['pickle_receiver_port']` - pickle receiver port (defaults to 2024)
+* `node['graphite']['carbon']['aggregator']['destinations']` - list of carbon daemons to send metrics to
+* `node['graphite']['carbon']['aggregator']['replication_factor']` - used to add redundancy to your data by replicating every datapoing to more than one machinne (defaults to 1)
+* `node['graphite']['carbon']['aggregator']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)
+* `node['graphite']['carbon']['aggregator']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
+* `node['graphite']['carbon']['aggregator']['max_datapoints_per_message']` - maximum datapoints to send in a message between carbon daemons (defaults to 500)
+* `node['graphite']['carbon']['aggregator']['max_aggregation_intervals']` - sets how many datapoints the aggregator remembers for each metric (defaults to 5)
+
+graphite-web attributes
+-----------------------
+
+* `node['graphite']['web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
+* `node['graphite']['web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
 
 
 Data Bags
