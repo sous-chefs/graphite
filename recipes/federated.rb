@@ -36,7 +36,7 @@ node.default['graphite']['carbon']['relay']['relay_method'] = "consistent-hashin
 int_instances = []
 ext_instances = []
 
-if node['graphite']['chef_role']
+if not Chef::Config[:solo] and node['graphite']['chef_role']
   graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}")
   if graphite_results
     destinations = []
@@ -59,6 +59,10 @@ if node['graphite']['chef_role']
       "127.0.0.1:#{node['graphite']['carbon']['cache_query_port']}:a",
     ]
   end
+else
+  node.default['graphite']['carbon']['relay']['destinations'] = [
+    "127.0.0.1:#{node['graphite']['carbon']['pickle_receiver_port']}:a"
+  ]
 end
 
 include_recipe "graphite::default"
