@@ -37,6 +37,12 @@ execute "install whisper" do
   cwd "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
 end
 
+directory "#{node['graphite']['base_dir']}/bin" do
+  owner 'root'
+  group 'root'
+  recursive true
+end
+
 template "#{node['graphite']['base_dir']}/bin/whisper-clean.py" do
   source 'whisper-clean.py.erb'
   owner 'root'
