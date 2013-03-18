@@ -30,3 +30,7 @@ suites:
   run_list:
   - recipe[graphite]
   attributes: {}
+- name: federated
+  run_list:
+  - recipe[graphite::federated]
+  attributes: {}
