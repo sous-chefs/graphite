@@ -8,7 +8,7 @@
 
 
 export CC_HOME="<%= @dir %>"
-export PIDFILE="$CC_HOME/storage/carbon-relay-a.pid"
+export PIDFILE="$CC_HOME/storage/carbon-relay.pid"
 export CC_CONFIG="$CC_HOME/etc/carbon-relay.conf"
 CC_USER="<%= @user %>"
 LOGDIR="/var/log/carbon-relay"
@@ -37,17 +37,18 @@ start() {
   fi
 
   echo -e "\033[1mStarting carbon-relay...\033[0m"
-  daemon --user $CC_USER $BIN_SCRIPT
+  cd /tmp
+  daemon --user $CC_USER $BIN_SCRIPT &
   result=$?
 
   if [ $result -ne 0 ] ; then
     failure
-    echo -e "Carbon-Cache did not start successfully"
+    echo -e "Carbon-Relay did not start successfully"
     echo "See $CC_LOG for details"
     exit 1
   else
     success
-    echo -e "Carbon-Cache started successfully"
+    echo -e "Carbon-Relay started successfully"
   fi
 
 }
@@ -83,7 +84,7 @@ function stop() {
         kill -0 $PID >/dev/null 2>&1
         if [ $? -gt 0 ]; then
           success
-          echo -e "Carbon-Cache stopped successfully"
+          echo -e "Carbon-Relay stopped successfully"
           break
         fi
         if [ $SHUTDOWN_WAIT -gt 0 ]; then
@@ -123,12 +124,12 @@ status() {
   # RUNNING
   if [[ $pid && -d "/proc/$pid" ]]; then
     success
-    echo -e "Carbon-Cache is running with pid $pid"
+    echo -e "Carbon-Relay is running with pid $pid"
   fi
 
   # NOT RUNNING
   if [[ ! $pid || ! -d "/proc/$pid" ]]; then
-    echo "Carbon-Cache not running"
+    echo "Carbon-Relay not running"
   fi
 
   # STALE PID FOUND
