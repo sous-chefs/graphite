@@ -1,19 +1,19 @@
 #!/usr/bin/env bats
 
 @test "carbon-cache should be running" {
-  [ "$(pgrep carbon-cache.py)" ]
+  [ "$(pgrep -f carbon-cache\.py)" ]
 }
 
-@test "carbon should be listening on port 2013" {
-  [ "$(lsof -Pna -itcp:2013 -sTCP:LISTEN -ccarbon-cache.py)" ]
+@test "carbon-cache should be listening on port 2013" {
+  [ "$(lsof -Pna -itcp:2013 -sTCP:LISTEN -p$(pgrep -f carbon-cache\.py) 2> /dev/null)" ]
 }
 
 @test "carbon-relay should be running" {
-  [ "$(pgrep carbon-relay.py)" ]
+  [ "$(pgrep -f carbon-relay\.py)" ]
 }
 
-@test "carbon should be listening on port 2003" {
-  [ "$(lsof -Pna -itcp:2003 -sTCP:LISTEN -ccarbon-relay.py)" ]
+@test "carbon-relay should be listening on port 2003" {
+  [ "$(lsof -Pna -itcp:2003 -sTCP:LISTEN -p$(pgrep -f carbon-relay\.py) 2> /dev/null)" ]
 }
 
 @test "localhost should serve graphite browser" {
