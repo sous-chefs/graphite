@@ -8,7 +8,7 @@
 
 
 export CC_HOME="<%= @dir %>"
-export PIDFILE="$CC_HOME/storage/carbon-relay.pid"
+export PIDFILE="$CC_HOME/storage/carbon-relay-a.pid"
 export CC_CONFIG="$CC_HOME/etc/carbon-relay.conf"
 CC_USER="<%= @user %>"
 LOGDIR="/var/log/carbon-relay"
@@ -38,7 +38,7 @@ start() {
 
   echo -e "\033[1mStarting carbon-relay...\033[0m"
   cd /tmp
-  daemon --user $CC_USER $BIN_SCRIPT &
+  daemon --user $CC_USER $BIN_SCRIPT
   result=$?
 
   if [ $result -ne 0 ] ; then
@@ -121,20 +121,20 @@ status() {
   # GOT PIDFILE?
   [ -f $PIDFILE ] && pid=$(cat $PIDFILE)
 
-  # RUNNING
-  if [[ $pid && -d "/proc/$pid" ]]; then
-    success
-    echo -e "Carbon-Relay is running with pid $pid"
-  fi
-
-  # NOT RUNNING
-  if [[ ! $pid || ! -d "/proc/$pid" ]]; then
-    echo "Carbon-Relay not running"
-  fi
-
   # STALE PID FOUND
   if [[ ! -d "/proc/$pid" && -f $PIDFILE ]]; then
     echo -e "\033[1;31;40m[!] Stale PID found in $PIDFILE\033[0m"
+  fi
+
+  if [[ $pid && -d "/proc/$pid" ]]; then
+    # RUNNING
+    success
+    echo -e "Carbon-Relay is running with pid $pid"
+  else
+    # NOT RUNNING
+    failure
+    echo "Carbon-Relay not running"
+    return 1
   fi
 }
 
