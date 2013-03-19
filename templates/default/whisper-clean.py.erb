@@ -6,6 +6,7 @@ import os.path
 import sys
 
 from carbon.hashing import ConsistentHashRing
+from carbon.conf import settings
 
 instances = []
 unwelcome_instances = []
@@ -25,6 +26,8 @@ if 0 == len(instances):
 ring = ConsistentHashRing(instances)
 
 for dirname, dirnames, filenames in os.walk('<%= @storage_dir %>/whisper'):
+    if dirname.startswith('<%= @storage_dir %>/whisper/%s' % settings.CARBON_METRIC_PREFIX):
+        continue
     for filename in filenames:
         pathname = os.path.join(dirname, filename)
         basename, ext = os.path.splitext(filename)
