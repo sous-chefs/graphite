@@ -31,6 +31,7 @@ Attributes
 
 * `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
 * `node['graphite']['storage_aggregation']` - a hash with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
+* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file
 * `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
 
 * `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for

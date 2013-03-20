@@ -23,6 +23,7 @@ default['graphite']['carbon']['checksum'] = "4f37e00595b5b078edb9b3f5cae318f752f
 
 default['graphite']['storage_schemas'] = {}
 default['graphite']['storage_aggregation'] = {}
+default['graphite']['aggregation_rules'] = {}
 default['graphite']['relay_rules'] = {}
 
 # carbon-cache.py
