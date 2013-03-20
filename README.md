@@ -29,16 +29,13 @@ Attributes
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
 
-* `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
-* `node['graphite']['storage_aggregation']` - a hash with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
-* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file
-* `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
-
 * `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
 the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
 
 carbon-cache.py attributes
 --------------------------
+
+* `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
 
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
@@ -63,6 +60,8 @@ carbon-cache.py attributes
 carbon-relay.py attributes
 --------------------------
 
+* `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
+
 * `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
 * `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0) 
@@ -76,6 +75,9 @@ carbon-relay.py attributes
 
 carbon-aggregator.py attributes
 -------------------------------
+
+* `node['graphite']['storage_aggregation']` - a hash with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
+* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file
 
 * `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
