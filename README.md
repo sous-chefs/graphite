@@ -39,7 +39,7 @@ carbon-cache.py attributes
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['line_receiver_port']` - line interface port (defaults to 2003)
 * `node['graphite']['carbon']['enable_udp_listener']` - set this to "True" to enable the UDP listener (defaults to "False")
-* `node['graphite']['carbon']['udp_receiver_interface'] - line interface IP for UDP listener (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['udp_receiver_interface']` - line interface IP for UDP listener (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['udp_receiver_port']` - line interface port for UDP listener (defaults to 2003)
 * `node['graphite']['carbon']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['pickle_receiver_port']` - pickle receiver port (defaults to 2004)
