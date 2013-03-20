@@ -18,5 +18,27 @@
 #
 
 service_type = node['graphite']['carbon']['service_type']
+
+case service_type
+when 'runit'
+  carbon_relay_service_resource = 'runit_service[carbon-relay]'
+else
+  carbon_relay_service_resource = 'service[carbon-relay]'
+end
+
+if node['graphite']['relay_rules'].length > 0
+  template "#{node['graphite']['base_dir']}/conf/relay-rules.conf" do
+    owner node['apache']['user']
+    group node['apache']['group']
+    variables( :relay_rules => node['graphite']['relay_rules'] )
+    notifies :restart, carbon_relay_service_resource
+  end
+else
+  file "#{node['graphite']['base_dir']}/conf/relay-rules.conf" do
+    action :delete
+    notifies :restart, carbon_relay_service_resource
+  end
+end
+
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
 

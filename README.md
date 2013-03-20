@@ -30,6 +30,7 @@ Attributes
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
 
 * `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
+* `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
 
 * `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
 the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
