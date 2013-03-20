@@ -24,6 +24,7 @@ template "/etc/init.d/carbon-relay" do
     :user    => node['apache']['user']
   )
   mode 00744
+  notifies :restart, "service[carbon-relay]"
 end
 
 service "carbon-relay" do

@@ -24,6 +24,7 @@ template "/etc/init.d/carbon-aggregator" do
     :user    => node['apache']['user']
   )
   mode 00744
+  notifies :restart, "service[carbon-aggregator]"
 end
 
 service "carbon-aggregator" do
