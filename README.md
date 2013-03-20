@@ -99,6 +99,12 @@ graphite-web attributes
 * `node['graphite']['graphite_web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
 * `node['graphite']['graphite_web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
 
+Helper Scripts
+==============
+
+The following helper scripts are included in the `graphite/bin` directory:
+
+* `whisper-clean-this-node.sh` - this script cleans the whisper metrics that belong to other machines in the cluster. Usually used after synchronizing the *storage/whisper* directory. Uses the [https://gist.github.com/rcrowley/3153844](whisper-clean.py) script internally
 
 Data Bags
 =========
