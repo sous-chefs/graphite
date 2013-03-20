@@ -25,10 +25,8 @@ Attributes
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"
 * `node['graphite']['django_root']` = "@DJANGO_ROOT@" - configurable path to your django installation
 * `node['graphite']['timezone']` - set the timezone for the graphite web interface, defaults to America/Los_Angeles
-
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
-
 * `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
 the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
 
@@ -36,7 +34,6 @@ carbon-cache.py attributes
 --------------------------
 
 * `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
-
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
@@ -61,7 +58,6 @@ carbon-relay.py attributes
 --------------------------
 
 * `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
-
 * `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
 * `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0) 
@@ -78,7 +74,6 @@ carbon-aggregator.py attributes
 
 * `node['graphite']['storage_aggregation']` - a hash with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
 * `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file
-
 * `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
 * `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
@@ -95,7 +90,6 @@ graphite-web attributes
 
 * `node['graphite']['graphite_web']['uri']` - download url for the graphite web ui
 * `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
-
 * `node['graphite']['graphite_web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
 * `node['graphite']['graphite_web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
 
