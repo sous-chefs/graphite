@@ -99,6 +99,71 @@ graphite-web attributes
 * `node['graphite']['graphite_web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
 * `node['graphite']['graphite_web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
 
+storage_schemas example
+-----------------------
+
+```ruby
+node.default['graphite']['storage_schemas'] = {
+  'carbon' => {
+    'pattern' => /^carbon\./,
+    'retentions' => '1m:10d'
+  },
+  'sensu' => {
+    'pattern' => /^sensu\./,
+    'retentions' => '1m:30d'
+  },
+  'everything_30s7d_15m1m' => {
+    :match_all => true,
+    :retentions => '30s:7d,15m:1m'
+  }
+}
+```
+
+relay_rules example
+-------------------
+
+```ruby
+node.default['graphite']['relay_rules'] = {
+  'example' => {
+    'pattern' => /^mydata\.foo\..+/,
+    'destinations' => [ '10.1.2.4:2004' ]
+  },
+}
+```
+
+storage_aggregation example
+---------------------------
+
+```ruby
+node.default['graphite']['storage_aggregation'] = {
+  'all_min' => {
+    'pattern' => /.min$/,
+    'xFilesFactor' => 0.1,
+    'aggregationMethod' => 'min'
+  },
+}
+```
+
+aggregation_rules example
+-------------------------
+
+```ruby
+node.default['graphite']['aggregation_rules'] = [
+  {
+    'output_template' => '<env>.applications.<app>.all.requests',
+    'frequency' => '60',
+    'method' => 'sum',
+    'input_pattern' => '<env>.applications.<app>.*.requests'
+  },
+  {
+    'output_template' => '<env>.applications.<app>.all.latency',
+    'frequency' => '60',
+    'method' => 'sum',
+    'input_pattern' => '<env>.applications.<app>.*.latency'
+  },
+]
+```
+
 Helper Scripts
 ==============
 
