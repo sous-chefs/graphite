@@ -18,5 +18,29 @@
 #
 
 service_type = node['graphite']['carbon']['service_type']
+
+case service_type
+when 'runit'
+  carbon_aggregator_service_resource = 'runit_service[carbon-aggregator]'
+else
+  carbon_aggregator_service_resource = 'service[carbon-aggregator]'
+end
+
+if node['graphite']['storage_aggregation'].length > 0
+  puts "YES"
+  template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
+    owner node['apache']['user']
+    group node['apache']['group']
+    variables( :storage_aggregation => node['graphite']['storage_aggregation'] )
+    notifies :restart, carbon_aggregator_service_resource
+  end
+else
+  puts "NO"
+  file "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
+    action :delete
+    notifies :restart, carbon_aggregator_service_resource
+  end
+end
+
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
 
