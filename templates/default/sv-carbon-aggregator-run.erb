@@ -1,0 +1,3 @@
+#!/bin/sh
+exec 2>&1
+exec chpst -u <%= node['apache']['user'] %> -l <%= node['graphite']['storage_dir'] %>/carbon-aggregator.lock -- <%= node['graphite']['base_dir']%>/bin/carbon-aggregator.py --debug start
