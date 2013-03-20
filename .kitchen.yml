@@ -30,6 +30,11 @@ suites:
   run_list:
   - recipe[graphite]
   attributes: {}
+- name: carbon-aggregator
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_aggregator]
+  attributes: {}
 - name: federated
   run_list:
   - recipe[graphite::federated]
