@@ -6,21 +6,21 @@
 #  retentions = timePerPoint:timeToStore, timePerPoint:timeToStore, ...
 
 <% if @storage_schemas.length > 0 -%>
-<% @storage_schemas.sort.each do |key, value| -%>
+<%   @storage_schemas.sort.each do |key, value| -%>
 [<%= key %>]
 priority = <%= value['priority'] || 100 %>
-<% if value['match_all'] -%>
+<%     if value['match_all'] -%>
 match-all = <%= value['match_all'].to_s %>
-<% elsif value['pattern'] -%>
+<%     elsif value['pattern'] -%>
 pattern = <%= value['pattern'].kind_of?(Regexp) ? value['pattern'].source : value['pattern'].to_s %>
-<% elsif value['list'] -%>
+<%     elsif value['list'] -%>
 list = <%= value['list'] %>
-<% else -%>
+<%     else -%>
 match-all = true
-<% end -%>
+<%     end -%>
 retentions = <%= value['retentions'] || '60s:1d' %>
 
-<% end -%>
+<%   end -%>
 <% else -%>
 [catchall]
 priority = 0
