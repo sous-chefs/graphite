@@ -1,8 +1,7 @@
 #!/bin/bash
 
 PYTHONPATH='<%= @graphite_lib_dir %>'
-DJANGO_SETTINGS_MODULE='graphite.settings'
-export PYTHONPATH DJANGO_SETTINGS_MODULE
+export PYTHONPATH
 
 python <%= @whisper_clean_py %> \
   <%= @int_instances.join(' ') %> \
