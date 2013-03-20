@@ -27,7 +27,6 @@ else
 end
 
 if node['graphite']['storage_aggregation'].length > 0
-  puts "YES"
   template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
     owner node['apache']['user']
     group node['apache']['group']
@@ -35,7 +34,6 @@ if node['graphite']['storage_aggregation'].length > 0
     notifies :restart, carbon_aggregator_service_resource
   end
 else
-  puts "NO"
   file "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
     action :delete
     notifies :restart, carbon_aggregator_service_resource
