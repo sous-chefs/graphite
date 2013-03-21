@@ -30,4 +30,5 @@ end
 
 service "carbon-relay" do
   action [:enable, :start]
+  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end

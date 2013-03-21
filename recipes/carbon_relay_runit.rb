@@ -25,4 +25,5 @@ runit_service "carbon-relay" do
   finish_script_template_name 'carbon'
   finish true
   options(:name => 'relay')
+  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end

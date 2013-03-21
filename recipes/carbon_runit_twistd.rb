@@ -17,4 +17,6 @@
 # limitations under the License.
 #
 
-runit_service "twistd-carbon-cache"
+runit_service "twistd-carbon-cache" do
+  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+end

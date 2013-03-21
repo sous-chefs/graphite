@@ -25,4 +25,5 @@ runit_service "carbon-aggregator" do
   finish_script_template_name 'carbon'
   finish true
   options(:name => 'aggregator')
+  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end
