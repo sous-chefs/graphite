@@ -46,13 +46,6 @@ execute "install carbon" do
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
-case node['graphite']['carbon']['service_type']
-when "runit"
-  carbon_cache_service_resource = "runit_service[carbon-cache]"
-else
-  carbon_cache_service_resource = "service[carbon-cache]"
-end
-
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['apache']['user']
   group node['apache']['group']
@@ -107,14 +100,6 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :aggregator_max_datapoints_per_message => node['graphite']['carbon']['aggregator']['max_datapoints_per_message'],
              :aggregator_max_aggregation_intervals => node['graphite']['carbon']['aggregator']['max_aggregation_intervals']
   )
-  notifies :restart, carbon_cache_service_resource
-end
-
-template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
-  owner node['apache']['user']
-  group node['apache']['group']
-  variables( :storage_schemas => node['graphite']['storage_schemas'] )
-  notifies :restart, carbon_cache_service_resource
 end
 
 directory node['graphite']['storage_dir'] do
@@ -136,5 +121,3 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   recursive true
 end
 
-service_type = node['graphite']['carbon']['service_type']
-include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"

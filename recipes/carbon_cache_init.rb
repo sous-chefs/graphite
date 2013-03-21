@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: default
+# Recipe:: carbon_cache_init
 #
 # Copyright 2011, Heavy Water Software Inc.
 #
@@ -17,11 +17,17 @@
 # limitations under the License.
 #
 
-include_recipe "python"
-include_recipe "memcached"
-include_recipe "apache2"
+template "/etc/init.d/carbon-cache" do
+  source "carbon.init.erb"
+  variables(
+    :name    => 'cache',
+    :dir     => node['graphite']['base_dir'],
+    :user    => node['apache']['user']
+  )
+  mode 00744
+  notifies :restart, "service[carbon-cache]"
+end
 
-include_recipe "graphite::whisper"
-include_recipe "graphite::carbon"
-include_recipe "graphite::carbon_cache"
-include_recipe "graphite::web"
+service "carbon-cache" do
+  action [:enable, :start]
+end
