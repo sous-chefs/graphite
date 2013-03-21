@@ -33,7 +33,7 @@ the graphite "root" user.  If this attribute is set it will not use `node['graph
 carbon-cache.py attributes
 --------------------------
 
-* `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file
+* `node['graphite']['storage_schemas']` - a hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file ([see the example below](#storage_schemas-example))
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
@@ -57,7 +57,7 @@ carbon-cache.py attributes
 carbon-relay.py attributes
 --------------------------
 
-* `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
+* `node['graphite']['relay_rules']` - a hash with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file ([see the example below](#relay_rules-example))
 * `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
 * `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0) 
@@ -72,8 +72,8 @@ carbon-relay.py attributes
 carbon-aggregator.py attributes
 -------------------------------
 
-* `node['graphite']['storage_aggregation']` - a hash with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
-* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file
+* `node['graphite']['storage_aggregation']` - a hash with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file ([see the example below](#storage_aggregation-example))
+* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file ([see the example below](#aggregation_rules-example))
 * `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
 * `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
@@ -163,7 +163,7 @@ Helper Scripts
 
 The following helper scripts are included in the `graphite/bin` directory:
 
-* `whisper-clean-this-node.sh` - this script cleans the whisper metrics that belong to other machines in the cluster. Usually used after synchronizing the *storage/whisper* directory. Uses the [https://gist.github.com/rcrowley/3153844](whisper-clean.py) script internally
+* `whisper-clean-this-node.sh` - this script cleans the whisper metrics that belong to other machines in the cluster. Usually used after synchronizing the *storage/whisper* directory. Uses the [whisper-clean.py](https://gist.github.com/rcrowley/3153844) script internally
 
 Data Bags
 =========
