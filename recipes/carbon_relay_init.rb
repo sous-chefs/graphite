@@ -18,8 +18,9 @@
 #
 
 template "/etc/init.d/carbon-relay" do
-  source "carbon-relay.init.erb"
+  source "carbon.init.erb"
   variables(
+    :name    => 'relay',
     :dir     => node['graphite']['base_dir'],
     :user    => node['apache']['user']
   )

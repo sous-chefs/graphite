@@ -18,8 +18,9 @@
 #
 
 template "/etc/init.d/carbon-aggregator" do
-  source "carbon-aggregator.init.erb"
+  source "carbon.init.erb"
   variables(
+    :name    => 'aggregator',
     :dir     => node['graphite']['base_dir'],
     :user    => node['apache']['user']
   )
