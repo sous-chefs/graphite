@@ -1,10 +1,11 @@
 #!/usr/bin/env bats
 
 @test "carbon-aggregator should be running" {
-  [ "$(pgrep -f carbon-aggregator\.py)" ]
+  ps aux | grep carbon-aggregator\.p[y]
 }
 
 @test "carbon-aggregator should be listening on port 2023" {
-  [ "$(lsof -Pna -itcp:2023 -sTCP:LISTEN -p$(pgrep -f carbon-aggregator\.py) 2> /dev/null)" ]
+  pid="$(ps aux | grep carbon-aggregator\.p[y] | awk '{print $2}' | head -1)"
+  lsof -Pna -itcp:2023 -sTCP:LISTEN -p$pid 2> /dev/null
 }
 

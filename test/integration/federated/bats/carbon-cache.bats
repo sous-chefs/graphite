@@ -1,10 +1,11 @@
 #!/usr/bin/env bats
 
 @test "carbon-cache should be running" {
-  [ "$(pgrep -f carbon-cache\.py)" ]
+  ps aux | grep carbon-cache\.p[y]
 }
 
 @test "carbon-cache should be listening on port 2013" {
-  [ "$(lsof -Pna -itcp:2013 -sTCP:LISTEN -p$(pgrep -f carbon-cache\.py) 2> /dev/null)" ]
+  pid="$(ps aux | grep carbon-cache\.p[y] | awk '{print $2}' | head -1)"
+  lsof -Pna -itcp:2013 -sTCP:LISTEN -p$pid 2> /dev/null
 }
 
