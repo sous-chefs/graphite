@@ -36,37 +36,40 @@ node.default['graphite']['carbon']['relay']['relay_method'] = "consistent-hashin
 int_instances = []
 ext_instances = []
 
-if not Chef::Config[:solo] and node['graphite']['chef_role']
-  graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}")
-  if graphite_results
-    destinations = []
-    cluster_servers = []
-
-    graphite_results.each do |result|
-      destinations << "#{result['fqdn']}:#{result['graphite']['carbon']['pickle_receiver_port']}:a"
-      if result['fqdn'] != node['fqdn']
-        cluster_servers << "#{result['fqdn']}:#{node['graphite']['listen_port']}"
-        ext_instances << "#{result['fqdn']}:a"
-      else
-        int_instances << "#{result['fqdn']}:a"
-      end
-    end
-
-    node.default['graphite']['carbon']['relay']['destinations'] = destinations
-    node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
-
-    node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
-      "127.0.0.1:#{node['graphite']['carbon']['cache_query_port']}:a",
-    ]
-  end
-else
+if Chef::Config[:solo]
   node.default['graphite']['carbon']['relay']['destinations'] = [
     "127.0.0.1:#{node['graphite']['carbon']['pickle_receiver_port']}:a"
   ]
+else
+  if node['graphite']['chef_role']
+    graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}")
+    if graphite_results
+      destinations = []
+      cluster_servers = []
+
+      graphite_results.each do |result|
+        destinations << "#{result['fqdn']}:#{result['graphite']['carbon']['pickle_receiver_port']}:a"
+        if result['fqdn'] != node['fqdn']
+          cluster_servers << "#{result['fqdn']}:#{node['graphite']['listen_port']}"
+          ext_instances << "#{result['fqdn']}:a"
+        else
+          int_instances << "#{result['fqdn']}:a"
+        end
+      end
+
+      node.default['graphite']['carbon']['relay']['destinations'] = destinations
+      node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
+
+      node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
+        "127.0.0.1:#{node['graphite']['carbon']['cache_query_port']}:a",
+      ]
+    end
+  end
 end
 
 include_recipe "graphite::default"
 include_recipe "graphite::carbon_relay"
+
 
 if int_instances.length > 0 and ext_instances.length > 0
   template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
