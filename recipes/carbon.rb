@@ -20,10 +20,9 @@
 package "python-twisted"
 package "python-simplejson"
 
-if node['graphite']['carbon']['enable_amqp']
-  python_pip "txamqp" do
-    action :install
-  end
+python_pip "txamqp" do
+  action :install
+  only_if { node['graphite']['carbon']['enable_amqp'] }
 end
 
 version = node['graphite']['version']

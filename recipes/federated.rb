@@ -71,16 +71,15 @@ include_recipe "graphite::default"
 include_recipe "graphite::carbon_relay"
 
 
-if int_instances.length > 0 and ext_instances.length > 0
-  template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
-    source 'whisper-clean-this-node.sh.erb'
-    owner 'root'
-    group 'root'
-    mode '0755'
-    variables(:graphite_lib_dir => "#{node['graphite']['base_dir']}/lib",
-              :whisper_clean_py => "#{node['graphite']['base_dir']}/bin/whisper-clean.py",
-              :int_instances => int_instances,
-              :ext_instances => ext_instances)
-  end
+template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
+  source 'whisper-clean-this-node.sh.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  variables(:graphite_lib_dir => "#{node['graphite']['base_dir']}/lib",
+            :whisper_clean_py => "#{node['graphite']['base_dir']}/bin/whisper-clean.py",
+            :int_instances => int_instances,
+            :ext_instances => ext_instances)
+  only_if { int_instances.length > 0 and ext_instances.length > 0 }
 end
 
