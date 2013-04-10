@@ -4,3 +4,4 @@ bin
 .vagrant
 .kitchen/
 .kitchen.local.yml
+.jamie
