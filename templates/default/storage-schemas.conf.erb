@@ -1,0 +1,30 @@
+# Schema definitions for Whisper files. Entries are scanned in order,
+# and first match wins. This file is scanned for changes every 60 seconds.
+#
+#  [name]
+#  pattern = regex
+#  retentions = timePerPoint:timeToStore, timePerPoint:timeToStore, ...
+
+<% if @storage_schemas.length > 0 -%>
+<%   @storage_schemas.sort.each do |key, value| -%>
+[<%= key %>]
+priority = <%= value['priority'] || 100 %>
+<%     if value['match_all'] -%>
+match-all = <%= value['match_all'].to_s %>
+<%     elsif value['pattern'] -%>
+pattern = <%= value['pattern'].kind_of?(Regexp) ? value['pattern'].source : value['pattern'].to_s %>
+<%     elsif value['list'] -%>
+list = <%= value['list'] %>
+<%     else -%>
+match-all = true
+<%     end -%>
+retentions = <%= value['retentions'] || '60s:1d' %>
+
+<%   end -%>
+<% else -%>
+[catchall]
+priority = 0
+pattern = ^.*
+retentions = 60:100800,900:63000
+
+<% end -%>

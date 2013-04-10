@@ -67,6 +67,7 @@ end
 
 template "#{node['apache']['dir']}/sites-available/graphite" do
   source "graphite-vhost.conf.erb"
+  notifies :reload, 'service[apache2]'
 end
 
 apache_site "graphite"
@@ -94,7 +95,10 @@ template "#{docroot}/graphite/local_settings.py" do
   variables(:timezone => node['graphite']['timezone'],
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
-            :storage_dir => node['graphite']['storage_dir'] )
+            :storage_dir => node['graphite']['storage_dir'],
+            :cluster_servers => node['graphite']['graphite_web']['cluster_servers'],
+            :carbonlink_hosts => node['graphite']['graphite_web']['carbonlink_hosts'] )
+  notifies :restart, 'service[apache2]'
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do

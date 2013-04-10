@@ -20,10 +20,9 @@
 package "python-twisted"
 package "python-simplejson"
 
-if node['graphite']['carbon']['enable_amqp']
-  python_pip "txamqp" do
-    action :install
-  end
+python_pip "txamqp" do
+  action :install
+  only_if { node['graphite']['carbon']['enable_amqp'] }
 end
 
 version = node['graphite']['version']
@@ -46,48 +45,12 @@ execute "install carbon" do
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
-case node['graphite']['carbon']['service_type']
-when "runit"
-  carbon_cache_service_resource = "runit_service[carbon-cache]"
-else
-  carbon_cache_service_resource = "service[carbon-cache]"
-end
-
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['apache']['user']
   group node['apache']['group']
-  variables( :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
-             :line_receiver_port => node['graphite']['carbon']['line_receiver_port'],
-             :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
-             :pickle_receiver_port => node['graphite']['carbon']['pickle_receiver_port'],
-             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
-             :cache_query_port => node['graphite']['carbon']['cache_query_port'],
-             :max_cache_size => node['graphite']['carbon']['max_cache_size'],
-             :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'],
-             :max_creates_per_second => node['graphite']['carbon']['max_creates_per_second'],
-             :log_whisper_updates => node['graphite']['carbon']['log_whisper_updates'],
-             :enable_amqp => node['graphite']['carbon']['enable_amqp'],
-             :amqp_host => node['graphite']['carbon']['amqp_host'],
-             :amqp_port => node['graphite']['carbon']['amqp_port'],
-             :amqp_vhost => node['graphite']['carbon']['amqp_vhost'],
-             :amqp_user => node['graphite']['carbon']['amqp_user'],
-             :amqp_password => node['graphite']['carbon']['amqp_password'],
-             :amqp_exchange => node['graphite']['carbon']['amqp_exchange'],
-             :amqp_metric_name_in_body => node['graphite']['carbon']['amqp_metric_name_in_body'],
-             :storage_dir => node['graphite']['storage_dir'])
-  notifies :restart, carbon_cache_service_resource
-end
-
-%w{ schemas aggregation }.each do |storage_feature|
-  storage_config = node['graphite']['storage_' + storage_feature]
-
-  template "#{node['graphite']['base_dir']}/conf/storage-#{storage_feature}.conf" do
-    source 'storage.conf.erb'
-    owner node['apache']['user']
-    group node['apache']['group']
-    variables({:storage_config => storage_config})
-    only_if { storage_config.is_a?(Array) }
-  end
+  variables( :storage_dir => node['graphite']['storage_dir'],
+             :carbon_options => node['graphite']['carbon']
+  )
 end
 
 directory node['graphite']['storage_dir'] do
@@ -109,5 +72,3 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   recursive true
 end
 
-service_type = node['graphite']['carbon']['service_type']
-include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"

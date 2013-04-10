@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_runit_twistd
+# Recipe:: carbon_cache_init
 #
 # Copyright 2011, Heavy Water Software Inc.
 #
@@ -17,6 +17,18 @@
 # limitations under the License.
 #
 
-runit_service "twistd-carbon-cache" do
+template "/etc/init.d/carbon-cache" do
+  source "carbon.init.erb"
+  variables(
+    :name    => 'cache',
+    :dir     => node['graphite']['base_dir'],
+    :user    => node['apache']['user']
+  )
+  mode 00744
+  notifies :restart, "service[carbon-cache]"
+end
+
+service "carbon-cache" do
+  action [:enable, :start]
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end

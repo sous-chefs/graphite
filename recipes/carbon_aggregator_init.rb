@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_runit_twistd
+# Recipe:: carbon_aggregator_init
 #
-# Copyright 2011, Heavy Water Software Inc.
+# Copyright 2013, Onddo Labs, SL.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,18 @@
 # limitations under the License.
 #
 
-runit_service "twistd-carbon-cache" do
+template "/etc/init.d/carbon-aggregator" do
+  source "carbon.init.erb"
+  variables(
+    :name    => 'aggregator',
+    :dir     => node['graphite']['base_dir'],
+    :user    => node['apache']['user']
+  )
+  mode 00744
+  notifies :restart, "service[carbon-aggregator]"
+end
+
+service "carbon-aggregator" do
+  action [:enable, :start]
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end

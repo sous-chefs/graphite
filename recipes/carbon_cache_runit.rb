@@ -20,5 +20,10 @@
 include_recipe "runit"
 
 runit_service "carbon-cache" do
+  run_template_name 'carbon'
+  log_template_name 'carbon'
+  finish_script_template_name 'carbon'
   finish true
+  options(:name => 'cache')
+  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end
