@@ -78,9 +78,16 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   notifies :restart, carbon_cache_service_resource
 end
 
-template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
-  owner node['apache']['user']
-  group node['apache']['group']
+%w{ schemas aggregation }.each do |storage_feature|
+  storage_config = node['graphite']['storage_' + storage_feature]
+
+  template "#{node['graphite']['base_dir']}/conf/storage-#{storage_feature}.conf" do
+    source 'storage.conf.erb'
+    owner node['apache']['user']
+    group node['apache']['group']
+    variables({:storage_config => storage_config})
+    only_if { storage_config.is_a?(Array) }
+  end
 end
 
 directory node['graphite']['storage_dir'] do
