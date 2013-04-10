@@ -18,6 +18,7 @@
 #
 
 include_recipe "apache2::mod_python"
+include_recipe "apache2::mod_headers"
 
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
