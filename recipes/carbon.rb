@@ -41,7 +41,7 @@ execute "untar carbon" do
 end
 
 execute "install carbon" do
-  command "python setup.py install"
+  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['base_dir']}/lib"
   creates "#{node['graphite']['base_dir']}/lib/carbon-#{version}-py#{pyver}.egg-info"
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end

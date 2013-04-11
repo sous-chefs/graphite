@@ -32,7 +32,7 @@ execute "untar whisper" do
 end
 
 execute "install whisper" do
-  command "python setup.py install"
+  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['base_dir']}/lib"
   creates "/usr/local/lib/python#{pyver}/dist-packages/whisper-#{version}.egg-info"
   cwd "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
 end
