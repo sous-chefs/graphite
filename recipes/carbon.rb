@@ -21,6 +21,7 @@ package "python-twisted"
 package "python-simplejson"
 
 if node['graphite']['carbon']['enable_amqp']
+  include_recipe "python::pip"
   python_pip "txamqp" do
     action :install
   end
