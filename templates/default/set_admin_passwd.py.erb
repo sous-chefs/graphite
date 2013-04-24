@@ -7,8 +7,8 @@ sys.path.append("<%= node['graphite']['doc_root']%>/graphite")
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.contrib.auth.models import User
 
-username = sys.argv[1]
-password = sys.argv[2]
+username = sys.argv[0]
+password = sys.argv[1]
 
 try:
     u = User.objects.get(username__exact=username)
