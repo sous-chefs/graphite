@@ -20,14 +20,7 @@
 
 include_recipe "runit"
 
-dep_packages = case node['platform_family']
-               when "debian"
-                 %w{ uwsgi uwsgi-plugin-python uwsgi-plugin-carbon }
-               when "rhel", "fedora"
-                 Chef::Log.fatal "uwsgi not yet supported on RHEL/CentOS platforms"
-               end
-
-dep_packages.each do |pkg|
+node['graphite']['uwsgi_packages'].each do |pkg|
   package pkg do
     action :install
   end
