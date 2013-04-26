@@ -1,0 +1,10 @@
+[uwsgi]
+vacuum = true
+master = true
+processes = 8
+http = 0.0.0.0:<%= node['graphite']['listen_port'] %>
+module = wsgi
+buffer-size = 65536
+chdir = /opt/graphite/webapp/graphite
+logto = /opt/graphite/storage/log/webapp/uwsgi.log
+procname = graphite-web

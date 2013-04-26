@@ -1,0 +1,3 @@
+#!/bin/sh
+exec 2>&1
+exec uwsgi_python --processes 8 --pythonpath /opt/graphite/lib --pythonpath /opt/graphite/webapp/graphite --wsgi-file /opt/graphite/conf/graphite.wsgi.example --logto /opt/graphite/storage/log/webapp/uwsgi.log --http 0.0.0.0:<%= node['graphite']['listen_port'] %> --uid <%= node['graphite']['user_account'] %> --gid <%= node['graphite']['group_account'] %> --no-orphans --master --procname graphite-web --die-on-term --plugins carbon --carbon 127.0.0.1:2003

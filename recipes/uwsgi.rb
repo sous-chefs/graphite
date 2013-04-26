@@ -1,8 +1,9 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: default
+# Recipe:: uwsgi
 #
 # Copyright 2011, Heavy Water Software Inc.
+# Copyright 2013, Enstratius Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +18,18 @@
 # limitations under the License.
 #
 
-include_recipe "python"
-include_recipe "memcached"
+include_recipe "runit"
 
-include_recipe "graphite::user"
-include_recipe "graphite::whisper"
-include_recipe "graphite::carbon"
-include_recipe "graphite::web"
+node['graphite']['uwsgi_packages'].each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+
+template "#{node['graphite']['doc_root']}/uwsgi.ini" do
+  source "uwsgi.ini.erb"
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
+end
+
+runit_service "graphite-web"

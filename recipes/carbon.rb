@@ -55,8 +55,8 @@ else
 end
 
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
   variables( :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
              :line_receiver_port => node['graphite']['carbon']['line_receiver_port'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
@@ -84,29 +84,29 @@ end
 
   template "#{node['graphite']['base_dir']}/conf/storage-#{storage_feature}.conf" do
     source 'storage.conf.erb'
-    owner node['apache']['user']
-    group node['apache']['group']
+    owner node['graphite']['user_account']
+    group node['graphite']['group_account']
     variables({:storage_config => storage_config})
     only_if { storage_config.is_a?(Array) }
   end
 end
 
 directory node['graphite']['storage_dir'] do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
   recursive true
 end
 
 %w{ log whisper }.each do |dir|
   directory "#{node['graphite']['storage_dir']}/#{dir}" do
-    owner node['apache']['user']
-    group node['apache']['group']
+    owner node['graphite']['user_account']
+    group node['graphite']['group_account']
   end
 end
 
 directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
   recursive true
 end
 
