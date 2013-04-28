@@ -60,3 +60,15 @@ default['graphite']['carbon']['amqp_exchange'] = "graphite"
 default['graphite']['carbon']['amqp_metric_name_in_body'] = false
 
 default['graphite']['encrypted_data_bag']['name'] = nil
+
+default['graphite']['web_server'] = 'apache'
+default['graphite']['user_account'] = node['apache']['user']
+default['graphite']['group_account'] = node['apache']['group']
+default['graphite']['create_user'] = false
+
+case node['platform_family']
+when "debian"
+  default['graphite']['uwsgi_packages'] = %w{uwsgi uwsgi-plugin-python uwsgi-plugin-carbon}
+else
+  default['graphite']['uwsgi_packages'] = []
+end

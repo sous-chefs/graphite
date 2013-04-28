@@ -17,9 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe "apache2::mod_python"
-include_recipe "apache2::mod_headers"
-
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
@@ -65,26 +62,16 @@ execute "install graphite-web" do
   cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
 end
 
-template "#{node['apache']['dir']}/sites-available/graphite" do
-  source "graphite-vhost.conf.erb"
-end
-
-apache_site "graphite"
-
-apache_site "000-default" do
-  enable false
-end
-
 directory "#{storagedir}/log/webapp" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
   recursive true
 end
 
 %w{ info.log exception.log access.log error.log }.each do |file|
   file "#{storagedir}/log/webapp/#{file}" do
-    owner node['apache']['user']
-    group node['apache']['group']
+    owner node['graphite']['user_account']
+    group node['graphite']['group_account']
   end
 end
 
@@ -114,7 +101,13 @@ end
 
 # This is not done in the cookbook_file above to avoid triggering a password set on permissions changes
 file "#{storagedir}/graphite.db" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
   mode 00644
+end
+
+if node['graphite']['web_server'] == 'apache'
+  include_recipe "graphite::apache"
+else
+  include_recipe "graphite::uwsgi"
 end
