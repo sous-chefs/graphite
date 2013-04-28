@@ -48,6 +48,10 @@ Attributes
 * `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
 the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
 
+* `default['graphite']['web_server']` - defaults to `apache`. Anything else will use uswsgi instead of apache
+* `default['graphite']['user_account']` - user (default `node['apache']['user']`)
+* `default['graphite']['group_account']` - group (default `node['apache']['group']`)
+* `default['graphite']['create_user']`- should the user be created, boolean (defaults to false)
 
 Data Bags
 =========
