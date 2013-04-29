@@ -30,3 +30,15 @@ suites:
   run_list:
   - recipe[graphite]
   attributes: {}
+- name: ssl
+  run_list:
+  - recipe[graphite_test::ssl]
+  - recipe[graphite]
+  attributes: {
+    "graphite": {
+      "ssl": {
+        "enabled": true
+      },
+      "listen_port": "443"
+    }
+  }
