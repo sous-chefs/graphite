@@ -19,6 +19,10 @@ Attributes
 * `node['graphite']['url']` - url of the graphite server (defaults to graphite)
 * `node['graphite']['url_aliases']` - array of url aliases (defaults to nil)
 * `node['graphite']['listen_port']` - port to listen on (defaults to 80)
+*  node['graphite']['ssl']['enabled'] - enable ssl in the apache2 vhost
+*  node['graphite']['ssl']['cipher_suite'] - the cipher suite to use if ssl is enabled
+*  node['graphite']['ssl']['certificate_file'] - the path to the certificate file if ssl is enabled
+*  node['graphite']['ssl']['certificate_key_file'] - the path to the vertificate key file if ssl is enabled
 * `node['graphite']['base_dir']` = "/opt/graphite"
 * `node['graphite']['doc_root']` = "/opt/graphite/webapp"
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"

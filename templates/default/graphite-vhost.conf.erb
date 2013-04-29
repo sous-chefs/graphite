@@ -17,6 +17,14 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         Header set Access-Control-Allow-Methods "GET, OPTIONS"
         Header set Access-Control-Allow-Headers "origin, authorization, accept"
 
+        <%- if node['graphite']['ssl']['enabled'] %>
+        SSLEngine on
+        SSLCipherSuite <%= node['graphite']['ssl']['cipher_suite'] %>
+
+        SSLCertificateFile <%= node['graphite']['ssl']['certificate_file'] %>
+        SSLCertificateKeyFile <%= node['graphite']['ssl']['certificate_key_file'] %>
+        <%- end %>
+
         <Location "/">
                 SetHandler python-program
                 PythonPath "['<%= node['graphite']['doc_root'] %>', '<%= node['graphite']['base_dir'] %>/lib'] + sys.path"
