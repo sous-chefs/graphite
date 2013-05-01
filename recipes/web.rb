@@ -17,14 +17,6 @@
 # limitations under the License.
 #
 
-if node['graphite']['web_server'] == 'apache'
-  include_recipe "apache2::mod_python"
-  include_recipe "apache2::mod_headers"
-  if node['graphite']['ssl']['enabled']
-    include_recipe "apache2::mod_ssl"
-  end
-end
-
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
