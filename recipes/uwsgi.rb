@@ -20,16 +20,8 @@
 
 include_recipe "runit"
 
-node['graphite']['uwsgi_packages'].each do |pkg|
-  package pkg do
-    action :install
-  end
-end
-
-template "#{node['graphite']['doc_root']}/uwsgi.ini" do
-  source "uwsgi.ini.erb"
-  owner node['graphite']['user_account']
-  group node['graphite']['group_account']
+python_pip "uwsgi" do
+  action :install
 end
 
 runit_service "graphite-web"
