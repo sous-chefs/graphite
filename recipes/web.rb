@@ -43,10 +43,19 @@ end
 
 dep_packages = case node['platform_family']
                when "debian"
-                 %w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }
+                 packages = %w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }
                when "rhel", "fedora"
-                 %w{ bitmap bitmap-fonts Django django-tagging pycairo-devel python-devel python-memcached mod_wsgi python-sqlite2 python-zope-interface }
+                 packages = %w{ Django django-tagging pycairo-devel python-devel python-memcached mod_wsgi python-sqlite2 python-zope-interface }
+
+                 # Include bitmap packages (optionally)
+                 if node['graphite']['graphite_web']['bitmap_support']
+                   %w{bitmap bitmap-fonts} + packages
+                 else
+                   packages
+                 end
+
                end
+
 dep_packages.each do |pkg|
   package pkg do
     action :install

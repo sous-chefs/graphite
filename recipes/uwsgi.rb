@@ -24,4 +24,6 @@ python_pip "uwsgi" do
   action :install
 end
 
-runit_service "graphite-web"
+runit_service "graphite-web" do
+  default_logger true
+end
