@@ -20,8 +20,13 @@
 package "python-twisted"
 package "python-simplejson"
 
+include_recipe "python::pip"
+
+python_pip "zope.interface>=3.6.0" do
+  action :install
+end
+
 if node['graphite']['carbon']['enable_amqp']
-  include_recipe "python::pip"
   python_pip "txamqp" do
     action :install
   end
