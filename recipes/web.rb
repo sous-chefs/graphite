@@ -28,7 +28,8 @@ if Chef::Config[:solo]
   Chef::Log.warn "This recipe uses encrypted data bags, which are not supported on Chef Solo - fallback to node attribute."
 elsif node['graphite']['encrypted_data_bag']['name']
   data_bag_name = node['graphite']['encrypted_data_bag']['name']
-  password = Chef::EncryptedDataBagItem.load(data_bag_name, "graphite")
+  data_bag_item = Chef::EncryptedDataBagItem.load(data_bag_name, 'graphite')
+  password = data_bag_item['web_password']
 else
   Chef::Log.warn "This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute."
 end
