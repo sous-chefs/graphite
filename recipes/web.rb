@@ -24,9 +24,7 @@ version = node['graphite']['version']
 pyver = node['languages']['python']['version'][0..-3]
 
 password = node['graphite']['password']
-if Chef::Config[:solo]
-  Chef::Log.warn "This recipe uses encrypted data bags, which are not supported on Chef Solo - fallback to node attribute."
-elsif node['graphite']['encrypted_data_bag']['name']
+if node['graphite']['encrypted_data_bag']['name']
   data_bag_name = node['graphite']['encrypted_data_bag']['name']
   data_bag_item = Chef::EncryptedDataBagItem.load(data_bag_name, 'graphite')
   password = data_bag_item['web_password']
