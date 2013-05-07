@@ -29,6 +29,14 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         <%- end %>
 
         <Location "/">
+                <%- if node['graphite']['apache']['basic_auth'] %>
+                AuthType Basic
+                AuthName "Restricted Area"
+                AuthBasicProvider    file
+                AuthUserFile <%= node['graphite']['apache']['basic_auth']['file_path'] %>
+                Require valid-user
+                <%- end %>
+
                 SetHandler python-program
                 PythonPath "['<%= node['graphite']['doc_root'] %>', '<%= node['graphite']['base_dir'] %>/lib'] + sys.path"
                 PythonHandler django.core.handlers.modpython
