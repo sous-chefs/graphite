@@ -29,7 +29,7 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
         <%- end %>
 
         <Location "/">
-                <%- if node['graphite']['apache']['basic_auth'] %>
+                <%- if node['graphite']['apache']['basic_auth']['enabled'] %>
                 AuthType Basic
                 AuthName "Restricted Area"
                 AuthBasicProvider    file
