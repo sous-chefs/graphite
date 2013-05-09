@@ -57,25 +57,9 @@ end
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['graphite']['user_account']
   group node['graphite']['group_account']
-  variables( :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
-             :line_receiver_port => node['graphite']['carbon']['line_receiver_port'],
-             :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
-             :pickle_receiver_port => node['graphite']['carbon']['pickle_receiver_port'],
-             :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
-             :cache_query_port => node['graphite']['carbon']['cache_query_port'],
-             :max_cache_size => node['graphite']['carbon']['max_cache_size'],
-             :max_updates_per_second => node['graphite']['carbon']['max_updates_per_second'],
-             :max_creates_per_second => node['graphite']['carbon']['max_creates_per_second'],
-             :log_whisper_updates => node['graphite']['carbon']['log_whisper_updates'],
-             :enable_amqp => node['graphite']['carbon']['enable_amqp'],
-             :amqp_host => node['graphite']['carbon']['amqp_host'],
-             :amqp_port => node['graphite']['carbon']['amqp_port'],
-             :amqp_vhost => node['graphite']['carbon']['amqp_vhost'],
-             :amqp_user => node['graphite']['carbon']['amqp_user'],
-             :amqp_password => node['graphite']['carbon']['amqp_password'],
-             :amqp_exchange => node['graphite']['carbon']['amqp_exchange'],
-             :amqp_metric_name_in_body => node['graphite']['carbon']['amqp_metric_name_in_body'],
-             :storage_dir => node['graphite']['storage_dir'])
+  variables( :storage_dir => node['graphite']['storage_dir'],
+             :carbon_options => node['graphite']['carbon']
+  )
   notifies :restart, carbon_cache_service_resource
 end
 
