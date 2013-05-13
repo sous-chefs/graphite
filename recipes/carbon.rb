@@ -59,6 +59,7 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   group node['graphite']['group_account']
   variables( :line_receiver_interface => node['graphite']['carbon']['line_receiver_interface'],
              :line_receiver_port => node['graphite']['carbon']['line_receiver_port'],
+             :enable_udp_listener => node['graphite']['carbon']['enable_udp_listener'],
              :pickle_receiver_interface => node['graphite']['carbon']['pickle_receiver_interface'],
              :pickle_receiver_port => node['graphite']['carbon']['pickle_receiver_port'],
              :cache_query_interface => node['graphite']['carbon']['cache_query_interface'],
@@ -75,7 +76,8 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
              :amqp_password => node['graphite']['carbon']['amqp_password'],
              :amqp_exchange => node['graphite']['carbon']['amqp_exchange'],
              :amqp_metric_name_in_body => node['graphite']['carbon']['amqp_metric_name_in_body'],
-             :storage_dir => node['graphite']['storage_dir'])
+             :storage_dir => node['graphite']['storage_dir']
+             )
   notifies :restart, carbon_cache_service_resource
 end
 

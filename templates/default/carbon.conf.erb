@@ -30,6 +30,12 @@ MAX_CREATES_PER_MINUTE = <%= @max_creates_per_second %>
 LINE_RECEIVER_INTERFACE = <%= @line_receiver_interface %>
 LINE_RECEIVER_PORT = <%= @line_receiver_port %>
 
+<% if @enable_udp_listener %>
+ENABLE_UDP_LISTENER = True
+UDP_RECEIVER_INTERFACE = <%= @line_receiver_interface %>
+UDP_RECEIVER_PORT = 2003
+<% end %>
+
 PICKLE_RECEIVER_INTERFACE = <%= @pickle_receiver_interface %>
 PICKLE_RECEIVER_PORT = <%= @pickle_receiver_port %>
 
