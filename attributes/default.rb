@@ -28,6 +28,7 @@ default['graphite']['carbon']['uri'] = "https://launchpad.net/graphite/0.9/#{nod
 default['graphite']['carbon']['checksum'] = "4f37e00595b5b078edb9b3f5cae318f752f4446a82623ea4da97dd7d0f6a5072"
 default['graphite']['carbon']['line_receiver_interface'] =   "0.0.0.0"
 default['graphite']['carbon']['line_receiver_port'] = 2003
+default['graphite']['carbon']['enable_udp_listener'] = false
 default['graphite']['carbon']['pickle_receiver_interface'] = "0.0.0.0"
 default['graphite']['carbon']['pickle_receiver_port'] = 2004
 default['graphite']['carbon']['cache_query_interface'] =     "0.0.0.0"
