@@ -20,7 +20,7 @@ LOG_CACHE_PERFORMANCE = True
 LOG_METRIC_ACCESS = True
 
 # Enable full debug page display on exceptions (Internal Server Error pages)
-#DEBUG = True
+DEBUG = <%= @debug %>
 
 # If using RRD files and rrdcached, set to the address or socket of the daemon
 #FLUSHRRDCACHED = 'unix:/var/run/rrdcached.sock'
@@ -44,6 +44,7 @@ MEMCACHE_HOSTS = ['127.0.0.1:11211']
 # Change only GRAPHITE_ROOT if your install is merely shifted from /opt/graphite
 # to somewhere else
 GRAPHITE_ROOT = '<%= @base_dir %>'
+
 # Most installs done outside of a separate tree such as /opt/graphite will only
 # need to change these three settings. Note that the default settings for each
 # of these is relative to GRAPHITE_ROOT
@@ -89,6 +90,7 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 #USE_LDAP_AUTH = True
 #LDAP_SERVER = "ldap.mycompany.com"
 #LDAP_PORT = 389
+#	OR
 #LDAP_URI = "ldaps://ldap.mycompany.com:636"
 #LDAP_SEARCH_BASE = "OU=users,DC=mycompany,DC=com"
 #LDAP_BASE_USER = "CN=some_readonly_account,DC=mycompany,DC=com"
@@ -197,3 +199,4 @@ DATABASES = {
 # Uncomment the following line for direct access to Django settings such as
 # MIDDLEWARE_CLASSES or APPS
 #from graphite.app_settings import *
+
