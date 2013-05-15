@@ -13,6 +13,7 @@ end
 
 template "#{node['apache']['dir']}/sites-available/graphite" do
   source "graphite-vhost.conf.erb"
+  notifies :reload, "service[apache2]"
 end
 
 apache_site "graphite"
