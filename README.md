@@ -38,7 +38,7 @@ the graphite "root" user.  If this attribute is set it will not use `node['graph
 carbon-cache.py attributes
 --------------------------
 
-* `node['graphite']['storage_schemas']` - an array with retention rates for storing metrics, used to generate the storage-schemas.conf file.
+* `node['graphite']['storage_schemas']` - an array with retention rates for storing metrics, used to generate the *storage-schemas.conf* file ([see the example below](#storage_schemas-example))
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
@@ -69,6 +69,29 @@ graphite-web attributes
 * `default['graphite']['user_account']` - user (default `node['apache']['user']`)
 * `default['graphite']['group_account']` - group (default `node['apache']['group']`)
 * `default['graphite']['create_user']`- should the user be created, boolean (defaults to false)
+
+storage_schemas example
+-----------------------
+
+```ruby
+node.default['graphite']['storage_schemas'] = [
+  {
+    'name' => 'carbon',
+    'pattern' => /^carbon\./,
+    'retentions' => '1m:10d'
+  },
+  {
+    'name' => 'sensu',
+    'pattern' => /^sensu\./,
+    'retentions' => '1m:30d'
+  },
+  {
+    'name' => 'everything_30s7d_15m1m',
+    'match-all' => true,
+    'retentions' => '30s:7d,15m:1m'
+  }
+]
+```
 
 Data Bags
 =========
