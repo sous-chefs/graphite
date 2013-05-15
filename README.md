@@ -38,6 +38,7 @@ the graphite "root" user.  If this attribute is set it will not use `node['graph
 carbon-cache.py attributes
 --------------------------
 
+* `node['graphite']['storage_schemas']` - an array with retention rates for storing metrics, used to generate the storage-schemas.conf file.
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
