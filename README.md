@@ -56,10 +56,10 @@ carbon-cache.py attributes
 graphite-web attributes
 -----------------------
 
-* `node['graphite']['graphite_web']['uri']` - download url for the graphite web ui
-* `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
-* `node['graphite']['graphite_web']['debug']` - debug mode (defaults to "False")
-* `node['graphite']['graphite_web']['admin_email']` - admin contact email (defaults to "admin@org.com")
+* `node['graphite']['web']['uri']` - download url for the graphite web ui
+* `node['graphite']['web']['checksum']` - checksum for the graphite web ui download
+* `node['graphite']['web']['debug']` - debug mode (defaults to "False")
+* `node['graphite']['web']['admin_email']` - admin contact email (defaults to "admin@org.com")
 * `node['graphite']['web_server']` - defaults to `apache`. Anything else will use uswsgi instead of apache
 * `node['graphite']['user_account']` - user (default `node['apache']['user']`)
 * `node['graphite']['group_account']` - group (default `node['apache']['group']`)

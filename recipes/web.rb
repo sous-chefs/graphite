@@ -45,8 +45,8 @@ dep_packages.each do |pkg|
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" do
-  source node['graphite']['graphite_web']['uri']
-  checksum node['graphite']['graphite_web']['checksum']
+  source node['graphite']['web']['uri']
+  checksum node['graphite']['web']['checksum']
 end
 
 execute "untar graphite-web" do
@@ -78,7 +78,7 @@ template "#{docroot}/graphite/local_settings.py" do
   source "local_settings.py.erb"
   mode 00755
   variables(:timezone => node['graphite']['timezone'],
-            :debug => node['graphite']['graphite_web']['debug'],
+            :debug => node['graphite']['web']['debug'],
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
             :storage_dir => node['graphite']['storage_dir'] )
