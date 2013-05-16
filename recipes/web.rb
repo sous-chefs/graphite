@@ -23,6 +23,12 @@ storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
 pyver = node['languages']['python']['version'][0..-3]
 
+if node['graphite']['web_server'] == 'apache'
+  graphite_web_service_resource = 'service[apache2]'
+else
+  graphite_web_service_resource = 'runit_service[graphite-web]'
+end
+
 password = node['graphite']['password']
 if node['graphite']['encrypted_data_bag']['name']
   data_bag_name = node['graphite']['encrypted_data_bag']['name']
@@ -82,7 +88,7 @@ template "#{docroot}/graphite/local_settings.py" do
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
             :storage_dir => node['graphite']['storage_dir'] )
-  notifies :reload, 'service[apache2]'
+  notifies :reload, graphite_web_service_resource
 end
 
 template "#{basedir}/bin/set_admin_passwd.py" do
