@@ -19,7 +19,9 @@
 
 include_recipe "python"
 include_recipe "memcached"
-include_recipe "apache2"
+if node['graphite']['web_server'] == 'apache'
+  include_recipe "apache2"
+end
 
 include_recipe "graphite::user"
 include_recipe "graphite::whisper"
