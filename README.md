@@ -24,10 +24,8 @@ Attributes
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"
 * `node['graphite']['django_root']` = "@DJANGO_ROOT@" - configurable path to your django installation
 * `node['graphite']['timezone']` - set the timezone for the graphite web interface, defaults to America/Los_Angeles
-
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
-
 * `node['graphite']['encrypted_data_bag']['name']` - the name of the encrypted data bag containing the default password for
 the graphite "root" user. If this attribute is set it will not use `node['graphite']['password']`.
 
@@ -62,12 +60,10 @@ graphite-web attributes
 * `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
 * `node['graphite']['graphite_web']['debug']` - debug mode (defaults to "False")
 * `node['graphite']['graphite_web']['admin_email']` - admin contact email (defaults to "admin@org.com")
-
 * `node['graphite']['web_server']` - defaults to `apache`. Anything else will use uswsgi instead of apache
 * `node['graphite']['user_account']` - user (default `node['apache']['user']`)
 * `node['graphite']['group_account']` - group (default `node['apache']['group']`)
 * `node['graphite']['create_user']`- should the user be created, boolean (defaults to false)
-
 * `node['graphite']['ssl']['enabled']` - enable ssl in the apache2 vhost
 * `node['graphite']['ssl']['cipher_suite']` - the cipher suite to use if ssl is enabled
 * `node['graphite']['ssl']['certificate_file']` - the path to the certificate file if ssl is enabled
