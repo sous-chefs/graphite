@@ -5,6 +5,7 @@ template "/etc/init.d/carbon-cache" do
     :user    => node['apache']['user']
   )
   mode 00744
+  notifies :restart, "service[carbon-cache]"
 end
 
 service "carbon-cache" do

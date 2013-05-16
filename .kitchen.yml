@@ -42,3 +42,12 @@ suites:
       "listen_port": "443"
     }
   }
+- name: uwsgi
+  run_list:
+  - recipe[graphite]
+  attributes: {
+    "graphite": {
+      "listen_port": "8080",
+      "web_server": "uswsgi"
+    }
+  }
