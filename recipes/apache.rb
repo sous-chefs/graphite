@@ -1,4 +1,3 @@
-include_recipe "apache2"
 include_recipe "apache2::mod_python"
 include_recipe "apache2::mod_headers"
 if node['graphite']['ssl']['enabled']
