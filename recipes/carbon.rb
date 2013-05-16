@@ -72,6 +72,8 @@ end
     group node['graphite']['group_account']
     variables({:storage_config => storage_config})
     only_if { storage_config.is_a?(Array) }
+    notifies :restart, carbon_cache_service_resource
+    # TODO: storage_aggregation should restart carbon-aggregator when supported
   end
 end
 

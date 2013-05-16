@@ -19,31 +19,26 @@ Attributes
 * `node['graphite']['url']` - url of the graphite server (defaults to graphite)
 * `node['graphite']['url_aliases']` - array of url aliases (defaults to nil)
 * `node['graphite']['listen_port']` - port to listen on (defaults to 80)
-*  node['graphite']['ssl']['enabled'] - enable ssl in the apache2 vhost
-*  node['graphite']['ssl']['cipher_suite'] - the cipher suite to use if ssl is enabled
-*  node['graphite']['ssl']['certificate_file'] - the path to the certificate file if ssl is enabled
-*  node['graphite']['ssl']['certificate_key_file'] - the path to the vertificate key file if ssl is enabled
 * `node['graphite']['base_dir']` = "/opt/graphite"
 * `node['graphite']['doc_root']` = "/opt/graphite/webapp"
 * `node['graphite']['storage_dir']` = "/opt/graphite/storage"
 * `node['graphite']['django_root']` = "@DJANGO_ROOT@" - configurable path to your django installation
-* `node['graphite']['timezone']` - Set the timezone for the graphite web interface, defaults to America/Los_Angeles
-
+* `node['graphite']['timezone']` - set the timezone for the graphite web interface, defaults to America/Los_Angeles
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
-
-* `node['graphite']['encrypted_data_bag']['name']` - The name of the encrypted data bag containing the default password for
-the graphite "root" user.  If this attribute is set it will not use `node['graphite']['password']`.
+* `node['graphite']['encrypted_data_bag']['name']` - the name of the encrypted data bag containing the default password for
+the graphite "root" user. If this attribute is set it will not use `node['graphite']['password']`.
 
 carbon-cache.py attributes
 --------------------------
 
+* `node['graphite']['storage_schemas']` - an array with retention rates for storing metrics, used to generate the *storage-schemas.conf* file ([see the example below](#storage_schemas-example))
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['line_receiver_port']` - line interface port (defaults to 2003)
 * `node['graphite']['carbon']['enable_udp_listener']` - set this to "True" to enable the UDP listener (defaults to "False")
-* `node['graphite']['carbon']['udp_receiver_interface'] - line interface IP for UDP listener (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['udp_receiver_interface']` - line interface IP for UDP listener (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['udp_receiver_port']` - line interface port for UDP listener (defaults to 2003)
 * `node['graphite']['carbon']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['pickle_receiver_port']` - pickle receiver port (defaults to 2004)
@@ -61,20 +56,48 @@ carbon-cache.py attributes
 graphite-web attributes
 -----------------------
 
-* `node['graphite']['graphite_web']['uri']` - download url for the graphite web ui
-* `node['graphite']['graphite_web']['checksum']` - checksum for the graphite web ui download
+* `node['graphite']['web']['uri']` - download url for the graphite web ui
+* `node['graphite']['web']['checksum']` - checksum for the graphite web ui download
+* `node['graphite']['web']['debug']` - debug mode (defaults to "False")
+* `node['graphite']['web']['admin_email']` - admin contact email (defaults to "admin@org.com")
+* `node['graphite']['web_server']` - defaults to `apache`. Anything else will use uswsgi instead of apache
+* `node['graphite']['user_account']` - user (default `node['apache']['user']`)
+* `node['graphite']['group_account']` - group (default `node['apache']['group']`)
+* `node['graphite']['create_user']`- should the user be created, boolean (defaults to false)
+* `node['graphite']['ssl']['enabled']` - enable ssl in the apache2 vhost
+* `node['graphite']['ssl']['cipher_suite']` - the cipher suite to use if ssl is enabled
+* `node['graphite']['ssl']['certificate_file']` - the path to the certificate file if ssl is enabled
+* `node['graphite']['ssl']['certificate_key_file']` - the path to the vertificate key file if ssl is enabled
 
-* `default['graphite']['web_server']` - defaults to `apache`. Anything else will use uswsgi instead of apache
-* `default['graphite']['user_account']` - user (default `node['apache']['user']`)
-* `default['graphite']['group_account']` - group (default `node['apache']['group']`)
-* `default['graphite']['create_user']`- should the user be created, boolean (defaults to false)
+storage_schemas example
+-----------------------
+
+```ruby
+node.default['graphite']['storage_schemas'] = [
+  {
+    'name' => 'carbon',
+    'pattern' => /^carbon\./,
+    'retentions' => '1m:10d'
+  },
+  {
+    'name' => 'sensu',
+    'pattern' => /^sensu\./,
+    'retentions' => '1m:30d'
+  },
+  {
+    'name' => 'everything_30s7d_15m1m',
+    'match-all' => true,
+    'retentions' => '30s:7d,15m:1m'
+  }
+]
+```
 
 Data Bags
 =========
 
 This cookbook optionally uses an encrypted data bag to store the graphite password.
 If this data bag is not present the cookbook will use `node['graphite']['password']`
-instead.  To use the encrypted data bag set `node['graphite']['encrypted_data_bag']['name']`
+instead. To use the encrypted data bag set `node['graphite']['encrypted_data_bag']['name']`
 with the name of the data bag you wish to use.
 
 
