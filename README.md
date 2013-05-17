@@ -56,7 +56,7 @@ carbon-cache.py attributes
 carbon-relay.py attributes
 --------------------------
 
-* `node['graphite']['relay_rules']` - an array with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
+* `node['graphite']['relay_rules']` - an array with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file ([see the example below](#relay_rules-example))
 * `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
 * `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
@@ -107,6 +107,19 @@ node.default['graphite']['storage_schemas'] = [
     'retentions' => '30s:7d,15m:1m'
   }
 ]
+```
+
+relay_rules example
+-------------------
+
+```ruby
+node.default['graphite']['relay_rules'] = {
+  'example' => {
+    'pattern' => /^mydata\.foo\..+/,
+    'destinations' => [ '10.1.2.4:2004' ],
+    'default' => true
+  },
+}
 ```
 
 Data Bags
