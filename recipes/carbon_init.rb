@@ -1,6 +1,7 @@
 template "/etc/init.d/carbon-cache" do
-  source "carbon-cache.init.erb"
+  source "carbon.init.erb"
   variables(
+    :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
     :user    => node['apache']['user']
   )
