@@ -20,5 +20,9 @@
 include_recipe "runit"
 
 runit_service "carbon-relay" do
+  run_template_name 'carbon'
+  log_template_name 'carbon'
+  finish_script_template_name 'carbon'
   finish true
+  options(:name => 'relay')
 end

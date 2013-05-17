@@ -1,6 +1,0 @@
-#!/bin/sh
-PIDFILE="<%= node['graphite']['storage_dir'] %>/carbon-relay-a.pid"
-
-if [ -e $PIDFILE ]; then
-    rm -v $PIDFILE
-fi
