@@ -3,6 +3,8 @@
 # Attributes:: carbon_relay
 #
 
+default['graphite']['relay_rules'] = []
+
 default['graphite']['carbon']['relay']['line_receiver_interface'] = "0.0.0.0"
 default['graphite']['carbon']['relay']['line_receiver_port'] = 2013
 default['graphite']['carbon']['relay']['pickle_receiver_interface'] = "0.0.0.0"

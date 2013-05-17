@@ -56,6 +56,7 @@ carbon-cache.py attributes
 carbon-relay.py attributes
 --------------------------
 
+* `node['graphite']['relay_rules']` - an array with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file
 * `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
 * `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
