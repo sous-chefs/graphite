@@ -51,3 +51,24 @@ suites:
       "web_server": "uswsgi"
     }
   }
+- name: carbon-relay
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_relay]
+  attributes: {
+    "graphite": {
+      "carbon": {
+        "relay": {
+          "destinations": [ "127.0.0.1:2003:a" ]
+        },
+      },
+      "relay_rules": [
+        {
+          "name": "example",
+          "pattern": "^mydata\\.foo\\..+",
+          "destinations": [ "127.0.0.1:2003:a" ],
+          "default": true
+        }
+      ]
+    }
+  }

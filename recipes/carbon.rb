@@ -47,34 +47,21 @@ execute "install carbon" do
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
-case node['graphite']['carbon']['service_type']
-when "runit"
-  carbon_cache_service_resource = "runit_service[carbon-cache]"
-else
-  carbon_cache_service_resource = "service[carbon-cache]"
-end
-
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['graphite']['user_account']
   group node['graphite']['group_account']
   variables( :storage_dir => node['graphite']['storage_dir'],
              :carbon_options => node['graphite']['carbon']
   )
-  notifies :restart, carbon_cache_service_resource
 end
 
-%w{ schemas aggregation }.each do |storage_feature|
-  storage_config = node['graphite']['storage_' + storage_feature]
-
-  template "#{node['graphite']['base_dir']}/conf/storage-#{storage_feature}.conf" do
-    source 'storage.conf.erb'
-    owner node['graphite']['user_account']
-    group node['graphite']['group_account']
-    variables({:storage_config => storage_config})
-    only_if { storage_config.is_a?(Array) }
-    notifies :restart, carbon_cache_service_resource
-    # TODO: storage_aggregation should restart carbon-aggregator when supported
-  end
+template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
+  source 'storage.conf.erb'
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
+  variables( :storage_config => node['graphite']['storage_aggregation'] )
+  only_if { node['graphite']['storage_aggregation'].is_a?(Array) }
+  # TODO: storage_aggregation should restart carbon-aggregator when supported
 end
 
 directory node['graphite']['storage_dir'] do
@@ -96,5 +83,3 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   recursive true
 end
 
-service_type = node['graphite']['carbon']['service_type']
-include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"

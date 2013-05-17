@@ -7,6 +7,8 @@ default['graphite']['web']['uri'] = "https://launchpad.net/graphite/0.9/#{node['
 default['graphite']['web']['checksum'] = "4fd1d16cac3980fddc09dbf0a72243c7ae32444903258e1b65e28428a48948be"
 default['graphite']['web']['debug'] = "False"
 default['graphite']['web']['admin_email'] = "admin@org.com"
+default['graphite']['web']['cluster_servers'] = []
+default['graphite']['web']['carbonlink_hosts'] = []
 
 default['graphite']['web_server'] = 'apache'
 default['graphite']['user_account'] = node['apache']['user']
