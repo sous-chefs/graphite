@@ -113,13 +113,14 @@ relay_rules example
 -------------------
 
 ```ruby
-node.default['graphite']['relay_rules'] = {
-  'example' => {
+node.default['graphite']['relay_rules'] = [
+  {
+    'name' => 'example',
     'pattern' => /^mydata\.foo\..+/,
     'destinations' => [ '10.1.2.4:2004' ],
     'default' => true
   },
-}
+]
 ```
 
 Data Bags
