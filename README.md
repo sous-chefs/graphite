@@ -53,6 +53,20 @@ carbon-cache.py attributes
 * `node['graphite']['carbon']['whisper_autoflush']` - set this option to "True" if you want whisper to write synchronously (defaults to "False")
 * `node['graphite']['carbon']['service_type']` - init service to use for carbon (defaults to runit)
 
+carbon-relay.py attributes
+--------------------------
+
+* `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
+* `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['relay']['pickle_receiver_port']` - pickle receiver port (defaults to 2014)
+* `node['graphite']['carbon']['relay']['relay_method']` - choose between *consistent-hashing* and *rules* (defaults to "rules")
+* `node['graphite']['carbon']['relay']['replication_factor']` - used to replicate datapoint data to more than one machine (defaults to 1)
+* `node['graphite']['carbon']['relay']['destinations']` - list of carbon daemons to send metrics to
+* `node['graphite']['carbon']['relay']['max_datapoints_per_message']` - maximum datapoints to send in a message between carbon daemons (defaults to 500)
+* `node['graphite']['carbon']['relay']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)
+* `node['graphite']['carbon']['relay']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
+
 graphite-web attributes
 -----------------------
 
