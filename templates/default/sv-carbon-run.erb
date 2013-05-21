@@ -1,0 +1,4 @@
+#!/bin/sh
+exec 2>&1
+exec chpst -u <%= node['graphite']['user_account'] %> -l <%= node['graphite']['storage_dir'] %>/carbon-<%= @options[:name] %>.lock -- <%= node['graphite']['base_dir']%>/bin/carbon-<%= @options[:name] %>.py --pid <%= node['graphite']['storage_dir'] %>/carbon-<%= @options[:name] %>-a.pid --debug start
+

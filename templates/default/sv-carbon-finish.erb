@@ -1,0 +1,6 @@
+#!/bin/sh
+PIDFILE="<%= node['graphite']['storage_dir'] %>/carbon-<%= @options[:name] %>-a.pid"
+
+if [ -e $PIDFILE ]; then
+    rm -v $PIDFILE
+fi

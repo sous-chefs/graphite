@@ -26,4 +26,5 @@ end
 include_recipe "graphite::user"
 include_recipe "graphite::whisper"
 include_recipe "graphite::carbon"
+include_recipe "graphite::carbon_cache"
 include_recipe "graphite::web"

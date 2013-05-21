@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_runit_twistd
+# Recipe:: carbon_relay_runit
 #
-# Copyright 2011, Heavy Water Software Inc.
+# Copyright 2013, Onddo Labs, SL.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,13 @@
 # limitations under the License.
 #
 
-runit_service "twistd-carbon-cache" do
+include_recipe "runit"
+
+runit_service "carbon-relay" do
+  run_template_name 'carbon'
+  log_template_name 'carbon'
+  finish_script_template_name 'carbon'
+  finish true
+  options(:name => 'relay')
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end
