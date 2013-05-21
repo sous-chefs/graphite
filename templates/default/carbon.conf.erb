@@ -117,7 +117,7 @@ WHISPER_AUTOFLUSH = <%= @carbon_options[:whisper_autoflush] %>
 # CARBON_METRIC_INTERVAL = 60
 
 # Enable AMQP if you want to receve metrics using an amqp broker
-<% if false and @carbon_options[:enable_amqp] %>
+<% if @carbon_options[:enable_amqp] %>
 ENABLE_AMQP = True
 <% else %>
 # ENABLE_AMQP = False
