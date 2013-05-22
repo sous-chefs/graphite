@@ -71,6 +71,7 @@ carbon-relay.py attributes
 carbon-aggregator.py attributes
 -------------------------------
 
+* `node['graphite']['storage_aggregation']` - an array with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
 * `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
 * `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)

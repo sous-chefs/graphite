@@ -55,15 +55,6 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   )
 end
 
-template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
-  source 'storage.conf.erb'
-  owner node['graphite']['user_account']
-  group node['graphite']['group_account']
-  variables( :storage_config => node['graphite']['storage_aggregation'] )
-  only_if { node['graphite']['storage_aggregation'].is_a?(Array) }
-  # TODO: storage_aggregation should restart carbon-aggregator when supported
-end
-
 directory node['graphite']['storage_dir'] do
   owner node['graphite']['user_account']
   group node['graphite']['group_account']

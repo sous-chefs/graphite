@@ -76,4 +76,15 @@ suites:
   run_list:
   - recipe[graphite]
   - recipe[graphite::carbon_aggregator]
-  attributes: {}
+  attributes: {
+   "graphite": {
+      "storage_aggregation": [
+        {
+          "name": "all_min",
+          "pattern": ".min$",
+          "xFilesFactor": "0.1",
+          "aggregationMethod": "min"
+        }
+      ]
+    }
+  }
