@@ -85,6 +85,19 @@ suites:
           "xFilesFactor": "0.1",
           "aggregationMethod": "min"
         }
+      ],
+      "aggregation_rules": [
+        {
+          "output_template": "<env>.applications.<app>.all.requests",
+          "frequency": "60",
+          "method": "sum",
+          "input_pattern": "<env>.applications.<app>.*.requests"
+        },{
+          "output_template": "<env>.applications.<app>.all.latency",
+          "frequency": "60",
+          "method": "sum",
+          "input_pattern": "<env>.applications.<app>.*.latency"
+        }
       ]
     }
   }
