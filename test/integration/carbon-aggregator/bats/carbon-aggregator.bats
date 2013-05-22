@@ -9,3 +9,11 @@
   lsof -Pna -itcp:2023 -sTCP:LISTEN -p$pid 2> /dev/null
 }
 
+@test "aggregation-rules.conf should be generated" {
+  test -f "/opt/graphite/conf/aggregation-rules.conf"
+}
+
+@test "aggregation-rules.conf should have the correct contents" {
+  grep -qF "<env>.applications.<app>.all.latency" "/opt/graphite/conf/aggregation-rules.conf"
+}
+
