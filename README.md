@@ -26,8 +26,7 @@ Attributes
 * `node['graphite']['timezone']` - set the timezone for the graphite web interface, defaults to America/Los_Angeles
 * `node['graphite']['whisper']['uri']` - download url for whisper
 * `node['graphite']['whisper']['checksum']` - checksum of the whisper download
-* `node['graphite']['encrypted_data_bag']['name']` - the name of the encrypted data bag containing the default password for
-the graphite "root" user. If this attribute is set it will not use `node['graphite']['password']`.
+* `node['graphite']['encrypted_data_bag']['name']` - the name of the encrypted data bag containing the default password for the graphite "root" user. If this attribute is set it will not use `node['graphite']['password']`.
 
 carbon-cache.py attributes
 --------------------------
@@ -72,7 +71,7 @@ carbon-aggregator.py attributes
 -------------------------------
 
 * `node['graphite']['storage_aggregation']` - an array with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
-* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file
+* `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file ([see the example below](#aggregation_rules-example))
 * `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
 * `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
@@ -135,6 +134,26 @@ node.default['graphite']['relay_rules'] = [
     'pattern' => /^mydata\.foo\..+/,
     'destinations' => [ '10.1.2.4:2004' ],
     'default' => true
+  },
+]
+```
+
+aggregation_rules example
+-------------------------
+
+```ruby
+node.default['graphite']['aggregation_rules'] = [
+  {
+    'output_template' => '<env>.applications.<app>.all.requests',
+    'frequency' => '60',
+    'method' => 'sum',
+    'input_pattern' => '<env>.applications.<app>.*.requests'
+  },
+  {
+    'output_template' => '<env>.applications.<app>.all.latency',
+    'frequency' => '60',
+    'method' => 'sum',
+    'input_pattern' => '<env>.applications.<app>.*.latency'
   },
 ]
 ```
