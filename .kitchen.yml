@@ -72,3 +72,8 @@ suites:
       ]
     }
   }
+- name: carbon-aggregator
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_aggregator]
+  attributes: {}
