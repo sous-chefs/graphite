@@ -64,10 +64,13 @@ suites:
       },
       "relay_rules": [
         {
-          "name": "example",
+          "name": "example_pattern",
           "pattern": "^mydata\\.foo\\..+",
-          "destinations": [ "127.0.0.1:2003:a" ],
-          "default": true
+          "destinations": [ "10.1.2.3:2004" ]
+        },{
+          "name": "example_default",
+          "default": true,
+          "destinations": [ "127.0.0.1:2004" ]
         }
       ]
     }

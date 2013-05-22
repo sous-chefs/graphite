@@ -130,11 +130,14 @@ relay_rules example
 ```ruby
 node.default['graphite']['relay_rules'] = [
   {
-    'name' => 'example',
+    'name' => 'example_pattern',
     'pattern' => /^mydata\.foo\..+/,
-    'destinations' => [ '10.1.2.4:2004' ],
-    'default' => true
-  },
+    'destinations' => [ '10.1.2.3', '10.1.2.4:2004', 'myserver.mydomain.com' ]
+  },{
+    'name' => 'example_default',
+    'default' => true,
+    'destinations' => [ '10.1.2.5:2004' ]
+  }
 ]
 ```
 
