@@ -68,6 +68,20 @@ carbon-relay.py attributes
 * `node['graphite']['carbon']['relay']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)
 * `node['graphite']['carbon']['relay']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
 
+carbon-aggregator.py attributes
+-------------------------------
+
+* `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
+* `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['aggregator']['pickle_receiver_port']` - pickle receiver port (defaults to 2024)
+* `node['graphite']['carbon']['aggregator']['destinations']` - list of carbon daemons to send metrics to
+* `node['graphite']['carbon']['aggregator']['replication_factor']` - used to add redundancy to your data by replicating every datapoing to more than one machinne (defaults to 1)
+* `node['graphite']['carbon']['aggregator']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)
+* `node['graphite']['carbon']['aggregator']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
+* `node['graphite']['carbon']['aggregator']['max_datapoints_per_message']` - maximum datapoints to send in a message between carbon daemons (defaults to 500)
+* `node['graphite']['carbon']['aggregator']['max_aggregation_intervals']` - sets how many datapoints the aggregator remembers for each metric (defaults to 5)
+
 graphite-web attributes
 -----------------------
 
