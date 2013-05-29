@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_upstart
+# Recipe:: carbon_cache_upstart
 #
 # Copyright 2013, Heavy Water Software Inc.
 #
@@ -19,8 +19,9 @@
 
 
 template "/etc/init/carbon-cache.conf" do
-  source "carbon-cache.upstart.erb"
+  source "carbon.upstart.erb"
   variables(
+    :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
     :user    => node['apache']['user']
   )

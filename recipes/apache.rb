@@ -1,14 +1,12 @@
-include_recipe "apache2"
 include_recipe "apache2::mod_python"
 include_recipe "apache2::mod_headers"
 if node['graphite']['ssl']['enabled']
   include_recipe "apache2::mod_ssl"
 end
 
-if node['graphite']['apache']['basic_auth']['enabled']
-  execute "create apache basic_auth file for graphite" do
-    command "htpasswd -bc #{node['graphite']['apache']['basic_auth']['file_path']} #{node['graphite']['apache']['basic_auth']['user']} #{node['graphite']['apache']['basic_auth']['pass']}"
-  end
+execute "create apache basic_auth file for graphite" do
+  command "htpasswd -bc #{node['graphite']['apache']['basic_auth']['file_path']} #{node['graphite']['apache']['basic_auth']['user']} #{node['graphite']['apache']['basic_auth']['pass']}"
+  only_if { node['graphite']['apache']['basic_auth']['enabled'] }
 end
 
 template "#{node['apache']['dir']}/sites-available/graphite" do

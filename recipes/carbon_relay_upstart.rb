@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_runit_twistd
+# Recipe:: carbon_relay_upstart
 #
-# Copyright 2011, Heavy Water Software Inc.
+# Copyright 2013, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,19 @@
 # limitations under the License.
 #
 
-runit_service "twistd-carbon-cache" do
-  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+
+template "/etc/init/carbon-relay.conf" do
+  source "carbon.upstart.erb"
+  variables(
+    :name    => 'relay',
+    :dir     => node['graphite']['base_dir'],
+    :user    => node['apache']['user']
+  )
+  mode 00644
+end
+
+service "carbon-relay" do
+  provider Chef::Provider::Service::Upstart
+  supports :restart => true, :status => true
+  action [:enable, :start]
 end

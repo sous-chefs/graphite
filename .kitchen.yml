@@ -42,3 +42,65 @@ suites:
       "listen_port": "443"
     }
   }
+- name: uwsgi
+  run_list:
+  - recipe[graphite]
+  attributes: {
+    "graphite": {
+      "listen_port": "8080",
+      "web_server": "uswsgi"
+    }
+  }
+- name: carbon-relay
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_relay]
+  attributes: {
+    "graphite": {
+      "carbon": {
+        "relay": {
+          "destinations": [ "127.0.0.1:2003:a" ]
+        },
+      },
+      "relay_rules": [
+        {
+          "name": "example_pattern",
+          "pattern": "^mydata\\.foo\\..+",
+          "destinations": [ "10.1.2.3:2004" ]
+        },{
+          "name": "example_default",
+          "default": true,
+          "destinations": [ "127.0.0.1:2004" ]
+        }
+      ]
+    }
+  }
+- name: carbon-aggregator
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_aggregator]
+  attributes: {
+   "graphite": {
+      "storage_aggregation": [
+        {
+          "name": "all_min",
+          "pattern": ".min$",
+          "xFilesFactor": "0.1",
+          "aggregationMethod": "min"
+        }
+      ],
+      "aggregation_rules": [
+        {
+          "output_template": "<env>.applications.<app>.all.requests",
+          "frequency": "60",
+          "method": "sum",
+          "input_pattern": "<env>.applications.<app>.*.requests"
+        },{
+          "output_template": "<env>.applications.<app>.all.latency",
+          "frequency": "60",
+          "method": "sum",
+          "input_pattern": "<env>.applications.<app>.*.latency"
+        }
+      ]
+    }
+  }

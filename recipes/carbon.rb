@@ -25,6 +25,15 @@ if node['graphite']['carbon']['enable_amqp']
   python_pip "txamqp" do
     action :install
   end
+
+  amqp_password = node['graphite']['carbon']['amqp_password']
+  if node['graphite']['encrypted_data_bag']['name']
+    data_bag_name = node['graphite']['encrypted_data_bag']['name']
+    data_bag_item = Chef::EncryptedDataBagItem.load(data_bag_name, 'graphite')
+    amqp_password = data_bag_item['amqp_password']
+  else
+    Chef::Log.warn "This recipe uses encrypted data bags for carbon AMQP password but no encrypted data bag name is specified - fallback to node attribute."
+  end
 end
 
 version = node['graphite']['version']
@@ -47,32 +56,14 @@ execute "install carbon" do
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
 end
 
-case node['graphite']['carbon']['service_type']
-when "runit"
-  carbon_cache_service_resource = "runit_service[carbon-cache]"
-else
-  carbon_cache_service_resource = "service[carbon-cache]"
-end
-
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['graphite']['user_account']
   group node['graphite']['group_account']
+  carbon_options = node['graphite']['carbon'].dup
+  carbon_options['amqp_password'] = amqp_password unless amqp_password.nil?
   variables( :storage_dir => node['graphite']['storage_dir'],
-             :carbon_options => node['graphite']['carbon']
+             :carbon_options => carbon_options
   )
-  notifies :restart, carbon_cache_service_resource
-end
-
-%w{ schemas aggregation }.each do |storage_feature|
-  storage_config = node['graphite']['storage_' + storage_feature]
-
-  template "#{node['graphite']['base_dir']}/conf/storage-#{storage_feature}.conf" do
-    source 'storage.conf.erb'
-    owner node['graphite']['user_account']
-    group node['graphite']['group_account']
-    variables({:storage_config => storage_config})
-    only_if { storage_config.is_a?(Array) }
-  end
 end
 
 directory node['graphite']['storage_dir'] do
@@ -94,5 +85,3 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   recursive true
 end
 
-service_type = node['graphite']['carbon']['service_type']
-include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
