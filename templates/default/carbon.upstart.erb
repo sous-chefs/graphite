@@ -1,7 +1,7 @@
 #!upstart
 # http://upstart.ubuntu.com/cookbook/
 #
-description carbon-cache
+description carbon-<%= @name %>
 
 start on runlevel [2345]
 stop on shutdown
@@ -13,4 +13,4 @@ respawn limit 99 5
 
 setuid <%= @user %>
 
-exec <%= @dir %>/bin/carbon-cache.py start
+exec <%= @dir %>/bin/carbon-<%= @name %>.py start
