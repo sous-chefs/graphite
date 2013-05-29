@@ -22,3 +22,4 @@ default['graphite']['carbon']['checksum'] = "4f37e00595b5b078edb9b3f5cae318f752f
 
 default['graphite']['encrypted_data_bag']['name'] = nil
 
+default['graphite']['graphite_web']['bitmap_support'] = true
