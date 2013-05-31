@@ -36,3 +36,17 @@ execute "install whisper" do
   creates "/usr/local/lib/python#{pyver}/dist-packages/whisper-#{version}.egg-info"
   cwd "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
 end
+
+directory "#{node['graphite']['base_dir']}/bin" do
+  owner 'root'
+  group 'root'
+  recursive true
+end
+
+template "#{node['graphite']['base_dir']}/bin/whisper-clean.py" do
+  source 'whisper-clean.py.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  variables(:storage_dir => node['graphite']['storage_dir'])
+end

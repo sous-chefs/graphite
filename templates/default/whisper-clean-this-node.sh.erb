@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PYTHONPATH='<%= @graphite_lib_dir %>'
+export PYTHONPATH
+
+python <%= @whisper_clean_py %> \
+  <%= @int_instances.join(' ') %> \
+  <%= @ext_instances.map{ |x| "-#{x}" }.join(' ') %>
+

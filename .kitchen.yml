@@ -104,3 +104,7 @@ suites:
       ]
     }
   }
+- name: federated
+  run_list:
+  - recipe[graphite::federated]
+  attributes: {}
