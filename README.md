@@ -15,7 +15,8 @@ Attributes
 ==========
 
 * `node['graphite']['version']` - version of graphite to install (defaults to 0.9.10)
-* `node['graphite']['password']` - password for graphite root user(default to `change_me` and is only used if encrypted databag isn't)
+* `node['graphite']['password']` - password for graphite root user (default to `change_me` and is only used if encrypted databag isn't)
+* `node['graphite']['chef_role']` - chef role name for graphite instances, used by the *federated* recipe (defaults to "graphite")
 * `node['graphite']['url']` - url of the graphite server (defaults to graphite)
 * `node['graphite']['url_aliases']` - array of url aliases (defaults to nil)
 * `node['graphite']['listen_port']` - port to listen on (defaults to 80)
@@ -169,6 +170,12 @@ If this data bag is not present the cookbook will use `node['graphite']['passwor
 instead. To use the encrypted data bag set `node['graphite']['encrypted_data_bag']['name']`
 with the name of the data bag you wish to use.
 
+Helper Scripts
+==============
+
+The following helper scripts are included in the `graphite/bin` directory:
+
+* `whisper-clean-this-node.sh` - this script cleans the whisper metrics that belong to other machines in the cluster. Usually used after synchronizing the *storage/whisper* directory. Uses the [whisper-clean.py](https://gist.github.com/rcrowley/3153844) script internally
 
 Usage
 =====

@@ -1,0 +1,45 @@
+
+# Author: rcrowley
+# Origin code from: https://gist.github.com/rcrowley/3153844
+# Slightly modified fork: https://gist.github.com/zuazo/5200981
+import os
+import os.path
+import sys
+
+from carbon.hashing import ConsistentHashRing
+from carbon.conf import settings
+
+## Settings
+# Absolute path to the Graphite Data Directory
+DATA_DIR = '<%= @storage_dir %>/whisper'
+
+## You need not modify anything below this
+instances = []
+unwelcome_instances = []
+for arg in sys.argv[1:]:
+    unwelcome = False
+    if arg.startswith('-'):
+        arg = arg[1:]
+        unwelcome = True
+    instance = tuple(arg.split(':', 2))
+    instances.append(instance)
+    if unwelcome:
+        unwelcome_instances.append(instance)
+if 0 == len(instances):
+    print('Usage: python whisper-clean.py [-]<address>:<instance>[...]')
+    sys.exit(1)
+
+ring = ConsistentHashRing(instances)
+
+for dirname, dirnames, filenames in os.walk(DATA_DIR):
+    if dirname.startswith(os.path.join(DATA_DIR, settings.CARBON_METRIC_PREFIX)):
+        continue
+    for filename in filenames:
+        pathname = os.path.join(dirname, filename)
+        basename, ext = os.path.splitext(filename)
+        if '.wsp' != ext:
+            print('skipping %s' % os.path.relpath(pathname, DATA_DIR))
+        if ring.get_node(os.path.relpath(os.path.join(dirname, basename), DATA_DIR).
+                         replace('/', '.')) in unwelcome_instances:
+            print('unlinking %s' % pathname)
+            os.unlink(pathname)
