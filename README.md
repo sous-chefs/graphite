@@ -170,6 +170,12 @@ If this data bag is not present the cookbook will use `node['graphite']['passwor
 instead. To use the encrypted data bag set `node['graphite']['encrypted_data_bag']['name']`
 with the name of the data bag you wish to use.
 
+Helper Scripts
+==============
+
+The following helper scripts are included in the `graphite/bin` directory:
+
+* `whisper-clean-this-node.sh` - this script cleans the whisper metrics that belong to other machines in the cluster. Usually used after synchronizing the *storage/whisper* directory. Uses the [whisper-clean.py](https://gist.github.com/rcrowley/3153844) script internally
 
 Usage
 =====
