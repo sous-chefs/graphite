@@ -101,6 +101,7 @@ graphite-web attributes
 * `node['graphite']['ssl']['cipher_suite']` - the cipher suite to use if ssl is enabled
 * `node['graphite']['ssl']['certificate_file']` - the path to the certificate file if ssl is enabled
 * `node['graphite']['ssl']['certificate_key_file']` - the path to the vertificate key file if ssl is enabled
+* `node['graphite']['uwsgi_socket']` - the socket to bind uwsgi process to (only needed if using uwsgi)
 
 storage_schemas example
 -----------------------
