@@ -3,6 +3,8 @@
 # Attributes:: default
 #
 
+include_attribute "apache2"
+
 default['graphite']['version'] = "0.9.10"
 default['graphite']['password'] = "change_me"
 default['graphite']['chef_role'] = "graphite"
