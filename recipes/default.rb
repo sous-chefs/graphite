@@ -18,9 +18,12 @@
 #
 
 include_recipe "python"
-include_recipe "memcached"
 if node['graphite']['web_server'] == 'apache'
   include_recipe "apache2"
+end
+
+if node['graphite']['web']['memcached_hosts'].length > 0
+  include_recipe "memcached"
 end
 
 include_recipe "graphite::user"
