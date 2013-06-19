@@ -34,13 +34,9 @@ DEBUG = <%= @debug %>
 # You should not use the loopback address (127.0.0.1) here if using clustering
 # as every webapp in the cluster should use the exact same values to prevent
 # unneeded cache misses. Set to [] to disable caching of images and fetched data
-<% if @memcached_hosts.length > 0 -%>
 MEMCACHE_HOSTS = [ <%= @memcached_hosts.map do |server|
   "\"#{server}\""
 end.join(', ') %> ]
-<% else -%>
-MEMCACHE_HOSTS =
-<% end -%>
 
 #DEFAULT_CACHE_DURATION = 60 # Cache images and data for 1 minute
 
