@@ -167,6 +167,26 @@ node.default['graphite']['aggregation_rules'] = [
 ]
 ```
 
+storage_aggregation example
+---------------------------
+```ruby
+node.default['graphite']['storage_aggregation'] = [
+  {
+    'name' => 'all_min',
+    'pattern' => '\.min$',
+    'xFilesFactor' => '0.1',
+    'aggregationMethod' => 'min'
+  },
+  {
+    'name' => 'count',
+    'pattern' => '\.count$',
+    'xFilesFactor' => '0',
+    'aggregationMethod' => 'sum'
+  },
+]
+```
+
+
 Data Bags
 =========
 
@@ -186,6 +206,9 @@ Usage
 =====
 
 `recipe[graphite]` should build a stand-alone Graphite installation.
+
+`recipe[graphite::carbon_aggregator]` builds the aggregation_rules and storage-aggregation config files,
+and configures the `carbon-aggregator` service.
 
 `recipe[graphite::ganglia]` integrates with Ganglia. You'll want at
 least one monitor node (i.e. recipe[ganglia]) node to be running
