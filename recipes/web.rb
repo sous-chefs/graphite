@@ -40,17 +40,28 @@ end
 
 dep_packages = case node['platform_family']
                when "debian"
-                 packages = %w{ python-cairo-dev python-django python-django-tagging python-memcache python-rrdtool }
+                 packages = %w{ python-cairo-dev python-django python-django-tagging python-rrdtool }
+
+                 # Optionally include memcached client
+                 if node['graphite']['web']['memcached_hosts'].length > 0
+                     packages += %w{python-memcache} + packages
+                 end
+
+                 packages
                when "rhel", "fedora"
-                 packages = %w{ Django django-tagging pycairo-devel python-devel python-memcached mod_wsgi python-sqlite2 python-zope-interface }
+                 packages = %w{ Django django-tagging pycairo-devel python-devel mod_wsgi python-sqlite2 python-zope-interface }
 
                  # Include bitmap packages (optionally)
                  if node['graphite']['graphite_web']['bitmap_support']
-                   %w{bitmap bitmap-fonts} + packages
-                 else
-                   packages
+                   packages += %w{bitmap bitmap-fonts}
                  end
 
+                 # Optionally include memcached client
+                 if node['graphite']['web']['memcached_hosts'].length > 0
+                     packages += %w{python-memcached}
+                 end
+
+                 packages
                end
 
 dep_packages.each do |pkg|
@@ -98,7 +109,8 @@ template "#{docroot}/graphite/local_settings.py" do
             :doc_root => node['graphite']['doc_root'],
             :storage_dir => node['graphite']['storage_dir'],
             :cluster_servers => node['graphite']['web']['cluster_servers'],
-            :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'] )
+            :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'],
+            :memcached_hosts => node['graphite']['web']['memcached_hosts'] )
   notifies :reload, graphite_web_service_resource
 end
 
