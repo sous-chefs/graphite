@@ -38,6 +38,7 @@ default['graphite']['web']['debug'] = "False"
 default['graphite']['web']['admin_email'] = "admin@org.com"
 default['graphite']['web']['cluster_servers'] = []
 default['graphite']['web']['carbonlink_hosts'] = []
+default['graphite']['web']['memcached_hosts'] = ['127.0.0.1:11211']
 
 default['graphite']['web_server'] = 'apache'
 default['graphite']['user_account'] = node['apache']['user']
