@@ -19,6 +19,7 @@
 
 version = node['graphite']['version']
 pyver = node['languages']['python']['version'][0..-3]
+install_lib_dir = "#{node['graphite']['base_dir']}/lib"
 
 remote_file "#{Chef::Config[:file_cache_path]}/whisper-#{version}.tar.gz" do
   source node['graphite']['whisper']['uri']
@@ -32,8 +33,8 @@ execute "untar whisper" do
 end
 
 execute "install whisper" do
-  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['base_dir']}/lib"
-  creates "/usr/local/lib/python#{pyver}/dist-packages/whisper-#{version}.egg-info"
+  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{install_lib_dir}"
+  creates "#{install_lib_dir}/whisper-#{version}-py#{pyver}.egg-info"
   cwd "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
 end
 
