@@ -7,6 +7,7 @@ end
 execute "create apache basic_auth file for graphite" do
   command "htpasswd -bc #{node['graphite']['apache']['basic_auth']['file_path']} #{node['graphite']['apache']['basic_auth']['user']} #{node['graphite']['apache']['basic_auth']['pass']}"
   only_if { node['graphite']['apache']['basic_auth']['enabled'] }
+  creates node['graphite']['apache']['basic_auth']['file_path']
 end
 
 template "#{node['apache']['dir']}/sites-available/graphite" do
