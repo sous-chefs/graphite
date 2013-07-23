@@ -32,4 +32,5 @@ service "carbon-relay" do
   provider Chef::Provider::Service::Upstart
   supports :restart => true, :status => true
   action [:enable, :start]
+  subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end
