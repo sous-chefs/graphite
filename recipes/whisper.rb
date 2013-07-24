@@ -27,7 +27,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/whisper-#{version}.tar.gz" do
 end
 
 execute "untar whisper" do
-  command "tar xzf whisper-#{version}.tar.gz"
+  command "tar --no-same-owner xzf whisper-#{version}.tar.gz"
   creates "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
   cwd Chef::Config[:file_cache_path]
 end
