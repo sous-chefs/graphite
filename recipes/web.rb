@@ -76,7 +76,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" d
 end
 
 execute "untar graphite-web" do
-  command "tar --no-same-owner xzf graphite-web-#{version}.tar.gz"
+  command "tar xzof graphite-web-#{version}.tar.gz"
   creates "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
   cwd Chef::Config[:file_cache_path]
 end
