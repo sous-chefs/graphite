@@ -45,7 +45,7 @@ remote_file "#{Chef::Config[:file_cache_path]}/carbon-#{version}.tar.gz" do
 end
 
 execute "untar carbon" do
-  command "tar --no-same-owner xzf carbon-#{version}.tar.gz"
+  command "tar xzof carbon-#{version}.tar.gz"
   creates "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
   cwd Chef::Config[:file_cache_path]
 end
