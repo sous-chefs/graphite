@@ -32,7 +32,7 @@ Attributes
 carbon-cache.py attributes
 --------------------------
 
-* `node['graphite']['storage_schemas']` - an array with retention rates for storing metrics, used to generate the *storage-schemas.conf* file ([see the example below](#storage_schemas-example))
+* `node['graphite']['storage_schemas']` - an weighted hash with retention rates for storing metrics, used to generate the *storage-schemas.conf* file ([see the example below](#storage_schemas-example))
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
 * `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
@@ -111,18 +111,18 @@ storage_schemas example
 -----------------------
 
 ```ruby
-node.default['graphite']['storage_schemas'] = [
-  {
+node.default['graphite']['storage_schemas'] = {
+  10 =>{
     'name' => 'carbon',
     'pattern' => /^carbon\./,
     'retentions' => '1m:10d'
   },
-  {
+  20 =>{
     'name' => 'sensu',
     'pattern' => /^sensu\./,
     'retentions' => '1m:30d'
   },
-  {
+  100 =>{
     'name' => 'everything_30s7d_15m1m',
     'match-all' => true,
     'retentions' => '30s:7d,15m:1m'
