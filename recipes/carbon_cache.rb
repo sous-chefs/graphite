@@ -30,7 +30,7 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   owner node['graphite']['user_account']
   group node['graphite']['group_account']
   keys = node['graphite']['storage_schemas'].keys.sort
-  variables( :storage_config => keys.collect{|key| node['graphite']['storage_schemas'][key] )
+  variables( :storage_config => keys.collect{|key| node['graphite']['storage_schemas'][key]}
   only_if { node['graphite']['storage_schemas'].is_a?(Hash) }
   notifies :restart, carbon_cache_service_resource
 end
