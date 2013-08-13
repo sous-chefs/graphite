@@ -112,17 +112,17 @@ storage_schemas example
 
 ```ruby
 node.default['graphite']['storage_schemas'] = {
-  10 =>{
+  "10" =>{
     'name' => 'carbon',
     'pattern' => /^carbon\./,
     'retentions' => '1m:10d'
   },
-  20 =>{
+  "20" =>{
     'name' => 'sensu',
     'pattern' => /^sensu\./,
     'retentions' => '1m:30d'
   },
-  100 =>{
+  "100" =>{
     'name' => 'everything_30s7d_15m1m',
     'match-all' => true,
     'retentions' => '30s:7d,15m:1m'

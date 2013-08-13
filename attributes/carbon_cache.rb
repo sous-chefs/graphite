@@ -21,7 +21,7 @@ default['graphite']['carbon']['log_whisper_updates'] = "False"
 default['graphite']['carbon']['whisper_autoflush'] = "False"
 
 default['graphite']['storage_schemas'] = {
-  100 => {
+  "100" => {
     'name' => 'catchall', 
     'pattern' => '^.*', 
     'retentions' => '60:100800,900:63000'
