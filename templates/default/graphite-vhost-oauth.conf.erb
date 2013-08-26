@@ -31,8 +31,8 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
 
         <Location "/">
                 <%- if node['graphite']['apache']['oauth']['enabled'] %>
-                <%- if ['graphite']['apache']['oauth']['force_load'] %>
-                LoadModule authopenid_module <%= ['graphite']['apache']['oauth']['id']['mod_location'] %>
+                <%- if node['graphite']['apache']['oauth']['force_load'] %>
+                LoadModule authopenid_module <%= node['graphite']['apache']['oauth']['id']['mod_location'] %>
                 <%- end %>
                 AuthType OpenID
                 require valid-user
@@ -60,7 +60,7 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
                AuthType Basic
                AuthName "Restricted Area"
                AuthBasicProvider    file
-               AuthUserFile /opt/graphite/webapp/htpasswd
+               AuthUserFile <%= node['graphite']['apache']['basic_auth']['file_path'] %>
                Require valid-user
                Order Allow,Deny
                <%- else %>

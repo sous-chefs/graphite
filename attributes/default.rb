@@ -66,7 +66,7 @@ default['graphite']['apache']['oauth']['id']['dax_username'] = "email"
 default['graphite']['apache']['oauth']['id']['cookie_lifespan'] = 28800
 default['graphite']['apache']['oauth']['id']['secure_cookie'] = "Off"
 
-
+default['apache']['oauth_package'] = 'mod_auth_openid'
 default['graphite']['apache']['events']['location_enabled'] = false
 default['graphite']['apache']['events']['basic_auth'] = false
 			
