@@ -20,13 +20,13 @@ default['graphite']['carbon']['max_updates_per_second'] = "1000"
 default['graphite']['carbon']['log_whisper_updates'] = "False"
 default['graphite']['carbon']['whisper_autoflush'] = "False"
 
-default['graphite']['storage_schemas'] = [
-  {
+default['graphite']['storage_schemas'] = {
+  "100" => {
     'name' => 'catchall', 
     'pattern' => '^.*', 
     'retentions' => '60:100800,900:63000'
   }
-]
+}
 
 case node['platform_family']
 when "debian"

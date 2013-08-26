@@ -5,6 +5,9 @@
 
 default['graphite']['carbon']['aggregator']['line_receiver_interface'] = "0.0.0.0"
 default['graphite']['carbon']['aggregator']['line_receiver_port'] = 2023
+default['graphite']['carbon']['aggregator']['enable_udp_listener'] = "True" 
+default['graphite']['carbon']['aggregator']['udp_receiver_interface'] = node['graphite']['carbon']['aggregator']['line_receiver_interface']
+default['graphite']['carbon']['aggregator']['udp_receiver_port'] = node['graphite']['carbon']['aggregator']['line_receiver_port']
 default['graphite']['carbon']['aggregator']['pickle_receiver_interface'] = "0.0.0.0"
 default['graphite']['carbon']['aggregator']['pickle_receiver_port'] = 2024
 default['graphite']['carbon']['aggregator']['destinations'] = []

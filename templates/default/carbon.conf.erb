@@ -243,6 +243,10 @@ USE_FLOW_CONTROL = <%= @carbon_options[:relay][:use_flow_control] %>
 LINE_RECEIVER_INTERFACE = <%= @carbon_options[:aggregator][:line_receiver_interface] %>
 LINE_RECEIVER_PORT = <%= @carbon_options[:aggregator][:line_receiver_port] %>
 
+ENABLE_UDP_LISTENER = <%= @carbon_options[:aggregator][:enable_udp_listener] %>
+UDP_RECEIVER_INTERFACE = <%= @carbon_options[:aggregator][:udp_receiver_interface] %>
+UDP_RECEIVER_PORT = <%= @carbon_options[:aggregator][:udp_receiver_port] %>
+
 PICKLE_RECEIVER_INTERFACE = <%= @carbon_options[:aggregator][:pickle_receiver_interface] %>
 PICKLE_RECEIVER_PORT = <%= @carbon_options[:aggregator][:pickle_receiver_port] %>
 
