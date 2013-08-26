@@ -14,6 +14,5 @@ default['graphite']['carbon']['aggregator']['use_flow_control'] = "True"
 default['graphite']['carbon']['aggregator']['max_datapoints_per_message'] = 500
 default['graphite']['carbon']['aggregator']['max_aggregation_intervals'] = 5
 
-default['graphite']['storage_aggregation'] = nil
 default['graphite']['aggregation_rules'] = []
 

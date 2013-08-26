@@ -22,11 +22,12 @@ default['graphite']['carbon']['whisper_autoflush'] = "False"
 
 default['graphite']['storage_schemas'] = [
   {
-    'name' => 'catchall', 
-    'pattern' => '^.*', 
+    'name' => 'catchall',
+    'pattern' => '^.*',
     'retentions' => '60:100800,900:63000'
   }
 ]
+default['graphite']['storage_aggregation'] = nil
 
 case node['platform_family']
 when "debian"

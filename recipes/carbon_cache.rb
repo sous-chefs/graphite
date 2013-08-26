@@ -34,4 +34,19 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   notifies :restart, carbon_cache_service_resource
 end
 
+if node['graphite']['storage_aggregation'].is_a?(Array) and node['graphite']['storage_aggregation'].length > 0
+  template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
+    source 'storage.conf.erb'
+    owner node['graphite']['user_account']
+    group node['graphite']['group_account']
+    variables( :storage_config => node['graphite']['storage_aggregation'] )
+    notifies :restart, carbon_cache_service_resource
+  end
+else
+  file "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
+    action :delete
+    notifies :restart, carbon_cache_service_resource
+  end
+end
+
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
