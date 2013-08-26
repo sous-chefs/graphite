@@ -9,8 +9,17 @@ execute "create apache basic_auth file for graphite" do
   only_if { node['graphite']['apache']['basic_auth']['enabled'] }
 end
 
+if node['graphite']['apache']['oauth']['enabled'] then 
+  package node['apache']['oauth_package'] do
+    action :install
+  end
+  graphite_template = 'graphite-vhost-oauth.conf.erb' 
+else 
+  graphite_template = 'graphite-vhost.conf.erb'
+end
+
 template "#{node['apache']['dir']}/sites-available/graphite" do
-  source "graphite-vhost.conf.erb"
+  source graphite_template
   notifies :reload, "service[apache2]"
 end
 
