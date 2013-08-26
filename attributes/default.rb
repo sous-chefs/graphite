@@ -54,3 +54,19 @@ default['graphite']['apache']['basic_auth']['enabled'] = false
 default['graphite']['apache']['basic_auth']['file_path'] = "#{node['graphite']['doc_root']}/htpasswd"
 default['graphite']['apache']['basic_auth']['user'] = nil
 default['graphite']['apache']['basic_auth']['pass'] = nil
+
+default['graphite']['apache']['oauth']['enabled'] = false
+default['graphite']['apache']['oauth']['force_load'] = false
+default['graphite']['apache']['oauth']['id']['mod_location'] = "/usr/lib64/httpd/modules/mod_auth_openid.so"
+default['graphite']['apache']['oauth']['id']['trusted'] = "https://www.google.com/accounts/o8/ud"
+default['graphite']['apache']['oauth']['id']['ax_require']['schema'] = 'email http://openid.net/schema/contact/email'
+default['graphite']['apache']['oauth']['id']['ax_require']['regex'] = '@mydomain\.com'
+default['graphite']['apache']['oauth']['id']['single_idp'] = 'https://www.google.com/accounts/o8/id'
+default['graphite']['apache']['oauth']['id']['dax_username'] = "email"
+default['graphite']['apache']['oauth']['id']['cookie_lifespan'] = 28800
+default['graphite']['apache']['oauth']['id']['secure_cookie'] = "Off"
+
+
+default['graphite']['apache']['events']['location_enabled'] = false
+default['graphite']['apache']['events']['basic_auth'] = false
+			
