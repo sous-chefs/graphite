@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: carbon_relay_upstart
+# Recipe:: carbon_aggregator_upstart
 #
 # Copyright 2013, Heavy Water Software Inc.
 #
@@ -18,17 +18,17 @@
 #
 
 
-template "/etc/init/carbon-relay.conf" do
+template "/etc/init/carbon-aggregator.conf" do
   source "carbon.upstart.erb"
   variables(
-    :name    => 'relay',
+    :name    => 'aggregator',
     :dir     => node['graphite']['base_dir'],
     :user    => node['apache']['user']
   )
   mode 00644
 end
 
-service "carbon-relay" do
+service "carbon-aggregator" do
   provider Chef::Provider::Service::Upstart
   supports :restart => true, :status => true
   action [:enable, :start]
