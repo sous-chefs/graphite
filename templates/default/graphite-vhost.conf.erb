@@ -27,6 +27,9 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
 
         SSLCertificateFile <%= node['graphite']['ssl']['certificate_file'] %>
         SSLCertificateKeyFile <%= node['graphite']['ssl']['certificate_key_file'] %>
+          <%- if node['graphite']['ssl']['ca_certificate_file'] %>
+        SSLCACertificateFile <%= node['graphite']['ssl']['ca_certificate_file'] %>
+          <%- end %>
         <%- end %>
 
         <Location "/">

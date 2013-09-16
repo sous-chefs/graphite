@@ -4,3 +4,5 @@ bin
 .vagrant
 .kitchen/
 .kitchen.local.yml
+Berksfile.lock
+Gemfile.lock

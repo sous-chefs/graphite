@@ -1,5 +1,8 @@
 ---
 driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: latest
+
 platforms:
 - name: ubuntu-12.04
   driver_config:
@@ -37,7 +40,8 @@ suites:
   attributes: {
     "graphite": {
       "ssl": {
-        "enabled": true
+        "enabled": true,
+        "ca_certificate_file":  "/etc/ssl/server.crt"
       },
       "listen_port": "443"
     }
