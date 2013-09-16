@@ -101,6 +101,7 @@ graphite-web attributes
 * `node['graphite']['ssl']['cipher_suite']` - the cipher suite to use if ssl is enabled
 * `node['graphite']['ssl']['certificate_file']` - the path to the certificate file if ssl is enabled
 * `node['graphite']['ssl']['certificate_key_file']` - the path to the vertificate key file if ssl is enabled
+* `node['graphite']['ssl']['ca_certificate_file']` - the path to the intermediate CA certificate file if ssl is enabled. Leave blank if you don't have or need one.
 * `node['graphite']['apache']['basic_auth']['enabled']` - enable basic auth in the apache2 vhost to require authentication for access to web interface (defaults to false)
 * `node['graphite']['apache']['basic_auth']['file_path']` - location of htpasswd file for basic auth (defaults to node['graphite']['doc_root']/htpasswd)
 * `node['graphite']['apache']['basic_auth']['user']` - username for basic auth
