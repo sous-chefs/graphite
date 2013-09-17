@@ -72,7 +72,7 @@ directory node['graphite']['storage_dir'] do
   recursive true
 end
 
-%w{ log whisper }.each do |dir|
+%w{ log whisper rrd }.each do |dir|
   directory "#{node['graphite']['storage_dir']}/#{dir}" do
     owner node['graphite']['user_account']
     group node['graphite']['group_account']
