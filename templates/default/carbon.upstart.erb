@@ -6,11 +6,19 @@ description carbon-<%= @name %>
 start on runlevel [2345]
 stop on shutdown
 
-expect daemon
-
 respawn
 respawn limit 99 5
 
 setuid <%= @user %>
 
-exec <%= @dir %>/bin/carbon-<%= @name %>.py start
+env LOGFILE=<%= @dir %>/storage/log/carbon-<%= @name %>/carbon-<%= @name %>-a/console.log
+
+pre-start script
+    LOGDIR=`dirname $LOGFILE`
+    [ -d $LOGDIR ] || mkdir -p $LOGDIR
+    chown -R <%= @user %> $LOGDIR
+end script
+
+exec <%= @dir %>/bin/carbon-<%= @name %>.py \
+       --debug \
+       --instance=a start >> $LOGFILE 2>&1
