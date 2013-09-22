@@ -17,8 +17,13 @@
 # limitations under the License.
 #
 
-template '/etc/init.d/carbon-cache' do
-  source 'carbon.init.erb'
+case node['platform_family']
+when "debian"
+  package "daemon"
+end
+
+template "/etc/init.d/carbon-cache" do
+  source "carbon.init.erb"
   variables(
     :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
