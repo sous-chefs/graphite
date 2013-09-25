@@ -23,7 +23,7 @@ template "/etc/init/carbon-aggregator.conf" do
   variables(
     :name    => 'aggregator',
     :dir     => node['graphite']['base_dir'],
-    :user    => node['apache']['user']
+    :user    => node['graphite']['user_account']
   )
   mode 00644
 end

@@ -22,7 +22,7 @@ template "/etc/init.d/carbon-cache" do
   variables(
     :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
-    :user    => node['apache']['user']
+    :user    => node['graphite']['user_account']
   )
   mode 00744
   notifies :restart, "service[carbon-cache]"

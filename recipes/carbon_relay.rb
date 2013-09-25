@@ -27,8 +27,8 @@ else
 end
 
 template "#{node['graphite']['base_dir']}/conf/relay-rules.conf" do
-  owner node['apache']['user']
-  group node['apache']['group']
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
   variables( :relay_rules => node['graphite']['relay_rules'] )
   notifies :restart, carbon_relay_service_resource
 end

@@ -22,7 +22,7 @@ template "/etc/init.d/carbon-aggregator" do
   variables(
     :name    => 'aggregator',
     :dir     => node['graphite']['base_dir'],
-    :user    => node['apache']['user']
+    :user    => node['graphite']['user_account']
   )
   mode 00744
   notifies :restart, "service[carbon-aggregator]"
