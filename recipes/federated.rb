@@ -55,14 +55,14 @@ else
         else
           int_instances << "#{result['fqdn']}:a"
         end
+        
+        node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
+          "#{result['fqdn']}:#{node['graphite']['carbon']['cache_query_port']}:a",
+        ]
       end
 
       node.default['graphite']['carbon']['relay']['destinations'] = destinations
       node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
-
-      node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
-        "#{result['fqdn']}:#{node['graphite']['carbon']['cache_query_port']}:a",
-      ]
     end
   end
 end
