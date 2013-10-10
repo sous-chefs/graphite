@@ -42,7 +42,7 @@ if Chef::Config[:solo]
   ]
 else
   if node['graphite']['chef_role']
-    graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}")
+    graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}").sort
     if graphite_results
       destinations = []
       cluster_servers = []
