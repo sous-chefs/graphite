@@ -46,13 +46,11 @@ else
     if graphite_results
       destinations = []
       cluster_servers = []
-      carbonlink_servers = []
 
       graphite_results.each do |result|
         destinations << "#{result['fqdn']}:#{result['graphite']['carbon']['pickle_receiver_port']}:a"
         if result['fqdn'] != node['fqdn']
           cluster_servers << "#{result['fqdn']}:#{node['graphite']['listen_port']}"
-          carbonlink_servers << "#{result['fqdn']}:#{node['graphite']['carbon']['cache_query_port']}:a"
           ext_instances << "#{result['fqdn']}:a"
         else
           int_instances << "#{result['fqdn']}:a"
@@ -60,8 +58,7 @@ else
       end
 
       node.default['graphite']['carbon']['relay']['destinations'] = destinations
-      node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
-      node.default['graphite']['graphite_web']['carbonlink_hosts'] = carbonlink_servers
+      node.default['graphite']['web']['cluster_servers'] = cluster_servers
     end
   end
 end
