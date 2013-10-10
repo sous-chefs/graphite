@@ -18,6 +18,7 @@
 #
 
 include_recipe 'python'
+
 if node['graphite']['web_server'] == 'apache'
   include_recipe 'apache2'
 end

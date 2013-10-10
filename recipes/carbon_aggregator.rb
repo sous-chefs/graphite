@@ -32,7 +32,7 @@ if node['graphite']['aggregation_rules'].is_a?(Array) && node['graphite']['aggre
   template "#{node['graphite']['base_dir']}/conf/aggregation-rules.conf" do
     owner node['graphite']['user_account']
     group node['graphite']['group_account']
-    variables( :aggregation_rules => node['graphite']['aggregation_rules'] )
+    variables(:aggregation_rules => node['graphite']['aggregation_rules'])
   end
 else
   file "#{node['graphite']['base_dir']}/conf/aggregation-rules.conf" do
@@ -41,4 +41,3 @@ else
 end
 
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
-

@@ -90,4 +90,3 @@ template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
             :ext_instances => ext_instances)
   only_if { int_instances.length > 0 and ext_instances.length > 0 }
 end
-

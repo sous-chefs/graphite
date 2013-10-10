@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-
 template '/etc/init/carbon-cache.conf' do
   source 'carbon.upstart.erb'
   variables(

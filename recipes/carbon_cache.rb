@@ -29,7 +29,7 @@ template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
   source 'storage.conf.erb'
   owner node['graphite']['user_account']
   group node['graphite']['group_account']
-  variables( :storage_config => node['graphite']['storage_schemas'] )
+  variables(:storage_config => node['graphite']['storage_schemas'])
   only_if { node['graphite']['storage_schemas'].is_a?(Array) }
   notifies :restart, carbon_cache_service_resource
 end
@@ -39,7 +39,7 @@ if node['graphite']['storage_aggregation'].is_a?(Array) && node['graphite']['sto
     source 'storage.conf.erb'
     owner node['graphite']['user_account']
     group node['graphite']['group_account']
-    variables( :storage_config => node['graphite']['storage_aggregation'] )
+    variables(:storage_config => node['graphite']['storage_aggregation'])
     notifies :restart, carbon_cache_service_resource
   end
 else

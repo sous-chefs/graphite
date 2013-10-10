@@ -61,8 +61,9 @@ template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   group node['graphite']['group_account']
   carbon_options = node['graphite']['carbon'].dup
   carbon_options['amqp_password'] = amqp_password unless amqp_password.nil?
-  variables( :storage_dir => node['graphite']['storage_dir'],
-             :carbon_options => carbon_options
+  variables(
+    :storage_dir => node['graphite']['storage_dir'],
+    :carbon_options => carbon_options
   )
 end
 
@@ -84,4 +85,3 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   group node['graphite']['group_account']
   recursive true
 end
-
