@@ -42,7 +42,7 @@ if Chef::Config[:solo]
   ]
 else
   if node['graphite']['chef_role']
-    graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}")
+    graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}").sort
     if graphite_results
       destinations = []
       cluster_servers = []
@@ -58,11 +58,8 @@ else
       end
 
       node.default['graphite']['carbon']['relay']['destinations'] = destinations
+      node.default['graphite']['graphite_web']['carbonlink_hosts'] = destinations
       node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
-
-      node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
-        "#{result['fqdn']}:#{node['graphite']['carbon']['cache_query_port']}:a",
-      ]
     end
   end
 end
