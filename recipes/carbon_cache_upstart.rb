@@ -18,8 +18,8 @@
 #
 
 
-template "/etc/init/carbon-cache.conf" do
-  source "carbon.upstart.erb"
+template '/etc/init/carbon-cache.conf' do
+  source 'carbon.upstart.erb'
   variables(
     :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
@@ -28,7 +28,7 @@ template "/etc/init/carbon-cache.conf" do
   mode 00644
 end
 
-service "carbon-cache" do
+service 'carbon-cache' do
   provider Chef::Provider::Service::Upstart
   supports :restart => true, :status => true
   action [:enable, :start]

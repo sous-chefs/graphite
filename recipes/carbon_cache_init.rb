@@ -17,18 +17,18 @@
 # limitations under the License.
 #
 
-template "/etc/init.d/carbon-cache" do
-  source "carbon.init.erb"
+template '/etc/init.d/carbon-cache' do
+  source 'carbon.init.erb'
   variables(
     :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
     :user    => node['graphite']['user_account']
   )
   mode 00744
-  notifies :restart, "service[carbon-cache]"
+  notifies :restart, 'service[carbon-cache]'
 end
 
-service "carbon-cache" do
+service 'carbon-cache' do
   action [:enable, :start]
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end

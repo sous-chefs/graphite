@@ -31,7 +31,7 @@ node.default['graphite']['carbon']['pickle_receiver_port'] = 2014
 node.default['graphite']['carbon']['relay']['line_receiver_port'] = 2003
 node.default['graphite']['carbon']['relay']['udp_receiver_port'] = 2003
 node.default['graphite']['carbon']['relay']['pickle_receiver_port'] = 2004
-node.default['graphite']['carbon']['relay']['relay_method'] = "consistent-hashing"
+node.default['graphite']['carbon']['relay']['relay_method'] = 'consistent-hashing'
 
 int_instances = []
 ext_instances = []
@@ -75,8 +75,8 @@ node.default['graphite']['relay_rules'] = [
   }
 ]
 
-include_recipe "graphite::default"
-include_recipe "graphite::carbon_relay"
+include_recipe 'graphite::default'
+include_recipe 'graphite::carbon_relay'
 
 
 template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
