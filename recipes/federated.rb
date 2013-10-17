@@ -75,7 +75,6 @@ node.default['graphite']['relay_rules'] = [
 include_recipe 'graphite::default'
 include_recipe 'graphite::carbon_relay'
 
-
 template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
   source 'whisper-clean-this-node.sh.erb'
   owner 'root'
@@ -85,5 +84,5 @@ template "#{node['graphite']['base_dir']}/bin/whisper-clean-this-node.sh" do
             :whisper_clean_py => "#{node['graphite']['base_dir']}/bin/whisper-clean.py",
             :int_instances => int_instances,
             :ext_instances => ext_instances)
-  only_if { int_instances.length > 0 and ext_instances.length > 0 }
+  only_if { int_instances.length > 0 && ext_instances.length > 0 }
 end
