@@ -1,8 +1,6 @@
 include_recipe 'apache2::mod_python'
 include_recipe 'apache2::mod_headers'
-if node['graphite']['ssl']['enabled']
-  include_recipe 'apache2::mod_ssl'
-end
+include_recipe 'apache2::mod_ssl' if node['graphite']['ssl']['enabled']
 
 execute 'create apache basic_auth file for graphite' do
   command "htpasswd -bc #{node['graphite']['apache']['basic_auth']['file_path']} #{node['graphite']['apache']['basic_auth']['user']} #{node['graphite']['apache']['basic_auth']['pass']}"

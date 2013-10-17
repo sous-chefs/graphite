@@ -27,7 +27,6 @@ default['graphite']['encrypted_data_bag']['name'] = nil
 
 default['graphite']['graphite_web']['bitmap_support'] = true
 
-
 #
 # graphite_web
 #

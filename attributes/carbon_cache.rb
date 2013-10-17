@@ -32,7 +32,7 @@ default['graphite']['storage_aggregation'] = nil
 case node['platform_family']
 when 'debian'
   default['graphite']['carbon']['service_type'] = 'runit'
-when 'rhel','fedora'
+when 'rhel', 'fedora'
   default['graphite']['carbon']['service_type'] = 'init'
 end
 
@@ -45,4 +45,3 @@ default['graphite']['carbon']['amqp_user'] = 'guest'
 default['graphite']['carbon']['amqp_password'] = 'guest'
 default['graphite']['carbon']['amqp_exchange'] = 'graphite'
 default['graphite']['carbon']['amqp_metric_name_in_body'] = false
-

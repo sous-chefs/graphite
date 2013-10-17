@@ -44,7 +44,7 @@ dep_packages = case node['platform_family']
 
                  # Optionally include memcached client
                  if node['graphite']['web']['memcached_hosts'].length > 0
-                     packages += %w{python-memcache} + packages
+                   packages += %w{python-memcache} + packages
                  end
 
                  packages
@@ -58,7 +58,7 @@ dep_packages = case node['platform_family']
 
                  # Optionally include memcached client
                  if node['graphite']['web']['memcached_hosts'].length > 0
-                     packages += %w{python-memcached}
+                   packages += %w{python-memcached}
                  end
 
                  packages
@@ -110,7 +110,7 @@ template "#{docroot}/graphite/local_settings.py" do
             :storage_dir => node['graphite']['storage_dir'],
             :cluster_servers => node['graphite']['web']['cluster_servers'],
             :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'],
-            :memcached_hosts => node['graphite']['web']['memcached_hosts'] )
+            :memcached_hosts => node['graphite']['web']['memcached_hosts'])
   notifies :reload, graphite_web_service_resource
 end
 

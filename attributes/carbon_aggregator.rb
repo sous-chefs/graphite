@@ -15,4 +15,3 @@ default['graphite']['carbon']['aggregator']['max_datapoints_per_message'] = 500
 default['graphite']['carbon']['aggregator']['max_aggregation_intervals'] = 5
 
 default['graphite']['aggregation_rules'] = []
-
