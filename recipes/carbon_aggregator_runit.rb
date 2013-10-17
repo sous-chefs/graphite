@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-include_recipe "runit"
+include_recipe 'runit'
 
-runit_service "carbon-aggregator" do
+runit_service 'carbon-aggregator' do
   run_template_name 'carbon'
   log_template_name 'carbon'
   finish_script_template_name 'carbon'

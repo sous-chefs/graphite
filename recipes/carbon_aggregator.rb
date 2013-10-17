@@ -28,11 +28,11 @@ end
 
 # aggregation-rules.conf file is automatically reloaded by the carbon-aggregator process.
 # There is no need to restart the application.
-if node['graphite']['aggregation_rules'].is_a?(Array) and node['graphite']['aggregation_rules'].length > 0
+if node['graphite']['aggregation_rules'].is_a?(Array) && node['graphite']['aggregation_rules'].length > 0
   template "#{node['graphite']['base_dir']}/conf/aggregation-rules.conf" do
     owner node['graphite']['user_account']
     group node['graphite']['group_account']
-    variables( :aggregation_rules => node['graphite']['aggregation_rules'] )
+    variables(:aggregation_rules => node['graphite']['aggregation_rules'])
   end
 else
   file "#{node['graphite']['base_dir']}/conf/aggregation-rules.conf" do
@@ -41,4 +41,3 @@ else
 end
 
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
-

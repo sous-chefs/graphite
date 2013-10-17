@@ -18,20 +18,20 @@
 # limitations under the License.
 #
 
-if node['graphite']['listen_port'].to_i < 1024 and node['graphite']['uwsgi']['listen_http']
+if node['graphite']['listen_port'].to_i < 1024 && node['graphite']['uwsgi']['listen_http']
   Chef::Log.error!("uwsgi cannot bind to ports less than 1024. Please set \"node['graphite']['listen_port']\" to an appropriate value")
 end
 
 if node['graphite']['uwsgi']['listen_http'] == false
-  Chef::Log.info("You have disabled uwsgi listening on an http port. Graphite web will not be accessible unless you are talking to the uwsgi socket from an external process")
+  Chef::Log.info('You have disabled uwsgi listening on an http port. Graphite web will not be accessible unless you are talking to the uwsgi socket from an external process')
 end
 
-include_recipe "runit"
+include_recipe 'runit'
 
-python_pip "uwsgi" do
+python_pip 'uwsgi' do
   action :install
 end
 
-runit_service "graphite-web" do
+runit_service 'graphite-web' do
   default_logger true
 end

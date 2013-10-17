@@ -17,18 +17,18 @@
 # limitations under the License.
 #
 
-template "/etc/init.d/carbon-relay" do
-  source "carbon.init.erb"
+template '/etc/init.d/carbon-relay' do
+  source 'carbon.init.erb'
   variables(
     :name    => 'relay',
     :dir     => node['graphite']['base_dir'],
     :user    => node['graphite']['user_account']
   )
   mode 00744
-  notifies :restart, "service[carbon-relay]"
+  notifies :restart, 'service[carbon-relay]'
 end
 
-service "carbon-relay" do
+service 'carbon-relay' do
   action [:enable, :start]
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
 end
