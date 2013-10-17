@@ -3,6 +3,11 @@ Description
 
 Installs and configures Graphite http://graphite.wikidot.com/
 
+Consult the Graphite documentation for more information:
+
+- http://graphite.readthedocs.org/en/latest/
+- http://graphite.wikidot.com/
+
 Requirements
 ============
 
