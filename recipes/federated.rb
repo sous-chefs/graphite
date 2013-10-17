@@ -58,11 +58,7 @@ else
       end
 
       node.default['graphite']['carbon']['relay']['destinations'] = destinations
-      node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
-
-      node.default['graphite']['graphite_web']['carbonlink_hosts'] = [
-        "#{result['fqdn']}:#{node['graphite']['carbon']['cache_query_port']}:a",
-      ]
+      node.default['graphite']['web']['cluster_servers'] = cluster_servers
     end
   end
 end
