@@ -6,3 +6,7 @@ bin
 .kitchen.local.yml
 Berksfile.lock
 Gemfile.lock
+vendor
+tmp
+.librarian
+Cheffile.lock
