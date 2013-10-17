@@ -98,7 +98,7 @@ graphite-web attributes
 * `node['graphite']['web']['admin_email']` - admin contact email (defaults to "admin@org.com")
 * `node['graphite']['web']['cluster_servers']` - IP address (and optionally port) of the webapp on each remote server in the cluster
 * `node['graphite']['web']['carbonlink_hosts']` - list the IP address, cache query port and instance name of each carbon cache instance on the **local** machine
-* `node['graphite']['web_server']` - defaults to `apache`. Anything else will use uswsgi instead of apache
+* `node['graphite']['web_server']` - defaults to `apache`. Anything else will use uwsgi instead of apache
 * `node['graphite']['user_account']` - user (default `node['apache']['user']`)
 * `node['graphite']['group_account']` - group (default `node['apache']['group']`)
 * `node['graphite']['create_user']`- should the user be created, boolean (defaults to false)
