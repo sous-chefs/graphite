@@ -37,7 +37,7 @@ if node['graphite']['carbon']['enable_amqp']
 end
 
 version = node['graphite']['version']
-pyver = node['languages']['python']['version'][0..-3]
+pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
 
 remote_file "#{Chef::Config[:file_cache_path]}/carbon-#{version}.tar.gz" do
   source node['graphite']['carbon']['uri']

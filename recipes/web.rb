@@ -21,7 +21,7 @@ basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
-pyver = node['languages']['python']['version'][0..-3]
+pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
 
 if node['graphite']['web_server'] == 'apache'
   graphite_web_service_resource = 'service[apache2]'
