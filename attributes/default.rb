@@ -38,6 +38,23 @@ default['graphite']['web']['admin_email'] = 'admin@org.com'
 default['graphite']['web']['cluster_servers'] = []
 default['graphite']['web']['carbonlink_hosts'] = []
 default['graphite']['web']['memcached_hosts'] = ['127.0.0.1:11211']
+default['graphite']['web']['database']['NAME'] = node['graphite']['storage_dir']+"/graphite.db"
+default['graphite']['web']['database']['ENGINE'] = "django.db.backends.sqlite3"
+default['graphite']['web']['database']['USER'] = ""
+default['graphite']['web']['database']['PASSWORD'] = ""
+default['graphite']['web']['database']['HOST'] = ""
+default['graphite']['web']['database']['PORT'] = ""
+default['graphite']['web']['ldap']['SERVER'] = ""
+default['graphite']['web']['ldap']['BASE_USER'] = ""
+default['graphite']['web']['ldap']['BASE_PASS'] = ""
+default['graphite']['web']['ldap']['USER_QUERY'] = "(sAMAccountName=%s)"
+default['graphite']['web']['ldap']['SEARCH_BASE'] = ""
+default['graphite']['web']['email']['BACKEND'] = "django.core.mail.backends.smtp.EmailBackend"
+default['graphite']['web']['email']['HOST'] = "localhost"
+default['graphite']['web']['email']['PORT'] = "25"
+default['graphite']['web']['email']['HOST_USER'] = ""
+default['graphite']['web']['email']['HOST_PASSWORD'] = ""
+default['graphite']['web']['email']['USE_TLS'] = false
 default['graphite']['web_server'] = 'apache'
 default['graphite']['create_user'] = false
 

@@ -76,12 +76,13 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 #####################################
 # This is used for emailing rendered Graphs
 # Default backend is SMTP
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 25
-#EMAIL_HOST_USER = ''
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_USE_TLS = False
+EMAIL_BACKEND = '<%= @email['BACKEND'] %>'
+EMAIL_HOST = '<%= @email['HOST'] %>'
+EMAIL_PORT = <%= @email['PORT'] %>
+EMAIL_HOST_USER = '<%= @email['HOST_USER'] %>'
+EMAIL_HOST_PASSWORD = '<%= @email['HOST_PASSWORD'] %>'
+EMAIL_USE_TLS = <%= (@email['USE_TLS'] == true) ? "True" : "False" %>
+
 # To drop emails on the floor, enable the Dummy backend:
 #EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
@@ -117,6 +118,14 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 # Override the URL for the login link (e.g. for django_openid_auth)
 #LOGIN_URL = '/account/login'
 
+<% if @ldap['SERVER'] != "" && @ldap['BASE_USER'] != "" && @ldap['BASE_PASS'] != "" && @ldap['SEARCH_BASE'] != "" -%>
+USE_LDAP_AUTH = True
+LDAP_SERVER = '<%= @ldap['SERVER'] %>'
+LDAP_BASE_USER = '<%= @ldap['BASE_USER'] %>'
+LDAP_BASE_PASS = '<%= @ldap['BASE_PASS'] %>'
+LDAP_USER_QUERY = '<%= @ldap['USER_QUERY'] %>'
+LDAP_SEARCH_BASE = '<%= @ldap['SEARCH_BASE'] %>'
+<% end -%>
 
 ##########################
 # Database Configuration #
@@ -143,12 +152,12 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 # specification as the old database specification style is removed in 1.4
 DATABASES = {
     'default': {
-        'NAME': '<%= @storage_dir %>/graphite.db',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': ''
+        'NAME': '<%= @database['NAME'] %>',
+        'ENGINE': '<%= @database['ENGINE'] %>',
+        'USER': '<%= @database['USER'] %>',
+        'PASSWORD': '<%= @database['PASSWORD'] %>',
+        'HOST': '<%= @database['HOST'] %>',
+        'PORT': '<%= @database['PORT'] %>'
     }
 }
 
