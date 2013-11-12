@@ -49,6 +49,12 @@ default['graphite']['web']['ldap']['BASE_USER'] = ""
 default['graphite']['web']['ldap']['BASE_PASS'] = ""
 default['graphite']['web']['ldap']['USER_QUERY'] = "(sAMAccountName=%s)"
 default['graphite']['web']['ldap']['SEARCH_BASE'] = ""
+default['graphite']['web']['email']['BACKEND'] = "django.core.mail.backends.smtp.EmailBackend"
+default['graphite']['web']['email']['HOST'] = "localhost"
+default['graphite']['web']['email']['PORT'] = "25"
+default['graphite']['web']['email']['HOST_USER'] = ""
+default['graphite']['web']['email']['HOST_PASSWORD'] = ""
+default['graphite']['web']['email']['USE_TLS'] = false
 default['graphite']['web_server'] = 'apache'
 default['graphite']['create_user'] = false
 

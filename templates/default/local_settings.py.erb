@@ -76,12 +76,12 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 #####################################
 # This is used for emailing rendered Graphs
 # Default backend is SMTP
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 25
-#EMAIL_HOST_USER = ''
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_USE_TLS = False
+EMAIL_BACKEND = '<%= @email['BACKEND'] %>'
+EMAIL_HOST = '<%= @email['HOST'] %>'
+EMAIL_PORT = <%= @email['PORT'] %>
+EMAIL_HOST_USER = '<%= @email['HOST_USER'] %>'
+EMAIL_HOST_PASSWORD = '<%= @email['HOST_PASSWORD'] %>'
+EMAIL_USE_TLS = <%= (@email['USE_TLS'] == true) ? "True" : "False" %>
 
 # To drop emails on the floor, enable the Dummy backend:
 #EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
