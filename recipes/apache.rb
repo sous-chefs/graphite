@@ -8,6 +8,7 @@ execute 'create apache basic_auth file for graphite' do
 end
 
 template "#{node['apache']['dir']}/sites-available/graphite" do
+  cookbook node['graphite']['apache']['vhost']['cookbook']
   source 'graphite-vhost.conf.erb'
   notifies :reload, 'service[apache2]'
 end
