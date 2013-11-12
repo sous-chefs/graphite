@@ -117,6 +117,14 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 # Override the URL for the login link (e.g. for django_openid_auth)
 #LOGIN_URL = '/account/login'
 
+<% if @ldap['LDAP_SERVER'] != "" && @ldap['LDAP_BASE_USER'] != "" && @ldap['LDAP_BASE_PASS'] != "" && @ldap['LDAP_SEARCH_BASE'] != "" -%>
+USE_LDAP_AUTH = True
+LDAP_SERVER = '<%= @ldap['LDAP_SERVER'] %>'
+LDAP_BASE_USER = '<%= @ldap['LDAP_BASE_USER'] %>'
+LDAP_BASE_PASS = '<%= @ldap['LDAP_BASE_PASS'] %>'
+LDAP_USER_QUERY = '<%= @ldap['LDAP_USER_QUERY'] %>'
+LDAP_SEARCH_BASE = '<%= @ldap['LDAP_SEARCH_BASE'] %>'
+<% end -%>
 
 ##########################
 # Database Configuration #

@@ -111,7 +111,8 @@ template "#{docroot}/graphite/local_settings.py" do
             :cluster_servers => node['graphite']['web']['cluster_servers'],
             :carbonlink_hosts => node['graphite']['web']['carbonlink_hosts'],
             :memcached_hosts => node['graphite']['web']['memcached_hosts'],
-            :database => node['graphite']['web']['database'])
+            :database => node['graphite']['web']['database'],
+            :ldap => node['graphite']['web']['ldap'])
   notifies :reload, graphite_web_service_resource
 end
 

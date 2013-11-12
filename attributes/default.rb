@@ -44,6 +44,11 @@ default['graphite']['web']['database']['USER'] = ""
 default['graphite']['web']['database']['PASSWORD'] = ""
 default['graphite']['web']['database']['HOST'] = ""
 default['graphite']['web']['database']['PORT'] = ""
+default['graphite']['web']['ldap']['LDAP_SERVER'] = ""
+default['graphite']['web']['ldap']['LDAP_BASE_USER'] = ""
+default['graphite']['web']['ldap']['LDAP_BASE_PASS'] = ""
+default['graphite']['web']['ldap']['LDAP_USER_QUERY'] = "(sAMAccountName=%s)"
+default['graphite']['web']['ldap']['LDAP_SEARCH_BASE'] = ""
 default['graphite']['web_server'] = 'apache'
 default['graphite']['create_user'] = false
 
