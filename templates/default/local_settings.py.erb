@@ -143,12 +143,12 @@ INDEX_FILE = '<%= @storage_dir %>/index'  # Search index file
 # specification as the old database specification style is removed in 1.4
 DATABASES = {
     'default': {
-        'NAME': '<%= @storage_dir %>/graphite.db',
-        'ENGINE': 'django.db.backends.sqlite3',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': ''
+        'NAME': '<%= @database['NAME'] %>',
+        'ENGINE': '<%= @database['ENGINE'] %>',
+        'USER': '<%= @database['USER'] %>',
+        'PASSWORD': '<%= @database['PASSWORD'] %>',
+        'HOST': '<%= @database['HOST'] %>',
+        'PORT': '<%= @database['PORT'] %>'
     }
 }
 
