@@ -113,6 +113,33 @@ graphite-web attributes
 * `node['graphite']['apache']['basic_auth']['pass']` - password for basic auth
 * `node['graphite']['uwsgi_socket']` - the socket to bind uwsgi process to (only needed if using uwsgi)
 
+### database settings
+
+* `default['graphite']['web']['database']['NAME']` - the database name defaults to sqlite database in the storage folder
+* `default['graphite']['web']['database']['ENGINE']` - the django database engine that will be used. The default is sqlite. If you want to use mysql set this to `django.db.backends.mysql`
+* `default['graphite']['web']['database']['USER']` - database username leave this blank if you're using sqlite
+* `default['graphite']['web']['database']['PASSWORD']` - database password leave this blank if you're using sqlite.
+* `default['graphite']['web']['database']['HOST']` - database host leave this blank if you're using sqlite.
+* `default['graphite']['web']['database']['PORT']` - database port leave this blank if you're using sqlite.
+
+### ldap settings
+
+* `default['graphite']['web']['ldap']['SERVER']` - ldap server you want to use
+* `default['graphite']['web']['ldap']['BASE_USER']` - the base dn of the user graphite web should use
+* `default['graphite']['web']['ldap']['BASE_PASS']` - password for the base dn user
+* `default['graphite']['web']['ldap']['USER_QUERY']` - the ldap query to find the user by name. If you're using MS AD this should be `"(sAMAccountName=%s)"`
+* `default['graphite']['web']['ldap']['SEARCH_BASE']` - the search base the query should run against
+
+### email settings
+
+* `default['graphite']['web']['email']['BACKEND']` - django email backend "django.core.mail.backends.smtp.EmailBackend"
+* `default['graphite']['web']['email']['HOST']` - the smtp host. This defaults to `"localhost"`
+* `default['graphite']['web']['email']['PORT']` - the smtp port.
+* `default['graphite']['web']['email']['HOST_USER']` - the smtp user. Just use this if you need to authenticate against smtp 
+* `default['graphite']['web']['email']['HOST_PASSWORD']` - the smtp password
+* `default['graphite']['web']['email']['USE_TLS']` - if you want to use tls change this to `true`
+
+
 storage_schemas example
 -----------------------
 
