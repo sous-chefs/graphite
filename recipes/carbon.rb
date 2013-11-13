@@ -22,9 +22,11 @@ package 'python-simplejson'
 
 if node['graphite']['carbon']['enable_amqp']
   include_recipe 'python::pip'
-  python_pip 'txamqp' do
-    action :install
-  end
+  %w(txamqp daemonize).each do |pipmod|
+    python_pip pipmod do
+      action :install
+    end
+  end 
 
   amqp_password = node['graphite']['carbon']['amqp_password']
   if node['graphite']['encrypted_data_bag']['name']
@@ -54,6 +56,14 @@ execute 'install carbon' do
   command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['base_dir']}/lib"
   creates "#{node['graphite']['base_dir']}/lib/carbon-#{version}-py#{pyver}.egg-info"
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
+end
+
+#TODO Fix Carbon problem with graphite
+#http://stackoverflow.com/questions/19894708/cant-start-carbon-12-04-python-error-importerror-cannot-import-name-daem
+file "util.py" do
+  mode 0655
+  path "#{node['graphite']['base_dir']}/lib/carbon"
+  :create
 end
 
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
