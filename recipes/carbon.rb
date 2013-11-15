@@ -60,10 +60,9 @@ end
 
 #TODO Fix Carbon problem with graphite
 #http://stackoverflow.com/questions/19894708/cant-start-carbon-12-04-python-error-importerror-cannot-import-name-daem
-file "util.py" do
-  mode 0655
-  path "#{node['graphite']['base_dir']}/lib/carbon"
-  :create
+template "#{node['graphite']['base_dir']}//lib/carbon/util.py" do
+  source "util_py.erb"
+  mode 0544
 end
 
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
