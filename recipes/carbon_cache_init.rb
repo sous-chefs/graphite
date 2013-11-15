@@ -24,7 +24,7 @@ template '/etc/init.d/carbon-cache' do
     :dir     => node['graphite']['base_dir'],
     :user    => node['graphite']['user_account']
   )
-  mode 00744
+  mode 0755
   notifies :restart, 'service[carbon-cache]'
 end
 
