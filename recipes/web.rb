@@ -53,7 +53,11 @@ dep_packages = case node['platform_family']
 
                  # Include bitmap packages (optionally)
                  if node['graphite']['graphite_web']['bitmap_support']
-                   packages += %w{bitmap bitmap-fonts}
+                   if node['platform'] == 'amazon'
+                     packages += %w{bitmap}
+                   else
+                     packages += %w{bitmap bitmap-fonts}
+                   end
                  end
 
                  # Optionally include memcached client
