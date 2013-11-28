@@ -20,9 +20,9 @@
 service_type = node['graphite']['carbon']['service_type']
 case service_type
 when 'runit'
-  carbon_cache_service_resource = 'runit_service[carbon-cache]'
+  carbon_cache_service_resource = 'runit_service[carbon-cache-a]'
 else
-  carbon_cache_service_resource = 'service[carbon-cache]'
+  carbon_cache_service_resource = 'service[carbon-cache-a]'
 end
 
 template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do

@@ -19,11 +19,24 @@
 
 include_recipe 'runit'
 
-runit_service 'carbon-relay' do
+runit_service 'carbon-relay-a' do
   run_template_name 'carbon'
   log_template_name 'carbon'
   finish_script_template_name 'carbon'
   finish true
-  options(:name => 'relay')
+  options(:name => 'relay', :instance => 'a')
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+end
+
+if node['graphite']['carbon']['relay']['instances'].length > 0
+    node['graphite']['carbon']['relay']['instances'].each do |instance|
+        runit_service "carbon-relay-#{instance['instance_name']}" do
+            run_template_name 'carbon'
+            log_template_name 'carbon'
+            finish_script_template_name 'carbon'
+            finish true
+            options(:name => 'relay', :instance => instance['instance_name'])
+            subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+        end
+    end
 end

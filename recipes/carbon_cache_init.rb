@@ -17,18 +17,40 @@
 # limitations under the License.
 #
 
-template '/etc/init.d/carbon-cache' do
+template '/etc/init.d/carbon-cache-a' do
   source 'carbon.init.erb'
   variables(
     :name    => 'cache',
     :dir     => node['graphite']['base_dir'],
-    :user    => node['graphite']['user_account']
+    :user    => node['graphite']['user_account'],
+    :instance => "a"
   )
   mode 00744
-  notifies :restart, 'service[carbon-cache]'
+  notifies :restart, 'service[carbon-cache-a]'
 end
 
-service 'carbon-cache' do
+service 'carbon-cache-a' do
   action [:enable, :start]
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+end
+
+if node['graphite']['carbon']['instances'].length > 0
+    node['graphite']['carbon']['instances'].each do |instance|
+      template "/etc/init.d/carbon-cache-#{instance['instance_name']}" do
+      source 'carbon.init.erb'
+      variables(
+        :name    => 'cache',
+        :dir     => node['graphite']['base_dir'],
+        :user    => node['graphite']['user_account'],
+        :instance => instance['instance_name']
+      )
+      mode 00744
+      notifies :restart, "service[carbon-cache-#{instance['instance_name']}]"
+    end
+
+    service "carbon-cache-#{instance['instance_name']}" do
+      action [:enable, :start]
+      subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+    end
+  end
 end

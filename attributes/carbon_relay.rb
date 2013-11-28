@@ -17,3 +17,4 @@ default['graphite']['carbon']['relay']['destinations'] = []
 default['graphite']['carbon']['relay']['max_datapoints_per_message'] = 500
 default['graphite']['carbon']['relay']['max_queue_size'] = 10000
 default['graphite']['carbon']['relay']['use_flow_control'] = 'True'
+default['graphite']['carbon']['relay']['instances'] = []

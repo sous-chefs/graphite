@@ -58,6 +58,7 @@ carbon-cache.py attributes
 * `node['graphite']['carbon']['log_whisper_updates']` - log updates to whisper (defaults to "False")
 * `node['graphite']['carbon']['whisper_autoflush']` - set this option to "True" if you want whisper to write synchronously (defaults to "False")
 * `node['graphite']['carbon']['service_type']` - init service to use for carbon (defaults to runit)
+* `node['graphite']['carbon'][instances]` - array of hashes to configure more instances additionally to the default ones. You can put as many as you want to this array. ([see the example below](#carbon-cache-instances-example))
 
 carbon-relay.py attributes
 --------------------------
@@ -73,6 +74,7 @@ carbon-relay.py attributes
 * `node['graphite']['carbon']['relay']['max_datapoints_per_message']` - maximum datapoints to send in a message between carbon daemons (defaults to 500)
 * `node['graphite']['carbon']['relay']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)
 * `node['graphite']['carbon']['relay']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
+* `node['graphite']['carbon']['relay'][instances]` - array of hashes to configure more instances additionally to the default ones. You can put as many as you want to this array. ([see the example below](#carbon-relay-instances-example))
 
 carbon-aggregator.py attributes
 -------------------------------
@@ -219,6 +221,63 @@ node.default['graphite']['storage_aggregation'] = [
 ]
 ```
 
+carbon cache instances example
+------------------------------
+```ruby
+node['graphite']['carbon']['instances'] = 
+[
+  {
+    "instance_name" => "cache1-a",
+    "options" => {
+      "LINE_RECEIVER_PORT" => 2013,
+      "UDP_RECEIVER_PORT" => 2013,
+      "PICKLE_RECEIVER_PORT" => 2014,
+      "CACHE_QUERY_PORT" => 7012
+    }
+  }
+]
+```
+will create this config
+
+```ini
+[cache:cache1-a]
+LINE_RECEIVER_PORT = 2013
+UDP_RECEIVER_PORT = 2013
+PICKLE_RECEIVER_PORT = 2014
+CACHE_QUERY_PORT = 7012
+```
+
+carbon relay instances example
+------------------------------
+```ruby
+destinations = ["localhost:2014:cache1-a", "localhost:2024:cache1-b"]
+node['graphite']['carbon']['relay']['instances'] = 
+[
+  {
+    "instance_name" => "relay1-a",
+    "options" => {
+      "DESTINATIONS" => destinations.join(', '),
+      "RELAY_METHOD" => "consistent-hashing",
+      "REPLICATION_FACTOR" => 1,
+      "LINE_RECEIVER_PORT" => 3003,
+      "UDP_RECEIVER_PORT" => 3003,
+      "PICKLE_RECEIVER_PORT" => 3004,
+    }
+  }
+]
+```
+
+will create this config:
+
+```ini
+[relay:relay1-a]
+LINE_RECEIVER_PORT = 3003
+UDP_RECEIVER_PORT = 3003
+PICKLE_RECEIVER_PORT = 3004
+REPLICATION_FACTOR = 1
+RELAY_METHOD = consistent-hashing
+DESTINATIONS = localhost:2014:cache1-a, localhost:2024:cache1-b
+```
 
 Data Bags
 =========

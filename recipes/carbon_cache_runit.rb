@@ -19,11 +19,24 @@
 
 include_recipe 'runit'
 
-runit_service 'carbon-cache' do
+runit_service 'carbon-cache-a' do
   run_template_name 'carbon'
   log_template_name 'carbon'
   finish_script_template_name 'carbon'
   finish true
-  options(:name => 'cache')
+  options(:name => 'cache', :instance => 'a')
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+end
+
+if node['graphite']['carbon']['instances'].length > 0
+    node['graphite']['carbon']['instances'].each do |instance|
+        runit_service "carbon-cache-#{instance['instance_name']}" do
+            run_template_name 'carbon'
+            log_template_name 'carbon'
+            finish_script_template_name 'carbon'
+            finish true
+            options(:name => 'cache', :instance => instance['instance_name'])
+            subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+        end
+    end
 end
