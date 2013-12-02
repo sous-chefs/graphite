@@ -104,3 +104,57 @@ suites:
   run_list:
   - recipe[graphite::federated]
   attributes: {}
+- name: carbon-instances
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_relay]
+  attributes: {
+    "graphite": {
+      "carbon": {
+        "instances": [
+          {
+            "instance_name": "test1-a",
+            "options": {
+              "LINE_RECEIVER_PORT": 2013,
+              "UDP_RECEIVER_PORT": 2013,
+              "PICKLE_RECEIVER_PORT": 2014,
+              "CACHE_QUERY_PORT": 7012
+            }
+          }, {
+            "instance_name": "test1-b",
+            "options": {
+              "LINE_RECEIVER_PORT": 2023,
+              "UDP_RECEIVER_PORT": 2023,
+              "PICKLE_RECEIVER_PORT": 2024,
+              "CACHE_QUERY_PORT": 7022
+            }
+          }
+        ],
+        "relay": {
+          "line_receiver_port": 3003,
+          "udp_receiver_port": 3003,
+          "pickle_receiver_port": 3004,
+          "method": "consistent-hashing",
+          "destinations": ["localhost:2013:test1-a", "localhost:2023:test1-b"],
+          "instances": [
+            {
+              "instance_name": "test1-a",
+              "options": {
+                "LINE_RECEIVER_PORT": 3013,
+                "UDP_RECEIVER_PORT": 3013,
+                "PICKLE_RECEIVER_PORT": 3014,
+              }
+            },
+            {
+              "instance_name": "test1-b",
+              "options": {
+                "LINE_RECEIVER_PORT": 3023,
+                "UDP_RECEIVER_PORT": 3023,
+                "PICKLE_RECEIVER_PORT": 3024,
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
