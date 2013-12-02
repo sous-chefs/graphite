@@ -17,18 +17,40 @@
 # limitations under the License.
 #
 
-template '/etc/init.d/carbon-relay' do
+template '/etc/init.d/carbon-relay-a' do
   source 'carbon.init.erb'
   variables(
     :name    => 'relay',
     :dir     => node['graphite']['base_dir'],
-    :user    => node['graphite']['user_account']
+    :user    => node['graphite']['user_account'],
+    :instance => 'a'
   )
   mode 00744
-  notifies :restart, 'service[carbon-relay]'
+  notifies :restart, 'service[carbon-relay-a]'
 end
 
-service 'carbon-relay' do
+service 'carbon-relay-a' do
   action [:enable, :start]
   subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+end
+
+if node['graphite']['carbon']['relay']['instances'].length > 0
+    node['graphite']['carbon']['relay']['instances'].each do |instance|
+      template "/etc/init.d/carbon-relay-#{instance['instance_name']}" do
+      source 'carbon.init.erb'
+      variables(
+        :name    => 'relay',
+        :dir     => node['graphite']['base_dir'],
+        :user    => node['graphite']['user_account'],
+        :instance => instance['instance_name']
+      )
+      mode 00744
+      notifies :restart, "service[carbon-relay-#{instance['instance_name']}]"
+    end
+
+    service "carbon-relay-#{instance['instance_name']}" do
+      action [:enable, :start]
+      subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
+    end
+  end
 end

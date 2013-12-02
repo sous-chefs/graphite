@@ -21,9 +21,9 @@ service_type = node['graphite']['carbon']['service_type']
 
 case service_type
 when 'runit'
-  carbon_relay_service_resource = 'runit_service[carbon-relay]'
+  carbon_relay_service_resource = 'runit_service[carbon-relay-a]'
 else
-  carbon_relay_service_resource = 'service[carbon-relay]'
+  carbon_relay_service_resource = 'service[carbon-relay-a]'
 end
 
 template "#{node['graphite']['base_dir']}/conf/relay-rules.conf" do

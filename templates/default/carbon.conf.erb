@@ -175,8 +175,14 @@ AMQP_METRIC_NAME_IN_BODY = <%= @carbon_options[:amqp_metric_name_in_body] ? "Tru
 # and any other settings you want to customize, defaults are inherited
 # from [carbon] section.
 # You can then specify the --instance=b option to manage this instance
-
-
+<% if @carbon_options[:instances].length > 0 -%>
+<% @carbon_options[:instances].each do |instance| -%>
+[cache:<%= instance[:instance_name] %>]
+<% instance[:options].each do |key, value| -%>
+<%= key %> = <%= value %>
+<% end -%>
+<% end -%>
+<% end -%>
 
 [relay]
 LINE_RECEIVER_INTERFACE = <%= @carbon_options[:relay][:line_receiver_interface] %>
@@ -240,6 +246,14 @@ USE_FLOW_CONTROL = <%= @carbon_options[:relay][:use_flow_control] %>
 # CARBON_METRIC_PREFIX = carbon
 # CARBON_METRIC_INTERVAL = 60
 
+<% if @carbon_options[:relay][:instances].length > 0 -%>
+<% @carbon_options[:relay][:instances].each do |rinstance| %>
+[relay:<%= rinstance[:instance_name] %>]
+<% rinstance['options'].each do |key, value| %>
+<%= key %> = <%= value %>
+<% end -%>
+<% end -%>
+<% end -%>
 
 [aggregator]
 LINE_RECEIVER_INTERFACE = <%= @carbon_options[:aggregator][:line_receiver_interface] %>

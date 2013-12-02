@@ -45,3 +45,4 @@ default['graphite']['carbon']['amqp_user'] = 'guest'
 default['graphite']['carbon']['amqp_password'] = 'guest'
 default['graphite']['carbon']['amqp_exchange'] = 'graphite'
 default['graphite']['carbon']['amqp_metric_name_in_body'] = false
+default['graphite']['carbon']['instances'] = []
