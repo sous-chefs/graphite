@@ -3,16 +3,16 @@
 # Attributes:: carbon_cache
 #
 
-default['graphite']['carbon']['line_receiver_interface'] =   '0.0.0.0'
-default['graphite']['carbon']['line_receiver_port'] = 2003
+default['graphite']['carbon']['caches']['a']['line_receiver_interface'] =   '0.0.0.0'
+default['graphite']['carbon']['caches']['a']['line_receiver_port'] = 2003
+default['graphite']['carbon']['caches']['a']['udp_receiver_interface'] = '0.0.0.0'
+default['graphite']['carbon']['caches']['a']['udp_receiver_port'] = 2003
+default['graphite']['carbon']['caches']['a']['pickle_receiver_interface'] = '0.0.0.0'
+default['graphite']['carbon']['caches']['a']['pickle_receiver_port'] = 2004
+default['graphite']['carbon']['caches']['a']['cache_query_interface'] =     '0.0.0.0'
+default['graphite']['carbon']['caches']['a']['cache_query_port'] = 7002
 default['graphite']['carbon']['enable_udp_listener'] = 'False'
-default['graphite']['carbon']['udp_receiver_interface'] = '0.0.0.0'
-default['graphite']['carbon']['udp_receiver_port'] = 2003
-default['graphite']['carbon']['pickle_receiver_interface'] = '0.0.0.0'
-default['graphite']['carbon']['pickle_receiver_port'] = 2004
 default['graphite']['carbon']['use_insecure_unpickler'] = 'False'
-default['graphite']['carbon']['cache_query_interface'] =     '0.0.0.0'
-default['graphite']['carbon']['cache_query_port'] = 7002
 default['graphite']['carbon']['use_flow_control'] = 'True'
 default['graphite']['carbon']['max_cache_size'] = 'inf'
 default['graphite']['carbon']['max_creates_per_second'] = 'inf'

@@ -56,26 +56,26 @@ MAX_UPDATES_PER_SECOND = <%= @carbon_options[:max_updates_per_second] %>
 # the files quickly but at the risk of slowing I/O down considerably for a while.
 MAX_CREATES_PER_MINUTE = <%= @carbon_options[:max_creates_per_second] %>
 
-LINE_RECEIVER_INTERFACE = <%= @carbon_options[:line_receiver_interface] %>
-LINE_RECEIVER_PORT = <%= @carbon_options[:line_receiver_port] %>
+LINE_RECEIVER_INTERFACE = <%= @carbon_options[:caches][:a][:line_receiver_interface] %>
+LINE_RECEIVER_PORT = <%= @carbon_options[:caches][:a][:line_receiver_port] %>
 
 # Set this to True to enable the UDP listener. By default this is off
 # because it is very common to run multiple carbon daemons and managing
 # another (rarely used) port for every carbon instance is not fun.
 ENABLE_UDP_LISTENER = <%= @carbon_options[:enable_udp_listener] %>
-UDP_RECEIVER_INTERFACE = <%= @carbon_options[:udp_receiver_interface] %>
-UDP_RECEIVER_PORT = <%= @carbon_options[:udp_receiver_port] %>
+UDP_RECEIVER_INTERFACE = <%= @carbon_options[:caches][:a][:udp_receiver_interface] %>
+UDP_RECEIVER_PORT = <%= @carbon_options[:caches][:a][:udp_receiver_port] %>
 
-PICKLE_RECEIVER_INTERFACE = <%= @carbon_options[:pickle_receiver_interface] %>
-PICKLE_RECEIVER_PORT = <%= @carbon_options[:pickle_receiver_port] %>
+PICKLE_RECEIVER_INTERFACE = <%= @carbon_options[:caches][:a][:pickle_receiver_interface] %>
+PICKLE_RECEIVER_PORT = <%= @carbon_options[:caches][:a][:pickle_receiver_port] %>
 
 # Per security concerns outlined in Bug #817247 the pickle receiver
 # will use a more secure and slightly less efficient unpickler.
 # Set this to True to revert to the old-fashioned insecure unpickler.
 USE_INSECURE_UNPICKLER = <%= @carbon_options[:use_insecure_unpickler] %>
 
-CACHE_QUERY_INTERFACE = <%= @carbon_options[:cache_query_interface] %>
-CACHE_QUERY_PORT = <%= @carbon_options[:cache_query_port] %>
+CACHE_QUERY_INTERFACE = <%= @carbon_options[:caches][:a][:cache_query_interface] %>
+CACHE_QUERY_PORT = <%= @carbon_options[:caches][:a][:cache_query_port] %>
 
 # Set this to False to drop datapoints received after the cache
 # reaches MAX_CACHE_SIZE. If this is True (the default) then sockets
@@ -167,7 +167,21 @@ AMQP_METRIC_NAME_IN_BODY = <%= @carbon_options[:amqp_metric_name_in_body] ? "Tru
 # Example: store everything
 # BIND_PATTERNS = #
 
-# To configure special settings for the carbon-cache instance 'b', uncomment this:
+<% if @carbon_options[:caches].length > 1 -%>
+# Configure special settings for other the carbon-cache instances
+<% @carbon_options[:caches].each do |instance| -%>
+<% if instance.first != "a" -%>
+[cache:<%= instance.first %>]
+LINE_RECEIVER_INTERFACE = <%= instance.last[:line_receiver_interface] %>
+LINE_RECEIVER_PORT = <%= instance.last[:line_receiver_port] %>
+PICKLE_RECEIVER_INTERFACE = <%= instance.last[:pickle_receiver_interface] %>
+PICKLE_RECEIVER_PORT = <%= instance.last[:pickle_receiver_port] %>
+CACHE_QUERY_INTERFACE = <%= instance.last[:cache_query_interface] %>
+CACHE_QUERY_PORT = <%= instance.last[:cache_query_port] %>
+
+<% end -%>
+<% else -%>
+# To configure special settings for other the carbon-cache instance 'b', uncomment this:
 #[cache:b]
 #LINE_RECEIVER_PORT = 2103
 #PICKLE_RECEIVER_PORT = 2104
@@ -175,7 +189,7 @@ AMQP_METRIC_NAME_IN_BODY = <%= @carbon_options[:amqp_metric_name_in_body] ? "Tru
 # and any other settings you want to customize, defaults are inherited
 # from [carbon] section.
 # You can then specify the --instance=b option to manage this instance
-
+<% end -%>
 
 
 [relay]
