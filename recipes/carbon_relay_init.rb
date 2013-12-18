@@ -22,7 +22,8 @@ template '/etc/init.d/carbon-relay' do
   variables(
     :name    => 'relay',
     :dir     => node['graphite']['base_dir'],
-    :user    => node['graphite']['user_account']
+    :user    => node['graphite']['user_account'],
+    :caches  => { "a" => "" }
   )
   mode 00744
   notifies :restart, 'service[carbon-relay]'
