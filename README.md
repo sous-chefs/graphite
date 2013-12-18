@@ -41,13 +41,13 @@ carbon-cache.py attributes
 * `node['graphite']['storage_aggregation']` - an array with rules to configure how to aggregate data to lower-precision retentions, used to generate the *storage-aggregation.conf* file
 * `node['graphite']['carbon']['uri']` - download url for carbon
 * `node['graphite']['carbon']['checksum']` - checksum for the carbon download
-* `node['graphite']['carbon']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
-* `node['graphite']['carbon']['line_receiver_port']` - line interface port (defaults to 2003)
+* `node['graphite']['carbon']['caches']['a']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['caches']['a']['line_receiver_port']` - line interface port (defaults to 2003)
+* `node['graphite']['carbon']['caches']['a']['udp_receiver_interface']` - line interface IP for UDP listener (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['caches']['a']['udp_receiver_port']` - line interface port for UDP listener (defaults to 2003)
+* `node['graphite']['carbon']['caches']['a']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['caches']['a']['pickle_receiver_port']` - pickle receiver port (defaults to 2004)
 * `node['graphite']['carbon']['enable_udp_listener']` - set this to "True" to enable the UDP listener (defaults to "False")
-* `node['graphite']['carbon']['udp_receiver_interface']` - line interface IP for UDP listener (defaults to 0.0.0.0)
-* `node['graphite']['carbon']['udp_receiver_port']` - line interface port for UDP listener (defaults to 2003)
-* `node['graphite']['carbon']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
-* `node['graphite']['carbon']['pickle_receiver_port']` - pickle receiver port (defaults to 2004)
 * `node['graphite']['carbon']['use_insecure_unpickler']` - set this to "True" to use the old-fashioned insecure unpickler (defaults to "False")
 * `node['graphite']['carbon']['cache_query_interface']` - cache query IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['cache_query_port']` - cache query port (defaults to 7002)
@@ -135,7 +135,7 @@ graphite-web attributes
 * `default['graphite']['web']['email']['BACKEND']` - django email backend "django.core.mail.backends.smtp.EmailBackend"
 * `default['graphite']['web']['email']['HOST']` - the smtp host. This defaults to `"localhost"`
 * `default['graphite']['web']['email']['PORT']` - the smtp port.
-* `default['graphite']['web']['email']['HOST_USER']` - the smtp user. Just use this if you need to authenticate against smtp 
+* `default['graphite']['web']['email']['HOST_USER']` - the smtp user. Just use this if you need to authenticate against smtp
 * `default['graphite']['web']['email']['HOST_PASSWORD']` - the smtp password
 * `default['graphite']['web']['email']['USE_TLS']` - if you want to use tls change this to `true`
 
