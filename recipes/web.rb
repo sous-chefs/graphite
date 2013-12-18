@@ -104,6 +104,10 @@ end
   end
 end
 
+execute 'config selinux context' do
+  command "chcon -R -h -t httpd_log_t #{storagedir}/log/webapp"
+end
+
 template "#{docroot}/graphite/local_settings.py" do
   source 'local_settings.py.erb'
   mode 00755
