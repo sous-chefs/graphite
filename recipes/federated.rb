@@ -24,15 +24,6 @@
 # http://rcrowley.org/articles/federated-graphite.html
 #
 
-node.default['graphite']['carbon']['line_receiver_port'] = 2013
-node.default['graphite']['carbon']['udp_receiver_port'] = 2013
-node.default['graphite']['carbon']['pickle_receiver_port'] = 2014
-
-node.default['graphite']['carbon']['relay']['line_receiver_port'] = 2003
-node.default['graphite']['carbon']['relay']['udp_receiver_port'] = 2003
-node.default['graphite']['carbon']['relay']['pickle_receiver_port'] = 2004
-node.default['graphite']['carbon']['relay']['method'] = 'consistent-hashing'
-
 int_instances = []
 ext_instances = []
 
