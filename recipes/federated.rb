@@ -55,8 +55,8 @@ else
       end
 
       node.default['graphite']['carbon']['relay']['destinations'] = destinations
-      node.default['graphite']['graphite_web']['carbonlink_hosts'] = carbonlink_hosts
-      node.default['graphite']['graphite_web']['cluster_servers'] = cluster_servers
+      node.default['graphite']['web']['carbonlink_hosts'] = carbonlink_hosts
+      node.default['graphite']['web']['cluster_servers'] = cluster_servers
     end
   end
 end
