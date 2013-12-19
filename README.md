@@ -219,6 +219,29 @@ node.default['graphite']['storage_aggregation'] = [
 ]
 ```
 
+graph_templates example
+-----------------------
+
+```ruby
+node.default['graphite']['graph_templates'] = [
+  {
+    'name' => 'basic',
+    'background' => 'white',
+    'foreground' => 'black',
+    'majorLine' => 'grey',
+    'minorLine' => 'rose',
+    'lineColors' => 'blue,green,red,purple,brown,yellow,aqua,grey,magenta,pink,gold,rose'
+  },
+  {
+    'name' => 'custom',
+    'background' => 'black',
+    'foreground' => 'white',
+    'majorLine' => 'grey',
+    'minorLine' => 'rose',
+    'lineColors' => '#f29709,#41546f,#0ebadc,#a48ad5,#49c28d,#c75551'
+  },
+]
+```
 
 Data Bags
 =========

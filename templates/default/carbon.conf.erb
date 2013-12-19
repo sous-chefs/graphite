@@ -169,8 +169,8 @@ AMQP_METRIC_NAME_IN_BODY = <%= @carbon_options[:amqp_metric_name_in_body] ? "Tru
 
 <% if @carbon_options[:caches].length > 1 -%>
 # Configure special settings for other the carbon-cache instances
-<% @carbon_options[:caches].each do |instance| -%>
-<% if instance.first != "a" -%>
+<%   @carbon_options[:caches].each do |instance| -%>
+<%     if instance.first != "a" -%>
 [cache:<%= instance.first %>]
 LINE_RECEIVER_INTERFACE = <%= instance.last[:line_receiver_interface] %>
 LINE_RECEIVER_PORT = <%= instance.last[:line_receiver_port] %>
@@ -179,8 +179,8 @@ PICKLE_RECEIVER_PORT = <%= instance.last[:pickle_receiver_port] %>
 CACHE_QUERY_INTERFACE = <%= instance.last[:cache_query_interface] %>
 CACHE_QUERY_PORT = <%= instance.last[:cache_query_port] %>
 
-<% end -%>
-<% end -%>
+<%     end -%>
+<%   end -%>
 <% else -%>
 # To configure special settings for other the carbon-cache instance 'b', uncomment this:
 #[cache:b]

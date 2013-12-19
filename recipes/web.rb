@@ -52,7 +52,7 @@ dep_packages = case node['platform_family']
                  packages = %w{ Django django-tagging pycairo-devel python-devel mod_wsgi python-sqlite2 python-zope-interface }
 
                  # Include bitmap packages (optionally)
-                 if node['graphite']['graphite_web']['bitmap_support']
+                 if node['graphite']['web']['bitmap_support']
                    if node['platform'] == 'amazon'
                      packages += %w{bitmap}
                    else
@@ -122,6 +122,15 @@ template "#{docroot}/graphite/local_settings.py" do
             :database => node['graphite']['web']['database'],
             :ldap => node['graphite']['web']['ldap'],
             :email => node['graphite']['web']['email'])
+  notifies :reload, graphite_web_service_resource
+end
+
+template "#{basedir}/conf/graphTemplates.conf" do
+  source 'graphTemplates.conf.erb'
+  mode 00755
+  variables(
+    :graph_templates => node['graphite']['graph_templates']
+  )
   notifies :reload, graphite_web_service_resource
 end
 
