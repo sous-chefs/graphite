@@ -11,12 +11,12 @@ respawn limit 99 5
 
 setuid <%= @user %>
 
-<% @caches.each do |instance| -%>
+<% @instances.each do |instance| -%>
 env LOGFILE_<%= instance.first %>=<%= @dir %>/storage/log/carbon-<%= @name %>/carbon-<%= @name %>-<%= instance.first %>/console.log
 <% end -%>
 
 pre-start script
-    for INSTANCE in <% @caches.each do |instance| -%><%= instance.first %> <% end -%>; do
+    for INSTANCE in <% @instances.each do |instance| -%><%= instance.first %> <% end -%>; do
         LOGFILE="LOGFILE_$INSTANCE"
         LOGDIR=`dirname ${!LOGFILE}`
         [ -d $LOGDIR ] || mkdir -p $LOGDIR
@@ -25,7 +25,7 @@ pre-start script
 end script
 
 script
-    for INSTANCE in <% @caches.each do |instance| -%><%= instance.first %> <% end -%>; do
+    for INSTANCE in <% @instances.each do |instance| -%><%= instance.first %> <% end -%>; do
         <%= @dir %>/bin/carbon-<%= @name %>.py --debug --instance=$INSTANCE start >> $LOGFILE 2>&1
     done
 end script

@@ -8,14 +8,14 @@
 
 
 export CC_HOME="<%= @dir %>"
-<% @caches.each do |instance| -%>
+<% @instances.each do |instance| -%>
 export PIDFILE_<%= instance.first %>="$CC_HOME/storage/carbon-<%= @name %>-<%= instance.first %>.pid"
 <% end -%>
 export CC_CONFIG="$CC_HOME/etc/carbon-<%= @name %>.conf"
 CC_USER="<%= @user %>"
 LOGDIR="/var/log/carbon-<%= @name %>"
 CC_LOG="$LOGDIR/carbon-<%= @name %>.log"
-<% @caches.each do |instance| -%>
+<% @instances.each do |instance| -%>
 BIN_SCRIPT_<%= instance.first %>="python $CC_HOME/bin/carbon-<%= @name %>.py --instance=<%= instance.first %> start >> $CC_LOG 2>&1"
 <% end -%>
 
@@ -29,7 +29,7 @@ start() {
 
   chown -R $CC_USER:$CC_USER $LOGDIR
 
-  for INSTANCE in <% @caches.each do |instance| -%><%= instance.first %> <% end -%>; do
+  for INSTANCE in <% @instances.each do |instance| -%><%= instance.first %> <% end -%>; do
     PIDFILE="PIDFILE_$INSTANCE"
     BIN_SCRIPT="BIN_SCRIPT_$INSTANCE"
     if [ -f ${!PIDFILE} ]; then
@@ -63,7 +63,7 @@ start() {
 
 
 function stop() {
-  for INSTANCE in <% @caches.each do |instance| -%><%= instance.first %> <% end -%>; do
+  for INSTANCE in <% @instances.each do |instance| -%><%= instance.first %> <% end -%>; do
     PIDFILE="PIDFILE_$INSTANCE"
     echo -n -e "\033[1mStopping carbon-<%= @name %>-$INSTANCE...\033[0m"
 
@@ -128,7 +128,7 @@ restart() {
 }
 
 status() {
-  for INSTANCE in <% @caches.each do |instance| -%><%= instance.first %> <% end -%>; do
+  for INSTANCE in <% @instances.each do |instance| -%><%= instance.first %> <% end -%>; do
     PIDFILE="PIDFILE_$INSTANCE"
     # GOT PIDFILE?
     [ -f ${!PIDFILE} ] && pid=$(cat ${!PIDFILE})

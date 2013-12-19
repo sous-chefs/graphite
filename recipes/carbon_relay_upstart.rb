@@ -20,10 +20,10 @@
 template '/etc/init/carbon-relay.conf' do
   source 'carbon.upstart.erb'
   variables(
-    :name    => 'relay',
-    :dir     => node['graphite']['base_dir'],
-    :user    => node['graphite']['user_account'],
-    :caches  => { "a" => "" }
+    :name       => 'relay',
+    :dir        => node['graphite']['base_dir'],
+    :user       => node['graphite']['user_account'],
+    :instances  => { "a" => "" }
   )
   mode 00644
 end
