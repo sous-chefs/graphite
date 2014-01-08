@@ -18,12 +18,12 @@
 #
 
 case node['platform_family']
-when "debian"
-  package "daemon"
+when 'debian'
+  package 'daemon'
 end
 
-template "/etc/init.d/carbon-relay" do
-  source "carbon.init.erb"
+template '/etc/init.d/carbon-relay' do
+  source 'carbon.init.erb'
   variables(
     :name    => 'relay',
     :dir     => node['graphite']['base_dir'],
