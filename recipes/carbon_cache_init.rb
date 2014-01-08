@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+case node['platform_family']
+when 'debian'
+  package 'daemon'
+end
+
 template '/etc/init.d/carbon-cache' do
   source 'carbon.init.erb'
   variables(

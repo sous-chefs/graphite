@@ -15,7 +15,9 @@ LOGDIR="/var/log/carbon-<%= @name %>"
 CC_LOG="$LOGDIR/carbon-<%= @name %>.log"
 BIN_SCRIPT="python $CC_HOME/bin/carbon-<%= @name %>.py start >> $CC_LOG 2>&1"
 
-. /etc/init.d/functions
+if [ -f /etc/init.d/functions ]; then
+  . /etc/init.d/functions
+fi
 
 start() {
 

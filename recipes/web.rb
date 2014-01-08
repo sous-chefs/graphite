@@ -21,7 +21,6 @@ basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
 version = node['graphite']['version']
-pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
 
 if node['graphite']['web_server'] == 'apache'
   graphite_web_service_resource = 'service[apache2]'
@@ -87,8 +86,11 @@ end
 
 execute 'install graphite-web' do
   command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['doc_root']}"
-  creates "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
   cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
+  creates lazy {
+    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
+    "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
+  }
 end
 
 directory "#{storagedir}/log/webapp" do
