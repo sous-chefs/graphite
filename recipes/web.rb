@@ -87,10 +87,10 @@ end
 execute 'install graphite-web' do
   command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['doc_root']}"
   cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
-  not_if do
+  creates lazy {
     pyver = node['languages']['python']['version'][0..-3]
-    ::File.exists?(::File.join(node['graphite']['doc_root'], "graphite_web-#{version}-py#{pyver}.egg-info"))
-  end
+    "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
+  }
 end
 
 directory "#{storagedir}/log/webapp" do

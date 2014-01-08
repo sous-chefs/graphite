@@ -34,10 +34,10 @@ end
 execute 'install whisper' do
   command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{install_lib_dir}"
   cwd "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
-  not_if do
+  creates lazy {
     pyver = node['languages']['python']['version'][0..-3]
-    ::File.exists?(::File.join(install_lib_dir, "whisper-#{version}-py#{pyver}.egg-info"))
-  end
+    "#{install_lib_dir}/whisper-#{version}-py#{pyver}.egg-info"
+  }
 end
 
 directory "#{node['graphite']['base_dir']}/bin" do
