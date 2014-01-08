@@ -53,7 +53,7 @@ execute 'install carbon' do
   command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['base_dir']}/lib"
   cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
   creates lazy {
-    pyver = node['languages']['python']['version'][0..-3]
+    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
     "#{node['graphite']['base_dir']}/lib/carbon-#{version}-py#{pyver}.egg-info"
   }
 end

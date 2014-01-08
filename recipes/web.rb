@@ -88,7 +88,7 @@ execute 'install graphite-web' do
   command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['doc_root']}"
   cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
   creates lazy {
-    pyver = node['languages']['python']['version'][0..-3]
+    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
     "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
   }
 end
