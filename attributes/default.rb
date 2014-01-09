@@ -25,7 +25,6 @@ default['graphite']['carbon']['checksum'] = '4f37e00595b5b078edb9b3f5cae318f752f
 
 default['graphite']['encrypted_data_bag']['name'] = nil
 
-default['graphite']['graphite_web']['bitmap_support'] = true
 
 #
 # graphite_web
@@ -34,6 +33,7 @@ default['graphite']['graphite_web']['bitmap_support'] = true
 default['graphite']['web']['uri'] = "https://github.com/graphite-project/graphite-web/archive/#{node['graphite']['version']}.tar.gz"
 default['graphite']['web']['checksum'] = '4fd1d16cac3980fddc09dbf0a72243c7ae32444903258e1b65e28428a48948be'
 default['graphite']['web']['debug'] = 'False'
+default['graphite']['web']['bitmap_support'] = true
 default['graphite']['web']['admin_email'] = 'admin@org.com'
 default['graphite']['web']['cluster_servers'] = []
 default['graphite']['web']['carbonlink_hosts'] = []
@@ -57,6 +57,21 @@ default['graphite']['web']['email']['HOST_PASSWORD'] = ""
 default['graphite']['web']['email']['USE_TLS'] = false
 default['graphite']['web_server'] = 'apache'
 default['graphite']['create_user'] = false
+
+default['graphite']['graph_templates'] = [
+  {
+    'name' => 'default',
+    'background' => 'black',
+    'foreground' => 'white',
+    'majorLine' => 'white',
+    'minorLine' => 'grey',
+    'lineColors' => 'blue,green,red,purple,brown,yellow,aqua,grey,magenta,pink,gold,rose',
+    'fontName' => 'Sans',
+    'fontSize' => '10',
+    'fontBold' => 'False',
+    'fontItalic' => 'False'
+  }
+]
 
 case node['graphite']['web_server']
 when 'apache'

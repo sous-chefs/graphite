@@ -20,9 +20,10 @@
 template '/etc/init/carbon-aggregator.conf' do
   source 'carbon.upstart.erb'
   variables(
-    :name    => 'aggregator',
-    :dir     => node['graphite']['base_dir'],
-    :user    => node['graphite']['user_account']
+    :name       => 'aggregator',
+    :dir        => node['graphite']['base_dir'],
+    :user       => node['graphite']['user_account'],
+    :instances  => { "a" => "" }
   )
   mode 00644
 end
