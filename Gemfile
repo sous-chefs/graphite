@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 group :test do
-  gem 'test-kitchen', git: 'git@github.com:opscode/test-kitchen.git'
+  gem 'test-kitchen'
   gem 'kitchen-vagrant'
+  gem 'kitchen-docker'
   gem 'librarian-chef'
 end

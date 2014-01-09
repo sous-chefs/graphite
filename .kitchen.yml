@@ -1,7 +1,6 @@
 ---
-driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
+driver:
+  name: vagrant
 
 platforms:
 - name: ubuntu-12.04
@@ -21,7 +20,10 @@ suites:
 - name: default
   run_list:
   - recipe[graphite]
-  attributes: {}
+  attributes:
+    graphite:
+      carbon:
+        service_type: "init"
 
 - name: ssl
   run_list:
