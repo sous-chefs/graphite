@@ -47,7 +47,7 @@ start() {
 
     echo -e "\033[1mStarting carbon-<%= @name %>-$INSTANCE...\033[0m"
     cd /tmp
-    daemon --user $CC_USER ${!BIN_SCRIPT}
+    daemon --user $CC_USER -- ${!BIN_SCRIPT}
     result=$?
 
     if [ $result -ne 0 ] ; then
