@@ -3,5 +3,6 @@
 site 'http://community.opscode.com/api/v1'
 
 cookbook 'apt'
+cookbook 'ubuntu'
 cookbook 'yum'
 cookbook 'graphite', path: '.'
