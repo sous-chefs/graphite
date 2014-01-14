@@ -47,7 +47,11 @@ start() {
 
     echo -e "\033[1mStarting carbon-<%= @name %>-$INSTANCE...\033[0m"
     cd /tmp
+    <% if node[:platform_family] == "rhel" %>
+    daemon --user $CC_USER ${!BIN_SCRIPT}
+    <% else %>
     daemon --user $CC_USER -- ${!BIN_SCRIPT}
+    <% end %>
     result=$?
 
     if [ $result -ne 0 ] ; then
