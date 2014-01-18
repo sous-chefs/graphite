@@ -114,9 +114,11 @@ EMAIL_USE_TLS = <%= (@email['USE_TLS'] == true) ? "True" : "False" %>
 
 ## REMOTE_USER authentication. See: https://docs.djangoproject.com/en/dev/howto/auth-remote-user/
 #USE_REMOTE_USER_AUTHENTICATION = True
-
+<% if @remote_user_auth -%>
+USE_REMOTE_USER_AUTHENTICATION = True
+<% end -%>
 # Override the URL for the login link (e.g. for django_openid_auth)
-#LOGIN_URL = '/account/login'
+LOGIN_URL = '<%= @login_url %>'
 
 <% if @ldap['SERVER'] != "" && @ldap['BASE_USER'] != "" && @ldap['BASE_PASS'] != "" && @ldap['SEARCH_BASE'] != "" -%>
 USE_LDAP_AUTH = True
