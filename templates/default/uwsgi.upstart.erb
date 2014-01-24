@@ -1,0 +1,5 @@
+description "uwsgi graphite instance"
+start on runlevel [2345]
+stop on runlevel [06]
+
+exec uwsgi --processes 4 --pythonpath <%= node['graphite']['base_dir'] %>/lib --pythonpath <%= node['graphite']['doc_root'] %>/graphite --wsgi-file <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi.example --uid www-data --gid www-data --no-orphans --master --procname graphite-web --die-on-term --socket <%= node['graphite']['uwsgi']['socket'] %>

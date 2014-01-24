@@ -25,7 +25,7 @@ version = node['graphite']['version']
 if node['graphite']['web_server'] == 'apache'
   graphite_web_service_resource = 'service[apache2]'
 else
-  graphite_web_service_resource = 'runit_service[graphite-web]'
+  graphite_web_service_resource = "#{'runit_' if node['graphite']['uwsgi']['service_type'] == 'runit'}service[graphite-web]"
 end
 
 password = node['graphite']['password']
