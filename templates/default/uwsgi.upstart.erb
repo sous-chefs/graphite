@@ -14,7 +14,7 @@ exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 --procname graphite-web \
 --die-on-term \
 <% if node['graphite']['uwsgi']['listen_http'] -%>
---http :<%= node['graphite']['listen_port'] %>
+--http <%= node['graphite']['listen_ip'] unless node['graphite']['listen_ip'].nil? %>:<%= node['graphite']['listen_port'] %>
 <% else -%>
 --socket <%= node['graphite']['uwsgi']['socket'] %>
 <% end -%>
