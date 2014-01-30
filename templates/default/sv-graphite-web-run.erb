@@ -2,7 +2,7 @@
 exec 2>&1
 exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 <% if node['graphite']['uwsgi']['carbon'] -%>
---plugins carbon --carbon 127.0.0.1:2003 \
+--plugins carbon --carbon <%= node['graphite']['uwsgi']['carbon'] %> \
 <% end -%>
 <% if node['graphite']['uwsgi']['listen_http'] -%>
 --http :<%= node['graphite']['listen_port'] %> \
