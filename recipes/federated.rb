@@ -65,7 +65,7 @@ node.default['graphite']['relay_rules'] = [
   {
     'name' => 'default_rule',
     'default' => true,
-    'destinations' => node['graphite']['carbon']['relay']['destinations'],
+    'destinations' => node['graphite']['carbon']['relay']['destinations']
   }
 ]
 
