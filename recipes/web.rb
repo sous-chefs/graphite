@@ -108,7 +108,7 @@ end
 
 execute 'config selinux context' do
   command "chcon -R -h -t httpd_log_t #{storagedir}/log/webapp"
-  only_if "sestatus | grep enabled"
+  only_if 'sestatus | grep enabled'
 end
 
 template "#{docroot}/graphite/local_settings.py" do
