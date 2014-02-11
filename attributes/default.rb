@@ -16,22 +16,11 @@ default['graphite']['doc_root'] = '/opt/graphite/webapp'
 default['graphite']['storage_dir'] = '/opt/graphite/storage'
 default['graphite']['timezone'] = 'America/Los_Angeles'
 default['graphite']['django_root'] = '@DJANGO_ROOT@'
-
-default['graphite']['whisper']['uri'] = "https://github.com/graphite-project/whisper/archive/#{node['graphite']['version']}.tar.gz"
-default['graphite']['whisper']['checksum'] = '5012e595a980658885ceb010d9dcd0e4ac664c24de6206a6b2430d1d8f60a679'
-
-default['graphite']['carbon']['uri'] = "https://github.com/graphite-project/carbon/archive/#{node['graphite']['version']}.tar.gz"
-default['graphite']['carbon']['checksum'] = '06003f72fd022a7c571734cf3acdcd9c784d505c145acbf0906a2fef886abaa6'
-
 default['graphite']['encrypted_data_bag']['name'] = nil
-
 
 #
 # graphite_web
 #
-
-default['graphite']['web']['uri'] = "https://github.com/graphite-project/graphite-web/archive/#{node['graphite']['version']}.tar.gz"
-default['graphite']['web']['checksum'] = '03a4403fdb36e5707d3dbd6a71d9be1e80b1adbbe49e3e0989a15829d02f23d2'
 default['graphite']['web']['debug'] = 'False'
 default['graphite']['web']['bitmap_support'] = true
 default['graphite']['web']['admin_email'] = 'admin@org.com'

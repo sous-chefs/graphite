@@ -73,24 +73,8 @@ dep_packages.each do |pkg|
   end
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" do
-  source node['graphite']['web']['uri']
-  checksum node['graphite']['web']['checksum']
-end
-
-execute 'untar graphite-web' do
-  command "tar xzof graphite-web-#{version}.tar.gz"
-  creates "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
-  cwd Chef::Config[:file_cache_path]
-end
-
-execute 'install graphite-web' do
-  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['doc_root']}"
-  cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
-  creates lazy {
-    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
-    "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
-  }
+python_pip "graphite-web" do
+  version node['graphite']['version']
 end
 
 directory "#{storagedir}/log/webapp" do
