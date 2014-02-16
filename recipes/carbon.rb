@@ -37,6 +37,10 @@ if node['graphite']['carbon']['enable_amqp']
 
 end
 
+python_pip "Twisted" do
+  version "11.1"
+end
+
 url = node['graphite']['carbon']['url']
 pkg_name = if node['graphite']['source_install'] then url else "carbon" end
 
