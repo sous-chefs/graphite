@@ -17,6 +17,10 @@ default['graphite']['storage_dir'] = '/opt/graphite/storage'
 default['graphite']['timezone'] = 'America/Los_Angeles'
 default['graphite']['django_root'] = '@DJANGO_ROOT@'
 default['graphite']['encrypted_data_bag']['name'] = nil
+default['graphite']['source_install'] = false
+default['graphite']['carbon']['url'] = "https://github.com/graphite-project/carbon/zipball/master"
+default['graphite']['graphite_web']['url'] = "https://github.com/graphite-project/graphite-web/zipball/master"
+default['graphite']['whisper']['url'] = "https://github.com/graphite-project/whisper/zipball/master"
 
 #
 # graphite_web

@@ -17,8 +17,15 @@
 # limitations under the License.
 #
 
-python_pip "whisper" do
-  version node['graphite']['version']
+url = node['graphite']['whisper']['url']
+pkg_name = if node['graphite']['source_install'] then url else "whisper" end
+
+python_pip pkg_name do
+  version node['graphite']['version'] unless node['graphite']['source_install']
+end
+
+directory "#{node['graphite']['base_dir']}/bin/" do
+  recursive true
 end
 
 template "#{node['graphite']['base_dir']}/bin/whisper-clean.py" do
