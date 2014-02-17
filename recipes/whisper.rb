@@ -17,11 +17,13 @@
 # limitations under the License.
 #
 
-url = node['graphite']['whisper']['url']
-pkg_name = if node['graphite']['source_install'] then url else "whisper" end
-
-python_pip pkg_name do
-  version node['graphite']['version'] unless node['graphite']['source_install']
+python_pip "whisper" do
+  package_name lazy {
+    node['graphite']['package_names']['whisper'][node['graphite']['install_type']]
+  }
+  version lazy {
+    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
+  }
 end
 
 directory "#{node['graphite']['base_dir']}/bin/" do

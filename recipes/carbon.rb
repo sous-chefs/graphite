@@ -41,11 +41,13 @@ python_pip "Twisted" do
   version "11.1"
 end
 
-url = node['graphite']['carbon']['url']
-pkg_name = if node['graphite']['source_install'] then url else "carbon" end
-
-python_pip pkg_name do
-  version node['graphite']['version'] unless node['graphite']['source_install']
+python_pip "carbon" do
+  package_name lazy {
+    node['graphite']['package_names']['carbon'][node['graphite']['install_type']]
+  }
+  version lazy {
+    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
+  }
 end
 
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
