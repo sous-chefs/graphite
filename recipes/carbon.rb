@@ -37,8 +37,10 @@ if node['graphite']['carbon']['enable_amqp']
 
 end
 
+# sadly, have to pin Twisted to known good version
+# install before carbon so it's used
 python_pip "Twisted" do
-  version "11.1"
+  version lazy { node['graphite']['twisted_version'] }
 end
 
 python_pip "carbon" do
