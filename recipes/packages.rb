@@ -52,4 +52,3 @@ dep_packages.each do |pkg|
     action :install
   end
 end
-

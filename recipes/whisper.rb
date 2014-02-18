@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-python_pip "whisper" do
+python_pip 'whisper' do
   package_name lazy {
     node['graphite']['package_names']['whisper'][node['graphite']['install_type']]
   }
