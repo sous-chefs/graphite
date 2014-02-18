@@ -76,6 +76,8 @@ template "#{docroot}/graphite/local_settings.py" do
             :memcached_hosts => node['graphite']['web']['memcached_hosts'],
             :database => node['graphite']['web']['database'],
             :ldap => node['graphite']['web']['ldap'],
+            :remote_user_auth => node['graphite']['web']['auth']['REMOTE_USER_AUTH'],
+            :login_url => node['graphite']['web']['auth']['LOGIN_URL'],
             :email => node['graphite']['web']['email'])
   notifies :reload, graphite_web_service_resource
 end
