@@ -18,10 +18,12 @@
 #
 
 include_recipe 'python'
+include_recipe 'python::pip'
 include_recipe 'apache2' if node['graphite']['web_server'] == 'apache'
 include_recipe 'memcached' if node['graphite']['web']['memcached_hosts'].length > 0
 
 include_recipe 'graphite::user'
+include_recipe 'graphite::packages'
 include_recipe 'graphite::whisper'
 include_recipe 'graphite::carbon'
 include_recipe 'graphite::carbon_cache'

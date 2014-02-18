@@ -21,7 +21,7 @@ package 'python-twisted'
 package 'python-simplejson'
 
 if node['graphite']['carbon']['enable_amqp']
-  include_recipe 'python::pip'
+
   python_pip 'txamqp' do
     action :install
   end
@@ -34,27 +34,21 @@ if node['graphite']['carbon']['enable_amqp']
   else
     Chef::Log.warn 'This recipe uses encrypted data bags for carbon AMQP password but no encrypted data bag name is specified - fallback to node attribute.'
   end
+
 end
 
-version = node['graphite']['version']
-
-remote_file "#{Chef::Config[:file_cache_path]}/carbon-#{version}.tar.gz" do
-  source node['graphite']['carbon']['uri']
-  checksum node['graphite']['carbon']['checksum']
+# sadly, have to pin Twisted to known good version
+# install before carbon so it's used
+python_pip "Twisted" do
+  version lazy { node['graphite']['twisted_version'] }
 end
 
-execute 'untar carbon' do
-  command "tar xzof carbon-#{version}.tar.gz"
-  creates "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
-  cwd Chef::Config[:file_cache_path]
-end
-
-execute 'install carbon' do
-  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['base_dir']}/lib"
-  cwd "#{Chef::Config[:file_cache_path]}/carbon-#{version}"
-  creates lazy {
-    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
-    "#{node['graphite']['base_dir']}/lib/carbon-#{version}-py#{pyver}.egg-info"
+python_pip "carbon" do
+  package_name lazy {
+    node['graphite']['package_names']['carbon'][node['graphite']['install_type']]
+  }
+  version lazy {
+    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
 end
 

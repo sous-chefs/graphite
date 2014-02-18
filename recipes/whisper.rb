@@ -17,32 +17,16 @@
 # limitations under the License.
 #
 
-version = node['graphite']['version']
-install_lib_dir = "#{node['graphite']['base_dir']}/lib"
-
-remote_file "#{Chef::Config[:file_cache_path]}/whisper-#{version}.tar.gz" do
-  source node['graphite']['whisper']['uri']
-  checksum node['graphite']['whisper']['checksum']
-end
-
-execute 'untar whisper' do
-  command "tar xzof whisper-#{version}.tar.gz"
-  creates "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
-  cwd Chef::Config[:file_cache_path]
-end
-
-execute 'install whisper' do
-  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{install_lib_dir}"
-  cwd "#{Chef::Config[:file_cache_path]}/whisper-#{version}"
-  creates lazy {
-    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
-    "#{install_lib_dir}/whisper-#{version}-py#{pyver}.egg-info"
+python_pip "whisper" do
+  package_name lazy {
+    node['graphite']['package_names']['whisper'][node['graphite']['install_type']]
+  }
+  version lazy {
+    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
 end
 
-directory "#{node['graphite']['base_dir']}/bin" do
-  owner 'root'
-  group 'root'
+directory "#{node['graphite']['base_dir']}/bin/" do
   recursive true
 end
 

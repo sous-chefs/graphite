@@ -20,7 +20,6 @@
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
-version = node['graphite']['version']
 
 if node['graphite']['web_server'] == 'apache'
   graphite_web_service_resource = 'service[apache2]'
@@ -37,59 +36,12 @@ else
   Chef::Log.warn 'This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute.'
 end
 
-dep_packages = case node['platform_family']
-               when 'debian'
-                 packages = %w{ python-cairo-dev python-django python-django-tagging python-rrdtool }
-
-                 # Optionally include memcached client
-                 if node['graphite']['web']['memcached_hosts'].length > 0
-                   packages += %w{python-memcache} + packages
-                 end
-
-                 packages
-               when 'rhel', 'fedora'
-                 packages = %w{ Django django-tagging pycairo-devel python-devel mod_wsgi python-sqlite2 python-zope-interface }
-
-                 # Include bitmap packages (optionally)
-                 if node['graphite']['web']['bitmap_support']
-                   if node['platform'] == 'amazon'
-                     packages += %w{bitmap}
-                   else
-                     packages += %w{bitmap bitmap-fonts}
-                   end
-                 end
-
-                 # Optionally include memcached client
-                 if node['graphite']['web']['memcached_hosts'].length > 0
-                   packages += %w{python-memcached}
-                 end
-
-                 packages
-               end
-
-dep_packages.each do |pkg|
-  package pkg do
-    action :install
-  end
-end
-
-remote_file "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}.tar.gz" do
-  source node['graphite']['web']['uri']
-  checksum node['graphite']['web']['checksum']
-end
-
-execute 'untar graphite-web' do
-  command "tar xzof graphite-web-#{version}.tar.gz"
-  creates "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
-  cwd Chef::Config[:file_cache_path]
-end
-
-execute 'install graphite-web' do
-  command "python setup.py install --prefix=#{node['graphite']['base_dir']} --install-lib=#{node['graphite']['doc_root']}"
-  cwd "#{Chef::Config[:file_cache_path]}/graphite-web-#{version}"
-  creates lazy {
-    pyver = node['languages']['python'] && node['languages']['python']['version'][0..-3] || node['python']['version'][0..-3]
-    "#{node['graphite']['doc_root']}/graphite_web-#{version}-py#{pyver}.egg-info"
+python_pip "graphite_web" do
+  package_name lazy {
+    node['graphite']['package_names']['graphite_web'][node['graphite']['install_type']]
+  }
+  version lazy {
+    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
 end
 
