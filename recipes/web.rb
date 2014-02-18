@@ -36,7 +36,7 @@ else
   Chef::Log.warn 'This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute.'
 end
 
-python_pip "graphite_web" do
+python_pip 'graphite_web' do
   package_name lazy {
     node['graphite']['package_names']['graphite_web'][node['graphite']['install_type']]
   }

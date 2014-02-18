@@ -39,11 +39,11 @@ end
 
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used
-python_pip "Twisted" do
+python_pip 'Twisted' do
   version lazy { node['graphite']['twisted_version'] }
 end
 
-python_pip "carbon" do
+python_pip 'carbon' do
   package_name lazy {
     node['graphite']['package_names']['carbon'][node['graphite']['install_type']]
   }
