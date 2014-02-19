@@ -63,6 +63,12 @@ execute 'config selinux context' do
   only_if 'sestatus | grep enabled'
 end
 
+directory "#{docroot}/graphite" do
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
+  recursive true
+end
+
 template "#{docroot}/graphite/local_settings.py" do
   source 'local_settings.py.erb'
   mode 00755

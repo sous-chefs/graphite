@@ -52,6 +52,12 @@ python_pip 'carbon' do
   }
 end
 
+directory "#{node['graphite']['base_dir']}/conf" do
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
+  recursive true
+end
+
 template "#{node['graphite']['base_dir']}/conf/carbon.conf" do
   owner node['graphite']['user_account']
   group node['graphite']['group_account']
