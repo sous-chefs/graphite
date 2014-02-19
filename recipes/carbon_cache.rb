@@ -19,17 +19,6 @@
 service_type = node['graphite']['carbon']['service_type']
 caches = find_carbon_cache_services(node)
 
-template "#{node['graphite']['base_dir']}/conf/storage-schemas.conf" do
-  source 'storage.conf.erb'
-  owner node['graphite']['user_account']
-  group node['graphite']['group_account']
-  variables(:storage_config => node['graphite']['storage_schemas'])
-  only_if { node['graphite']['storage_schemas'].is_a?(Array) }
-  caches.each do |service|
-    notifies :restart, service
-  end
-end
-
 if node['graphite']['storage_aggregation'].is_a?(Array) && node['graphite']['storage_aggregation'].length > 0
   template "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf" do
     source 'storage.conf.erb'
