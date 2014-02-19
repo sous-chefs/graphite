@@ -26,12 +26,10 @@ if node['graphite']['uwsgi']['listen_http'] == false
   Chef::Log.info('You have disabled uwsgi listening on an http port. Graphite web will not be accessible unless you are talking to the uwsgi socket from an external process')
 end
 
-include_recipe 'runit'
+service_type = node['graphite']['uwsgi']['service_type']
 
 python_pip 'uwsgi' do
   action :install
 end
 
-runit_service 'graphite-web' do
-  default_logger true
-end
+include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
