@@ -103,3 +103,45 @@ suites:
   run_list:
   - recipe[graphite::federated]
   attributes: {}
+- name: carbon-cache
+  run_list:
+  - recipe[graphite]
+  - recipe[graphite::carbon_cache]
+  attributes: {
+    "graphite": {
+      "carbon": {
+        "caches": {
+          "a": {
+            "line_reciever_port": 2003,
+            "udp_receiver_port": 2003,
+            "pickle_receiver_port": 2004,
+            "cache_query_port": 7002,
+            "line_receiver_interface": 0.0.0.0,
+            "udp_receiver_interface": 0.0.0.0,
+            "pickle_receiver_interface": 0.0.0.0,
+            "cache_query_interface": 0.0.0.0
+          },
+          "b": {
+            "line_receiver_port": 2005,
+            "udp_receiver_port": 2005,
+            "pickle_receiver_port": 2006,
+            "cache_query_port": 7003,
+            "line_receiver_interface": 0.0.0.0,
+            "udp_receiver_interface": 0.0.0.0,
+            "pickle_receiver_interface": 0.0.0.0,
+            "cache_query_interface": 0.0.0.0
+          },
+          "c": {
+            "line_receiver_port": 2007,
+            "udp_receiver_port": 2007,
+            "pickle_receiver_port": 2008,
+            "cache_query_port": 7004,
+            "line_receiver_interface": 0.0.0.0,
+            "udp_receiver_interface": 0.0.0.0,
+            "pickle_receiver_interface": 0.0.0.0,
+            "cache_query_interface": 0.0.0.0
+          }
+        }
+      }
+    }
+  }

@@ -8,4 +8,6 @@ group :test do
   gem 'kitchen-vagrant'
   gem 'kitchen-docker'
   gem 'librarian-chef'
+  gem 'rspec'
+  gem 'chefspec'
 end
