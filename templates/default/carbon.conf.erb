@@ -54,7 +54,7 @@ MAX_UPDATES_PER_SECOND = <%= @carbon_options[:max_updates_per_second] %>
 # database files to all get created and thus longer until the data becomes usable.
 # Setting this value high (like "inf" for infinity) will cause graphite to create
 # the files quickly but at the risk of slowing I/O down considerably for a while.
-MAX_CREATES_PER_MINUTE = <%= @carbon_options[:max_creates_per_second] %>
+MAX_CREATES_PER_MINUTE = <%= @carbon_options[:max_creates_per_minute] %>
 
 LINE_RECEIVER_INTERFACE = <%= @carbon_options[:caches][:a][:line_receiver_interface] %>
 LINE_RECEIVER_PORT = <%= @carbon_options[:caches][:a][:line_receiver_port] %>

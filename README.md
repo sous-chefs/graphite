@@ -53,7 +53,7 @@ carbon-cache.py attributes
 * `node['graphite']['carbon']['cache_query_port']` - cache query port (defaults to 7002)
 * `node['graphite']['carbon']['use_flow_control']` - set this to "False" to drop datapoints received after the cache reaches *MAX_CACHE_SIZE* (defaults to "True")
 * `node['graphite']['carbon']['max_cache_size']` - max size of the carbon cache (defaults to "inf")
-* `node['graphite']['carbon']['max_creates_per_second']` - max number of new metrics to create per second (defaults to "inf")
+* `node['graphite']['carbon']['max_creates_per_minute']` - max number of new metrics to create per minute (defaults to "inf")
 * `node['graphite']['carbon']['max_updates_per_second']` - max updates to carbon per second (defaults to "1000")
 * `node['graphite']['carbon']['log_whisper_updates']` - log updates to whisper (defaults to "False")
 * `node['graphite']['carbon']['whisper_autoflush']` - set this option to "True" if you want whisper to write synchronously (defaults to "False")
