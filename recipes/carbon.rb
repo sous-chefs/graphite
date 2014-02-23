@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: carbon
 #
-# Copyright 2011, Heavy Water Software Inc.
+# Copyright 2014, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-package 'python-twisted'
-package 'python-simplejson'
+include_recipe 'python'
+include_recipe 'python::pip'
 
 if node['graphite']['carbon']['enable_amqp']
 
