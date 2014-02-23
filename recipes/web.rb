@@ -17,6 +17,12 @@
 # limitations under the License.
 #
 
+include_recipe 'python'
+include_recipe 'python::pip'
+
+include_recipe 'graphite::packages'
+include_recipe 'graphite::_user'
+
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']
 storagedir = node['graphite']['storage_dir']
