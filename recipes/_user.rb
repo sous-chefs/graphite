@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: user
+# Recipe:: _user
 #
-# Copyright 2013, Heavy Water Software Inc.
+# Copyright 2014, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,17 +17,15 @@
 # limitations under the License.
 #
 
-group node['graphite']['group_account'] do
+group node['graphite']['group'] do
   system true
   action :create
-  only_if { node['graphite']['create_user'] }
 end
 
-user node['graphite']['user_account'] do
+user node['graphite']['user'] do
   system true
-  group node['graphite']['group_account']
+  group node['graphite']['group']
   home '/var/lib/graphite'
-  shell '/bin/none'
+  shell '/bin/false'
   action :create
-  only_if { node['graphite']['create_user'] }
 end

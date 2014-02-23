@@ -3,12 +3,12 @@
 # Attributes:: default
 #
 
-include_attribute 'apache2'
-
 default['graphite']['version'] = '0.9.12'
 default['graphite']['twisted_version'] = '11.1'
 default['graphite']['password'] = 'change_me'
 default['graphite']['chef_role'] = 'graphite'
+default['graphite']['user'] = 'graphite'
+default['graphite']['group'] = 'graphite'
 default['graphite']['url'] = 'graphite'
 default['graphite']['url_aliases'] = []
 default['graphite']['listen_port'] = 80
@@ -62,8 +62,6 @@ default['graphite']['web']['email']['PORT'] = '25'
 default['graphite']['web']['email']['HOST_USER'] = ''
 default['graphite']['web']['email']['HOST_PASSWORD'] = ''
 default['graphite']['web']['email']['USE_TLS'] = false
-default['graphite']['web_server'] = 'apache'
-default['graphite']['create_user'] = false
 
 default['graphite']['graph_templates'] = [
   {
@@ -79,15 +77,6 @@ default['graphite']['graph_templates'] = [
     'fontItalic' => 'False'
   }
 ]
-
-case node['graphite']['web_server']
-when 'apache'
-  default['graphite']['user_account'] = node['apache']['user']
-  default['graphite']['group_account'] = node['apache']['group']
-when 'uwsgi'
-  default['graphite']['user_account'] = 'graphite'
-  default['graphite']['group_account'] = 'graphite'
-end
 
 default['graphite']['ssl']['enabled'] = false
 default['graphite']['ssl']['cipher_suite'] = 'ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP'
