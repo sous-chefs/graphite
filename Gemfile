@@ -19,6 +19,10 @@ group :style do
 end
 
 group :test do
+  gem 'chefspec', '~> 3.2.0'
+end
+
+group :integration do
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
   gem 'kitchen-docker'
