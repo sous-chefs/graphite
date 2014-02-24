@@ -19,7 +19,7 @@
 
 dep_packages = case node['platform_family']
                when 'debian'
-                 packages = %w{ python-cairo-dev python-rrdtool }
+                 packages = %w{ python-cairo-dev python-django python-django-tagging python-rrdtool }
 
                  # Optionally include memcached client
                  if node['graphite']['web']['memcached_hosts'].length > 0
