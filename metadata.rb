@@ -22,3 +22,4 @@ depends  'memcached'
 
 suggests 'systemd'
 suggests 'graphiti'
+suggests 'delayed_evaluator'
