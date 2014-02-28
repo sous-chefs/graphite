@@ -1,6 +1,9 @@
 AllCops:
   Excludes:
     - vendor/**
+    - tmp/**
+    - cookbooks/**
+    - bin/**
 
 AlignParameters:
   Enabled: false
@@ -10,6 +13,10 @@ HashSyntax:
   Enabled: false
 LineLength:
   Enabled: false
+StringLiterals:
+  Enabled: false
+NumericLiterals:
+  MinDigits: 12
 MethodLength:
   Max: 30
 
