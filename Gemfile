@@ -7,9 +7,6 @@ gem 'librarian-chef'
 gem 'emeril', :group => :release
 
 group :development do
-  gem 'rb-inotify', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-fchange', :require => false
   gem 'guard-rspec'
 end
 
