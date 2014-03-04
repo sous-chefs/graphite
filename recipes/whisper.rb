@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+if external_lazy_needed?(node)
+  include_recipe 'delayed_evaluator'
+end
 
 python_pip 'whisper' do
   package_name lazy {
