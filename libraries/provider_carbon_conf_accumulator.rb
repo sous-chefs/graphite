@@ -23,10 +23,14 @@ require 'chef/provider'
 
 class Chef
   class Provider
-    class CarbonConfAccumulator < Chef::Provider
+    class GraphiteCarbonConfAccumulator < Chef::Provider
 
       def whyrun_supported?
         false
+      end
+
+      def load_current_resource
+        @current_resource = new_resource
       end
 
       def action_create
@@ -35,8 +39,7 @@ class Chef
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
         # raw ini data, string constant
-        file_resource.content = ChefGraphite.ini_file(resources)
-        # TODO sort properly?
+        file_resource.content ChefGraphite.ini_file(resources)
 
         file_resource.run_action(:create)
 

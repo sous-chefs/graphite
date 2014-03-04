@@ -7,8 +7,8 @@ describe ChefGraphite do
 
     let(:resources) do
       [
-        double(name: "a", resource_name: "blah_blah", config: { one: "two" }),
-        double(name: "b", resource_name: "wakka", config: { alpha: "beta" })
+        double(name: "a", resource_name: :bleh_blah, config: { one: "two" }),
+        double(name: "b", resource_name: :wakka, config: { alpha: "beta" })
       ]
     end
 
@@ -22,7 +22,7 @@ describe ChefGraphite do
 
     it "returns an array of resource-like hashes" do
       expect(ChefGraphite.resources_to_hashes(resources)).to eq([
-          { type: "blah_blah", name: "a", config: { one: "two" }},
+          { type: "blah", name: "a", config: { one: "two" }},
           { type: "wakka", name: "b", config: { alpha: "beta" }},
         ])
     end

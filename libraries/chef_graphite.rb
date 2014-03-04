@@ -24,7 +24,7 @@ module ChefGraphite
     def resources_to_hashes(resources)
       Array(resources).map do |resource|
         {
-          :type => resource.resource_name,
+          :type => resource.resource_name.to_s.split("_").last,
           :name => resource.name,
           :config => resource.config
         }
