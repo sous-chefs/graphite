@@ -17,6 +17,10 @@
 # limitations under the License.
 #
 
+if external_lazy_needed?(node)
+  include_recipe 'delayed_evaluator'
+end
+
 package 'python-twisted'
 package 'python-simplejson'
 

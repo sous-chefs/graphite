@@ -19,7 +19,7 @@ depends  'python'
 depends  'apache2'
 depends  'runit', '~> 1.0'
 depends  'memcached'
+depends  'delayed_evaluator'
 
 suggests 'systemd'
 suggests 'graphiti'
-suggests 'delayed_evaluator'
