@@ -10,3 +10,4 @@ vendor
 tmp
 .librarian
 Cheffile.lock
+.coverage
