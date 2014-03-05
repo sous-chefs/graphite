@@ -39,7 +39,9 @@ class Chef
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
         # raw ini data, string constant
-        file_resource.content ChefGraphite.ini_file(resources)
+        contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
+        contents << ChefGraphite.ini_file(resources)
+        file_resource.content contents
 
         file_resource.run_action(:create)
 
