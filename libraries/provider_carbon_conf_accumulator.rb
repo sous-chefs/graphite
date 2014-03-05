@@ -34,7 +34,7 @@ class Chef
       end
 
       def action_create
-        carbon_resources = %w{cache relay aggreggator}.map { |r| "graphite_carbon_#{r}".to_sym }
+        carbon_resources = %w{cache relay aggregator}.map { |r| "graphite_carbon_#{r}".to_sym }
         resources = run_context.resource_collection.select { |x| carbon_resources.include? x.resource_name }
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
