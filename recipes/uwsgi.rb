@@ -19,7 +19,7 @@
 #
 
 if node['graphite']['listen_port'].to_i < 1024 && node['graphite']['uwsgi']['listen_http']
-  Chef::Log.error!("uwsgi cannot bind to ports less than 1024. Please set \"node['graphite']['listen_port']\" to an appropriate value")
+  Chef::Log.error("uwsgi cannot bind to ports less than 1024. Please set \"node['graphite']['listen_port']\" to an appropriate value")
 end
 
 if node['graphite']['uwsgi']['listen_http'] == false
