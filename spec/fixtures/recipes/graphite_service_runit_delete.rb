@@ -1,4 +1,7 @@
-graphite_storage "instance-1" do
-  prefix "/mnt/graphin/stuff"
+graphite_service_runit 'cache' do
+  action :delete
+end
+
+graphite_service_runit 'cache:a' do
   action :delete
 end
