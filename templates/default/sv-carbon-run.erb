@@ -1,3 +1,18 @@
 #!/bin/sh
+
+type="<%= @options[:type] %>"
+instance="<%= @options[:instance] %>"
+name="${type}-${instance}"
+user="<%= node['graphite']['user'] %>"
+storage_path="<%= node['graphite']['storage_dir'] %>"
+daemon="<%= node['graphite']['base_dir']%>/bin/carbon-${type}.py"
+
 exec 2>&1
-exec chpst -u <%= node['graphite']['user_account'] %> -l <%= node['graphite']['storage_dir'] %>/carbon-<%= @options[:name] %><%= @options[:instance] %>.lock -- <%= node['graphite']['base_dir']%>/bin/carbon-<%= @options[:name] %>.py --pid <%= node['graphite']['storage_dir'] %>/carbon-<%= @options[:name] %>-<%= @options[:instance] %>.pid --instance=<%= @options[:instance] %> --debug start
+
+exec chpst \
+    -u $user \
+    -l $storage_path/${name}.lock -- \
+    $daemon \
+    --pid $storage_path/${name}.pid \
+<%= "    --instance $instance \\" if @options[:instance] -%>
+    --debug start
