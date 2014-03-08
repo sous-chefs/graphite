@@ -24,7 +24,7 @@ suites:
 
 - name: ssl
   run_list:
-  - recipe[graphite_test::ssl]
+  - recipe[graphite_example::ssl]
   - recipe[graphite]
   attributes: {
     "graphite": {
