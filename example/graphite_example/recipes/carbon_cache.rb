@@ -39,5 +39,19 @@ graphite_carbon_cache "b" do
     })
 end
 
+graphite_storage_schema "carbon" do
+  config ({
+      pattern: "^carbon\.",
+      retentions: "60:90d"
+    })
+end
+
+graphite_storage_schema "default_1min_for_1day" do
+  config ({
+      pattern: ".*",
+      retentions: "60s:1d"
+    })
+end
+
 graphite_service "cache:a"
 graphite_service "cache:b"
