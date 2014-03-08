@@ -3,7 +3,7 @@ require_relative '../../libraries/chef_graphite'
 
 describe ChefGraphite do
 
-  describe ".resource_to_data" do
+  describe ".resources_to_hashes" do
 
     let(:resources) do
       [
@@ -11,6 +11,8 @@ describe ChefGraphite do
         double(name: "b", resource_name: :wakka, config: { alpha: "beta" })
       ]
     end
+
+    let(:whitelist) { [:bleh_blah, :wakka] }
 
     it "returns an empty array if an empty array of resources is given" do
       expect(ChefGraphite.resources_to_hashes([])).to eq([])
@@ -20,10 +22,17 @@ describe ChefGraphite do
       expect(ChefGraphite.resources_to_hashes(nil)).to eq([])
     end
 
-    it "returns an array of resource-like hashes" do
-      expect(ChefGraphite.resources_to_hashes(resources)).to eq([
+    it "returns an array of hashes with types set given a whitelist" do
+      expect(ChefGraphite.resources_to_hashes(resources, whitelist)).to eq([
           { type: "blah", name: "a", config: { one: "two" }},
           { type: "wakka", name: "b", config: { alpha: "beta" }},
+        ])
+    end
+
+    it "returns an array of hashes with nil types when no whitelist is given" do
+      expect(ChefGraphite.resources_to_hashes(resources)).to eq([
+          { type: nil, name: "a", config: { one: "two" }},
+          { type: nil, name: "b", config: { alpha: "beta" }},
         ])
     end
   end
@@ -32,7 +41,7 @@ describe ChefGraphite do
 
     let(:input) do
       [
-        { type: "beta", name: "b", config: { "A_KEY" => [ true, "#.blah", 4 ] }},
+        { type: "beta", name: "b", config: { "A_KEY" => [ true, "#.blah", 4 ] }}, # 
         { type: "alpha", name: "a", config: { :another_key => "something" }},
         { type: "beta", name: "default", config: { "is_frog" => true }},
       ]
@@ -87,6 +96,21 @@ describe ChefGraphite do
     end
   end
 
+  describe ".section_name" do
+
+    it "returns type and name when provided" do
+      expect(ChefGraphite.section_name("foo", "bar")).to eq("foo:bar")
+    end
+
+    it "returns only type if name is default" do
+      expect(ChefGraphite.section_name("piggy", "default")).to eq("piggy")
+    end
+
+    it "returns only name if type is nil" do
+      expect(ChefGraphite.section_name(nil, "baz")).to eq("baz")
+    end
+  end
+
   describe ".ini_file" do
 
     let(:resources) do
@@ -97,12 +121,14 @@ describe ChefGraphite do
       ]
     end
 
+    let(:whitelist) { [:beta, :alpha] }
+
     it "returns an empty file with comment for an empty array of resources" do
       expect(ChefGraphite.ini_file([])).to eq("\n")
     end
 
     it "returns the ini format as a string" do
-      expect(ChefGraphite.ini_file(resources)).to eq(<<-INI)
+      expect(ChefGraphite.ini_file(resources, whitelist)).to eq(<<-INI)
 [alpha:a]
 ANOTHER_KEY = something
 

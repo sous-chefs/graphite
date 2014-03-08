@@ -40,7 +40,7 @@ class Chef
 
         # raw ini data, string constant
         contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
-        contents << ChefGraphite.ini_file(resources)
+        contents << ChefGraphite.ini_file(resources, carbon_resources)
         file_resource.content contents
 
         file_resource.run_action(:create)

@@ -1,8 +1,8 @@
 module ChefGraphite
   class << self
 
-    def ini_file(resources)
-      data = generate_conf_data(resources_to_hashes(resources))
+    def ini_file(resources, whitelist = [])
+      data = generate_conf_data(resources_to_hashes(resources, whitelist))
 
       lines = []
       data.each do |section, config|
@@ -21,10 +21,15 @@ module ChefGraphite
       result
     end
 
-    def resources_to_hashes(resources)
+    def resources_to_hashes(resources, whitelist = [])
       Array(resources).map do |resource|
+        type = if whitelist.include?(resource.resource_name.to_sym)
+                 resource.resource_name.to_s.split("_").last
+               else
+                 nil
+               end
         {
-          :type => resource.resource_name.to_s.split("_").last,
+          :type => type,
           :name => resource.name,
           :config => resource.config
         }
@@ -45,7 +50,13 @@ module ChefGraphite
     end
 
     def section_name(type, name)
-      name == "default" ? type : "#{type}:#{name}"
+      if type.nil?
+        name
+      elsif name == "default"
+        type
+      else
+        "#{type}:#{name}"
+      end
     end
 
     def normalize(hash)
