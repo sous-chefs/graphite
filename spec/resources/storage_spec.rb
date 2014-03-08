@@ -4,7 +4,7 @@ describe 'graphite_storage resource' do
   let(:chef_run) do
     ChefSpec::Runner.new { |node|
       node.set['graphite']['version'] = '99.88.77'
-    }.converge("graphite_storage::#{action}")
+    }.converge("graphite_fixtures::graphite_storage_#{action}")
   end
 
   describe "with the create action" do
