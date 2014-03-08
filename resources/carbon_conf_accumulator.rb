@@ -16,13 +16,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-  actions :create
-  default_action :create
 
-  attribute :name, :kind_of => String, :default => nil, :name_attribute => true
-  attribute :file_resource, :kind_of => String, :default => "file[carbon.conf]"
+actions :create
+default_action :create
 
-  def initialize(*args)
-    super
-    @provider = Chef::Provider::GraphiteCarbonConfAccumulator
-  end
+attribute :name, :kind_of => String, :default => nil, :name_attribute => true
+attribute :file_resource, :kind_of => String, :default => "file[carbon.conf]"
+
+def initialize(*args)
+  super
+  @provider = Chef::Provider::GraphiteCarbonConfAccumulator
+end
