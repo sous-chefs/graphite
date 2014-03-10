@@ -61,3 +61,6 @@ BlockNesting:
 # Offences: 106
 HashSyntax:
   Enabled: false
+
+Encoding:
+  Enabled: false
