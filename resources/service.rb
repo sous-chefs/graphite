@@ -40,4 +40,3 @@ def instance
   _, i = name.split(":")
   i
 end
-

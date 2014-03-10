@@ -4,7 +4,7 @@ module ChefGraphite
     def ini_file(resources, whitelist = [])
       data = generate_conf_data(resources_to_hashes(resources, whitelist))
 
-      lines = []
+      lines = Array.new
       data.each do |section, config|
         lines << "[#{section}]"
         config.each { |key, value| lines << "#{key} = #{value}" }

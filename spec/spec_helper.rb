@@ -6,9 +6,7 @@ RSpec.configure do |config|
   config.log_level = :fatal
 end
 
-if ENV['COVERAGE']
-  at_exit { ChefSpec::Coverage.report! }
-end
+at_exit { ChefSpec::Coverage.report! } if ENV['COVERAGE']
 
 def load_resource(cookbook, lwrp)
   require "chef/resource/lwrp_base"

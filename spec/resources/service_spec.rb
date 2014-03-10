@@ -1,6 +1,6 @@
 require "spec_helper"
 
-load_resource("graphite","service")
+load_resource("graphite", "service")
 load_provider("graphite", "service_runit")
 
 describe Chef::Resource::GraphiteService do

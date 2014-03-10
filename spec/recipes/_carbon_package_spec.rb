@@ -29,7 +29,7 @@ describe "graphite::carbon" do
 
     it "installs carbon from pypi pinned to a version" do
       expect(chef_run).to install_python_pip("carbon").
-        with(version: "99", package_name: "carbon" )
+        with(version: "99", package_name: "carbon")
     end
 
   end

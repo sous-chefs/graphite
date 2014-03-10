@@ -26,7 +26,7 @@ graphite_carbon_cache "a" do
       line_receiver_port: 2004,
       udp_receiver_port: 2004,
       pickle_receiver_port: 2005,
-      cache_query_port: 7003,
+      cache_query_port: 7003
     })
 end
 
@@ -35,7 +35,7 @@ graphite_carbon_cache "b" do
       line_receiver_port: 2006,
       udp_receiver_port: 2006,
       pickle_receiver_port: 2007,
-      cache_query_port: 7004,
+      cache_query_port: 7004
     })
 end
 

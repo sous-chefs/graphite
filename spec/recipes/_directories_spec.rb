@@ -8,7 +8,7 @@ describe 'graphite::_directories' do
     expect(chef_run).to create_directory(storage).with(
       user: 'graphite',
       group: 'graphite',
-      recursive: true,
+      recursive: true
     )
   end
 
@@ -17,7 +17,7 @@ describe 'graphite::_directories' do
       expect(chef_run).to create_directory(File.join(storage, dir)).with(
         user: 'graphite',
         group: 'graphite',
-        recursive: true,
+        recursive: true
       )
     end
   end

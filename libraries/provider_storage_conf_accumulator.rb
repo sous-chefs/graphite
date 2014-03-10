@@ -34,7 +34,7 @@ class Chef
       end
 
       def action_create
-        resources = run_context.resource_collection.select { |x| x.resource_name == :graphite_storage_schema}
+        resources = run_context.resource_collection.select { |x| x.resource_name == :graphite_storage_schema }
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
         contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"

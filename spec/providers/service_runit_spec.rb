@@ -17,7 +17,7 @@ describe 'service_runit provider' do
         default_logger: true,
         finish_script_template_name: "carbon",
         finish: true,
-        options: {type: "cache", instance: "a"}
+        options: { type: "cache", instance: "a" }
       )
     end
   end
