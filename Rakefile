@@ -32,7 +32,7 @@ end
 
 namespace :travis do
   desc "run on Travis"
-  task ci: ['unit']
+  task ci: ['unit', 'style:ruby', 'style:chef']
 end
 
 require 'emeril/rake'
