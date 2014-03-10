@@ -19,5 +19,5 @@ group :test do
   gem 'test-kitchen'
   gem 'kitchen-vagrant'
   gem 'kitchen-docker'
-  gem 'chefspec', '~> 3.2.0'
+  gem 'chefspec', '~> 3.3.0'
 end
