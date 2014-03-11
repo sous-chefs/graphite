@@ -12,6 +12,15 @@ namespace :style do
   FoodCritic::Rake::LintTask.new(:chef)
 end
 
+namespace :doc do
+  require 'inch'
+  require 'inch/rake'
+  desc 'Run inch for documentation coverage'
+  Inch::Rake::Suggest.new do |doc|
+    doc.args = %w{libraries providers recipes resources}.map { |p| "#{p}/**/*.rb" }
+  end
+end
+
 desc 'Run all style checks'
 task style: ['style:chef', 'style:ruby']
 

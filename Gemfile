@@ -8,6 +8,7 @@ gem 'emeril', :group => :release
 
 group :development do
   gem 'guard-rspec'
+  gem 'inch'
 end
 
 group :style do
