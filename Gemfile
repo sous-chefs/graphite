@@ -8,10 +8,11 @@ gem 'emeril', :group => :release
 
 group :development do
   gem 'guard-rspec'
-  gem 'inch'
+
 end
 
 group :style do
+  gem 'inch'
   gem 'rubocop', '~> 0.18'
   gem 'foodcritic', '~> 3.0'
 end
