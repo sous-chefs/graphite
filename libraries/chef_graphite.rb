@@ -1,8 +1,8 @@
 module ChefGraphite
   class << self
 
-    def ini_file(resources, whitelist = [])
-      data = generate_conf_data(resources_to_hashes(resources, whitelist))
+    def ini_file(hash)
+      data = generate_conf_data(hash)
 
       lines = Array.new
       data.each do |section, config|
@@ -19,21 +19,6 @@ module ChefGraphite
       result = Hash.new
       tuples.each { |tuple| result[tuple.first] = tuple.last }
       result
-    end
-
-    def resources_to_hashes(resources, whitelist = [])
-      Array(resources).map do |resource|
-        type = if whitelist.include?(resource.resource_name.to_sym)
-                 resource.resource_name.to_s.split("_").last
-               else
-                 nil
-               end
-        {
-          :type => type,
-          :name => resource.name,
-          :config => resource.config
-        }
-      end
     end
 
     def sort_tuples(tuples)
