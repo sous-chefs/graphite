@@ -52,6 +52,10 @@ Documentation:
 ParenthesesAsGroupedExpression:
   Enabled: false
 
+# This isn't practical for all the spec code
+BracesAroundHashParameters:
+  Enabled: false
+
 # Temporary during refactor for federated.rb recipe
 # Offence count: 1
 BlockNesting:
