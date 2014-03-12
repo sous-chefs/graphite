@@ -52,15 +52,15 @@ python_pip 'graphite_web' do
 end
 
 directory "#{storagedir}/log/webapp" do
-  owner node['graphite']['user_account']
-  group node['graphite']['group_account']
+  owner node['graphite']['user']
+  group node['graphite']['group']
   recursive true
 end
 
 %w{ info.log exception.log access.log error.log }.each do |file|
   file "#{storagedir}/log/webapp/#{file}" do
-    owner node['graphite']['user_account']
-    group node['graphite']['group_account']
+    owner node['graphite']['user']
+    group node['graphite']['group']
   end
 end
 
@@ -70,8 +70,8 @@ execute 'config selinux context' do
 end
 
 directory "#{docroot}/graphite" do
-  owner node['graphite']['user_account']
-  group node['graphite']['group_account']
+  owner node['graphite']['user']
+  group node['graphite']['group']
   recursive true
 end
 
@@ -120,8 +120,8 @@ end
 
 # This is not done in the cookbook_file above to avoid triggering a password set on permissions changes
 file "#{storagedir}/graphite.db" do
-  owner node['graphite']['user_account']
-  group node['graphite']['group_account']
+  owner node['graphite']['user']
+  group node['graphite']['group']
   mode 00644
 end
 
