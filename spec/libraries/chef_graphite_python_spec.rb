@@ -4,7 +4,7 @@ require_relative '../../libraries/chef_graphite_python'
 describe ChefGraphite::PythonWriter do
   let(:config) { Hash.new }
   let(:options) { Hash.new }
-  let(:writer) { ChefGraphite::PythonWriter.new(config, options)}
+  let(:writer) { ChefGraphite::PythonWriter.new(config, options) }
 
   describe "#to_s" do
     it "take an empty config hash and returns and empty string" do
@@ -25,7 +25,7 @@ describe ChefGraphite::PythonWriter do
     it "takes a hash and writes the python config" do
       config.replace({
           "secret_key" => "purplemonkeypants",
-          "allowed_hosts" => [ '*' ],
+          "allowed_hosts" => ['*'],
           "time_zone" => "America/Los_Angeles",
           "documentation_url" => "https://myownprivatedocs.org",
           :log_rendering_performance => true,
@@ -33,7 +33,7 @@ describe ChefGraphite::PythonWriter do
           :log_metric_access => true,
           'flushrrdcached' => 'unix:/var/run/rrdcached.sock',
           "whisper_dir" => '/opt/graphite/storage/whisper',
-          :ldap_base_user => "CN=some_readonly_account,DC=mycompany,DC=com",
+          :ldap_base_user => "CN=some_readonly_account,DC=mycompany,DC=com"
         })
       expect(writer.to_s).to eq(<<-EOF.gsub(/^\s+/, ''))
           secret_key = 'purplemonkeypants'
@@ -53,7 +53,7 @@ describe ChefGraphite::PythonWriter do
       options[:upcase_root_keys] = true
       config.replace({
           "secret_key" => "purplemonkeypants",
-          "allowed_hosts" => [ '*' ],
+          "allowed_hosts" => ['*'],
           "time_zone" => "America/Los_Angeles",
           "documentation_url" => "https://myownprivatedocs.org",
           :log_rendering_performance => true,
@@ -61,7 +61,7 @@ describe ChefGraphite::PythonWriter do
           :log_metric_access => true,
           'flushrrdcached' => 'unix:/var/run/rrdcached.sock',
           "whisper_dir" => '/opt/graphite/storage/whisper',
-          :ldap_base_user => "CN=some_readonly_account,DC=mycompany,DC=com",
+          :ldap_base_user => "CN=some_readonly_account,DC=mycompany,DC=com"
         })
       expect(writer.to_s).to eq(<<-EOF.gsub(/^\s+/, ''))
           SECRET_KEY = 'purplemonkeypants'

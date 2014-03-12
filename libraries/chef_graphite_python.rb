@@ -7,8 +7,7 @@ module ChefGraphite
     end
 
     def to_s
-      lines = []
-      lines = @config.map { |key,value| render_line(key,value) }
+      lines = @config.map { |key, value| render_line(key, value) }
       lines.join("\n").concat("\n")
     end
 
@@ -16,15 +15,15 @@ module ChefGraphite
       case value
       when NilClass
         "''"
-      when TrueClass,FalseClass
+      when TrueClass, FalseClass
         value.to_s.capitalize
-      when String,Symbol
+      when String, Symbol
         "'#{value}'"
       when Array
         a = value.map { |i| pythonize(i) }.join(", ")
         "[#{a}]"
       when Hash
-        h = value.map { |k,v| "#{pythonize(k)}: #{pythonize(v)}" }.join(", ")
+        h = value.map { |k, v| "#{pythonize(k)}: #{pythonize(v)}" }.join(", ")
         "{#{h}}"
       else
         value
@@ -33,7 +32,7 @@ module ChefGraphite
 
     private
 
-    def render_line(key,value)
+    def render_line(key, value)
       "#{upcase(key)} = #{pythonize(value)}"
     end
 
