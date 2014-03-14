@@ -265,3 +265,9 @@ Usage
 
 `recipe[graphite::carbon_aggregator]` builds the aggregation_rules and storage-aggregation config files,
 and configures the `carbon-aggregator` service.
+
+Amazon Web Services
+===================
+
+Due to old version of Chef used on Amazon Web Services to succesfully run this cookbook add [`delayed_evaluator`](http://community.opscode.com/cookbooks/delayed_evaluator) recipe
+to run list somewhere before `graphite` recipe.
