@@ -56,6 +56,17 @@ ParenthesesAsGroupedExpression:
 BracesAroundHashParameters:
   Enabled: false
 
+# Emacs ruby-mode handles this just fine thanks 
+IndentHash:
+  Enabled: false
+
+IndentArray:
+  Enabled: false
+
+# Pretty sure this isn't a requirement anywhere else
+PercentLiteralDelimiters:
+  Enabled: false
+
 # Temporary during refactor for federated.rb recipe
 # Offence count: 1
 BlockNesting:
