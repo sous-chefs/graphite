@@ -1,6 +1,11 @@
 require 'spec_helper'
+load_provider("graphite", "web_config")
+describe Chef::Provider::GraphiteWebConfig do
 
-describe 'graphite_web_config provider' do
+  # fixes weird bug with RSpec::Metadata.store_computed (~L94)
+  # and handling around description_args (possibly?)
+  metadata[:example_group][:description]
+
   let(:runner) do
     ChefSpec::Runner.new(step_into: ['graphite_web_config'])
   end
@@ -16,4 +21,15 @@ describe 'graphite_web_config provider' do
 
   end
 
+  describe "#optimistic_loader_code" do
+
+    it "adds python code for optimistic loading"
+
+  end
+
+  describe "#dynamic_template_name" do
+
+    it "returns a filename with .py extension removed"
+
+  end
 end

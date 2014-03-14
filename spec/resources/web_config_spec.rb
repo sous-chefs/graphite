@@ -15,4 +15,12 @@ describe Chef::Resource::GraphiteWebConfig do
     expect(resource.action).to eq(:create)
   end
 
+  it "returns a default dynamic template parameter" do
+    expect(resource.dynamic_template).to eq("local_settings_dynamic.py")
+  end
+
+  it "allows a custom dynamic template parameter" do
+    resource.dynamic_template("random_water_boa.py")
+    expect(resource.dynamic_template).to eq("random_water_boa.py")
+  end
 end

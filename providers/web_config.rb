@@ -23,9 +23,26 @@ end
 use_inline_resources
 
 action :create do
-  python_config = ChefGraphite::PythonWriter.new(new_resource.config)
+  contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
+  contents << ChefGraphite::PythonWriter.new(new_resource.config).to_s
+  contents << optimistic_loader_code
   f = file new_resource.path do
-    content python_config.to_s
+    content contents
   end
   new_resource.updated_by_last_action(f.updated_by_last_action?)
+end
+
+def optimistic_loader_code
+  <<-EOF
+
+try:
+  from graphite.#{dynamic_template_name} import *
+except ImportError
+  pass
+
+  EOF
+end
+
+def dynamic_template_name
+  ::File.basename(new_resource.dynamic_template, ".py")
 end
