@@ -1,6 +1,6 @@
 include_recipe "runit"
-include_recipe "graphite::packages"
 include_recipe "graphite::carbon"
+include_recipe "graphite::_web_packages"
 
 graphite_carbon_cache "default" do
   config ({
@@ -97,6 +97,8 @@ except err:
     print "could not create %s" % username
     print "died with error: %e" % err
   PYTHON
+  # could be idempotent just by reading for user from db, ignore
+  # django models?
 end
 
 runit_service 'graphite-web' do
