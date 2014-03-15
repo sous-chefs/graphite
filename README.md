@@ -41,8 +41,9 @@ For example usage consult the reference cookbook (link)
 
 TODO document resource usage
 
-Amazon Web Services
-===================
+## Amazon Web Services
 
-Due to old version of Chef used on Amazon Web Services to succesfully run this cookbook add [`delayed_evaluator`](http://community.opscode.com/cookbooks/delayed_evaluator) recipe
-to run list somewhere before `graphite` recipe.
+Due to the old version of Chef used on Amazon Web Services in order to
+succesfully run this cookbook you will need to add the
+[`delayed_evaluator`](http://community.opscode.com/cookbooks/delayed_evaluator)
+recipe to your run list before the `graphite` recipe.
