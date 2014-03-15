@@ -24,7 +24,7 @@ use_inline_resources
 
 action :create do
   contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
-  contents << ChefGraphite::PythonWriter.new(new_resource.config).to_s
+  contents << ChefGraphite::PythonWriter.new(new_resource.config, upcase_root_keys: true).to_s
   contents << optimistic_loader_code
   f = file new_resource.path do
     content contents
@@ -37,7 +37,7 @@ def optimistic_loader_code
 
 try:
   from graphite.#{dynamic_template_name} import *
-except ImportError
+except ImportError:
   pass
 
   EOF
