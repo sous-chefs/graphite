@@ -44,3 +44,14 @@ default['graphite']['graph_templates'] = [
     'fontItalic' => 'False'
   }
 ]
+
+case node['platform_family']
+when 'debian'
+  default['graphite']['system_packages'] =
+    %w{python-cairo-dev python-rrdtool bitmap}
+when 'rhel'
+  default['graphite']['system_packages'] = %w{pycairo-devel python-rrdtool bitmap}
+  unless node['platform'] == 'amazon'
+    default['graphite']['system_packages'] << 'bitmap-fonts'
+  end
+end

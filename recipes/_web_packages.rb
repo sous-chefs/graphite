@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: packages
+# Recipe:: _web_packages
 #
 # Copyright 2014, Heavy Water Software Inc.
 #
@@ -17,5 +17,25 @@
 # limitations under the License.
 #
 
-include_recipe "graphite::_carbon_packages"
-include_recipe "graphite::_web_packages"
+node['graphite']['system_packages'].each do |p|
+  package p
+end
+
+python_pip 'django' do
+  version lazy { node['graphite']['django_version'] }
+end
+
+python_pip 'django-tagging'
+python_pip 'pytz'
+python_pip 'pyparsing'
+python_pip 'python-memcached'
+python_pip 'uwsgi'
+
+python_pip 'graphite_web' do
+  package_name lazy {
+    node['graphite']['package_names']['graphite_web'][node['graphite']['install_type']]
+  }
+  version lazy {
+    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
+  }
+end
