@@ -1,4 +1,5 @@
 include_recipe "runit"
+include_recipe "graphite::packages"
 include_recipe "graphite::carbon"
 
 graphite_carbon_cache "default" do
@@ -39,29 +40,6 @@ end
 graphite_service "cache"
 
 base_dir = "#{node['graphite']['base_dir']}"
-
-# packages
-package "python-cairo-dev" # || pycairo-devel on rhel
-package "python-rrdtool"
-
-python_pip 'django' do
-  version "1.5.5"
-end
-
-python_pip 'django-tagging'
-python_pip 'uwsgi'
-python_pip 'pytz'
-python_pip 'pyparsing'
-python_pip 'python-memcached'
-
-python_pip 'graphite_web' do
-  package_name lazy {
-    node['graphite']['package_names']['graphite_web'][node['graphite']['install_type']]
-  }
-  version lazy {
-    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
-  }
-end
 
 graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
   config({
