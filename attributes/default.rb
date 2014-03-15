@@ -4,7 +4,7 @@
 #
 
 default['graphite']['version'] = '0.9.12'
-default['graphite']['twisted_version'] = '11.1'
+default['graphite']['twisted_version'] = '13.1'
 default['graphite']['password'] = 'change_me'
 default['graphite']['chef_role'] = 'graphite'
 default['graphite']['user'] = 'graphite'
