@@ -34,7 +34,7 @@ NumericLiterals:
 
 # ABC complexity is a far better code smell signal than raw method length.
 MethodLength:
-  Max: 30
+  Max: 50
 
 LineLength:
   Enabled: false
@@ -63,8 +63,14 @@ IndentHash:
 IndentArray:
   Enabled: false
 
+SignalException:
+  Enabled: false
+
 # Pretty sure this isn't a requirement anywhere else
 PercentLiteralDelimiters:
+  Enabled: false
+
+AlignParameters:
   Enabled: false
 
 # Temporary during refactor for federated.rb recipe
