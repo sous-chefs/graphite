@@ -24,17 +24,26 @@ end
 use_inline_resources
 
 action :enable do
-  r = runit_service(new_resource.service_name) do
+  set_updated { manage_runit_service(:enable) }
+end
+
+action :disable do
+  set_updated { manage_runit_service(:disable) }
+end
+
+def manage_runit_service(resource_action)
+  runit_service(new_resource.service_name) do
     cookbook "graphite"
     run_template_name "carbon"
     default_logger true
     finish_script_template_name "carbon"
     finish true
     options(type: new_resource.type, instance: new_resource.instance)
-    action :enable
+    action resource_action
   end
-  new_resource.updated_by_last_action(r.updated_by_last_action?)
 end
 
-action :disable do
+def set_updated
+  r = yield
+  new_resource.updated_by_last_action(r.updated_by_last_action?)
 end
