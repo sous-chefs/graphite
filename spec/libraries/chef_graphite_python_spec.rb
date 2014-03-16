@@ -7,7 +7,11 @@ describe ChefGraphite::PythonWriter do
   let(:writer) { ChefGraphite::PythonWriter.new(config, options) }
 
   describe "#to_s" do
-    it "take an empty config hash and returns and empty string" do
+    it "takes a nil config has and returns an empty string" do
+      expect(ChefGraphite::PythonWriter.new(nil, options).to_s).to eq("\n")
+    end
+
+    it "takes an empty config hash and returns an empty string" do
       expect(writer.to_s).to eq("\n")
     end
 

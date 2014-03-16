@@ -2,7 +2,7 @@ module ChefGraphite
   class PythonWriter
 
     def initialize(config, options = {})
-      @config = config
+      @config = config || Hash.new
       @options = options
     end
 
