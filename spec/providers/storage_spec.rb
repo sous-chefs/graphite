@@ -16,7 +16,7 @@ describe Chef::Provider::GraphiteStorage do
 
     let(:resource) { provider.manage_python_pip(resource_action) }
 
-    it "sets action" do
+    it "sets a default action" do
       expect(resource.action).to eq([resource_action])
     end
 
