@@ -21,4 +21,8 @@ describe Chef::Resource::GraphiteWebConfig do
     resource.dynamic_template("random_water_boa.py")
     expect(resource.dynamic_template).to eq("random_water_boa.py")
   end
+
+  it "action defaults to :create" do
+    expect(resource.action).to eq(:create)
+  end
 end
