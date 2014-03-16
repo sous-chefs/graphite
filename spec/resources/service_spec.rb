@@ -1,11 +1,10 @@
 require "spec_helper"
-
 load_resource("graphite", "service")
 load_provider("graphite", "service_runit")
 
 describe Chef::Resource::GraphiteService do
 
-  let(:resource) { described_class.new("mega:beta") }
+  let(:resource_name) { "mega:beta" }
 
   it "sets the name attribute to name" do
     expect(resource.name).to eq("mega:beta")

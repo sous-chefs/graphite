@@ -1,11 +1,9 @@
 require "spec_helper"
-
 load_resource("graphite", "web_config")
-load_provider("graphite", "web_config")
 
 describe Chef::Resource::GraphiteWebConfig do
 
-  let(:resource) { described_class.new("/opt/graphite/file.py") }
+  let(:resource_name) { "/opt/graphite/file.py" }
 
   it "sets the path attribute to name" do
     expect(resource.path).to eq("/opt/graphite/file.py")
