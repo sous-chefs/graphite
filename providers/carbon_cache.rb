@@ -24,28 +24,18 @@ end
 use_inline_resources
 
 action :create do
-  attrs = package_attributes
-  p = python_pip package_name do
-    attrs.each { |attr, value| send(attr, value) }
-  end
-  Chef::Log.info "Installing storage backend: #{package_name}"
-  new_resource.updated_by_last_action(p.updated_by_last_action?)
+  set_updated { install_python_pip }
 end
 
-private
-
-def package_name
-  backend = new_resource.backend
-  backend.is_a?(Hash) ? backend["name"] : backend
+def install_python_pip
+  python_pip new_resource.backend_name do
+    new_resource.backend_attributes.each { |attr, value| send(attr, value) }
+    Chef::Log.info "Installing storage backend: #{package_name}"
+    action :install
+  end
 end
 
-def package_attributes
-  backend = new_resource.backend
-  if backend.is_a? Hash
-    attrs = backend.dup
-    attrs.delete("name")
-    attrs
-  else
-    Hash.new
-  end
+def set_updated
+  r = yield
+  new_resource.updated_by_last_action(r.updated_by_last_action?)
 end
