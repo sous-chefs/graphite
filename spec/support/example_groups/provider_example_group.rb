@@ -45,7 +45,6 @@ class Chef
 
     def self.included(base)
       base.class_eval do
-
         metadata[:type] = :provider
         metadata[:example_group][:description]
 
