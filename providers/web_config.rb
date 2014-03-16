@@ -23,13 +23,27 @@ end
 use_inline_resources
 
 action :create do
+  set_updated { manage_file(:create) }
+end
+
+action :delete do
+  set_updated { manage_file(:delete) }
+end
+
+def manage_file(resource_action)
   contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
   contents << ChefGraphite::PythonWriter.new(new_resource.config, upcase_root_keys: true).to_s
   contents << optimistic_loader_code
-  f = file new_resource.path do
+
+  file new_resource.path do
     content contents
+    action resource_action
   end
-  new_resource.updated_by_last_action(f.updated_by_last_action?)
+end
+
+def set_updated
+  r = yield
+  new_resource.updated_by_last_action(r.updated_by_last_action?)
 end
 
 def optimistic_loader_code

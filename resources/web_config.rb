@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-actions :create
+actions :create, :delete
 default_action :create
 
 attribute :path, :kind_of => String, :default => nil, :name_attribute => true

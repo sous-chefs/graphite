@@ -25,4 +25,8 @@ describe Chef::Resource::GraphiteWebConfig do
   it "action defaults to :create" do
     expect(resource.action).to eq(:create)
   end
+
+  it "actions include :delete" do
+    expect(resource.allowed_actions).to include(:delete)
+  end
 end
