@@ -2,9 +2,11 @@ require 'spec_helper'
 
 describe 'service_runit provider' do
   let(:runner) do
-    ChefSpec::Runner.new(step_into: ['graphite_service']) do |node|
-      node.automatic["platform_family"] = "debian"
-    end
+    ChefSpec::Runner.new(
+      platform: "ubuntu",
+      version: "12.04",
+      step_into: ['graphite_service']
+    )
   end
   let(:node) { runner.node }
   let(:chef_run) { runner.converge("graphite_fixtures::graphite_service_runit_enable") }
