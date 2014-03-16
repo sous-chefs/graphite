@@ -1,9 +1,22 @@
-require 'chefspec'
-require 'chefspec/librarian'
-require 'chef/mixin/convert_to_class_name'
+require "chefspec"
+require "chefspec/librarian"
+require_relative "support/example_groups/provider_example_group"
+require_relative "support/example_groups/resource_example_group"
 
 RSpec.configure do |config|
   config.log_level = :fatal
+
+  config.include Chef::ProviderExampleGroup,
+    :type => :provider,
+    :example_group => lambda { |example_group, metadata|
+      metadata[:type].nil? && %r{spec/providers/} =~ example_group[:file_path]
+    }
+
+  config.include Chef::ResourceExampleGroup,
+    :type => :resource,
+    :example_group => lambda { |example_group, metadata|
+      metadata[:type].nil? && %r{spec/resources/} =~ example_group[:file_path]
+    }
 end
 
 at_exit { ChefSpec::Coverage.report! } if ENV['COVERAGE']
@@ -33,6 +46,7 @@ def load_provider(cookbook, lwrp)
 end
 
 def class_name_for_lwrp(cookbook, lwrp)
+  require "chef/mixin/convert_to_class_name"
   Chef::Mixin::ConvertToClassName.convert_to_class_name(
     Chef::Mixin::ConvertToClassName.filename_to_qualified_string(cookbook, lwrp)
   )
