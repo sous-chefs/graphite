@@ -16,7 +16,7 @@ describe Chef::Provider::GraphiteStorage do
 
     let(:resource) { provider.manage_python_pip(resource_action) }
 
-    it "sets action to :install" do
+    it "sets action" do
       expect(resource.action).to eq([resource_action])
     end
 
