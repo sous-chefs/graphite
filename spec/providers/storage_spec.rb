@@ -1,47 +1,123 @@
 require 'spec_helper'
+load_resource("graphite", "storage")
+load_provider("graphite", "storage")
 
-describe 'graphite_storage provider' do
+describe Chef::Provider::GraphiteStorage do
 
-  let(:chef_run) do
-    ChefSpec::Runner.new(step_into: ['graphite_storage']) { |node|
-      node.set['graphite']['version'] = '0.0.999'
-    }.converge("graphite_fixtures::graphite_storage_#{action}")
+  before { using_lw_resource("python", "pip") }
+
+  let(:resource_name) { "/path/to/greatness" }
+
+  it "is whyrun supported" do
+    expect(provider).to be_whyrun_supported
   end
 
-  describe "with the create action" do
-    let(:action) { "create" }
+  shared_examples "manages python_pip" do
 
-    it 'installs a specific version of whisper from pip' do
-      expect(chef_run).to install_python_pip('whisper').
-        with(version: '0.0.999')
+    let(:resource) { provider.manage_python_pip(resource_action) }
+
+    it "sets action to :install" do
+      expect(resource.action).to eq([resource_action])
     end
 
-    it 'installs a custom tarball from a URL' do
-      expect(chef_run).to install_python_pip('https://example.com/pkg.tgz').
-        with(version: nil)
+    it "defaults name to whisper" do
+      expect(resource.package_name).to eq("whisper")
     end
 
-    it 'creates a directory with the default action' do
-      expect(chef_run).to create_directory('/opt/graphite/storage')
+    it "sets name from package_name attribute" do
+      new_resource.package_name("complain")
+
+      expect(resource.package_name).to eq("complain")
     end
 
-    it 'creates a directory when path is given as an attribute' do
-      expect(chef_run).to create_directory('/tmp/goodstuff')
+    it "defaults version to nil" do
+      expect(resource.version).to be_nil
     end
 
+    it "sets version from version attribute" do
+      new_resource.version("1.2.3")
+
+      expect(resource.version).to eq("1.2.3")
+    end
   end
 
-  describe "with the delete action" do
-    let(:action) { "delete" }
+  shared_examples "manages directory" do
 
-    it 'removes a graphite storage library' do
-      expect(chef_run).to remove_python_pip('whisper')
+    let(:resource) { provider.manage_directory(resource_action) }
+
+    it "sets action to :create" do
+      expect(resource.action).to eq([resource_action])
     end
 
-    it 'removes a graphite storage path' do
-      expect(chef_run).to delete_directory("/mnt/graphin/stuff")
-      expect(chef_run).to_not delete_directory("/mnt/graphin/")
+    it "sets path to prefix attribute" do
+      resource.path("yep")
+
+      expect(resource.path).to eq("yep")
     end
 
+    it "sets recursive to true" do
+      expect(resource.recursive).to be_true
+    end
+  end
+
+  shared_examples "resource collection" do
+
+    it "adds python_pip to the resource collection" do
+      provider.run_action(action)
+
+      expect(runner_resources).to include("python_pip[whisper]")
+    end
+
+    it "adds directory to the resource collection" do
+      provider.run_action(action)
+
+      expect(runner_resources).to include("directory[/path/to/greatness]")
+    end
+  end
+
+  context "for :create action" do
+
+    let(:action) { :create }
+
+    before { new_resource.action(action) }
+
+    describe "#manage_python_pip" do
+
+      let(:resource_action) { :install }
+
+      include_examples "manages python_pip"
+    end
+
+    describe "#manage_directory" do
+
+      let(:resource_action) { :create }
+
+      include_examples "manages directory"
+    end
+
+    include_examples "resource collection"
+  end
+
+  context "for :delete action" do
+
+    let(:action) { :delete }
+
+    before { new_resource.action(action) }
+
+    describe "#manage_python_pip" do
+
+      let(:resource_action) { :remove }
+
+      include_examples "manages python_pip"
+    end
+
+    describe "#manage_directory" do
+
+      let(:resource_action) { :delete }
+
+      include_examples "manages directory"
+    end
+
+    include_examples "resource collection"
   end
 end

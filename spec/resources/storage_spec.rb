@@ -1,32 +1,49 @@
-require 'spec_helper'
+require "spec_helper"
+load_resource("graphite", "storage")
 
-describe 'graphite_storage resource' do
-  let(:chef_run) do
-    ChefSpec::Runner.new { |node|
-      node.set['graphite']['version'] = '99.88.77'
-    }.converge("graphite_fixtures::graphite_storage_#{action}")
+describe Chef::Resource::GraphiteStorage do
+
+  let(:resource_name) { "/opt/barn" }
+
+  it "sets the default attribute to prefix" do
+    expect(resource.prefix).to eq("/opt/barn")
   end
 
-  describe "with the create action" do
-    let(:action) { "create" }
-
-    it 'sets a version of storage' do
-      expect(chef_run).to create_graphite_storage('/opt/graphite/storage').
-        with(version: '99.88.77')
-    end
-
-    it 'sets a custom package name' do
-      expect(chef_run).to create_graphite_storage('instance-2').
-        with(prefix: '/tmp/goodstuff', package_name: 'https://example.com/pkg.tgz')
-    end
+  it "attribute package_name defaults to whisper" do
+    expect(resource.package_name).to eq("whisper")
   end
 
-  describe "with the delete action" do
-    let(:action) { "delete" }
+  it "attribute package_name takes a String value" do
+    resource.package_name("sing")
 
-    it 'removes a graphite storage path' do
-      expect(chef_run).to delete_graphite_storage('instance-1').
-        with(prefix: '/mnt/graphin/stuff')
-    end
+    expect(resource.package_name).to eq("sing")
+  end
+
+  it "attribute version defaults to nil" do
+    expect(resource.version).to be_nil
+  end
+
+  it "attribute version takes a String value" do
+    resource.version("99")
+
+    expect(resource.version).to eq("99")
+  end
+
+  it "attribute type defaults to whisper" do
+    expect(resource.type).to eq("whisper")
+  end
+
+  it "attribute type takes a String value" do
+    resource.type("another")
+
+    expect(resource.type).to eq("another")
+  end
+
+  it "action defaults to :create" do
+    expect(resource.action).to eq(:create)
+  end
+
+  it "actions include :delete" do
+    expect(resource.allowed_actions).to include(:delete)
   end
 end
