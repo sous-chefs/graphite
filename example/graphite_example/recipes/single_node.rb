@@ -93,9 +93,9 @@ password = "#{node['graphite']['password']}"
 try:
     u = User.objects.create_user(username, password=password)
     u.save()
-except err:
+except Exception,err:
     print "could not create %s" % username
-    print "died with error: %e" % err
+    print "died with error: %s" % str(err)
   PYTHON
   # could be idempotent just by reading for user from db, ignore
   # django models?
