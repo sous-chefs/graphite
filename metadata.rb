@@ -19,6 +19,7 @@ depends  'python'
 depends  'runit', '~> 1.0'
 depends  'memcached'
 depends  'build-essential'
+depends  'yum-epel'
 
 suggests 'systemd'
 suggests 'graphiti'

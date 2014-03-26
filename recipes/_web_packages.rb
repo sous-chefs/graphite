@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe 'yum-epel'
+
 node['graphite']['system_packages'].each do |p|
   package p
 end
