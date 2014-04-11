@@ -10,11 +10,11 @@
 export CC_HOME="<%= @dir %>"
 <% @instances.each do |instance| -%>
 export PIDFILE_<%= instance.first %>="$CC_HOME/storage/carbon-<%= @name %>-<%= instance.first %>.pid"
-<% end -%>
 export CC_CONFIG="$CC_HOME/etc/carbon-<%= @name %>.conf"
 CC_USER="<%= @user %>"
-LOGDIR="/var/log/carbon-<%= @name %>"
-CC_LOG="$LOGDIR/carbon-<%= @name %>.log"
+LOGDIR="/opt/graphite/storage/log/carbon-<%= @name %>/carbon-<%= @name %>-<%= instance.first %>"
+<% end -%>
+CC_LOG="$LOGDIR/console.log"
 <% @instances.each do |instance| -%>
 BIN_SCRIPT_<%= instance.first %>="python $CC_HOME/bin/carbon-<%= @name %>.py --instance=<%= instance.first %> start >> $CC_LOG 2>&1"
 <% end -%>

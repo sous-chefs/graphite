@@ -19,6 +19,11 @@ default['graphite']['carbon']['max_creates_per_minute'] = 'inf'
 default['graphite']['carbon']['max_updates_per_second'] = '1000'
 default['graphite']['carbon']['log_whisper_updates'] = 'False'
 default['graphite']['carbon']['whisper_autoflush'] = 'False'
+default['graphite']['carbon']['log_cache_queue_sorts'] = 'True'
+default['graphite']['carbon']['log_updates'] = 'False'
+default['graphite']['carbon']['log_listener_connections'] = 'True'
+default['graphite']['carbon']['log_cache_hits'] = 'False'
+default['graphite']['carbon']['whisper_fallocate_create'] = 'True'
 
 default['graphite']['storage_schemas'] = [
   {

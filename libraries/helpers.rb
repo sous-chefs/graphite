@@ -13,3 +13,16 @@ def find_carbon_cache_services(node)
   end
   caches
 end
+
+def find_carbon_relay_services(node)
+  relay = []
+  case node['graphite']['carbon']['service_type']
+    when 'runit'
+      node['graphite']['carbon']['relay'].each do |instance, data|
+        relays << "runit_service[carbon-relay-#{instance}]"
+      end
+    else
+      relay << "service[carbon-relay]"
+    end
+    relay
+end
