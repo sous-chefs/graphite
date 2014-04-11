@@ -74,6 +74,7 @@ template "#{docroot}/graphite/local_settings.py" do
   mode 00755
   variables(:timezone => node['graphite']['timezone'],
             :debug => node['graphite']['web']['debug'],
+	    :django_cache => node['graphite']['web']['django_cache'],
             :base_dir => node['graphite']['base_dir'],
             :doc_root => node['graphite']['doc_root'],
             :storage_dir => node['graphite']['storage_dir'],

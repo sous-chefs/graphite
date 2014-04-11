@@ -37,6 +37,7 @@ default['graphite']['package_names'] = {
 #
 # graphite_web
 #
+default['graphite']['web']['django_cache'] = true
 default['graphite']['web']['debug'] = 'False'
 default['graphite']['web']['bitmap_support'] = true
 default['graphite']['web']['admin_email'] = 'admin@org.com'
