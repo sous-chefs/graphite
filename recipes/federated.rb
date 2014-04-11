@@ -35,25 +35,33 @@ if Chef::Config[:solo]
   node.default['graphite']['carbon']['relay']['destinations'] = destinations
 else
   if node['graphite']['chef_role']
-    graphite_results = search(:node, "roles:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment}").sort
+    graphite_results = search(:node, "role:#{node['graphite']['chef_role']} AND chef_environment:#{node.chef_environment} AND region:#{node.region}").sort
     if graphite_results
       destinations = []
       carbonlink_hosts = []
       cluster_servers = []
+      replication_relay = []
 
       graphite_results.each do |result|
         result['graphite']['carbon']['caches'].each do |instance|
+          if result['fqdn'] == node['fqdn']
           destinations << "#{result['fqdn']}:#{instance.last['pickle_receiver_port']}:#{instance.first}"
+          end
           if result['fqdn'] != node['fqdn']
             cluster_servers << "#{result['fqdn']}:#{node['graphite']['listen_port']}" unless cluster_servers.include?("#{result['fqdn']}:#{node['graphite']['listen_port']}")
             ext_instances << "#{result['fqdn']}:#{instance}"
           else
-            carbonlink_hosts << "#{result['fqdn']}:#{instance.last['pickle_receiver_port']}:#{instance.first}"
+            carbonlink_hosts << "#{result['fqdn']}:#{instance.last['cache_query_port']}:#{instance.first}"
             int_instances << "#{result['fqdn']}:#{instance}"
           end
         end
+        result['graphite']['carbon']['relays'].each do |instance|
+        if instance.first != "a" 
+          replication_relay << "#{result['fqdn']}:#{instance.last['pickle_receiver_port']}:#{instance.first}" 
+        end
       end
-
+      end
+      node.default['graphite']['carbon']['relay']['primary_relay'] = replication_relay
       node.default['graphite']['carbon']['relay']['destinations'] = destinations
       node.default['graphite']['web']['carbonlink_hosts'] = carbonlink_hosts
       node.default['graphite']['web']['cluster_servers'] = cluster_servers

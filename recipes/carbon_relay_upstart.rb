@@ -23,7 +23,7 @@ template '/etc/init/carbon-relay.conf' do
     :name       => 'relay',
     :dir        => node['graphite']['base_dir'],
     :user       => node['graphite']['user_account'],
-    :instances  => { 'a' => '' }
+    :instances  => node['graphite']['carbon']['relays']
   )
   mode 00644
 end

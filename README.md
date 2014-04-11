@@ -63,12 +63,12 @@ carbon-relay.py attributes
 --------------------------
 
 * `node['graphite']['relay_rules']` - an array with relay rules for sending metrics to a certain backends, used to generate the *relay-rules.conf* file ([see the example below](#relay_rules-example))
-* `node['graphite']['carbon']['relay']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
-* `node['graphite']['carbon']['relay']['line_receiver_port']` - line interface port (defaults to 2013)
-* `node['graphite']['carbon']['relay']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
-* `node['graphite']['carbon']['relay']['pickle_receiver_port']` - pickle receiver port (defaults to 2014)
-* `node['graphite']['carbon']['relay']['relay_method']` - choose between *consistent-hashing* and *rules* (defaults to "rules")
-* `node['graphite']['carbon']['relay']['replication_factor']` - used to replicate datapoint data to more than one machine (defaults to 1)
+* `node['graphite']['carbon']['relays']['a']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['relays']['a']['line_receiver_port']` - line interface port (defaults to 2013)
+* `node['graphite']['carbon']['relays']['a']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
+* `node['graphite']['carbon']['relays']['a']['pickle_receiver_port']` - pickle receiver port (defaults to 2014)
+* `node['graphite']['carbon']['relays']['a']['relay_method']` - choose between *consistent-hashing* and *rules* (defaults to "rules")
+* `node['graphite']['carbon']['relays']['a']['replication_factor']` - used to replicate datapoint data to more than one machine (defaults to 1)
 * `node['graphite']['carbon']['relay']['destinations']` - list of carbon daemons to send metrics to
 * `node['graphite']['carbon']['relay']['max_datapoints_per_message']` - maximum datapoints to send in a message between carbon daemons (defaults to 500)
 * `node['graphite']['carbon']['relay']['max_queue_size']` - maximum queue of messages used to comunicate to other carbon daemons (defaults to 10000)

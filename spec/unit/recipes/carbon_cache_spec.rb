@@ -14,10 +14,6 @@ describe 'graphite::carbon_cache' do
       node.set['graphite']['carbon']['caches']['b']['udp_receiver_port'] = 2005
       node.set['graphite']['carbon']['caches']['b']['pickle_receiver_port'] = 2006
       node.set['graphite']['carbon']['caches']['b']['cache_query_port'] = 7003
-      node.set['graphite']['carbon']['caches']['c']['line_receiver_port'] = 2007
-      node.set['graphite']['carbon']['caches']['c']['udp_receiver_port'] = 2007
-      node.set['graphite']['carbon']['caches']['c']['pickle_receiver_port'] = 2008
-      node.set['graphite']['carbon']['caches']['c']['cache_query_port'] = 7004
 
       # Work around for lack of platform defaults in runit
       node.set['runit']['sv_bin'] = '/usr/bin/sv'
@@ -30,7 +26,6 @@ describe 'graphite::carbon_cache' do
     resource = chef_run.template('/opt/graphite/conf/storage-schemas.conf')
     expect(resource).to notify('runit_service[carbon-cache-a]').to(:restart)
     expect(resource).to notify('runit_service[carbon-cache-b]').to(:restart)
-    expect(resource).to notify('runit_service[carbon-cache-c]').to(:restart)
   end
 
   it 'should delete the default storage-aggregation.conf file and restart each carbon-cache runit daemon' do
@@ -64,7 +59,6 @@ describe 'graphite::carbon_cache' do
     resource = chef_run.template('/opt/graphite/conf/storage-aggregation.conf')
     expect(resource).to notify('runit_service[carbon-cache-a]').to(:restart)
     expect(resource).to notify('runit_service[carbon-cache-b]').to(:restart)
-    expect(resource).to notify('runit_service[carbon-cache-c]').to(:restart)
   end
 
   it 'should include the graphite carbon cache runit recipe' do
