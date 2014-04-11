@@ -226,3 +226,10 @@ end.join(', ') %> ]
 # MIDDLEWARE_CLASSES or APPS
 #from graphite.app_settings import *
 
+<% unless @django_cache %>
+CACHES = {
+  'default': {
+    'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+  },
+}    
+<% end %>
