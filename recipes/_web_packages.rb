@@ -19,7 +19,7 @@
 
 include_recipe "yum-epel" if platform_family?("rhel")
 
-node['graphite']['system_packages'].each do |p|
+Array(node['graphite']['system_packages']).each do |p|
   package p
 end
 
@@ -35,9 +35,12 @@ python_pip 'uwsgi'
 
 python_pip 'graphite_web' do
   package_name lazy {
-    node['graphite']['package_names']['graphite_web'][node['graphite']['install_type']]
+    key = node['graphite']['install_type']
+    node['graphite']['package_names']['graphite_web'][key]
   }
   version lazy {
-    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
+    if node['graphite']['install_type'] == 'package'
+      node['graphite']['version']
+    end
   }
 end
