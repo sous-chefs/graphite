@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../../libraries/chef_graphite'
+require_relative '../../libraries/chef_graphite_ini_writer'
 
 describe ChefGraphite do
 
