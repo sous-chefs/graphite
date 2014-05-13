@@ -27,3 +27,7 @@ def initialize(*args)
   super
   @provider = Chef::Provider::GraphiteCarbonConfAccumulator
 end
+
+def carbon_resources
+  [:graphite_carbon_cache, :graphite_carbon_relay, :graphite_carbon_aggregator]
+end
