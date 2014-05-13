@@ -23,4 +23,5 @@ end
 
 use_inline_resources
 
-action :create do; end
+action :create do
+end
