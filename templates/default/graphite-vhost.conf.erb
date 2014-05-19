@@ -39,6 +39,11 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
                 AuthBasicProvider    file
                 AuthUserFile <%= node['graphite']['apache']['basic_auth']['file_path'] %>
                 Require valid-user
+                <%- elsif node['graphite']['apache']['cas_auth']['enabled'] %>
+                CASLoginURL <%= node['graphite']['apache']['cas_auth']['cas_login_url'] %>
+                CASValidateURL <%= node['graphite']['apache']['cas_auth']['cas_validate_url'] %>
+                CASRootProxiedAs <%= node['graphite']['apache']['cas_auth']['cas_root_proxied_as'] %>
+                CASValidateServer <%= node['graphite']['apache']['cas_auth']['cas_validate_server'] ? 'on' : 'off' %>
                 <%- end %>
 
                 SetHandler python-program

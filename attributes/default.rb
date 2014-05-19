@@ -98,3 +98,9 @@ default['graphite']['apache']['basic_auth']['enabled'] = false
 default['graphite']['apache']['basic_auth']['file_path'] = "#{node['graphite']['doc_root']}/htpasswd"
 default['graphite']['apache']['basic_auth']['user'] = nil
 default['graphite']['apache']['basic_auth']['pass'] = nil
+
+default['graphite']['apache']['cas_auth']['enabled'] = false
+default['graphite']['apache']['cas_auth']['cas_login_url'] = ''
+default['graphite']['apache']['cas_auth']['cas_validate_url'] = ''
+default['graphite']['apache']['cas_auth']['cas_validate_server'] = false
+default['graphite']['apache']['cas_auth']['cas_root_proxied_as'] = ''
