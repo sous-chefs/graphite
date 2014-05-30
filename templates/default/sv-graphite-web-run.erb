@@ -12,6 +12,7 @@ exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 --wsgi-file <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi.example \
 --uid <%= node['graphite']['user_account'] %> --gid <%= node['graphite']['group_account'] %> \
 --no-orphans --master \
+--buffer-size <%= node['graphite']['buffer_size'] %> \
 --procname graphite-web \
 --die-on-term \
 --socket <%= node['graphite']['uwsgi']['socket'] %>
