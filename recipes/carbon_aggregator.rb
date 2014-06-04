@@ -19,6 +19,8 @@
 
 service_type = node['graphite']['carbon']['service_type']
 
+include_recipe "graphite::carbon"
+
 # aggregation-rules.conf file is automatically reloaded by the carbon-aggregator process.
 # There is no need to restart the application.
 if node['graphite']['aggregation_rules'].is_a?(Array) && node['graphite']['aggregation_rules'].length > 0
