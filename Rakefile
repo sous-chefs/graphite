@@ -5,7 +5,7 @@ require 'bundler/setup'
 namespace :style do
   require 'rubocop/rake_task'
   desc 'Run rubocop for Ruby style checks'
-  Rubocop::RakeTask.new(:ruby)
+  RuboCop::RakeTask.new(:ruby)
 
   require 'foodcritic'
   desc 'Run foodcritic for Chef style checks'
@@ -26,7 +26,7 @@ desc 'Run Test Kitchen integration tests'
 task :integration do
   Kitchen.logger = Kitchen.default_file_logger
   Kitchen::Config.new.instances.each do |instance|
-    instances.test(:always)
+    instance.test(:always)
   end
 end
 
