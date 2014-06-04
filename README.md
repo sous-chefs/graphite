@@ -200,6 +200,24 @@ node.default['graphite']['aggregation_rules'] = [
 ]
 ```
 
+rewrite_rules example
+-------------------------
+
+```ruby
+node.default['graphite']['rewrite_rules']['pre'] = [
+  {
+    "source" => "\\.cpu\\.idle\\.value$",
+    "destination" => ".idle"
+  } 
+]
+
+node.default['graphite']['rewrite_rules'['post'] = [ 
+  {
+    "source": "\\.users\\.users\\.value$",
+    "destination": "users"
+  } 
+]
+```
 storage_aggregation example
 ---------------------------
 ```ruby
