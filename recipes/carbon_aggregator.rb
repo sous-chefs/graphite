@@ -33,4 +33,20 @@ else
   end
 end
 
+if (node['graphite']['rewrite_rules']['pre'].is_a?(Array) && node['graphite']['rewrite_rules']['pre'].length > 0) ||
+   (node['graphite']['rewrite_rules']['post'].is_a?(Array) && node['graphite']['rewrite_rules']['post'].length > 0)
+  template "#{node['graphite']['base_dir']}/conf/rewrite-rules.conf" do
+    source 'rewrite-rules.conf.erb'
+    owner node['graphite']['user_account']
+    group node['graphite']['group_account']
+    variables({ :pre_rewrite_rules => node['graphite']['rewrite_rules']['pre'],
+                :post_rewrite_rules => node['graphite']['rewrite_rules']['post'] 
+              })
+  end
+else
+  file "#{node['graphite']['base_dir']}/conf/rewrite_rules.conf" do
+    action :delete
+  end
+end
+
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
