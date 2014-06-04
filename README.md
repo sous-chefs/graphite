@@ -78,6 +78,8 @@ carbon-aggregator.py attributes
 -------------------------------
 
 * `node['graphite']['aggregation_rules']` - an array with rules that allow you to add several metrics together, used to generate the *aggregation-rules.conf* file ([see the example below](#aggregation_rules-example))
+* `node['graphite']['rewrite_rules']['pre']` - an array with rules which allow to to rename metrics before they are aggregated, used to generate the *rewrite-rules.conf* file ([see the example below](#rewrite_rules-example))
+* `node['graphite']['rewrite_rules']['post']` - an array with rules which allow to to rename metrics after they are aggregated, used to generate the *rewrite-rules.conf* file ([see the example below](#rewrite_rules-example))
 * `node['graphite']['carbon']['aggregator']['line_receiver_interface']` - line interface IP (defaults to 0.0.0.0)
 * `node['graphite']['carbon']['aggregator']['line_receiver_port']` - line interface port (defaults to 2023)
 * `node['graphite']['carbon']['aggregator']['pickle_receiver_interface']` - pickle receiver IP (defaults to 0.0.0.0)
@@ -200,6 +202,24 @@ node.default['graphite']['aggregation_rules'] = [
 ]
 ```
 
+rewrite_rules example
+-------------------------
+
+```ruby
+node.default['graphite']['rewrite_rules']['pre'] = [
+  {
+    "source" => "\\.cpu\\.idle\\.value$",
+    "destination" => ".idle"
+  } 
+]
+
+node.default['graphite']['rewrite_rules'['post'] = [ 
+  {
+    "source": "\\.users\\.users\\.value$",
+    "destination": "users"
+  } 
+]
+```
 storage_aggregation example
 ---------------------------
 ```ruby
