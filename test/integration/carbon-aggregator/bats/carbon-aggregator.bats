@@ -17,3 +17,10 @@
   grep -qF "<env>.applications.<app>.all.latency" "/opt/graphite/conf/aggregation-rules.conf"
 }
 
+@test "rewrite-rules.conf should be generated" {
+    test -f "/opt/graphite/conf/rewrite-rules.conf"
+}
+
+@test "rewrite-rules.conf should have the correct content" {
+      grep -qF ".idle" "/opt/graphite/conf/rewrite-rules.conf"
+}
