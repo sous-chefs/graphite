@@ -96,7 +96,17 @@ suites:
           "method": "sum",
           "input_pattern": "<env>.applications.<app>.*.latency"
         }
-      ]
+      ],
+      "rewrite_rules": {
+        "pre": [ {
+            "source": "\\.cpu\\.idle\\.value$",
+            "destination": ".idle"
+        } ],
+        "post": [ {
+            "source": "\\.users\\.users\\.value$",
+            "destination": "users"
+        } ]
+      }
     }
   }
 - name: federated
