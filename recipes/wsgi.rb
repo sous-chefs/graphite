@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: graphite
-# Recipe:: default
+# Recipe:: wsgi
 #
-# Copyright 2011, Heavy Water Software Inc.
+# Copyright 2014, realzeit GmbH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,15 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe 'python'
-include_recipe 'python::pip'
-include_recipe 'apache2' if node['graphite']['web_server'] == 'apache'
-include_recipe 'memcached' if node['graphite']['web']['memcached_hosts'].length > 0
-
-include_recipe 'graphite::user'
-include_recipe 'graphite::packages'
-include_recipe 'graphite::whisper'
-include_recipe 'graphite::carbon'
-include_recipe 'graphite::carbon_cache'
-include_recipe 'graphite::wsgi'
-include_recipe 'graphite::web'
+template "#{node['graphite']['doc_root']}/graphite.wsgi" do
+  source 'graphite.wsgi.erb'
+  notifies :reload, 'service[apache2]'
+end
