@@ -19,7 +19,7 @@
 
 dep_packages = case node['platform_family']
                when 'debian'
-                 packages = %w{ python-cairo-dev python-django python-django-tagging python-rrdtool }
+                 packages = %w{ python-cairo-dev python-django-tagging python-rrdtool }
 
                  # Optionally include memcached client
                  if node['graphite']['web']['memcached_hosts'].length > 0
@@ -46,6 +46,10 @@ dep_packages = case node['platform_family']
 
                  packages
                end
+
+python_pip 'django' do
+  version "1.5.8"
+end
 
 dep_packages.each do |pkg|
   package pkg do
