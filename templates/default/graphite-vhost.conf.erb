@@ -32,6 +32,11 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
           <%- end %>
         <%- end %>
 
+        #WSGIDaemonProcess graphite processes=5 threads=5 display-name='%{GROUP}' inactivity-timeout=120 user=graphite group=graphite
+        #WSGIProcessGroup graphite
+        #WSGIImportScript /opt/graphite/webapp/graphite.wsgi process-group=graphite application-group=%{GLOBAL}
+        WSGIScriptAlias / <%= node['graphite']['doc_root'] %>/graphite.wsgi
+
         <Location "/">
                 <%- if node['graphite']['apache']['basic_auth']['enabled'] %>
                 AuthType Basic
@@ -40,13 +45,6 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
                 AuthUserFile <%= node['graphite']['apache']['basic_auth']['file_path'] %>
                 Require valid-user
                 <%- end %>
-
-                SetHandler python-program
-                PythonPath "['<%= node['graphite']['doc_root'] %>', '<%= node['graphite']['base_dir'] %>/lib'] + sys.path"
-                PythonHandler django.core.handlers.modpython
-                SetEnv DJANGO_SETTINGS_MODULE graphite.settings
-                PythonDebug Off
-                PythonAutoReload Off
         </Location>
 
         <Location "/content/">
@@ -62,6 +60,8 @@ NameVirtualHost *:<%= node['graphite']['listen_port'] %>
 	        SetHandler None
 	</Location>
         <% end -%>
+
+        Alias /content/ "<%= node['graphite']['doc_root'] %>/content/"
 
 	# NOTE: In order for the django admin site media to work you
 	# must change @DJANGO_ROOT@ to be the path to your django
