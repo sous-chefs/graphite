@@ -20,10 +20,11 @@
 template '/etc/init/carbon-cache.conf' do
   source 'carbon.upstart.erb'
   variables(
-    :name       => 'cache',
-    :dir        => node['graphite']['base_dir'],
-    :user       => node['graphite']['user_account'],
-    :instances  => node['graphite']['carbon']['caches']
+    :name         => 'cache',
+    :base_dir     => node['graphite']['base_dir'],
+    :storage_dir  => node['graphite']['storage_dir'],
+    :user         => node['graphite']['user_account'],
+    :instances    => node['graphite']['carbon']['caches']
   )
   mode 00644
 end

@@ -13,7 +13,7 @@ setuid <%= @user %>
 
 pre-start script
   <% @instances.each do |instance| -%>
-  LOGDIR="<%= @dir %>/storage/log/carbon-<%= @name %>/carbon-<%= @name %>-<%= instance.first %>"
+  LOGDIR="<%= @storage_dir %>/log/carbon-<%= @name %>/carbon-<%= @name %>-<%= instance.first %>"
   [ -d $LOGDIR ] || mkdir -p $LOGDIR
   chown -R <%= @user %> $LOGDIR
   <% end -%>
@@ -21,6 +21,6 @@ end script
 
 script
   <% @instances.each do |instance| -%>
-  <%= @dir %>/bin/carbon-<%= @name %>.py --debug --instance=<%= instance.first %> start >> <%= @dir %>/storage/log/carbon-<%= @name %>/carbon-<%= @name %>-<%= instance.first %>/console.log 2>&1
+  <%= @base_dir %>/bin/carbon-<%= @name %>.py --debug --instance=<%= instance.first %> start >> <%= @storage_dir %>/log/carbon-<%= @name %>/carbon-<%= @name %>-<%= instance.first %>/console.log 2>&1
   <% end -%>
 end script
