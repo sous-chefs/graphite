@@ -36,13 +36,8 @@ else
   Chef::Log.warn 'This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute.'
 end
 
-python_pip 'graphite_web' do
-  package_name lazy {
-    node['graphite']['package_names']['graphite_web'][node['graphite']['install_type']]
-  }
-  version lazy {
-    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
-  }
+package 'graphite-web' do
+  action :upgrade
 end
 
 directory "#{storagedir}/log/webapp" do
@@ -69,7 +64,7 @@ directory "#{docroot}/graphite" do
   recursive true
 end
 
-template "#{docroot}/graphite/local_settings.py" do
+template "/etc/graphite/local_settings.py" do
   source 'local_settings.py.erb'
   mode 00755
   variables(:timezone => node['graphite']['timezone'],
