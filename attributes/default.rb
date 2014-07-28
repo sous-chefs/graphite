@@ -26,7 +26,7 @@ default['graphite']['package_names'] = {
   },
   'carbon' => {
     'package' => 'carbon',
-    'source' => 'https://github.com/graphite-project/graphite-web/zipball/master'
+    'source' => 'https://github.com/graphite-project/carbon/zipball/master'
   },
   'graphite_web' => {
     'package' => 'graphite-web',
