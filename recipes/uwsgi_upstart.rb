@@ -8,4 +8,5 @@ service 'graphite-web' do
   provider Chef::Provider::Service::Upstart
   supports :restart => true
   action [:enable, :start]
+  subscribes :restart, 'file[uwsgi-config]'
 end

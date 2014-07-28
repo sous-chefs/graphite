@@ -22,14 +22,30 @@ if node['graphite']['listen_port'].to_i < 1024 && node['graphite']['uwsgi']['lis
   Chef::Log.error("uwsgi cannot bind to ports less than 1024. Please set \"node['graphite']['listen_port']\" to an appropriate value")
 end
 
-if node['graphite']['uwsgi']['listen_http'] == false
+unless node['graphite']['uwsgi'].key?('http-socket')
   Chef::Log.info('You have disabled uwsgi listening on an http port. Graphite web will not be accessible unless you are talking to the uwsgi socket from an external process')
 end
 
 service_type = node['graphite']['uwsgi']['service_type']
+uwsgi_config = node['graphite']['uwsgi']['config'].dup.delete_if{|k,v| v.nil? }
 
 python_pip 'uwsgi' do
   action :install
+end
+
+case node['platform_family']
+when 'debian'
+  package 'libjansson-dev'
+else
+  package 'jannson-devel'
+end
+
+file 'uwsgi-config' do
+  path "#{node['graphite']['base_dir']}/conf/uwsgi-config.json"
+  owner node['graphite']['user_account']
+  group node['graphite']['group_account']
+  content JSON.pretty_generate({ "uwsgi" => uwsgi_config })
+  action :create
 end
 
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"
