@@ -25,6 +25,10 @@ dep_packages = case node['platform_family']
                  if node['graphite']['web']['memcached_hosts'].length > 0
                    packages += %w{python-memcache} + packages
                  end
+                 
+                 if node['graphite']['web']['ldap']['SERVER']
+                   packages += %w{python-ldap} + packages
+                 end
 
                  packages
                when 'rhel', 'fedora'
@@ -42,6 +46,10 @@ dep_packages = case node['platform_family']
                  # Optionally include memcached client
                  if node['graphite']['web']['memcached_hosts'].length > 0
                    packages += %w{python-memcached}
+                 end
+                 
+                 if node['graphite']['web']['ldap']['SERVER']
+                   packages += %w{python-ldap} + packages
                  end
 
                  packages
