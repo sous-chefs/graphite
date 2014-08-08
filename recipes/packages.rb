@@ -26,7 +26,7 @@ dep_packages = case node['platform_family']
                    packages += %w{python-memcache} + packages
                  end
                  
-                 if node['graphite']['web']['ldap']['SERVER']
+                 if node['graphite']['web']['ldap']['SERVER'].length > 0
                    packages += %w{python-ldap} + packages
                  end
 
@@ -48,7 +48,7 @@ dep_packages = case node['platform_family']
                    packages += %w{python-memcached}
                  end
                  
-                 if node['graphite']['web']['ldap']['SERVER']
+                 if node['graphite']['web']['ldap']['SERVER'].length > 0
                    packages += %w{python-ldap} + packages
                  end
 
