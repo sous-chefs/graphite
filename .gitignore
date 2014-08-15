@@ -10,3 +10,5 @@ vendor
 tmp
 .librarian
 Cheffile.lock
+.coverage
+.dir-locals.el

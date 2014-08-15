@@ -25,7 +25,7 @@ describe 'find_carbon_cache_services' do
     it 'should return a single runit_service carbon-cache service name' do
       caches = find_carbon_cache_services(node)
       caches.should == [
-        'runit_service[carbon-cache-a]',
+        'runit_service[carbon-cache-a]'
       ]
     end
   end
@@ -40,7 +40,6 @@ describe 'find_carbon_cache_services' do
       ]
     end
   end
-
 
   context 'when a single carbon-cache service is defined and not run under runit' do
     before do

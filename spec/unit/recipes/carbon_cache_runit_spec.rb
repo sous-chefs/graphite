@@ -32,4 +32,3 @@ describe 'graphite::carbon_cache_runit' do
     expect(chef_run).to enable_runit_service('carbon-cache-c')
   end
 end
-

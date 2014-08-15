@@ -19,7 +19,7 @@
 
 include_recipe 'runit'
 
-node['graphite']['carbon']['caches'].each do |key,data|
+node['graphite']['carbon']['caches'].each do |key, data|
   runit_service "carbon-cache-#{key}" do
     run_template_name 'carbon'
     log_template_name 'carbon'

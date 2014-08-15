@@ -55,7 +55,7 @@ describe 'graphite::carbon_cache' do
         'pattern' => '\.count$',
         'xFilesFactor' => '0',
         'aggregationMethod' => 'sum'
-      },
+      }
     ]
     chef_run.converge(described_recipe)
 
@@ -71,4 +71,3 @@ describe 'graphite::carbon_cache' do
     expect(chef_run).to include_recipe('graphite::carbon_cache_runit')
   end
 end
-
