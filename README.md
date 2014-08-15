@@ -35,7 +35,7 @@ It's a library cookbook, intended to be used in your custom wrapper
 cookbook to behave as needed. It's the building materials, not the
 house.
 
-For example usage consult the reference cookbook (link)
+For example usage consult the reference cookbook [example](https://github.com/hw-cookbooks/graphite/tree/master/example/graphite_example/recipes)
 
 ## Custom Resources
 
@@ -47,3 +47,19 @@ Due to the old version of Chef used on Amazon Web Services in order to
 succesfully run this cookbook you will need to add the
 [`delayed_evaluator`](http://community.opscode.com/cookbooks/delayed_evaluator)
 recipe to your run list before the `graphite` recipe.
+
+## Development / Contributing
+
+* Source hosted at [GitHub][repo]
+* Report issues/questions/feature requests on [GitHub Issues][issues]
+
+Pull requests are very welcome! Make sure your patches are well tested.
+Ideally create a topic branch for every separate change you make. For
+example:
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Write some tests, see [ChefSpec](https://github.com/sethvargo/chefspec)
+4. Commit your changes (`git commit -am 'Added some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
