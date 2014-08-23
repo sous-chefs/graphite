@@ -23,7 +23,7 @@ dep_packages = case node['platform_family']
 
                  # Optionally include memcached client
                  if node['graphite']['web']['memcached_hosts'].length > 0
-                   packages += %w{python-memcache} + packages
+                   packages += %w{python-memcache}
                  end
 
                  packages
