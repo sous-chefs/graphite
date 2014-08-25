@@ -5,7 +5,7 @@ require 'bundler/setup'
 namespace :style do
   require 'rubocop/rake_task'
   desc 'Run rubocop for Ruby style checks'
-  Rubocop::RakeTask.new(:ruby)
+  RuboCop::RakeTask.new(:ruby)
 
   require 'foodcritic'
   desc 'Run foodcritic for Chef style checks'
