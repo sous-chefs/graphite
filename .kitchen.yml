@@ -21,7 +21,6 @@ suites:
   attributes:
     graphite:
       listen_port: "8080"
-      web_server: "uwsgi"
       uwsgi:
         workers: 4
         listen_http: true
