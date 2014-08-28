@@ -16,7 +16,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-include_recipe 'graphite::carbon'
-include_recipe 'graphite::carbon_cache'
-include_recipe 'graphite::web'
