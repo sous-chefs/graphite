@@ -25,10 +25,6 @@ Consult the Graphite documentation for more information:
 
 TODO (sure, use em if you like, even encrypt them)
 
-## Helper Scripts
-
-TODO (optionally install carbonate if avail?)
-
 ## Usage
 
 It's a library cookbook, intended to be used in your custom wrapper
@@ -37,9 +33,11 @@ house.
 
 For example usage consult the reference cookbook [example](https://github.com/hw-cookbooks/graphite/tree/master/example/graphite_example/recipes)
 
+Feel free to ask us questions anytime on irc: #heavywater on freenode
+
 ## Custom Resources
 
-TODO document resource usage
+TODO (resource usage documentation coming)
 
 ## Amazon Web Services
 
@@ -60,6 +58,6 @@ example:
 1. Fork the repo
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Write some tests, see [ChefSpec](https://github.com/sethvargo/chefspec)
-4. Commit your changes (`git commit -am 'Added some feature'`)
+4. Commit your awesome changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+5. Create new Pull Request against the `develop` branch
