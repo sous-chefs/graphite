@@ -8,138 +8,20 @@ provisioner:
 platforms:
 - name: ubuntu-12.04
   run_list:
-  - recipe[ubuntu]
+    - recipe[ubuntu]
 - name: centos-6.4
-
+  run_list:
+    - recipe[yum-epel]
+    
 suites:
 - name: default
   run_list:
-  - recipe[graphite]
+  - recipe[runit]
+  - recipe[graphite_example::single_node]
   attributes:
     graphite:
-      carbon:
-        service_type: "init"
-
-- name: ssl
-  run_list:
-  - recipe[graphite_example::ssl]
-  - recipe[graphite]
-  attributes: {
-    "graphite": {
-      "ssl": {
-        "enabled": true,
-        "ca_certificate_file":  "/etc/ssl/server.crt"
-      },
-      "listen_port": "443"
-    }
-  }
-
-- name: uwsgi
-  run_list:
-  - recipe[graphite]
-  attributes: {
-    "graphite": {
-      "listen_port": "8080",
-      "web_server": "uwsgi"
-    }
-  }
-
-- name: carbon-relay
-  run_list:
-  - recipe[graphite]
-  - recipe[graphite::carbon_relay]
-  attributes: {
-    "graphite": {
-      "carbon": {
-        "relay": {
-          "destinations": [ "127.0.0.1:2003:a" ]
-        },
-      },
-      "relay_rules": [
-        {
-          "name": "example_pattern",
-          "pattern": "^mydata\\.foo\\..+",
-          "destinations": [ "10.1.2.3:2004" ]
-        },{
-          "name": "example_default",
-          "default": true,
-          "destinations": [ "127.0.0.1:2004" ]
-        }
-      ]
-    }
-  }
-- name: carbon-aggregator
-  run_list:
-  - recipe[graphite]
-  - recipe[graphite::carbon_aggregator]
-  attributes: {
-   "graphite": {
-      "storage_aggregation": [
-        {
-          "name": "all_min",
-          "pattern": ".min$",
-          "xFilesFactor": "0.1",
-          "aggregationMethod": "min"
-        }
-      ],
-      "aggregation_rules": [
-        {
-          "output_template": "<env>.applications.<app>.all.requests",
-          "frequency": "60",
-          "method": "sum",
-          "input_pattern": "<env>.applications.<app>.*.requests"
-        },{
-          "output_template": "<env>.applications.<app>.all.latency",
-          "frequency": "60",
-          "method": "sum",
-          "input_pattern": "<env>.applications.<app>.*.latency"
-        }
-      ]
-    }
-  }
-- name: federated
-  run_list:
-  - recipe[graphite::federated]
-  attributes: {}
-- name: carbon-cache
-  run_list:
-  - recipe[graphite]
-  - recipe[graphite::carbon_cache]
-  attributes: {
-    "graphite": {
-      "carbon": {
-        "caches": {
-          "a": {
-            "line_reciever_port": 2003,
-            "udp_receiver_port": 2003,
-            "pickle_receiver_port": 2004,
-            "cache_query_port": 7002,
-            "line_receiver_interface": 0.0.0.0,
-            "udp_receiver_interface": 0.0.0.0,
-            "pickle_receiver_interface": 0.0.0.0,
-            "cache_query_interface": 0.0.0.0
-          },
-          "b": {
-            "line_receiver_port": 2005,
-            "udp_receiver_port": 2005,
-            "pickle_receiver_port": 2006,
-            "cache_query_port": 7003,
-            "line_receiver_interface": 0.0.0.0,
-            "udp_receiver_interface": 0.0.0.0,
-            "pickle_receiver_interface": 0.0.0.0,
-            "cache_query_interface": 0.0.0.0
-          },
-          "c": {
-            "line_receiver_port": 2007,
-            "udp_receiver_port": 2007,
-            "pickle_receiver_port": 2008,
-            "cache_query_port": 7004,
-            "line_receiver_interface": 0.0.0.0,
-            "udp_receiver_interface": 0.0.0.0,
-            "pickle_receiver_interface": 0.0.0.0,
-            "cache_query_interface": 0.0.0.0
-          }
-        }
-      }
-    }
-  }
+      listen_port: "8080"
+      web_server: "uwsgi"
+      uwsgi:
+        workers: 4
+        listen_http: true
