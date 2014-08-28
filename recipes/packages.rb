@@ -17,38 +17,5 @@
 # limitations under the License.
 #
 
-dep_packages = case node['platform_family']
-               when 'debian'
-                 packages = %w{ python-cairo-dev python-django python-django-tagging python-rrdtool }
-
-                 # Optionally include memcached client
-                 if node['graphite']['web']['memcached_hosts'].length > 0
-                   packages += %w{python-memcache} + packages
-                 end
-
-                 packages
-               when 'rhel', 'fedora'
-                 packages = %w{ Django django-tagging pycairo-devel python-devel mod_wsgi python-sqlite2 python-zope-interface }
-
-                 # Include bitmap packages (optionally)
-                 if node['graphite']['web']['bitmap_support']
-                   if node['platform'] == 'amazon'
-                     packages += %w{bitmap}
-                   else
-                     packages += %w{bitmap bitmap-fonts}
-                   end
-                 end
-
-                 # Optionally include memcached client
-                 if node['graphite']['web']['memcached_hosts'].length > 0
-                   packages += %w{python-memcached}
-                 end
-
-                 packages
-               end
-
-dep_packages.each do |pkg|
-  package pkg do
-    action :install
-  end
-end
+include_recipe "graphite::_carbon_packages"
+include_recipe "graphite::_web_packages"

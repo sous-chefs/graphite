@@ -1,3 +1,0 @@
-#!/bin/sh
-exec 2>&1
-exec chpst -u <%= node['graphite']['user_account'] %> -l <%= node['graphite']['storage_dir'] %>/carbon-cache.lock -- bash -c twistd --nodaemon --umask=0022 carbon-cache -c <%= node['graphite']['base_dir']%>/conf/carbon.conf --instance=a start
