@@ -59,6 +59,7 @@ graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
              }
            }
          })
+  notifies :restart, 'service[graphite-web]', :delayed
 end
 
 directory "#{base_dir}/storage/log/webapp" do
