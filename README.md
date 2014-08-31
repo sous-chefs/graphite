@@ -88,6 +88,8 @@ attribute, which is basically a hash of the configuration to be written.
 This can come from attributes in a wrapper cookbook or via data bags
 if you like. Be as creative as you can tolerate.
 
+Accumulator pattern came from excellent work by [Mathieu Sauve-Frankel](https://github.com/kisoku/chef-accumulator)
+
 ## Data Bags
 
 Sure, use em if you like. Even encrypt them.
