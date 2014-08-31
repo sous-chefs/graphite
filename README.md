@@ -33,12 +33,69 @@ Feel free to ask us questions anytime on irc: #heavywater on freenode
 
 ## Custom Resources
 
-TODO (resource usage documentation coming)
+### Carbon daemons
+Management for the various
+[Carbon](https://github.com/graphite-project/carbon) services which
+receive your metrics and write them to disk.
+
+* `graphite_service`: sets up a carbon service with runit, essentially
+   a glorified `runit_service`. Carbon configuration should be defined
+   first with one of the `graphite_carbon_*` resources. Multiple
+   daemons can be run by using multiple resources with names such as
+   `cache:a`, `cache:b`, etc..
+* `graphite_carbon_aggregator`: data driven resource for carbon-aggregator configuration
+* `graphite_carbon_cache`: data driven resource for carbon-cache configuration
+* `graphite_carbon_relay`: data driven resource for carbon-cache configuration
+
+### Storage
+[Whisper](https://github.com/graphite-project/whisper) is
+pretty much a requirement right now, so these resources assume whisper
+libraries should be installed. Feel free to implement something else in
+your own wrapper if you live on the edge and prefer [Ceres](https://github.com/graphite-project/ceres).
+
+* `graphite_storage`: makes a directory intended for graphite storage,
+  installs whisper
+* `graphite_storage_schema`: data driven resource for storage schema 
+
+### Graphite Web
+Write the configuration file for [Graphite Web](https://github.com/graphite-project/graphite-web)
+
+* `graphite_web_config`: data driven python config file writer for
+   graphite web. Assumes the whole file is managed, typically this is
+   the path to local_settings.py. Custom python code can be placed in
+   the optional 'dynamic template', by default a file named
+   'local_settings_dynamic.py' that is optimistically loaded if
+   present.
+
+Yes it's [writing python via ruby](https://github.com/hw-cookbooks/graphite/blob/master/libraries/chef_graphite_python.rb#L14).
+
+### Accumulators
+Due to the graphite config file format, the data driven resources use
+an accumulator pattern to find the appropriate resources in the run
+context and extract provided configuration data. You should never need
+to use these directly, but you're welcome to go crazy.
+
+* `graphite_carbon_conf_accumulator`: lookup named carbon resources in
+  run context and gather config
+* `graphite_storage_conf_accumulator`: lookup named storage schema
+  resources in run context and gather config
+
+If you look at the
+[example cookbook recipe](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L6)
+you probably notice that many of the resources simply take a single `config`
+attribute, which is basically a hash of the configuration to be written.
+
+This can come from attributes in a wrapper cookbook or via data bags
+if you like. Be as creative as you can tolerate.
+
+## Data Bags
+
+Sure, use em if you like. Even encrypt them.
 
 ## Amazon Web Services
 
 Due to the old version of Chef used on Amazon Web Services in order to
-succesfully run this cookbook you will need to add the
+successfully run this cookbook you may need to add the
 [`delayed_evaluator`](http://community.opscode.com/cookbooks/delayed_evaluator)
 recipe to your run list before the `graphite` recipe.
 
