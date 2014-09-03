@@ -69,6 +69,8 @@ Write the configuration file for [Graphite Web](https://github.com/graphite-proj
 
 Yes it's [writing python via ruby](https://github.com/hw-cookbooks/graphite/blob/master/libraries/chef_graphite_python.rb#L14).
 
+A runit service definition is provided to [start a uwsgi process](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L105), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
+
 ### Accumulators
 Due to the graphite config file format, the data driven resources use
 an accumulator pattern to find the appropriate resources in the run
