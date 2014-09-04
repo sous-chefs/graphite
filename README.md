@@ -152,6 +152,11 @@ It's a library cookbook, intended to be used in your custom wrapper
 cookbook to behave as needed. It's the building materials, not the
 house.
 
+We have purposefully left out web server configuration to remove the
+dependency, so you're free to use whatever works in your environment.
+This avoids the need for this cookbook to keep up to date with
+configuration that isn't really graphite specific.
+
 For example usage consult the reference cookbook [example](https://github.com/hw-cookbooks/graphite/tree/master/example/graphite_example/recipes)
 
 Feel free to ask us questions anytime on irc: #heavywater on freenode
