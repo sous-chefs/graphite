@@ -52,14 +52,40 @@ github master branch.
 
 ## Recipes
 ### default
+
 No-op, assuming cookbook inclusion in a custom wrapper.
 
 ### packages
+
 Just install all packages, carbon and web
 
 ### carbon
+
 Install all carbon packages, setup the graphite user, storage paths
 and write the carbon configuration. Does not start any services.
+
+### web
+
+Set up just about everything for graphite web, except configure it and
+start the service. Use the `graphite_web_config` resource and the
+`uwsgi` recipe for those two things.
+
+Some of this weirdness may not really be needed, so send us a PR if
+you fix it before us. For example, I'd love some way to remove that
+execute block for selinux and there's probably a better way to manage
+all those files and directories.
+
+### uwsgi
+
+Start a uwsgi runit service for graphite-web. That's it.
+
+### Various internal recipes
+
+View the code for additional stub recipes that perform smaller pieces
+of functionality such as setup the user or install specific packages,
+the all begin with an underscore `_`.
+
+It's like a treasure hunt.
 
 ## Custom Resources
 
