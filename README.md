@@ -120,6 +120,20 @@ if you like. Be as creative as you can tolerate.
 
 Accumulator pattern came from excellent work by [Mathieu Sauve-Frankel](https://github.com/kisoku/chef-accumulator)
 
+## Usage
+
+It's a library cookbook, intended to be used in your custom wrapper
+cookbook to behave as needed. It's the building materials, not the
+house.
+
+For example usage consult the reference cookbook [example](https://github.com/hw-cookbooks/graphite/tree/master/example/graphite_example/recipes)
+
+Feel free to ask us questions anytime on irc: #heavywater on freenode
+
+## Examples
+
+You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb).
+
 ## Data Bags
 
 Sure, use em if you like. Even encrypt them.
