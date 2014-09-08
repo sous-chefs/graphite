@@ -1,0 +1,9 @@
+<VirtualHost *:80>
+        ServerName "graphite"
+        ProxyPass / http://localhost:<%= node['graphite']['uwsgi']['port'] %>/
+        ProxyPassReverse / http://localhost:<%= node['graphite']['uwsgi']['port'] %>/
+        <Location />
+          Order allow,deny
+          Allow from all
+        </Location>
+</VirtualHost>
