@@ -5,7 +5,7 @@ exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 --plugins carbon --carbon <%= node['graphite']['uwsgi']['carbon'] %> \
 <% end -%>
 <% if node['graphite']['uwsgi']['listen_http'] -%>
---http :<%= node['graphite']['listen_port'] %> \
+--http :<%= node['graphite']['uwsgi']['port'] %> \
 <% end -%>
 --pythonpath <%= node['graphite']['base_dir'] %>/lib \
 --pythonpath <%= node['graphite']['base_dir'] %>/webapp/graphite \
