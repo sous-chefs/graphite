@@ -9,7 +9,6 @@ default['graphite']['django_version'] = '1.5.5'
 default['graphite']['password'] = 'change_me'
 default['graphite']['user'] = 'graphite'
 default['graphite']['group'] = 'graphite'
-default['graphite']['listen_port'] = 80
 default['graphite']['base_dir'] = '/opt/graphite'
 default['graphite']['storage_dir'] = '/opt/graphite/storage'
 default['graphite']['install_type'] = 'package'
