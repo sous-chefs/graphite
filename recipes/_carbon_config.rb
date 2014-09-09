@@ -36,3 +36,13 @@ file "storage-schemas.conf" do
 end
 
 graphite_storage_conf_accumulator "default"
+
+file "storage-aggregation.conf" do
+  path "#{node['graphite']['base_dir']}/conf/storage-aggregation.conf"
+  owner node['graphite']['user']
+  group node['graphite']['group']
+  mode 0644
+  action :nothing
+end
+
+graphite_storage_aggregation_conf_accumulator "default"
