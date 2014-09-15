@@ -14,4 +14,5 @@ exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 --no-orphans --master \
 --procname graphite-web \
 --die-on-term \
+--buffer-size <%= node['graphite']['uwsgi']['buffer-size'] %> \
 --socket <%= node['graphite']['uwsgi']['socket'] %>
