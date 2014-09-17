@@ -28,8 +28,12 @@ end
 
 service_type = node['graphite']['uwsgi']['service_type']
 
-python_pip 'uwsgi' do
-  action :install
+package 'uwsgi' do
+  action :upgrade
+end
+
+package "uwsgi-plugin-python" do
+  action :upgrade
 end
 
 include_recipe "#{cookbook_name}::#{recipe_name}_#{service_type}"

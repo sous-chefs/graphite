@@ -35,13 +35,3 @@ when 'debian'
 when 'rhel', 'fedora'
   default['graphite']['carbon']['service_type'] = 'init'
 end
-
-# Default carbon AMQP settings match the carbon default config
-default['graphite']['carbon']['enable_amqp'] = false
-default['graphite']['carbon']['amqp_host'] = 'localhost'
-default['graphite']['carbon']['amqp_port'] = 5672
-default['graphite']['carbon']['amqp_vhost'] = '/'
-default['graphite']['carbon']['amqp_user'] = 'guest'
-default['graphite']['carbon']['amqp_password'] = 'guest'
-default['graphite']['carbon']['amqp_exchange'] = 'graphite'
-default['graphite']['carbon']['amqp_metric_name_in_body'] = false

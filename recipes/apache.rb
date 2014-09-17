@@ -7,7 +7,7 @@ execute 'create apache basic_auth file for graphite' do
   only_if { node['graphite']['apache']['basic_auth']['enabled'] }
 end
 
-template "#{node['apache']['dir']}/sites-available/graphite" do
+template "#{node['apache']['dir']}/sites-available/graphite.conf" do
   source 'graphite-vhost.conf.erb'
   notifies :reload, 'service[apache2]'
 end

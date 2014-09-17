@@ -17,13 +17,8 @@
 # limitations under the License.
 #
 
-python_pip 'whisper' do
-  package_name lazy {
-    node['graphite']['package_names']['whisper'][node['graphite']['install_type']]
-  }
-  version lazy {
-    node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
-  }
+package 'python-whisper' do
+  action :upgrade
 end
 
 directory "#{node['graphite']['base_dir']}/bin/" do
