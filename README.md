@@ -5,8 +5,7 @@
 
 ## Description
 
-Library cookbook for installation and configuration of Graphite
-http://graphite.wikidot.com/ via Chef
+Library cookbook for installation and configuration of [Graphite](http://graphite.readthedocs.org) via Chef
 
 Consult the Graphite documentation for more information:
 
