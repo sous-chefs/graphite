@@ -92,6 +92,29 @@ template "#{basedir}/conf/graphTemplates.conf" do
   notifies :reload, graphite_web_service_resource
 end
 
+# Ubuntu modifies some of Graphite's base layout and does it in ways that aren't
+# friendly to reconfiguring, even with the out of the box supported routes, like
+# the local_settings.py file. This updates the search index script to put the
+# index where the storage directory is located in Chef. Ubuntu changes the
+# content of the script, and moves it, and the new location is what is
+# referenced by the cronjob to rebuild indexes.
+template "/usr/bin/graphite-build-search-index" do
+  source "build-search-index.sh.erb"
+  mode 00755
+end
+
+# While Ubuntu moves the search index script, Graphite has hard coded paths
+# inside when it tries to execute it inline. This can cause issues with initial
+# installation, where graphite-web can come up, see no idex, and try to build
+# one but fail.
+directory "/usr/share/graphite-web/bin" do
+  recursive true
+  action :create
+end
+link "/usr/share/graphite-web/bin/build-index.sh" do
+  to "/usr/bin/graphite-build-search-index"
+end
+
 template "#{basedir}/bin/set_admin_passwd.py" do
   source 'set_admin_passwd.py.erb'
   mode 00755
