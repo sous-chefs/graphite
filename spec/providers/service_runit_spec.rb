@@ -90,4 +90,43 @@ describe Chef::Provider::GraphiteServiceRunit do
       expect(runner_resources).to include("runit_service[carbon-yabbadoo]")
     end
   end
+
+  context "for :restart action" do
+
+    before { new_resource.action(action) }
+    let(:action) { :restart }
+
+    describe "#manage_runit_service" do
+
+      let(:resource_action) { :restart }
+
+      include_examples "manages runit service"
+    end
+
+    it "adds the runit_service to the resource collection" do
+      provider.run_action(action)
+
+      expect(runner_resources).to include("runit_service[carbon-yabbadoo]")
+    end
+  end
+
+  context "for :reload action" do
+
+    before { new_resource.action(action) }
+    let(:action) { :reload }
+
+    describe "#manage_runit_service" do
+
+      let(:resource_action) { :reload }
+
+      include_examples "manages runit service"
+    end
+
+    it "adds the runit_service to the resource collection" do
+      provider.run_action(action)
+
+      expect(runner_resources).to include("runit_service[carbon-yabbadoo]")
+    end
+  end
+
 end

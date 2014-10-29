@@ -18,6 +18,14 @@ describe Chef::Resource::GraphiteService do
     expect(resource.allowed_actions).to include(:disable)
   end
 
+  it "actions include :restart" do
+    expect(resource.allowed_actions).to include(:restart)
+  end
+
+  it "actions include :reload" do
+    expect(resource.allowed_actions).to include(:reload)
+  end
+
   it "provider defaults the runit service" do
     expect(resource.provider).to eq(Chef::Provider::GraphiteServiceRunit)
   end
