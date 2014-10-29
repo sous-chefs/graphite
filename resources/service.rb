@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-actions :enable, :disable
+actions :enable, :disable, :restart, :reload
 default_action :enable
 
 attribute :name, :kind_of => String, :default => nil, :name_attribute => true

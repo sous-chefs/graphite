@@ -31,6 +31,14 @@ action :disable do
   set_updated { manage_runit_service(:disable) }
 end
 
+action :restart do
+  set_updated { manage_runit_service(:restart) }
+end
+
+action :reload do
+  set_updated { manage_runit_service(:reload) }
+end
+
 def manage_runit_service(resource_action)
   runit_service(new_resource.service_name) do
     cookbook "graphite"
