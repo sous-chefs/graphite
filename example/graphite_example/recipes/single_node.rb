@@ -73,13 +73,15 @@ execute "python manage.py syncdb --noinput" do
   group node['graphite']['group']
   cwd "#{base_dir}/webapp/graphite"
   creates "#{base_dir}/storage/graphite.db"
+  notifies :run, "python[set admin password]"
 end
 
 # creates an initial user, doesn't require the set_admin_password
-# script. But srsly, how ugly is this? also, not idempotent could be
+# script. But srsly, how ugly is this? could be
 # crazy and wrap this as a graphite_user resource with a few
 # improvements...
 python "set admin password" do
+  action :nothing
   cwd "#{base_dir}/webapp/graphite"
   user node['graphite']['user']
   code <<-PYTHON
@@ -98,8 +100,6 @@ except Exception,err:
     print "could not create %s" % username
     print "died with error: %s" % str(err)
   PYTHON
-  # could be idempotent just by reading for user from db, ignore
-  # django models?
 end
 
 runit_service 'graphite-web' do
