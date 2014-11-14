@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-actions :create, :delete
+actions :create, :delete, :upgrade
 default_action :create
 
 attribute :prefix, :kind_of => String, :default => nil, :name_attribute => true
