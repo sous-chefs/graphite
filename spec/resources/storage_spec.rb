@@ -46,4 +46,8 @@ describe Chef::Resource::GraphiteStorage do
   it "actions include :delete" do
     expect(resource.allowed_actions).to include(:delete)
   end
+
+  it "actions include :upgrade" do
+    expect(resource.allowed_actions).to include(:upgrade)
+  end
 end

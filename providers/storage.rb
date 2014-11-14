@@ -28,6 +28,11 @@ action :create do
   set_updated { manage_directory(:create) }
 end
 
+action :upgrade do
+  set_updated { manage_python_pip(:upgrade) }
+  set_updated { manage_directory(:create) }
+end
+
 action :delete do
   set_updated { manage_python_pip(:remove) }
   set_updated { manage_directory(:delete) }
