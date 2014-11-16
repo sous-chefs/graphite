@@ -21,8 +21,6 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :enable do
   set_updated { manage_runit_service(:enable) }
 end

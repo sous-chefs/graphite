@@ -21,8 +21,6 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :create do
   set_updated { manage_python_pip(:install) }
   set_updated { manage_directory(:create) }
