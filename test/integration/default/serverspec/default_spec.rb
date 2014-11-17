@@ -6,7 +6,7 @@ describe 'carbon-cache' do
     it { should be_listening.with('udp') }
   end
 
-  [ 2003, 2004, 7002 ].each do |p|
+  [2003, 2004, 7002].each do |p|
     describe port(p) do
       it { should be_listening.with('tcp') }
     end
