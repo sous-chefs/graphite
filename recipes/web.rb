@@ -22,6 +22,7 @@ include_recipe 'python::pip'
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_web_packages'
+include_recipe 'graphite::_directories'
 
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']

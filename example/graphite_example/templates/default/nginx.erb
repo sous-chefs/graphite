@@ -1,0 +1,30 @@
+# This is the "site config" for graphite proxying nginx
+#
+# Feel free to use it as a starting point for what you'll use in your
+# own wrapper cookbook.
+
+upstream django {
+    ip_hash;
+    server unix:<%= node['graphite']['uwsgi']['socket'] %>;
+}
+server {
+    listen 80;
+    server_name graphite;
+    charset utf-8;
+
+    # Django admin media.
+    location /media/admin/ {
+        alias /usr/lib/python2.7/site-packages/django/contrib/admin/media/;
+    }
+
+    # static media.
+    location /content/ {
+        alias <%= node['graphite']['doc_root'] %>/content/;
+    }
+
+    # all non-media requests to the Django server.
+    location / {
+        uwsgi_pass django;
+        include uwsgi_params;
+    }
+}
