@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+if File.exists(File.join(__FILE__, '../Gemfile'))
+  # eval the master Gemfile and ensure exceptions reference the correct filename.
+  eval File.read('../Gemfile'), nil, 'Gemfile'
+end
+
+gem 'chef', '~> 11.0'
+
