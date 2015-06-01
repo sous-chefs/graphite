@@ -1,17 +1,20 @@
 #!/bin/sh
 exec 2>&1
-exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
-<% if node['graphite']['uwsgi']['carbon'] -%>
---plugins carbon --carbon <%= node['graphite']['uwsgi']['carbon'] %> \
+exec uwsgi \
+<% lineterm = "\\" -%>
+<% node['graphite']['uwsgi']['config'].each_with_index do |(param, val), index| -%>
+<% if index == node['graphite']['uwsgi']['config'].size - 1 -%>
+<% lineterm = "" -%>
 <% end -%>
-<% if node['graphite']['uwsgi']['listen_http'] -%>
---http :<%= node['graphite']['uwsgi']['port'] %> \
+<% if val.is_a? String -%>
+--<%= param %> <%= val %> <%= lineterm %>
+<% elsif val.is_a? Integer -%>
+--<%= param %> <%= val.to_s %> <%= lineterm %>
+<% elsif !!val == val -%>
+--<%= param %> <%= lineterm %>
+<% elsif val.is_a? Array -%>
+<% val.each do |eachval| -%>
+--<%= param %> <%= eachval %> <%= lineterm %>
 <% end -%>
---pythonpath <%= node['graphite']['base_dir'] %>/lib \
---pythonpath <%= node['graphite']['base_dir'] %>/webapp/graphite \
---wsgi-file <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi.example \
---uid <%= node['graphite']['user'] %> --gid <%= node['graphite']['group'] %> \
---no-orphans --master \
---procname graphite-web \
---die-on-term \
---socket <%= node['graphite']['uwsgi']['socket'] %>
+<% end -%>
+<% end -%>
