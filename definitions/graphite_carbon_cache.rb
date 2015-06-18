@@ -1,16 +1,12 @@
 define :graphite_carbon_cache do
+  carbon_backend = params[:backend]
+  carbon_config = params[:config]
+  carbon_action = params[:action]
 
-  node.run_state["graphite"]["carbon_cache"] ||= []
-  conf_obj = node.run_state["graphite"]["carbon_cache"].find { |i| i[:name] == params[:name] }
-
-  if conf_obj.nil?
-    node.run_state["graphite"]["carbon_cache"] << {
-      :name => params[:name],
-      :config => params.fetch(:config, {})
-    }
-  else
-    index = node.run_state["graphite"]["carbon_cache"].index(conf_obj)
-    node.run_state["graphite"]["carbon_cache"][index][:config].merge!(params[:config])
+  graphite_carbon_conf_accumulator params[:name] do
+    type :cache
+    backend carbon_backend
+    config carbon_config
+    action carbon_action
   end
-
 end

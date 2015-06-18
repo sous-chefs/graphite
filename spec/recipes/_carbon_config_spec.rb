@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'graphite::_carbon_config' do
   let(:chef_run) { ChefSpec::Runner.new.converge(described_recipe) }
-  let(:file_resource) { chef_run.find_resource(:file, "carbon.conf") }
+  let(:file_resource) { chef_run.find_resource(:template, "carbon.conf") }
 
   context "for the file resource" do
 
@@ -22,8 +22,8 @@ describe 'graphite::_carbon_config' do
       expect(file_resource.mode).to eq(0644)
     end
 
-    it "has action :nothing" do
-      expect(file_resource.performed_actions).to be_empty
+    it "has action :create" do
+      expect(file_resource.performed_actions).to eq([:create])
     end
 
   end

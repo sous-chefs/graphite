@@ -26,8 +26,8 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:graphite_storage, :delete, name)
   end
 
-  def create_graphite_carbon_conf_accumulator(name)
-    ChefSpec::Matchers::ResourceMatcher.new(:graphite_carbon_conf_accumulator, :create, name)
+  def create_graphite_carbon_conf_accumulator(_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:template, :create, 'carbon.conf')
   end
 
   def enable_runit_service(resource_name)

@@ -1,21 +1,9 @@
 define :graphite_storage_schema do
+  carbon_config = params[:config]
+  carbon_action = params[:action]
 
-  Chef::Log.info("!!!DEBUG: params #{params.inspect}")
-
-  node.run_state["graphite"] ||= Mash.new
-  node.run_state["graphite"]["storage_schema"] ||= []
-  conf_obj = node.run_state["graphite"]["storage_schema"].find { |i| i[:name] == params[:name] }
-
-  if conf_obj.nil?
-    node.run_state["graphite"]["storage_schema"] << {
-      :name => params[:name],
-      :config => params.fetch(:config, {})
-    }
-  else
-    index = node.run_state["graphite"]["storage_schema"].index(conf_obj)
-    node.run_state["graphite"]["storage_schema"][index][:config].merge!(params[:config])
+  graphite_storage_conf_accumulator params[:name] do
+    config carbon_config
+    action carbon_action
   end
-
-
-  Chef::Log.info("!!!!DEBUG graphite run_state: #{node.run_state['graphite']}")
 end
