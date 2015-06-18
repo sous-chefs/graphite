@@ -1,7 +1,9 @@
+require "rspec/matchers"
 require "chefspec"
 require "chefspec/librarian"
 require_relative "support/example_groups/provider_example_group"
 require_relative "support/example_groups/resource_example_group"
+require_relative "support/example_groups/definition_example_group"
 
 RSpec.configure do |config|
   config.log_level = :fatal
@@ -16,6 +18,12 @@ RSpec.configure do |config|
     :type => :resource,
     :example_group => lambda { |example_group, metadata|
       metadata[:type].nil? && %r{spec/resources/} =~ example_group[:file_path]
+    }
+
+  config.include Chef::DefinitionExampleGroup,
+    :type => :definition,
+    :example_group => lambda { |example_group, metadata|
+      metadata[:type].nil? && %r{spec/definitions/} =~ example_group[:file_path]
     }
 end
 

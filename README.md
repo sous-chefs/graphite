@@ -86,7 +86,7 @@ the all begin with an underscore `_`.
 
 It's like a treasure hunt.
 
-## Custom Resources
+## Custom Resources and Definitions
 
 ### Carbon daemons
 Management for the various
@@ -98,9 +98,9 @@ receive your metrics and write them to disk.
    first with one of the `graphite_carbon_*` resources. Multiple
    daemons can be run by using multiple resources with names such as
    `cache:a`, `cache:b`, etc..
-* `graphite_carbon_aggregator`: data driven resource for carbon-aggregator configuration
-* `graphite_carbon_cache`: data driven resource for carbon-cache configuration
-* `graphite_carbon_relay`: data driven resource for carbon-cache configuration
+* `graphite_carbon_aggregator`: data driven definition for carbon-aggregator configuration
+* `graphite_carbon_cache`: data driven definition for carbon-cache configuration
+* `graphite_carbon_relay`: data driven definition for carbon-cache configuration
 
 ### Storage
 [Whisper](https://github.com/graphite-project/whisper) is
@@ -110,7 +110,7 @@ your own wrapper if you live on the edge and prefer [Ceres](https://github.com/g
 
 * `graphite_storage`: makes a directory intended for graphite storage,
   installs whisper
-* `graphite_storage_schema`: data driven resource for storage schema 
+* `graphite_storage_schema`: data driven definition for storage schema
 
 ### Graphite Web
 Write the configuration file for [Graphite Web](https://github.com/graphite-project/graphite-web)
@@ -127,15 +127,15 @@ Yes it's [writing python via ruby](https://github.com/hw-cookbooks/graphite/blob
 A runit service definition is provided to [start a uwsgi process](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L105), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
 
 ### Accumulators
-Due to the graphite config file format, the data driven resources use
-an accumulator pattern to find the appropriate resources in the run
-context and extract provided configuration data. You should never need
-to use these directly, but you're welcome to go crazy.
+Due to the graphite config file format, the data driven definitions
+use an accumulator pattern to accumulate configuration data and inject
+it into the final configuration file. You should never need to use
+these directly, but you're welcome to go crazy.
 
-* `graphite_carbon_conf_accumulator`: lookup named carbon resources in
-  run context and gather config
-* `graphite_storage_conf_accumulator`: lookup named storage schema
-  resources in run context and gather config
+* `graphite_carbon_conf_accumulator`: creates *carbon.conf*
+  configuration file using accumulator pattern.
+* `graphite_storage_conf_accumulator`: creates
+  *storage-schemas.conf* configuration file using accumulator pattern.
 
 If you look at the
 [example cookbook recipe](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L6)

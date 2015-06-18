@@ -1,10 +1,10 @@
-define :graphite_carbon_relay do
+define :graphite_carbon_aggregator do
   carbon_backend = params[:backend]
   carbon_config = params[:config]
   carbon_action = params[:action]
 
   graphite_carbon_conf_accumulator params[:name] do
-    type :relay
+    type :aggregator
     backend carbon_backend
     config carbon_config
     action carbon_action
