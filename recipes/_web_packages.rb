@@ -27,7 +27,13 @@ python_pip 'django' do
   version lazy { node['graphite']['django_version'] }
 end
 
-python_pip 'django-tagging'
+# The latest version is 0.4, which causes an importError
+# ImportError: No module named fields
+# with `python manage.py syncdb --noinput`
+python_pip 'django-tagging' do
+  version "0.3.6"
+end
+
 python_pip 'pytz'
 python_pip 'pyparsing'
 python_pip 'python-memcached'
