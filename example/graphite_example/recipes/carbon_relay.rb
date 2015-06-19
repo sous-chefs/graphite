@@ -11,3 +11,5 @@ graphite_carbon_relay "default" do
       ]
     })
 end
+
+graphite_service "relay"

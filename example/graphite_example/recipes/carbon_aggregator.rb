@@ -13,3 +13,5 @@ graphite_carbon_aggregator "default" do
       ]
     })
 end
+
+graphite_service "aggregator"

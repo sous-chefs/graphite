@@ -14,7 +14,7 @@ platforms:
     - recipe[yum-epel]
     
 suites:
-- name: default
+- name: single-node
   run_list:
   - recipe[runit]
   - recipe[graphite_example::single_node]
@@ -24,3 +24,15 @@ suites:
       uwsgi:
         workers: 4
         listen_http: true
+- name: carbon-aggregator
+  run_list:
+  - recipe[runit]
+  - recipe[graphite_example::carbon_aggregator]
+- name: carbon-cache
+  run_list:
+  - recipe[runit]
+  - recipe[graphite_example::carbon_cache]
+- name: carbon-relay
+  run_list:
+  - recipe[runit]
+  - recipe[graphite_example::carbon_relay]
