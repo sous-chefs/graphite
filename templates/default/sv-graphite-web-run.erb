@@ -1,17 +1,22 @@
 #!/bin/sh
+
+ulimit -H -n <%= node['graphite']['limits']['nofile'] %>
+ulimit -n <%= node['graphite']['limits']['nofile'] %>
+
 exec 2>&1
-exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
+exec chpst -- \
+    uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 <% if node['graphite']['uwsgi']['carbon'] -%>
---plugins carbon --carbon <%= node['graphite']['uwsgi']['carbon'] %> \
+    --plugins carbon --carbon <%= node['graphite']['uwsgi']['carbon'] %> \
 <% end -%>
 <% if node['graphite']['uwsgi']['listen_http'] -%>
---http :<%= node['graphite']['uwsgi']['port'] %> \
+    --http :<%= node['graphite']['uwsgi']['port'] %> \
 <% end -%>
---pythonpath <%= node['graphite']['base_dir'] %>/lib \
---pythonpath <%= node['graphite']['base_dir'] %>/webapp/graphite \
---wsgi-file <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi.example \
---uid <%= node['graphite']['user'] %> --gid <%= node['graphite']['group'] %> \
---no-orphans --master \
---procname graphite-web \
---die-on-term \
---socket <%= node['graphite']['uwsgi']['socket'] %>
+    --pythonpath <%= node['graphite']['base_dir'] %>/lib \
+    --pythonpath <%= node['graphite']['base_dir'] %>/webapp/graphite \
+    --wsgi-file <%= node['graphite']['base_dir'] %>/conf/graphite.wsgi.example \
+    --uid <%= node['graphite']['user'] %> --gid <%= node['graphite']['group'] %> \
+    --no-orphans --master \
+    --procname graphite-web \
+    --die-on-term \
+    --socket <%= node['graphite']['uwsgi']['socket'] %>
