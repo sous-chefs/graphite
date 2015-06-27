@@ -24,7 +24,7 @@ end
 use_inline_resources
 
 action :create do
-  set_updated { install_python_pip }
+  set_updated { install_python_pip } if new_resource.install
 end
 
 def install_python_pip
