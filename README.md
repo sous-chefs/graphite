@@ -111,6 +111,7 @@ your own wrapper if you live on the edge and prefer [Ceres](https://github.com/g
 * `graphite_storage`: makes a directory intended for graphite storage,
   installs whisper
 * `graphite_storage_schema`: data driven resource for storage schema 
+* `graphite_storage_aggregation`: data driven resource for storage aggregation
 
 ### Graphite Web
 Write the configuration file for [Graphite Web](https://github.com/graphite-project/graphite-web)
@@ -135,6 +136,8 @@ to use these directly, but you're welcome to go crazy.
 * `graphite_carbon_conf_accumulator`: lookup named carbon resources in
   run context and gather config
 * `graphite_storage_conf_accumulator`: lookup named storage schema
+  resources in run context and gather config
+* `graphite_storage_aggregation_conf_accumulator`: lookup named storage aggregation
   resources in run context and gather config
 
 If you look at the
