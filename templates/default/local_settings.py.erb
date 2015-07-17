@@ -25,12 +25,15 @@ DEBUG = <%= @debug %>
 # If using RRD files and rrdcached, set to the address or socket of the daemon
 #FLUSHRRDCACHED = 'unix:/var/run/rrdcached.sock'
 
+
+
+<% if @memcached_hosts.length > 0 -%>
+
 # This lists the memcached servers that will be used by this webapp.
 # In Graphite 0.9.12 they reference memcache incorrectly with Django 1.3+
 # This will set memcache manually until the next version is available
 # in linux.
 
-<% if @memcached_hosts -%>
 CACHE_MIDDLEWARE_SECONDS = <%= @memcached_seconds %>
 CACHES = {
     'default': {
