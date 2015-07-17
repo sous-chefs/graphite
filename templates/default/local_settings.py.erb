@@ -26,20 +26,21 @@ DEBUG = <%= @debug %>
 #FLUSHRRDCACHED = 'unix:/var/run/rrdcached.sock'
 
 # This lists the memcached servers that will be used by this webapp.
-# If you have a cluster of webapps you should ensure all of them
-# have the *exact* same value for this setting. That will maximize cache
-# efficiency. Setting MEMCACHE_HOSTS to be empty will turn off use of
-# memcached entirely.
-#
-# You should not use the loopback address (127.0.0.1) here if using clustering
-# as every webapp in the cluster should use the exact same values to prevent
-# unneeded cache misses. Set to [] to disable caching of images and fetched data
-MEMCACHE_HOSTS = [ <%= @memcached_hosts.map do |server|
-  "\"#{server}\""
+# In Graphite 0.9.12 they reference memcache incorrectly with Django 1.3+
+# This will set memcache manually until the next version is available
+# in linux.
+
+<% if @memcached_hosts -%>
+CACHE_MIDDLEWARE_SECONDS = <%= @memcached_seconds %>
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': [<%= @memcached_hosts.map do |server|
+  "'#{server}'"
 end.join(', ') %> ]
-
-#DEFAULT_CACHE_DURATION = 60 # Cache images and data for 1 minute
-
+    }
+}
+<% end -%>
 
 #####################################
 # Filesystem Paths #

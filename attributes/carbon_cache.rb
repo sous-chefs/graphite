@@ -19,6 +19,8 @@ default['graphite']['carbon']['max_creates_per_minute'] = 'inf'
 default['graphite']['carbon']['max_updates_per_second'] = '1000'
 default['graphite']['carbon']['log_whisper_updates'] = 'False'
 default['graphite']['carbon']['whisper_autoflush'] = 'False'
+default['graphite']['carbon']['max_updates_per_second_on_shutdown'] = '2000'
+default['graphite']['carbon']['cache_write_stategy'] = 'sorted'
 
 default['graphite']['storage_schemas'] = [
   {
