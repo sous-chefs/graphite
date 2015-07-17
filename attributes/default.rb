@@ -41,6 +41,7 @@ default['graphite']['web']['admin_email'] = 'admin@org.com'
 default['graphite']['web']['cluster_servers'] = []
 default['graphite']['web']['carbonlink_hosts'] = []
 default['graphite']['web']['memcached_hosts'] = ['127.0.0.1:11211']
+default['graphite']['web']['memcached_seconds'] = 60
 default['graphite']['web']['database']['NAME'] = node['graphite']['storage_dir'] + '/graphite.db'
 default['graphite']['web']['database']['ENGINE'] = 'django.db.backends.sqlite3'
 default['graphite']['web']['database']['USER'] = ''
