@@ -10,7 +10,6 @@ Library cookbook for installation and configuration of [Graphite](http://graphit
 Consult the Graphite documentation for more information:
 
 - http://graphite.readthedocs.org/en/latest/
-- http://graphite.wikidot.com/
 - https://github.com/graphite-project
 
 ## Platforms
@@ -110,7 +109,7 @@ your own wrapper if you live on the edge and prefer [Ceres](https://github.com/g
 
 * `graphite_storage`: makes a directory intended for graphite storage,
   installs whisper
-* `graphite_storage_schema`: data driven resource for storage schema 
+* `graphite_storage_schema`: data driven resource for storage schema
 
 ### Graphite Web
 Write the configuration file for [Graphite Web](https://github.com/graphite-project/graphite-web)
