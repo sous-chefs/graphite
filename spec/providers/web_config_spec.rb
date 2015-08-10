@@ -40,7 +40,7 @@ describe Chef::Provider::GraphiteWebConfig do
 
       it "inserts a header" do
         expect(content).to match(regexify_line(
-          "# This file is managed by Chef, your changes *will* be overwritten!"
+                                   "# This file is managed by Chef, your changes *will* be overwritten!"
         ))
       end
 

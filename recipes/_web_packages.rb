@@ -39,8 +39,6 @@ python_pip 'graphite_web' do
     node['graphite']['package_names']['graphite_web'][key]
   }
   version lazy {
-    if node['graphite']['install_type'] == 'package'
-      node['graphite']['version']
-    end
+    node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
 end
