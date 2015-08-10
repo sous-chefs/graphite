@@ -1,7 +1,7 @@
 # Graphite Cookbook
 
-[![Build Status](https://travis-ci.org/hw-cookbooks/graphite.png?branch=teh-futur)](https://travis-ci.org/hw-cookbooks/graphite)
-[![Code Climate](https://codeclimate.com/github/hw-cookbooks/graphite.png)](https://codeclimate.com/github/hw-cookbooks/graphite)
+[![Build Status](https://travis-ci.org/hw-cookbooks/graphite.svg?branch=master)](https://travis-ci.org/hw-cookbooks/graphite)
+[![Code Climate](https://codeclimate.com/github/hw-cookbooks/graphite/badges/gpa.svg)](https://codeclimate.com/github/hw-cookbooks/graphite)
 
 ## Description
 
