@@ -1,4 +1,8 @@
 #!/bin/sh
+
+ulimit -H -n <%= node['graphite']['limits']['nofile'] %>
+ulimit -n <%= node['graphite']['limits']['nofile'] %>
+
 exec 2>&1
 exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 <% if node['graphite']['uwsgi']['carbon'] -%>

@@ -25,6 +25,7 @@ default['graphite']['user'] = 'graphite'
 default['graphite']['group'] = 'graphite'
 default['graphite']['base_dir'] = '/opt/graphite'
 default['graphite']['doc_root'] = '/opt/graphite/webapp'
+default['graphite']['limits']['nofile'] = 1024
 default['graphite']['storage_dir'] = '/opt/graphite/storage'
 default['graphite']['install_type'] = 'package'
 default['graphite']['package_names'] = {
