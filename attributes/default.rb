@@ -18,7 +18,7 @@
 #
 
 default['graphite']['version'] = '0.9.12'
-default['graphite']['twisted_version'] = '13.1'
+default['graphite']['twisted_version'] = '13.1.0'
 default['graphite']['django_version'] = '1.5.5'
 default['graphite']['password'] = 'change_me'
 default['graphite']['user'] = 'graphite'
