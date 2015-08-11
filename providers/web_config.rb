@@ -20,8 +20,6 @@ def whyrun_supported?
   true
 end
 
-use_inline_resources
-
 action :create do
   set_updated { manage_file(:create) }
 end

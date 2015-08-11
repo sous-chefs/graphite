@@ -17,22 +17,5 @@
 # limitations under the License.
 #
 
-file "carbon.conf" do
-  path "#{node['graphite']['base_dir']}/conf/carbon.conf"
-  owner node['graphite']['user']
-  group node['graphite']['group']
-  mode 0644
-  action :nothing
-end
-
 graphite_carbon_conf_accumulator "default"
-
-file "storage-schemas.conf" do
-  path "#{node['graphite']['base_dir']}/conf/storage-schemas.conf"
-  owner node['graphite']['user']
-  group node['graphite']['group']
-  mode 0644
-  action :nothing
-end
-
 graphite_storage_conf_accumulator "default"
