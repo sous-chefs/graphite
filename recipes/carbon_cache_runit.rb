@@ -25,6 +25,7 @@ node['graphite']['carbon']['caches'].each do |key,data|
     log_template_name 'carbon'
     finish_script_template_name 'carbon'
     finish true
+    sv_timeout 60
     default_logger    true
     options(:name => "cache", :instance => key)
     subscribes :restart, "template[#{node['graphite']['base_dir']}/conf/carbon.conf]"
