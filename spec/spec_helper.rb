@@ -7,14 +7,14 @@ RSpec.configure do |config|
   config.log_level = :fatal
 
   config.include Chef::ProviderExampleGroup,
-    :type => :provider,
-    :example_group => lambda { |example_group, metadata|
+    type: :provider,
+    example_group: lambda { |example_group, metadata|
       metadata[:type].nil? && %r{spec/providers/} =~ example_group[:file_path]
     }
 
   config.include Chef::ResourceExampleGroup,
-    :type => :resource,
-    :example_group => lambda { |example_group, metadata|
+    type: :resource,
+    example_group: lambda { |example_group, metadata|
       metadata[:type].nil? && %r{spec/resources/} =~ example_group[:file_path]
     }
 end

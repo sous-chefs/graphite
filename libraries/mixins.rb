@@ -29,9 +29,9 @@ module ChefGraphite
                  nil
                end
         {
-          :type => type,
-          :name => resource.name,
-          :config => resource.config
+          type: type,
+          name: resource.name,
+          config: resource.config
         }
       end
     end

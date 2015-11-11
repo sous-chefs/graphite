@@ -20,5 +20,5 @@
 actions :create, :delete
 default_action :create
 
-attribute :name, :kind_of => String, :default => nil, :name_attribute => true
-attribute :config, :kind_of => Hash, :default => nil
+attribute :name, kind_of: String, default: nil, name_attribute: true
+attribute :config, kind_of: Hash, default: nil

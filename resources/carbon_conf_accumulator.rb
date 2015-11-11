@@ -20,8 +20,8 @@
 actions :create
 default_action :create
 
-attribute :name, :kind_of => String, :default => nil, :name_attribute => true
-attribute :file_resource, :kind_of => String, :default => "file[carbon.conf]"
+attribute :name, kind_of: String, default: nil, name_attribute: true
+attribute :file_resource, kind_of: String, default: "file[carbon.conf]"
 
 def initialize(*args)
   super
