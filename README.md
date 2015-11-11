@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/hw-cookbooks/graphite.svg?branch=master)](https://travis-ci.org/hw-cookbooks/graphite)
 [![Code Climate](https://codeclimate.com/github/hw-cookbooks/graphite/badges/gpa.svg)](https://codeclimate.com/github/hw-cookbooks/graphite)
+[![Cookbook Version](https://img.shields.io/cookbook/v/graphite.svg)](https://supermarket.chef.io/cookbooks/graphite)
+
 
 ## Description
 
@@ -12,12 +14,23 @@ Consult the Graphite documentation for more information:
 - http://graphite.readthedocs.org/en/latest/
 - https://github.com/graphite-project
 
-## Platforms
+
+## Requirements
+#### Platforms
 
 * Ubuntu
 * Debian
 * RHEL and derivatives (Centos, Amazon Linux, Oracle Linux, Scientific Linux)
 * Fedora
+
+#### Chef
+* Chef 11+
+
+#### Cookbooks
+* ark
+* java
+* windows
+
 
 ## Attributes
 See
@@ -47,6 +60,7 @@ You can override the
 where `#{name}` is one of `whisper`, `carbon` or `graphite_web`, to
 set a custom install path. By default a source install will use the
 github master branch.
+
 
 ## Recipes
 ### default
