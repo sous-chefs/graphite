@@ -13,8 +13,8 @@ end
 
 group :style do
   gem 'inch'
-  gem 'rubocop', '~> 0.33.0'
-  gem 'foodcritic', '~> 4.0'
+  gem 'rubocop', '~> 0.35.0'
+  gem 'foodcritic', '~> 5.0'
 end
 
 group :test do
