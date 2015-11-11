@@ -28,7 +28,7 @@ def initialize(*args)
 end
 
 def service_name
-  "carbon-" + name.gsub(":", "-")
+  "carbon-" + name.tr(":", "-")
 end
 
 def type

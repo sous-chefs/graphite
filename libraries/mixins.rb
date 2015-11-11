@@ -25,8 +25,6 @@ module ChefGraphite
       Array(resources).map do |resource|
         type = if whitelist.include?(resource.resource_name.to_sym)
                  resource.resource_name.to_s.split("_").last
-               else
-                 nil
                end
         {
           type: type,
