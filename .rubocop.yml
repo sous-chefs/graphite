@@ -82,3 +82,6 @@ BlockNesting:
 
 Encoding:
   Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
