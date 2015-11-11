@@ -1,4 +1,3 @@
----
 driver:
   name: vagrant
 
@@ -6,13 +5,20 @@ provisioner:
   name: chef_zero
 
 platforms:
-- name: ubuntu-12.04
-  run_list:
-    - recipe[ubuntu]
-- name: centos-6.4
-  run_list:
-    - recipe[yum-epel]
-    
+  - name: centos-5.11
+  - name: centos-6.7
+  - name: centos-7.1
+  - name: debian-7.8
+    run_list: apt::default
+  - name: debian-8.1
+    run_list: apt::default
+  - name: fedora-21
+  - name: fedora-22
+  - name: ubuntu-12.04
+    run_list: apt::default
+  - name: ubuntu-14.04
+    run_list: apt::default
+
 suites:
 - name: default
   run_list:
