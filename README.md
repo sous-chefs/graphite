@@ -1,7 +1,7 @@
 # Graphite Cookbook
 
-[![Build Status](https://travis-ci.org/hw-cookbooks/graphite.png?branch=teh-futur)](https://travis-ci.org/hw-cookbooks/graphite)
-[![Code Climate](https://codeclimate.com/github/hw-cookbooks/graphite.png)](https://codeclimate.com/github/hw-cookbooks/graphite)
+[![Build Status](https://travis-ci.org/hw-cookbooks/graphite.svg?branch=master)](https://travis-ci.org/hw-cookbooks/graphite)
+[![Code Climate](https://codeclimate.com/github/hw-cookbooks/graphite/badges/gpa.svg)](https://codeclimate.com/github/hw-cookbooks/graphite)
 
 ## Description
 
@@ -10,7 +10,6 @@ Library cookbook for installation and configuration of [Graphite](http://graphit
 Consult the Graphite documentation for more information:
 
 - http://graphite.readthedocs.org/en/latest/
-- http://graphite.wikidot.com/
 - https://github.com/graphite-project
 
 ## Platforms
@@ -110,7 +109,7 @@ your own wrapper if you live on the edge and prefer [Ceres](https://github.com/g
 
 * `graphite_storage`: makes a directory intended for graphite storage,
   installs whisper
-* `graphite_storage_schema`: data driven resource for storage schema 
+* `graphite_storage_schema`: data driven resource for storage schema
 
 ### Graphite Web
 Write the configuration file for [Graphite Web](https://github.com/graphite-project/graphite-web)

@@ -8,7 +8,8 @@ describe "graphite::_web_packages" do
 
   context "on centos" do
 
-    let(:runner) do ChefSpec::Runner.new(
+    let(:runner) do
+      ChefSpec::Runner.new(
         platform: "centos", version: "6.5"
       ).tap { |runner| runner.node.set["platform_family"] = "rhel" }
     end

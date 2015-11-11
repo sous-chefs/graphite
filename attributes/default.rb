@@ -18,13 +18,14 @@
 #
 
 default['graphite']['version'] = '0.9.12'
-default['graphite']['twisted_version'] = '13.1'
+default['graphite']['twisted_version'] = '13.1.0'
 default['graphite']['django_version'] = '1.5.5'
 default['graphite']['password'] = 'change_me'
 default['graphite']['user'] = 'graphite'
 default['graphite']['group'] = 'graphite'
 default['graphite']['base_dir'] = '/opt/graphite'
 default['graphite']['doc_root'] = '/opt/graphite/webapp'
+default['graphite']['limits']['nofile'] = 1024
 default['graphite']['storage_dir'] = '/opt/graphite/storage'
 default['graphite']['install_type'] = 'package'
 default['graphite']['package_names'] = {
@@ -34,7 +35,7 @@ default['graphite']['package_names'] = {
   },
   'carbon' => {
     'package' => 'carbon',
-    'source' => 'https://github.com/graphite-project/graphite-web/zipball/master'
+    'source' => 'https://github.com/graphite-project/carbon/zipball/master'
   },
   'graphite_web' => {
     'package' => 'graphite-web',
