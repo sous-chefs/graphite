@@ -39,6 +39,8 @@ Berksfile.lock
 .kitchen.local.yml
 vendor/
 .coverage/
+Cheffile.lock
+.librarian/
 
 #vagrant stuff
 .vagrant/
