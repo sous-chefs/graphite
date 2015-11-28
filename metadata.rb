@@ -17,10 +17,12 @@ supports 'fedora'
 
 depends  'python'
 depends  'runit', '~> 1.0'
-depends  'memcached'
 depends  'build-essential'
 depends  'yum-epel'
 
 suggests 'systemd'
 suggests 'graphiti'
 suggests 'delayed_evaluator'
+
+source_url 'https://github.com/hw-cookbooks/graphite' if respond_to?(:source_url)
+issues_url 'https://github.com/hw-cookbooks/graphite/issues' if respond_to?(:issues_url)

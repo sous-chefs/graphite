@@ -80,10 +80,8 @@ AlignParameters:
 BlockNesting:
   Max: 5
 
-# TODO convert to 1.9 every
-# Offences: 106
-HashSyntax:
+Encoding:
   Enabled: false
 
-Encoding:
+Metrics/AbcSize:
   Enabled: false

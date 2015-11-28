@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'librarian-chef'
-gem 'emeril', :group => :release
+gem 'emeril', group: :release
 
 group :development do
   gem 'guard-rspec'

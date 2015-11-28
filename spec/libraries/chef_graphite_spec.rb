@@ -8,7 +8,7 @@ describe ChefGraphite do
     let(:input) do
       [
         { type: "beta", name: "b", config: { "A_KEY" => [true, "#.blah", 4] } },
-        { type: "alpha", name: "a", config: { :another_key => "something" } },
+        { type: "alpha", name: "a", config: { another_key: "something" } },
         { type: "beta", name: "default", config: { "is_frog" => true } }
       ]
     end
@@ -82,7 +82,7 @@ describe ChefGraphite do
     let(:resources) do
       [
         { type: "beta", name: "b", config: { "A_KEY" => [true, "#.blah", 4] } },
-        { type: "alpha", name: "a", config: { :another_key => "something" } },
+        { type: "alpha", name: "a", config: { another_key: "something" } },
         { type: "beta", name: "default", config: { "is_frog" => true } }
       ]
     end
