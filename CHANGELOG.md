@@ -3,6 +3,16 @@ Graphite  CHANGELOG
 
 This file is used to list changes made in each version of the graphite cookbook.
 
+## 1.0.4
+- Syntax and styling updates
+- Use full Twisted version number
+- Manage graphite nofile ulimit
+- Fixes carbon source
+- Adds License and Code of Conduct
+### Known Issues
+- Reordering of Carbon .ini [241](https://github.com/hw-cookbooks/graphite/issues/241)
+- Graphite web timeout when restarting [224](https://github.com/hw-cookbooks/graphite/issues/224)
+
 ## 1.0.2
 - README improvements to address resource usage and removal of Apache
   dependency ([@webframp][], [#187][])
