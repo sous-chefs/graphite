@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'librarian-chef'
-gem 'emeril', :group => :release
+gem 'emeril', group: :release
 
 group :development do
   gem 'guard-rspec'
@@ -13,8 +13,8 @@ end
 
 group :style do
   gem 'inch'
-  gem 'rubocop', '~> 0.19.0'
-  gem 'foodcritic', '~> 3.0'
+  gem 'rubocop', '~> 0.35.0'
+  gem 'foodcritic', '~> 5.0'
 end
 
 group :test do

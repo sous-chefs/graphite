@@ -20,7 +20,7 @@
 actions :enable, :disable, :restart, :reload
 default_action :enable
 
-attribute :name, :kind_of => String, :default => nil, :name_attribute => true
+attribute :name, kind_of: String, default: nil, name_attribute: true
 
 def initialize(*args)
   super
@@ -28,7 +28,7 @@ def initialize(*args)
 end
 
 def service_name
-  "carbon-" + name.gsub(":", "-")
+  "carbon-" + name.tr(":", "-")
 end
 
 def type

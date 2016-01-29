@@ -43,8 +43,8 @@ describe "graphite::carbon" do
     it "installs carbon from a url with no version set" do
       expect(chef_run).to install_python_pip("carbon").
         with(
-        version: nil,
-        package_name: "https://github.com/graphite-project/graphite-web/zipball/master"
+          version: nil,
+          package_name: "https://github.com/graphite-project/graphite-web/zipball/master"
         )
     end
 

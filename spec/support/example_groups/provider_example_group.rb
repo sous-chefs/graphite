@@ -4,7 +4,7 @@ class Chef
     def using_lw_resource(cookbook, lwrp)
       name = class_name_for_lwrp(cookbook, lwrp)
       resource_file = run_context.cookbook_collection[cookbook].
-        resource_filenames.find { |f| ::File.basename(f, ".rb") == lwrp }
+                      resource_filenames.find { |f| ::File.basename(f, ".rb") == lwrp }
 
       using_libraries(cookbook)
 
@@ -20,7 +20,7 @@ class Chef
     def using_lw_provider(cookbook, lwrp)
       name = class_name_for_lwrp(cookbook, lwrp)
       resource_file = run_context.cookbook_collection[cookbook].
-        provider_filenames.find { |f| ::File.basename(f, ".rb") == lwrp }
+                      provider_filenames.find { |f| ::File.basename(f, ".rb") == lwrp }
 
       using_libraries(cookbook)
 
@@ -34,8 +34,8 @@ class Chef
     end
 
     def using_libraries(cookbook)
-      run_context.cookbook_collection[cookbook].library_filenames.each do
-        |f| require(f)
+      run_context.cookbook_collection[cookbook].library_filenames.each do |f|
+        require(f)
       end
     end
 

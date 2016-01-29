@@ -1,9 +1,13 @@
 AllCops:
-  Excludes:
+  Exclude:
     - vendor/**
     - tmp/**
     - cookbooks/**
     - bin/**
+
+# allow for alignment of indentations
+Style/SingleSpaceBeforeFirstArg:
+  Enabled: false
 
 # Let's not argue over this...
 StringLiterals:
@@ -16,15 +20,13 @@ DotPosition:
 
 # Whitespace between modules/classes/methods can be helpful to read and
 # don't hurt anybody.
-EmptyLinesAroundBody:
+Style/EmptyLinesAroundBlockBody:
   Enabled: false
-
-# I very much agree with the Jim Weirich school of thought on usage of do/end
-# vs. {...}:
-# * http://devblog.avdi.org/2011/07/26/the-procedurefunction-block-convention-in-ruby/
-# * http://talklikeaduck.denhaven2.com/2007/10/02/ruby-blocks-do-or-brace
-# * http://onestepback.org/index.cgi/Tech/Ruby/BraceVsDoEnd.rdoc
-Blocks:
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/EmptyLinesAroundMethodBody:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
   Enabled: false
 
 # When this is useful, it's useful, every other time it's entirely surprising
@@ -56,7 +58,7 @@ ParenthesesAsGroupedExpression:
 BracesAroundHashParameters:
   Enabled: false
 
-# Emacs ruby-mode handles this just fine thanks 
+# Emacs ruby-mode handles this just fine thanks
 IndentHash:
   Enabled: false
 
@@ -78,10 +80,8 @@ AlignParameters:
 BlockNesting:
   Max: 5
 
-# TODO convert to 1.9 every
-# Offences: 106
-HashSyntax:
+Encoding:
   Enabled: false
 
-Encoding:
+Metrics/AbcSize:
   Enabled: false

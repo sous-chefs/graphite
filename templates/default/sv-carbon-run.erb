@@ -7,6 +7,9 @@ user="<%= node['graphite']['user'] %>"
 storage_path="<%= node['graphite']['storage_dir'] %>"
 daemon="<%= node['graphite']['base_dir']%>/bin/carbon-${type}.py"
 
+ulimit -H -n <%= node['graphite']['limits']['nofile'] %>
+ulimit -n <%= node['graphite']['limits']['nofile'] %>
+
 exec 2>&1
 
 exec chpst \

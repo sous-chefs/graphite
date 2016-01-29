@@ -1,11 +1,30 @@
 #
+# Cookbook Name:: graphite
+# Library:: helpers
+#
+# Copyright 2014, Heavy Water Ops, LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+#
 # A function which assists in carbon-cache service discover
 #
 def find_carbon_cache_services(node)
   caches = []
   case node['graphite']['carbon']['service_type']
   when 'runit'
-    node['graphite']['carbon']['caches'].each do |instance, data|
+    node['graphite']['carbon']['caches'].each do |instance, _data|
       caches << "runit_service[carbon-cache-#{instance}]"
     end
   else

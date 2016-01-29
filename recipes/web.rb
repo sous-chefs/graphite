@@ -56,6 +56,6 @@ template "#{basedir}/conf/graphTemplates.conf" do
   source 'graphTemplates.conf.erb'
   mode 00755
   variables(
-    :graph_templates => node['graphite']['graph_templates']
+    graph_templates: node['graphite']['graph_templates']
   )
 end
