@@ -17,11 +17,25 @@
 # limitations under the License.
 #
 
+service_type = node['graphite']['carbon']['service_type']
+include_recipe "#{cookbook_name}::#{recipe_name}_cache_#{service_type}"
+
 package 'python-twisted'
 package 'python-simplejson'
 
-package "graphite-carbon" do
-  action :upgrade
+case service_type
+when 'runit'
+  package "graphite-carbon" do
+    action :upgrade
+    node['graphite']['carbon']['caches'].each do |key,data|
+      notifies :restart, "service[carbon-cache-#{key}]"
+    end
+  end
+else
+  package "graphite-carbon" do
+    action :upgrade
+    notifies :restart, 'service[carbon-cache]'
+  end
 end
 
 directory "#{node['graphite']['base_dir']}/conf" do
