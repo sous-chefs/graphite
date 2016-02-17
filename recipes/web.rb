@@ -37,7 +37,11 @@ else
 end
 
 package 'graphite-web' do
+  # The package is attempting to overwrite /etc/graphite/local_settings.py,
+  # which causes a conflict.  We want the old version.
+  options "-o Dpkg::Options::='--force-confold'"
   action :upgrade
+  notifies :restart, graphite_web_service_resource
 end
 
 directory "#{storagedir}/log/webapp" do
