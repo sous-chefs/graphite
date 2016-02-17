@@ -18,7 +18,6 @@
 #
 
 service_type = node['graphite']['carbon']['service_type']
-include_recipe "#{cookbook_name}::#{recipe_name}_cache_#{service_type}"
 
 package 'python-twisted'
 package 'python-simplejson'
@@ -28,13 +27,13 @@ when 'runit'
   package "graphite-carbon" do
     action :upgrade
     node['graphite']['carbon']['caches'].each do |key,data|
-      notifies :restart, "service[carbon-cache-#{key}]"
+      notifies :restart, "service[carbon-cache-#{key}]", :delayed
     end
   end
 else
   package "graphite-carbon" do
     action :upgrade
-    notifies :restart, 'service[carbon-cache]'
+    notifies :restart, 'service[carbon-cache]', :delayed
   end
 end
 
@@ -72,3 +71,5 @@ directory "#{node['graphite']['base_dir']}/lib/twisted/plugins/" do
   group node['graphite']['group_account']
   recursive true
 end
+
+include_recipe "#{cookbook_name}::#{recipe_name}_cache_#{service_type}"
