@@ -85,7 +85,7 @@ template "/etc/graphite/local_settings.py" do
             :login_url => node['graphite']['web']['auth']['LOGIN_URL'],
             :email => node['graphite']['web']['email'],
             :memcached_seconds => node['graphite']['web']['memcached_seconds'])
-  notifies :reload, graphite_web_service_resource
+  notifies :restart, graphite_web_service_resource
 end
 
 template "#{basedir}/conf/graphTemplates.conf" do
@@ -94,7 +94,7 @@ template "#{basedir}/conf/graphTemplates.conf" do
   variables(
     :graph_templates => node['graphite']['graph_templates']
   )
-  notifies :reload, graphite_web_service_resource
+  notifies :restart, graphite_web_service_resource
 end
 
 # Ubuntu modifies some of Graphite's base layout and does it in ways that aren't
