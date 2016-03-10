@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['graphite']['version'] = '0.10.0'
+default['graphite']['version'] = '0.9.15'
 default['graphite']['twisted_version'] = '13.2.0'
 default['graphite']['django_version'] = '1.6.1'
 default['graphite']['password'] = 'change_me'
