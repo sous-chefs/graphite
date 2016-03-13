@@ -39,7 +39,7 @@ action :delete do
 end
 
 def manage_python_pip(resource_action)
-  python_pip package_name do
+  python_package package_name do
     version new_resource.version if new_resource.version
     Chef::Log.info 'Installing whisper pip package'
     action resource_action

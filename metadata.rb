@@ -15,7 +15,7 @@ supports 'scientific'
 supports 'oracle'
 supports 'fedora'
 
-depends  'python'
+depends  'poise-python'
 depends  'runit', '~> 1.0'
 depends  'build-essential'
 depends  'yum-epel'

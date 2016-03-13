@@ -23,23 +23,23 @@ Array(node['graphite']['system_packages']).each do |p|
   package p
 end
 
-python_pip 'django' do
+python_package 'django' do
   version lazy { node['graphite']['django_version'] }
 end
 
 # The latest version is 0.4, which causes an importError
 # ImportError: No module named fields
 # with `python manage.py syncdb --noinput`
-python_pip 'django-tagging' do
+python_package 'django-tagging' do
   version "0.3.6"
 end
 
-python_pip 'pytz'
-python_pip 'pyparsing'
-python_pip 'python-memcached'
-python_pip 'uwsgi'
+python_package 'pytz'
+python_package 'pyparsing'
+python_package 'python-memcached'
+python_package 'uwsgi'
 
-python_pip 'graphite_web' do
+python_package 'graphite_web' do
   package_name lazy {
     key = node['graphite']['install_type']
     node['graphite']['package_names']['graphite_web'][key]

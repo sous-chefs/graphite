@@ -28,7 +28,7 @@ action :create do
 end
 
 def install_python_pip
-  python_pip new_resource.backend_name do
+  python_package new_resource.backend_name do
     new_resource.backend_attributes.each { |attr, value| send(attr, value) }
     Chef::Log.info "Installing storage backend: #{package_name}"
     action :install
