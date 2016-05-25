@@ -40,7 +40,7 @@ class Chef
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
         contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
-        contents << ChefGraphite.ini_file(resources_to_hashes(resources))
+        contents << ChefGraphite.ini_file(resources_to_hashes(resources),new_resource.sort_schemas)
         file_resource.content contents
 
         file_resource.run_action(:create)

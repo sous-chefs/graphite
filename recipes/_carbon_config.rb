@@ -25,7 +25,9 @@ file "carbon.conf" do
   action :nothing
 end
 
-graphite_carbon_conf_accumulator "default"
+graphite_carbon_conf_accumulator "default" do
+  sort_configs node['graphite']['sort_configs']
+end
 
 file "storage-schemas.conf" do
   path "#{node['graphite']['base_dir']}/conf/storage-schemas.conf"
@@ -35,4 +37,6 @@ file "storage-schemas.conf" do
   action :nothing
 end
 
-graphite_storage_conf_accumulator "default"
+graphite_storage_conf_accumulator "default" do
+  sort_schemas node['graphite']['sort_storage_schemas']
+end
