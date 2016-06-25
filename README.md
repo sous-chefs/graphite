@@ -52,6 +52,8 @@ for platform specific packages installed.
 - `default['graphite']['package_names']` - package name hash, indexed
   by 'install_type' attribute.
 - `default['graphite']['graph_templates']` - graphite template config hash
+- `default['graphite']['sort_storage_schemas']` - Boolean attribute to specify whether or not storage schemas should be sorted in alphabetical order
+- `default['graphite']['sort_configs']` - Boolean attribute to specify whether or not config stanzas should be sorted in alphabetical order
 
 ### Adjusting package source location
 
