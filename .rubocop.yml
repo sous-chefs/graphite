@@ -6,7 +6,7 @@ AllCops:
     - bin/**
 
 # allow for alignment of indentations
-Style/SingleSpaceBeforeFirstArg:
+Style/SpaceBeforeFirstArg:
   Enabled: false
 
 # Let's not argue over this...

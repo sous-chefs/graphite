@@ -42,7 +42,7 @@ end
 
 graphite_service "cache"
 
-base_dir = "#{node['graphite']['base_dir']}"
+base_dir = (node['graphite']['base_dir']).to_s
 
 graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
   config({

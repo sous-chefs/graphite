@@ -3,12 +3,12 @@ require 'spec_helper'
 describe 'graphite::carbon' do
   let(:chef_run) do
     ChefSpec::Runner.new { |node| node.automatic["platform_family"] = 'debian' }
-      .converge(described_recipe)
+                    .converge(described_recipe)
   end
 
   %w{python python::pip}.each do |r|
     it "includes the external #{r} recipe" do
-      expect(chef_run).to include_recipe("#{r}")
+      expect(chef_run).to include_recipe(r.to_s)
     end
   end
 

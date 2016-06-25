@@ -32,7 +32,7 @@ def service_name
 end
 
 def type
-  t, _ = name.split(":")
+  t, = name.split(":")
   t
 end
 

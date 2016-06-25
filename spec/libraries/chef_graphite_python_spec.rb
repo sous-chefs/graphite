@@ -139,8 +139,10 @@ describe ChefGraphite::PythonWriter do
                "jazzhands" => ["tap", true, 100],
                "tap" => { purple: 'pants' },
                "jazzercise" => false,
-               "icedance" => 1)).to eq(
-                 "{'jazzhands': ['tap', True, 100], 'tap': {'purple': 'pants'}, 'jazzercise': False, 'icedance': 1}")
+               "icedance" => 1
+      )).to eq(
+        "{'jazzhands': ['tap', True, 100], 'tap': {'purple': 'pants'}, 'jazzercise': False, 'icedance': 1}"
+      )
     end
   end
 

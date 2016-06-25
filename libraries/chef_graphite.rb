@@ -20,8 +20,8 @@
 module ChefGraphite
   class << self
 
-    def ini_file(hash,sort_tuple_data=true)
-      data = generate_conf_data(hash,sort_tuple_data)
+    def ini_file(hash, sort_tuple_data = true)
+      data = generate_conf_data(hash, sort_tuple_data)
 
       lines = Array.new
       data.each do |section, config|
@@ -32,8 +32,8 @@ module ChefGraphite
       lines.join("\n").concat("\n")
     end
 
-    def generate_conf_data(data,sort_tuple_data=true)
-      tuples = sort_tuple_data ?  sort_tuples(section_tuples(data)) : section_tuples(data)
+    def generate_conf_data(data, sort_tuple_data = true)
+      tuples = sort_tuple_data ? sort_tuples(section_tuples(data)) : section_tuples(data)
 
       result = Hash.new
       tuples.each { |tuple| result[tuple.first] = tuple.last }
