@@ -20,7 +20,7 @@
 actions :create, :delete, :upgrade
 default_action :create
 
-attribute :prefix, kind_of: String, default: nil, name_attribute: true
+attribute :prefix, kind_of: String, name_attribute: true
 attribute :package_name, kind_of: String, default: "whisper"
 attribute :version, kind_of: String, default: nil
 attribute :type, kind_of: String, default: "whisper"
