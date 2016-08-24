@@ -1,5 +1,5 @@
 require 'chefspec'
-require 'chefspec/librarian'
+require 'chefspec/berkshelf'
 require_relative 'support/example_groups/provider_example_group'
 require_relative 'support/example_groups/resource_example_group'
 
