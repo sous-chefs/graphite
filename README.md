@@ -11,7 +11,7 @@ Library cookbook for installation and configuration of [Graphite](http://graphit
 
 Consult the Graphite documentation for more information:
 
-- http://graphite.readthedocs.org/en/latest/
+- http://graphite.readthedocs.io/en/latest/
 - https://github.com/graphite-project
 
 
