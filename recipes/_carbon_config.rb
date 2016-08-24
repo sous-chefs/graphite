@@ -20,7 +20,7 @@
 directory "conf dir" do
   path "#{node['graphite']['base_dir']}/conf"
   owner node['graphite']['user']
-  group node['graphite']['user']
+  group node['graphite']['group']
   mode 0755
   recursive true
 end
