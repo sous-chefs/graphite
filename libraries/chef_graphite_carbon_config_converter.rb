@@ -18,7 +18,6 @@
 #
 
 module ChefGraphite
-
   # Converts an Array of resource-like Ruby Hashes and converts the collection
   # into a sorted Hash data structure suitable for serializing into an INI
   # format.
@@ -37,7 +36,6 @@ module ChefGraphite
   # @author Fletcher Nichol <fnichol@nichol.ca>
   #
   class CarbonConfigConverter
-
     # Creates a new CarbonConfigConverter using the provided Array of Hashes
     # as input data.
     #
@@ -90,7 +88,7 @@ module ChefGraphite
     def section_name(type, name)
       if type.nil?
         name
-      elsif name == "default"
+      elsif name == 'default'
         type
       else
         "#{type}:#{name}"
@@ -105,7 +103,7 @@ module ChefGraphite
     # @api private
     #
     def normalize(hash)
-      result = Hash.new
+      result = {}
       hash.each do |key, value|
         result[key.to_s.upcase] = normalize_value(value)
       end
@@ -121,10 +119,10 @@ module ChefGraphite
     #
     def normalize_value(obj)
       if obj.is_a? Array
-        obj.map { |o| normalize_value(o) }.join(", ")
+        obj.map { |o| normalize_value(o) }.join(', ')
       else
         value = obj.to_s
-        value.capitalize! if %w{true false}.include?(value)
+        value.capitalize! if %w(true false).include?(value)
         value
       end
     end

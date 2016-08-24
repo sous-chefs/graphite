@@ -28,7 +28,7 @@ def find_carbon_cache_services(node)
       caches << "runit_service[carbon-cache-#{instance}]"
     end
   else
-    caches << "service[carbon-cache]"
+    caches << 'service[carbon-cache]'
   end
   caches
 end

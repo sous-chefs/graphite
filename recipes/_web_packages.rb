@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "yum-epel" if platform_family?("rhel")
+include_recipe 'yum-epel' if platform_family?('rhel')
 
 Array(node['graphite']['system_packages']).each do |p|
   package p
@@ -31,7 +31,7 @@ end
 # ImportError: No module named fields
 # with `python manage.py syncdb --noinput`
 python_pip 'django-tagging' do
-  version "0.3.6"
+  version '0.3.6'
 end
 
 python_pip 'pytz'

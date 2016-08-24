@@ -25,7 +25,7 @@ directory path do
   recursive true
 end
 
-%w{ log whisper rrd }.each do |dir|
+%w( log whisper rrd ).each do |dir|
   directory "#{path}/#{dir}" do
     owner node['graphite']['user']
     group node['graphite']['group']

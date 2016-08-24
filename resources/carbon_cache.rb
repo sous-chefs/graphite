@@ -21,19 +21,19 @@ actions :create, :delete
 default_action :create
 
 attribute :name, kind_of: String, name_attribute: true
-attribute :backend, kind_of: [String, Hash], default: "whisper"
+attribute :backend, kind_of: [String, Hash], default: 'whisper'
 attribute :config, kind_of: Hash, default: nil
 
 def backend_name
-  backend.is_a?(Hash) ? backend["name"] : backend
+  backend.is_a?(Hash) ? backend['name'] : backend
 end
 
 def backend_attributes
   if backend.is_a?(Hash)
     attrs = backend.dup
-    attrs.delete("name")
+    attrs.delete('name')
     attrs
   else
-    Hash.new
+    {}
   end
 end

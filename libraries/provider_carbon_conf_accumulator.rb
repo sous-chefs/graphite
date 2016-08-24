@@ -24,7 +24,6 @@ require 'chef/provider'
 class Chef
   class Provider
     class GraphiteCarbonConfAccumulator < Chef::Provider
-
       include ChefGraphite::Mixins
 
       def whyrun_supported?
@@ -36,7 +35,7 @@ class Chef
       end
 
       def action_create
-        carbon_resources = %w{cache relay aggregator}.map { |r| "graphite_carbon_#{r}".to_sym }
+        carbon_resources = %w(cache relay aggregator).map { |r| "graphite_carbon_#{r}".to_sym }
         resources = run_context.resource_collection.select { |x| carbon_resources.include? x.resource_name }
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
@@ -50,7 +49,6 @@ class Chef
         if file_resource.updated_by_last_action?
           new_resource.updated_by_last_action(true)
         end
-
       end
     end
   end

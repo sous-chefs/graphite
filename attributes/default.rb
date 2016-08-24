@@ -63,13 +63,13 @@ default['graphite']['graph_templates'] = [
 default['graphite']['system_packages'] =
   case node['platform_family']
   when 'debian'
-    %w{python-cairo-dev python-rrdtool}
+    %w(python-cairo-dev python-rrdtool)
   when 'rhel'
     case node['platform']
     when 'amazon'
-      %w{pycairo-devel python-rrdtool bitmap}
+      %w(pycairo-devel python-rrdtool bitmap)
     else
-      %w{pycairo-devel python-rrdtool bitmap bitmap-fonts}
+      %w(pycairo-devel python-rrdtool bitmap bitmap-fonts)
     end
   else
     []

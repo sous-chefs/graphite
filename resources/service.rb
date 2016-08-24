@@ -28,15 +28,15 @@ def initialize(*args)
 end
 
 def service_name
-  "carbon-" + name.tr(":", "-")
+  'carbon-' + name.tr(':', '-')
 end
 
 def type
-  t, = name.split(":")
+  t, = name.split(':')
   t
 end
 
 def instance
-  _, i = name.split(":")
+  _, i = name.split(':')
   i
 end

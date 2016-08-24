@@ -19,15 +19,14 @@
 
 module ChefGraphite
   class << self
-
     def ini_file(hash, sort_tuple_data = true)
       data = generate_conf_data(hash, sort_tuple_data)
 
-      lines = Array.new
+      lines = []
       data.each do |section, config|
         lines << "[#{section}]"
         config.each { |key, value| lines << "#{key} = #{value}" }
-        lines << ""
+        lines << ''
       end
       lines.join("\n").concat("\n")
     end
@@ -35,7 +34,7 @@ module ChefGraphite
     def generate_conf_data(data, sort_tuple_data = true)
       tuples = sort_tuple_data ? sort_tuples(section_tuples(data)) : section_tuples(data)
 
-      result = Hash.new
+      result = {}
       tuples.each { |tuple| result[tuple.first] = tuple.last }
       result
     end
@@ -56,7 +55,7 @@ module ChefGraphite
     def section_name(type, name)
       if type.nil?
         name
-      elsif name == "default"
+      elsif name == 'default'
         type
       else
         "#{type}:#{name}"
@@ -64,7 +63,7 @@ module ChefGraphite
     end
 
     def normalize(hash)
-      result = Hash.new
+      result = {}
       hash.each do |key, value|
         result[key.to_s.upcase] = normalize_value(value)
       end
@@ -73,10 +72,10 @@ module ChefGraphite
 
     def normalize_value(obj)
       if obj.is_a? Array
-        obj.map { |o| normalize_value(o) }.join(", ")
+        obj.map { |o| normalize_value(o) }.join(', ')
       else
         value = obj.to_s
-        value.capitalize! if %w{true false}.include?(value)
+        value.capitalize! if %w(true false).include?(value)
         value
       end
     end

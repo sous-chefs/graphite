@@ -1,62 +1,58 @@
-require "spec_helper"
-load_resource("graphite", "service")
-load_provider("graphite", "service_runit")
+require 'spec_helper'
+load_resource('graphite', 'service')
+load_provider('graphite', 'service_runit')
 
 describe Chef::Resource::GraphiteService do
+  let(:resource_name) { 'mega:beta' }
 
-  let(:resource_name) { "mega:beta" }
-
-  it "sets the name attribute to name" do
-    expect(resource.name).to eq("mega:beta")
+  it 'sets the name attribute to name' do
+    expect(resource.name).to eq('mega:beta')
   end
 
-  it "action defaults to :enable" do
+  it 'action defaults to :enable' do
     expect(resource.action).to eq(:enable)
   end
 
-  it "actions include :disable" do
+  it 'actions include :disable' do
     expect(resource.allowed_actions).to include(:disable)
   end
 
-  it "actions include :restart" do
+  it 'actions include :restart' do
     expect(resource.allowed_actions).to include(:restart)
   end
 
-  it "actions include :reload" do
+  it 'actions include :reload' do
     expect(resource.allowed_actions).to include(:reload)
   end
 
-  it "provider defaults the runit service" do
+  it 'provider defaults the runit service' do
     expect(resource.provider).to eq(Chef::Provider::GraphiteServiceRunit)
   end
 
-  describe "#service_name" do
-
-    it "returns a string with carbon prefixed and colons replaced" do
-      expect(resource.service_name).to eq("carbon-mega-beta")
+  describe '#service_name' do
+    it 'returns a string with carbon prefixed and colons replaced' do
+      expect(resource.service_name).to eq('carbon-mega-beta')
     end
   end
 
-  describe "#type" do
-
-    it "returns the type portion of name" do
-      expect(resource.type).to eq("mega")
+  describe '#type' do
+    it 'returns the type portion of name' do
+      expect(resource.type).to eq('mega')
     end
 
-    it "returns the type portion of name when no instance is given" do
-      resource.name("charlie")
-      expect(resource.type).to eq("charlie")
+    it 'returns the type portion of name when no instance is given' do
+      resource.name('charlie')
+      expect(resource.type).to eq('charlie')
     end
   end
 
-  describe "#instance" do
-
-    it "returns the instance portion of name" do
-      expect(resource.instance).to eq("beta")
+  describe '#instance' do
+    it 'returns the instance portion of name' do
+      expect(resource.instance).to eq('beta')
     end
 
-    it "returns nil when no instance is given" do
-      resource.name("charlie")
+    it 'returns nil when no instance is given' do
+      resource.name('charlie')
       expect(resource.instance).to be_nil
     end
   end

@@ -1,10 +1,9 @@
 class Chef
   module ProviderExampleGroup
-
     def using_lw_resource(cookbook, lwrp)
       name = class_name_for_lwrp(cookbook, lwrp)
-      resource_file = run_context.cookbook_collection[cookbook].
-                      resource_filenames.find { |f| ::File.basename(f, ".rb") == lwrp }
+      resource_file = run_context.cookbook_collection[cookbook]
+                      .resource_filenames.find { |f| ::File.basename(f, '.rb') == lwrp }
 
       using_libraries(cookbook)
 
@@ -19,8 +18,8 @@ class Chef
 
     def using_lw_provider(cookbook, lwrp)
       name = class_name_for_lwrp(cookbook, lwrp)
-      resource_file = run_context.cookbook_collection[cookbook].
-                      provider_filenames.find { |f| ::File.basename(f, ".rb") == lwrp }
+      resource_file = run_context.cookbook_collection[cookbook]
+                      .provider_filenames.find { |f| ::File.basename(f, '.rb') == lwrp }
 
       using_libraries(cookbook)
 
@@ -57,7 +56,7 @@ class Chef
         end
 
         let(:platform) do
-          "ubuntu"
+          'ubuntu'
         end
 
         let(:provider) do
@@ -65,7 +64,7 @@ class Chef
         end
 
         let(:resource_class) do
-          Chef::Resource.const_get(described_class.name.split("::").last)
+          Chef::Resource.const_get(described_class.name.split('::').last)
         end
 
         let(:resource_name) do
@@ -85,13 +84,13 @@ class Chef
           step_into = Chef::Mixin::ConvertToClassName.convert_to_snake_case(
             resource_class.to_s, Chef::Resource.to_s
           )
-          ChefSpec::Runner.new(
+          ChefSpec::SoloRunner.new(
             platform: platform, version: version, step_into: [step_into]
           )
         end
 
         let(:version) do
-          "12.04"
+          '12.04'
         end
       end
     end

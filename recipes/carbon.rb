@@ -20,7 +20,7 @@
 include_recipe 'python'
 include_recipe 'python::pip'
 
-include_recipe "graphite::_user"
-include_recipe "graphite::_carbon_packages"
-include_recipe "graphite::_directories"
-include_recipe "graphite::_carbon_config"
+include_recipe 'graphite::_user'
+include_recipe 'graphite::_carbon_packages'
+include_recipe 'graphite::_directories'
+include_recipe 'graphite::_carbon_config'

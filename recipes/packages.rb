@@ -17,5 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe "graphite::_carbon_packages"
-include_recipe "graphite::_web_packages"
+include_recipe 'graphite::_carbon_packages'
+include_recipe 'graphite::_web_packages'
