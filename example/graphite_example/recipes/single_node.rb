@@ -1,3 +1,4 @@
+apt_update 'update' if platform_family?('debian')
 include_recipe 'runit'
 include_recipe 'graphite::carbon'
 include_recipe 'graphite::_web_packages'
