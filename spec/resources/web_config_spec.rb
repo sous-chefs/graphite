@@ -9,7 +9,7 @@ describe Chef::Resource::GraphiteWebConfig do
   end
 
   it 'action defaults to :create' do
-    expect(resource.action).to eq(:create)
+    expect(resource.action).to eq([:create])
   end
 
   it 'returns a default dynamic template parameter' do
@@ -22,7 +22,7 @@ describe Chef::Resource::GraphiteWebConfig do
   end
 
   it 'action defaults to :create' do
-    expect(resource.action).to eq(:create)
+    expect(resource.action).to eq([:create])
   end
 
   it 'actions include :delete' do

@@ -21,7 +21,7 @@ describe Chef::Resource::GraphiteStorageConfAccumulator do
   end
 
   it 'action defaults to :create' do
-    expect(resource.action).to eq(:create)
+    expect(resource.action).to eq([:create])
   end
 
   it 'provider defaults to GraphiteStorageConfAccumulator' do

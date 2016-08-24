@@ -35,7 +35,7 @@ describe Chef::Resource::GraphiteCarbonCache do
   end
 
   it 'action defaults to :create' do
-    expect(resource.action).to eq(:create)
+    expect(resource.action).to eq([:create])
   end
 
   it 'actions include :delete' do

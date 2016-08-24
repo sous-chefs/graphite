@@ -4,7 +4,8 @@ require_relative 'support/example_groups/provider_example_group'
 require_relative 'support/example_groups/resource_example_group'
 
 RSpec.configure do |config|
-  config.log_level = :fatal
+  config.color = true
+  config.log_level = :error
 
   config.include Chef::ProviderExampleGroup,
     type: :provider,
@@ -18,8 +19,6 @@ RSpec.configure do |config|
       metadata[:type].nil? && %r{spec/resources/} =~ example_group[:file_path]
     }
 end
-
-at_exit { ChefSpec::Coverage.report! } if ENV['COVERAGE']
 
 def load_resource(cookbook, lwrp)
   require 'chef/resource/lwrp_base'

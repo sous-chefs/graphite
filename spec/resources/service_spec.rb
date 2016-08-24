@@ -10,7 +10,7 @@ describe Chef::Resource::GraphiteService do
   end
 
   it 'action defaults to :enable' do
-    expect(resource.action).to eq(:enable)
+    expect(resource.action).to eq([:enable])
   end
 
   it 'actions include :disable' do
