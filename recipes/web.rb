@@ -36,6 +36,13 @@ else
   Chef::Log.warn 'This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute.'
 end
 
+case node['platform_family']
+when 'rhel', 'fedora'
+  package 'uwsgi-plugin-carbon' do
+    action [:install, :upgrade]
+  end
+end
+
 package 'graphite-web' do
   # The package is attempting to overwrite /etc/graphite/local_settings.py,
   # which causes a conflict.  We want the old version.
