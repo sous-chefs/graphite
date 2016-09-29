@@ -44,9 +44,12 @@ when 'rhel', 'fedora'
 end
 
 package 'graphite-web' do
-  # The package is attempting to overwrite /etc/graphite/local_settings.py,
-  # which causes a conflict.  We want the old version.
-  options "-o Dpkg::Options::='--force-confold'"
+  case node['platform_family']
+  when 'debian'
+    # The package is attempting to overwrite /etc/graphite/local_settings.py,
+    # which causes a conflict.  We want the old version.
+    options "-o Dpkg::Options::='--force-confold'"
+  end
   action :upgrade
   notifies :restart, graphite_web_service_resource
 end
