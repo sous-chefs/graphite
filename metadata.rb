@@ -26,3 +26,4 @@ suggests 'delayed_evaluator'
 
 source_url 'https://github.com/hw-cookbooks/graphite' if respond_to?(:source_url)
 issues_url 'https://github.com/hw-cookbooks/graphite/issues' if respond_to?(:issues_url)
+chef_version '>= 11.0' if respond_to?(:chef_version)
