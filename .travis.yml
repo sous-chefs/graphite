@@ -1,14 +1,20 @@
-rvm: 2.2
-
 sudo: required
+dist: trusty
 
-# install the pre-release chef-dk.  Use chef-stable-precise to install the stable release
+# install the pre-release chef-dk.  Use chef-stable-trusty to install the stable release
 addons:
   apt:
     sources:
-      - chef-current-precise
+      - chef-current-trusty
     packages:
       - chefdk
+
+# Don't `bundle install` which takes about 1.5 mins
+install: echo "skip bundle install"
+
+branches:
+  only:
+    - master
 
 services: docker
 
@@ -18,9 +24,6 @@ env:
   - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
-
-# Don't `bundle install`
-install: echo "skip bundle install"
 
 # Ensure we make ChefDK's Ruby the default
 before_script:
