@@ -19,7 +19,7 @@
 
 if defined?(ChefSpec)
   ChefSpec.define_matcher :graphite_storage
-  
+
   ChefSpec.define_matcher :graphite_carbon_conf_accumulator
 
   def create_graphite_storage(name)
