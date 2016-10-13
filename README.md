@@ -25,10 +25,10 @@ Consult the Graphite documentation for more information:
 - Chef 11+
 
 ### Cookbooks
-
-- ark
-- java
-- windows
+- python
+- runit
+- build-essential
+- yum-epel
 
 ## Attributes
 
