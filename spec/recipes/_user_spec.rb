@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'graphite::_user' do
-  let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
 
   it 'creates the graphite group' do
     expect(chef_run).to create_group('graphite')

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'graphite::carbon' do
-  let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
 
   %w(python python::pip).each do |r|
     it "includes the external #{r} recipe" do
