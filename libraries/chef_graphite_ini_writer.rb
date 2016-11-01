@@ -18,7 +18,6 @@
 #
 
 module ChefGraphite
-
   # Object that takes a specially formatted Hash and returns an INI-formatted
   # data representation as a String. Each key in the underlying Hash maps to a
   # top level INI section and each sub-Hash represents a set of key/value
@@ -36,13 +35,12 @@ module ChefGraphite
   # @author Fletcher Nichol <fnichol@nichol.ca>
   #
   class INIWriter
-
     # Creates a new INIWriter using the provided Hash as input data.
     #
     # @param config [Hash,nil] input INI hash data
     #
     def initialize(config)
-      @config = config || Hash.new
+      @config = config || {}
     end
 
     # Returns a string representing an INI document with section delimiters.
@@ -78,7 +76,7 @@ module ChefGraphite
     # @api private
     #
     def render_line(key, value)
-      [key, value].join(" = ")
+      [key, value].join(' = ')
     end
   end
 end

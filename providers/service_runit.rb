@@ -41,10 +41,10 @@ end
 
 def manage_runit_service(resource_action)
   runit_service(new_resource.service_name) do
-    cookbook "graphite"
-    run_template_name "carbon"
+    cookbook 'graphite'
+    run_template_name 'carbon'
     default_logger true
-    finish_script_template_name "carbon"
+    finish_script_template_name 'carbon'
     finish true
     options(type: new_resource.type, instance: new_resource.instance)
     action resource_action

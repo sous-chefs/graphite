@@ -34,7 +34,7 @@ directory "#{storagedir}/log/webapp" do
   recursive true
 end
 
-%w{ info.log exception.log access.log error.log }.each do |file|
+%w( info.log exception.log access.log error.log ).each do |file|
   file "#{storagedir}/log/webapp/#{file}" do
     owner node['graphite']['user']
     group node['graphite']['group']

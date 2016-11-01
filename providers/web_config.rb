@@ -58,5 +58,5 @@ except ImportError:
 end
 
 def dynamic_template_name
-  ::File.basename(new_resource.dynamic_template, ".py")
+  ::File.basename(new_resource.dynamic_template, '.py')
 end
