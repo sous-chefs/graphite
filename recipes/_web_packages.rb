@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'yum-epel' if platform_family?('rhel')
-
 Array(node['graphite']['system_packages']).each do |p|
   package p
 end
@@ -27,15 +25,8 @@ python_pip 'django' do
   version lazy { node['graphite']['django_version'] }
 end
 
-# The latest version is 0.4, which causes an importError
-# ImportError: No module named fields
-# with `python manage.py syncdb --noinput`
-python_pip 'django-tagging' do
-  version '0.3.6'
-end
-
+python_pip 'django-tagging'
 python_pip 'pytz'
-python_pip 'pyparsing'
 python_pip 'python-memcached'
 python_pip 'uwsgi'
 python_pip 'cairocffi'

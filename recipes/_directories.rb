@@ -17,16 +17,14 @@
 # limitations under the License.
 #
 
-path = node['graphite']['storage_dir']
-
-directory path do
+directory node['graphite']['storage_dir'] do
   owner node['graphite']['user']
   group node['graphite']['group']
   recursive true
 end
 
 %w( log whisper rrd ).each do |dir|
-  directory "#{path}/#{dir}" do
+  directory "#{node['graphite']['storage_dir']}/#{dir}" do
     owner node['graphite']['user']
     group node['graphite']['group']
     recursive true
