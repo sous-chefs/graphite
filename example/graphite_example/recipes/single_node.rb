@@ -90,7 +90,7 @@ python 'set admin password' do
 import os,sys,django
 sys.path.append("#{base_dir}/webapp/graphite")
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-django.setup
+django.setup()
 from django.contrib.auth.models import User
 
 username = "#{node['graphite']['user']}"
