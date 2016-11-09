@@ -1,6 +1,6 @@
 name             'graphite'
-maintainer       'Heavy Water Software Inc.'
-maintainer_email 'ops@hw-ops.com'
+maintainer       'Chef Brigade '
+maintainer_email 'help@chefbrigade.io'
 license          'Apache 2.0'
 description      'Installs/Configures graphite'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
@@ -19,6 +19,6 @@ depends  'python'
 depends  'runit', '>= 1.2'
 depends  'build-essential'
 
-source_url 'https://github.com/hw-cookbooks/graphite' if respond_to?(:source_url)
-issues_url 'https://github.com/hw-cookbooks/graphite/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/chef-brigade/graphite-cookbook' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-brigade/graphite-cookbook/issues' if respond_to?(:issues_url)
 chef_version '>= 11.0' if respond_to?(:chef_version)
