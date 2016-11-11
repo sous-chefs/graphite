@@ -78,7 +78,13 @@ directory "#{docroot}/graphite" do
   recursive true
 end
 
-template "/etc/graphite/local_settings.py" do
+template "graphite-local_settings.py" do
+  case node['platform_family']
+  when 'debian'
+    path "/etc/graphite/local_settings.py"
+  when 'rhel', 'fedora'
+    path "/etc/graphite-web/local_settings.py"
+  end
   source 'local_settings.py.erb'
   mode 00755
   variables(:timezone => node['graphite']['timezone'],
