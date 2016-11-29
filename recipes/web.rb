@@ -36,10 +36,20 @@ else
   Chef::Log.warn 'This recipe uses encrypted data bags for graphite password but no encrypted data bag name is specified - fallback to node attribute.'
 end
 
+case node['platform_family']
+when 'rhel', 'fedora'
+  package 'uwsgi-plugin-carbon' do
+    action [:install, :upgrade]
+  end
+end
+
 package 'graphite-web' do
-  # The package is attempting to overwrite /etc/graphite/local_settings.py,
-  # which causes a conflict.  We want the old version.
-  options "-o Dpkg::Options::='--force-confold'"
+  case node['platform_family']
+  when 'debian'
+    # The package is attempting to overwrite /etc/graphite/local_settings.py,
+    # which causes a conflict.  We want the old version.
+    options "-o Dpkg::Options::='--force-confold'"
+  end
   action :upgrade
   notifies :restart, graphite_web_service_resource
 end
@@ -68,7 +78,13 @@ directory "#{docroot}/graphite" do
   recursive true
 end
 
-template "/etc/graphite/local_settings.py" do
+template "graphite-local_settings.py" do
+  case node['platform_family']
+  when 'debian'
+    path "/etc/graphite/local_settings.py"
+  when 'rhel', 'fedora'
+    path "/etc/graphite-web/local_settings.py"
+  end
   source 'local_settings.py.erb'
   mode 00755
   variables(:timezone => node['graphite']['timezone'],

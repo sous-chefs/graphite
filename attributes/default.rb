@@ -31,6 +31,12 @@ default['graphite']['package_names'] = {
     'source' => 'https://github.com/graphite-project/graphite-web/zipball/master'
   }
 }
+case node['platform_family']
+when 'debian'
+  default['graphite']['python_package_dir'] = '/usr/lib/python2.7/dist-packages/graphite'
+when 'rhel', 'fedora'
+  default['graphite']['python_package_dir'] = '/usr/lib/python2.7/site-packages/graphite'
+end
 
 #
 # graphite_web

@@ -28,7 +28,7 @@ dep_packages = case node['platform_family']
 
                  packages
                when 'rhel', 'fedora'
-                 packages = %w{ Django django-tagging pycairo-devel python-devel mod_wsgi python-sqlite2 python-zope-interface }
+                 packages = %w{ Django python-django-tagging pycairo-devel python-devel mod_wsgi python-sqlite3dbm python-zope-interface}
 
                  # Include bitmap packages (optionally)
                  if node['graphite']['web']['bitmap_support']

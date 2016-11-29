@@ -19,19 +19,27 @@
 
 service_type = node['graphite']['carbon']['service_type']
 
-package 'python-twisted'
+case node['platform_family']
+when 'debian'
+  package 'python-twisted'
+  carbon_package = "graphite-carbon"
+when 'rhel', 'fedora'
+  package 'python-twisted-core'
+  carbon_package = "python-carbon"
+end
+
 package 'python-simplejson'
 
 case service_type
 when 'runit'
-  package "graphite-carbon" do
+  package carbon_package do
     action :upgrade
     node['graphite']['carbon']['caches'].each do |key,data|
       notifies :restart, "service[carbon-cache-#{key}]", :delayed
     end
   end
 else
-  package "graphite-carbon" do
+  package carbon_package do
     action :upgrade
     notifies :restart, 'service[carbon-cache]', :delayed
   end
