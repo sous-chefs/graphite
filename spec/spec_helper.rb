@@ -4,8 +4,9 @@ require_relative 'support/example_groups/provider_example_group'
 require_relative 'support/example_groups/resource_example_group'
 
 RSpec.configure do |config|
-  config.color = true
-  config.log_level = :error
+  config.color = true               # Use color in STDOUT
+  config.formatter = :documentation # Use the specified formatter
+  config.log_level = :error         # Avoid deprecation notice SPAM
 
   config.include Chef::ProviderExampleGroup,
     type: :provider,
