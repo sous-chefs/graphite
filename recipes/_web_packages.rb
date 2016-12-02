@@ -28,7 +28,11 @@ end
 python_pip 'django-tagging'
 python_pip 'pytz'
 python_pip 'python-memcached'
-python_pip 'uwsgi'
+
+python_pip 'uwsgi' do
+  options '--isolated'
+end
+
 python_pip 'cairocffi'
 
 python_pip 'graphite_web' do
