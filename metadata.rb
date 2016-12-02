@@ -13,7 +13,6 @@ supports 'centos'
 supports 'amazon'
 supports 'scientific'
 supports 'oracle'
-supports 'fedora'
 
 depends  'python'
 depends  'runit', '>= 1.2'
