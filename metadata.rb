@@ -1,6 +1,6 @@
 name             'graphite'
 maintainer       'Sous Chefs'
-maintainer_email 'help@chefbrigade.io'
+maintainer_email 'help@sous-chefs.org'
 license          'Apache 2.0'
 description      'Installs/Configures graphite'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
