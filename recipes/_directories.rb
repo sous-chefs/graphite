@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: _directories
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,16 +17,14 @@
 # limitations under the License.
 #
 
-path = node['graphite']['storage_dir']
-
-directory path do
+directory node['graphite']['storage_dir'] do
   owner node['graphite']['user']
   group node['graphite']['group']
   recursive true
 end
 
 %w( log whisper rrd ).each do |dir|
-  directory "#{path}/#{dir}" do
+  directory "#{node['graphite']['storage_dir']}/#{dir}" do
     owner node['graphite']['user']
     group node['graphite']['group']
     recursive true

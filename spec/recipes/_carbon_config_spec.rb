@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'graphite::_carbon_config' do
-  let(:chef_run) { ChefSpec::SoloRunner.new.converge(described_recipe) }
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
   let(:file_resource) { chef_run.find_resource(:file, 'carbon.conf') }
 
   context 'for the file resource' do

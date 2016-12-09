@@ -1,6 +1,6 @@
 # Graphite Cookbook
 
-[![Build Status](https://travis-ci.org/hw-cookbooks/graphite.svg?branch=master)](https://travis-ci.org/hw-cookbooks/graphite) [![Code Climate](https://codeclimate.com/github/hw-cookbooks/graphite/badges/gpa.svg)](https://codeclimate.com/github/hw-cookbooks/graphite) [![Cookbook Version](https://img.shields.io/cookbook/v/graphite.svg)](https://supermarket.chef.io/cookbooks/graphite)
+[![Build Status](https://travis-ci.org/sous-chefs/graphite.svg?branch=master)](https://travis-ci.org/sous-chefs/graphite) [![Code Climate](https://codeclimate.com/github/sous-chefs/graphite/badges/gpa.svg)](https://codeclimate.com/github/sous-chefs/graphite) [![Cookbook Version](https://img.shields.io/cookbook/v/graphite.svg)](https://supermarket.chef.io/cookbooks/graphite)
 
 ## Description
 
@@ -17,14 +17,14 @@ Consult the Graphite documentation for more information:
 
 - Ubuntu
 - Debian
-- RHEL and derivatives (Centos, Amazon Linux, Oracle Linux, Scientific Linux)
-- Fedora
+- RHEL 7+ (RHEL 6 lacks Python 2.7)
 
 ### Chef
 
 - Chef 11+
 
 ### Cookbooks
+
 - python
 - runit
 - build-essential
@@ -32,7 +32,7 @@ Consult the Graphite documentation for more information:
 
 ## Attributes
 
-See [default attributes](https://github.com/hw-cookbooks/graphite/blob/master/attributes/default.rb#L48) for platform specific packages installed.
+See [default attributes](https://github.com/sous-chefs/graphite/blob/master/attributes/default.rb#L48) for platform specific packages installed.
 
 - `node['graphite']['version']` - package version to install, defaults to '0.9.12'
 - `node['graphite']['twisted_version']` - twisted version to pin to, defaults to '13.1'
@@ -106,9 +106,9 @@ Write the configuration file for [Graphite Web](https://github.com/graphite-proj
 
 - `graphite_web_config`: data driven python config file writer for graphite web. Assumes the whole file is managed, typically this is the path to local_settings.py. Custom python code can be placed in the optional 'dynamic template', by default a file named 'local_settings_dynamic.py' that is optimistically loaded if present.
 
-Yes it's [writing python via ruby](https://github.com/hw-cookbooks/graphite/blob/master/libraries/chef_graphite_python.rb#L14).
+Yes it's [writing python via ruby](https://github.com/sous-chefs/graphite/blob/master/libraries/chef_graphite_python.rb#L14).
 
-A runit service definition is provided to [start a uwsgi process](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L105), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
+A runit service definition is provided to [start a uwsgi process](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L105), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
 
 ### Accumulators
 
@@ -117,7 +117,7 @@ Due to the graphite config file format, the data driven resources use an accumul
 - `graphite_carbon_conf_accumulator`: lookup named carbon resources in run context and gather config
 - `graphite_storage_conf_accumulator`: lookup named storage schema resources in run context and gather config
 
-If you look at the [example cookbook recipe](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L6) you probably notice that many of the resources simply take a single `config` attribute, which is basically a hash of the configuration to be written.
+If you look at the [example cookbook recipe](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L6) you probably notice that many of the resources simply take a single `config` attribute, which is basically a hash of the configuration to be written.
 
 This can come from attributes in a wrapper cookbook or via data bags if you like. Be as creative as you can tolerate.
 
@@ -129,13 +129,11 @@ It's a library cookbook, intended to be used in your custom wrapper cookbook to 
 
 We have purposefully left out web server configuration to remove the dependency, so you're free to use whatever works in your environment. This avoids the need for this cookbook to keep up to date with configuration that isn't really graphite specific.
 
-For example usage consult the reference cookbook [example](https://github.com/hw-cookbooks/graphite/tree/master/example/graphite_example/recipes)
-
-Feel free to ask us questions anytime on irc: #heavywater on freenode
+For example usage consult the reference cookbook [example](https://github.com/sous-chefs/graphite/tree/master/example/graphite_example/recipes)
 
 ## Examples
 
-You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/hw-cookbooks/graphite/blob/master/example/graphite_example/recipes/single_node.rb).
+You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb).
 
 ## Data Bags
 

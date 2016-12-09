@@ -70,7 +70,7 @@ directory "#{storage_dir}/log/webapp" do
   recursive true
 end
 
-execute 'python manage.py syncdb --noinput' do
+execute 'python manage.py migrate --noinput' do
   user node['graphite']['user']
   group node['graphite']['group']
   cwd "#{base_dir}/webapp/graphite"
@@ -87,9 +87,10 @@ python 'set admin password' do
   cwd "#{base_dir}/webapp/graphite"
   user node['graphite']['user']
   code <<-PYTHON
-import os,sys
+import os,sys,django
 sys.path.append("#{base_dir}/webapp/graphite")
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+django.setup()
 from django.contrib.auth.models import User
 
 username = "#{node['graphite']['user']}"
@@ -104,7 +105,4 @@ except Exception,err:
   PYTHON
 end
 
-runit_service 'graphite-web' do
-  cookbook 'graphite'
-  default_logger true
-end
+include_recipe 'graphite::uwsgi'

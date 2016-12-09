@@ -1,4 +1,3 @@
-
 describe port(2003) do
   it { should be_listening }
   its('protocols') { should include 'udp' }
