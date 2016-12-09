@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: packages
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,5 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe "graphite::_carbon_packages"
-include_recipe "graphite::_web_packages"
+include_recipe 'graphite::_carbon_packages'
+include_recipe 'graphite::_web_packages'

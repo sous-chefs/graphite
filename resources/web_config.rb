@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Resource:: web_config
 #
-# Copyright (C) 2014  Heavy Water Operations, LLC
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,6 @@
 actions :create, :delete
 default_action :create
 
-attribute :path, kind_of: String, default: nil, name_attribute: true
+attribute :path, kind_of: String, name_attribute: true
 attribute :config, kind_of: Hash, default: nil
-attribute :dynamic_template, kind_of: String, default: "local_settings_dynamic.py"
+attribute :dynamic_template, kind_of: String, default: 'local_settings_dynamic.py'

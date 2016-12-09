@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: _carbon_packages
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "build-essential"
+include_recipe 'build-essential'
 
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used

@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: carbon
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,9 +33,11 @@ file "carbon.conf" do
   action :nothing
 end
 
-graphite_carbon_conf_accumulator "default"
+graphite_carbon_conf_accumulator 'default' do
+  sort_configs node['graphite']['sort_configs']
+end
 
-file "storage-schemas.conf" do
+file 'storage-schemas.conf' do
   path "#{node['graphite']['base_dir']}/conf/storage-schemas.conf"
   owner node['graphite']['user']
   group node['graphite']['group']
@@ -43,4 +45,6 @@ file "storage-schemas.conf" do
   action :nothing
 end
 
-graphite_storage_conf_accumulator "default"
+graphite_storage_conf_accumulator 'default' do
+  sort_schemas node['graphite']['sort_storage_schemas']
+end

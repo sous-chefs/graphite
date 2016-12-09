@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Resource:: resource_storage_conf
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,9 @@
 actions :create
 default_action :create
 
-attribute :name, kind_of: String, default: nil, name_attribute: true
-attribute :file_resource, kind_of: String, default: "file[storage-schemas.conf]"
+attribute :name, kind_of: String, name_attribute: true
+attribute :file_resource, kind_of: String, default: 'file[storage-schemas.conf]'
+attribute :sort_schemas, kind_of: [TrueClass, FalseClass], default: true
 
 def initialize(*args)
   super

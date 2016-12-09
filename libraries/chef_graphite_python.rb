@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Library:: ChefGraphite::PythonWriter
 #
-# Copyright 2014, Heavy Water Ops, LLC
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,8 @@
 
 module ChefGraphite
   class PythonWriter
-
     def initialize(config, options = {})
-      @config = config || Hash.new
+      @config = config || {}
       @options = options
     end
 
@@ -39,10 +38,10 @@ module ChefGraphite
       when String, Symbol
         "'#{value}'"
       when Array
-        a = value.map { |i| pythonize(i) }.join(", ")
+        a = value.map { |i| pythonize(i) }.join(', ')
         "[#{a}]"
       when Hash
-        h = value.map { |k, v| "#{pythonize(k)}: #{pythonize(v)}" }.join(", ")
+        h = value.map { |k, v| "#{pythonize(k)}: #{pythonize(v)}" }.join(', ')
         "{#{h}}"
       else
         value
@@ -62,6 +61,5 @@ module ChefGraphite
         key.to_s
       end
     end
-
   end
 end

@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: web
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ directory "#{storagedir}/log/webapp" do
   recursive true
 end
 
-%w{ info.log exception.log access.log error.log }.each do |file|
+%w( info.log exception.log access.log error.log ).each do |file|
   file "#{storagedir}/log/webapp/#{file}" do
     owner node['graphite']['user']
     group node['graphite']['group']

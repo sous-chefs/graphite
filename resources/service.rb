@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Resource:: carbon_service
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 actions :enable, :disable, :restart, :reload
 default_action :enable
 
-attribute :name, kind_of: String, default: nil, name_attribute: true
+attribute :name, kind_of: String, name_attribute: true
 
 def initialize(*args)
   super
@@ -28,15 +28,15 @@ def initialize(*args)
 end
 
 def service_name
-  "carbon-" + name.tr(":", "-")
+  'carbon-' + name.tr(':', '-')
 end
 
 def type
-  t, _ = name.split(":")
+  t, = name.split(':')
   t
 end
 
 def instance
-  _, i = name.split(":")
+  _, i = name.split(':')
   i
 end

@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Provider:: carbon_service_runit
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,10 +41,10 @@ end
 
 def manage_runit_service(resource_action)
   runit_service(new_resource.service_name) do
-    cookbook "graphite"
-    run_template_name "carbon"
+    cookbook 'graphite'
+    run_template_name 'carbon'
     default_logger true
-    finish_script_template_name "carbon"
+    finish_script_template_name 'carbon'
     finish true
     options(type: new_resource.type, instance: new_resource.instance)
     action resource_action

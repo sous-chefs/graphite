@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: _web_packages
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe "yum-epel" if platform_family?("rhel")
-
 Array(node['graphite']['system_packages']).each do |p|
   package p
 end
@@ -27,17 +25,15 @@ python_pip 'django' do
   version lazy { node['graphite']['django_version'] }
 end
 
-# The latest version is 0.4, which causes an importError
-# ImportError: No module named fields
-# with `python manage.py syncdb --noinput`
-python_pip 'django-tagging' do
-  version "0.3.6"
+python_pip 'django-tagging'
+python_pip 'pytz'
+python_pip 'python-memcached'
+
+python_pip 'uwsgi' do
+  options '--isolated'
 end
 
-python_pip 'pytz'
-python_pip 'pyparsing'
-python_pip 'python-memcached'
-python_pip 'uwsgi'
+python_pip 'cairocffi'
 
 python_pip 'graphite_web' do
   package_name lazy {

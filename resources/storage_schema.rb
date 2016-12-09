@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Resource:: storage_schema
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,5 +20,5 @@
 actions :create, :delete
 default_action :create
 
-attribute :name, kind_of: String, default: nil, name_attribute: true
+attribute :name, kind_of: String, name_attribute: true
 attribute :config, kind_of: Hash, default: nil

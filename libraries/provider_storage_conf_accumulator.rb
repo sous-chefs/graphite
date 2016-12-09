@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Provider:: provider_storage_conf_accumulator
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ require 'chef/provider'
 class Chef
   class Provider
     class GraphiteStorageConfAccumulator < Chef::Provider
-
       include ChefGraphite::Mixins
 
       def whyrun_supported?
@@ -40,7 +39,7 @@ class Chef
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
         contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
-        contents << ChefGraphite.ini_file(resources_to_hashes(resources))
+        contents << ChefGraphite.ini_file(resources_to_hashes(resources), new_resource.sort_schemas)
         file_resource.content contents
 
         file_resource.run_action(:create)
@@ -48,7 +47,6 @@ class Chef
         if file_resource.updated_by_last_action?
           new_resource.updated_by_last_action(true)
         end
-
       end
     end
   end

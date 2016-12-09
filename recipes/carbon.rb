@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Recipe:: carbon
 #
-# Copyright 2014, Heavy Water Software Inc.
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 include_recipe 'python'
 include_recipe 'python::pip'
 
-include_recipe "graphite::_user"
-include_recipe "graphite::_carbon_packages"
-include_recipe "graphite::_directories"
-include_recipe "graphite::_carbon_config"
+include_recipe 'graphite::_user'
+include_recipe 'graphite::_carbon_packages'
+include_recipe 'graphite::_directories'
+include_recipe 'graphite::_carbon_config'

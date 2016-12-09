@@ -1,9 +1,7 @@
 class Chef
   module ResourceExampleGroup
-
     def self.included(base)
       base.class_eval do
-
         metadata[:type] = :resource
         metadata[:example_group][:description]
 

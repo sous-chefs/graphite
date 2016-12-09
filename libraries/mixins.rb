@@ -2,7 +2,7 @@
 # Cookbook Name:: graphite
 # Library:: ChefGraphite::Mixins
 #
-# Copyright 2014, Heavy Water Ops, LLC
+# Copyright 2014-2016, Heavy Water Software Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,13 +18,11 @@
 #
 
 module ChefGraphite
-
   module Mixins
-
     def resources_to_hashes(resources, whitelist = [])
       Array(resources).map do |resource|
         type = if whitelist.include?(resource.resource_name.to_sym)
-                 resource.resource_name.to_s.split("_").last
+                 resource.resource_name.to_s.split('_').last
                end
         {
           type: type,
@@ -33,7 +31,5 @@ module ChefGraphite
         }
       end
     end
-
   end
-
 end

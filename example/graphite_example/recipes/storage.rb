@@ -1,3 +1,3 @@
-graphite_storage "/opt/graphite/storage"
+graphite_storage '/opt/graphite/storage'
 
-graphite_storage "/srv/graphite/data"
+graphite_storage '/srv/graphite/data'
