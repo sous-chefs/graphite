@@ -17,7 +17,15 @@
 # limitations under the License.
 #
 
-file 'carbon.conf' do
+directory "conf dir" do
+  path "#{node['graphite']['base_dir']}/conf"
+  owner node['graphite']['user']
+  group node['graphite']['group']
+  mode 0755
+  recursive true
+end
+
+file "carbon.conf" do
   path "#{node['graphite']['base_dir']}/conf/carbon.conf"
   owner node['graphite']['user']
   group node['graphite']['group']

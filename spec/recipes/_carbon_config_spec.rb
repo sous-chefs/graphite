@@ -3,6 +3,29 @@ require 'spec_helper'
 describe 'graphite::_carbon_config' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
   let(:file_resource) { chef_run.find_resource(:file, 'carbon.conf') }
+  let(:dir_resource) { chef_run.find_resource(:directory, "conf dir") }
+
+  context "for the directory resource" do
+    it "has the path specified" do
+      expect(dir_resource.path).to eq('/opt/graphite/conf')
+    end
+
+    it "has the correct owner" do
+      expect(dir_resource.owner).to eq('graphite')
+    end
+
+    it "has the correct group" do
+      expect(dir_resource.group).to eq('graphite')
+    end
+
+    it "has correct mode" do
+      expect(dir_resource.mode).to eq(0755)
+    end
+
+    it "has recursive set" do
+      expect(dir_resource.recursive).to be true
+    end
+  end
 
   context 'for the file resource' do
     it 'has the path specified' do
