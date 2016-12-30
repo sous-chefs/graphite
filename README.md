@@ -1,6 +1,6 @@
 # Graphite Cookbook
 
-[![Build Status](https://travis-ci.org/sous-chefs/graphite.svg?branch=master)](https://travis-ci.org/sous-chefs/graphite) [![Code Climate](https://codeclimate.com/github/sous-chefs/graphite/badges/gpa.svg)](https://codeclimate.com/github/sous-chefs/graphite) [![Cookbook Version](https://img.shields.io/cookbook/v/graphite.svg)](https://supermarket.chef.io/cookbooks/graphite)
+[![Build Status](https://travis-ci.org/sous-chefs/graphite.svg?branch=master)](https://travis-ci.org/sous-chefs/graphite) [![Cookbook Version](https://img.shields.io/cookbook/v/graphite.svg)](https://supermarket.chef.io/cookbooks/graphite)
 
 ## Description
 
