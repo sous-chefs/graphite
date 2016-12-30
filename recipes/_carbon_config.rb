@@ -21,7 +21,7 @@ directory 'conf dir' do
   path "#{node['graphite']['base_dir']}/conf"
   owner node['graphite']['user']
   group node['graphite']['group']
-  mode 0755
+  mode '755'
   recursive true
 end
 
@@ -29,7 +29,7 @@ file 'carbon.conf' do
   path "#{node['graphite']['base_dir']}/conf/carbon.conf"
   owner node['graphite']['user']
   group node['graphite']['group']
-  mode 0644
+  mode '644'
   action :nothing
 end
 
@@ -41,7 +41,7 @@ file 'storage-schemas.conf' do
   path "#{node['graphite']['base_dir']}/conf/storage-schemas.conf"
   owner node['graphite']['user']
   group node['graphite']['group']
-  mode 0644
+  mode '644'
   action :nothing
 end
 

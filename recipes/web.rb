@@ -54,7 +54,7 @@ end
 
 template "#{basedir}/conf/graphTemplates.conf" do
   source 'graphTemplates.conf.erb'
-  mode 00755
+  mode '755'
   variables(
     graph_templates: node['graphite']['graph_templates']
   )
