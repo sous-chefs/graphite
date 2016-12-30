@@ -40,14 +40,14 @@ module ChefGraphite
     end
 
     def sort_tuples(tuples)
-      tuples.sort { |a, b| a.first <=> b.first }
+      tuples.sort_by(&:first)
     end
 
     def section_tuples(section_hashes)
       section_hashes.map do |hash|
         [
           section_name(hash[:type], hash[:name]),
-          normalize(hash[:config])
+          normalize(hash[:config]),
         ]
       end
     end

@@ -7,7 +7,7 @@ graphite_carbon_relay 'default' do
     relay_method: 'consistent-hashing',
     destinations: [
       '127.0.0.1:2003:a',
-      '127.0.0.1:2004:b'
-    ]
+      '127.0.0.1:2004:b',
+    ],
   })
 end

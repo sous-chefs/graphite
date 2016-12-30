@@ -23,7 +23,7 @@ describe ChefGraphite::INIWriter do
     it "renders the section's subhash as key/value pairs" do
       config['alpha'] = {
         'one' => 'two',
-        'three' => 'four'
+        'three' => 'four',
       }
 
       expect(writer.to_s).to eq(<<-EOF.gsub(/^\s+/, ''))
@@ -37,11 +37,11 @@ describe ChefGraphite::INIWriter do
     it 'handles multiple INI sections and key/value pairs' do
       config['alpha'] = {
         'one' => 'two',
-        'three' => 'four'
+        'three' => 'four',
       }
       config['beta'] = {
         'apple' => 'orange',
-        'pear' => 'kiwi'
+        'pear' => 'kiwi',
       }
 
       expect(writer.to_s).to eq(<<-EOF.gsub(/^\s+/, ''))

@@ -23,21 +23,21 @@ graphite_carbon_cache 'default' do
     log_updates: false,
     log_cache_hits: false,
     whisper_autoflush: false,
-    local_data_dir: "#{storage_dir}/whisper/"
+    local_data_dir: "#{storage_dir}/whisper/",
   })
 end
 
 graphite_storage_schema 'carbon' do
   config ({
     pattern: '^carbon.',
-    retentions: '60:90d'
+    retentions: '60:90d',
   })
 end
 
 graphite_storage_schema 'default_1min_for_1day' do
   config ({
     pattern: '.*',
-    retentions: '60s:1d'
+    retentions: '60s:1d',
   })
 end
 
@@ -58,8 +58,8 @@ graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
              USER: nil,
              PASSWORD: nil,
              HOST: nil,
-             PORT: nil
-           }
+             PORT: nil,
+           },
          })
   notifies :restart, 'service[graphite-web]', :delayed
 end

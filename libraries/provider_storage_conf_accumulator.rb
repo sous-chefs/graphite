@@ -44,9 +44,7 @@ class Chef
 
         file_resource.run_action(:create)
 
-        if file_resource.updated_by_last_action?
-          new_resource.updated_by_last_action(true)
-        end
+        new_resource.updated_by_last_action(true) if file_resource.updated_by_last_action?
       end
     end
   end

@@ -17,7 +17,7 @@ graphite_carbon_cache 'default' do
     use_flow_control: true,
     log_updates: false,
     log_cache_hits: false,
-    whisper_autoflush: false
+    whisper_autoflush: false,
   })
 end
 
@@ -26,7 +26,7 @@ graphite_carbon_cache 'a' do
     line_receiver_port: 2004,
     udp_receiver_port: 2004,
     pickle_receiver_port: 2005,
-    cache_query_port: 7003
+    cache_query_port: 7003,
   })
 end
 
@@ -35,21 +35,21 @@ graphite_carbon_cache 'b' do
     line_receiver_port: 2006,
     udp_receiver_port: 2006,
     pickle_receiver_port: 2007,
-    cache_query_port: 7004
+    cache_query_port: 7004,
   })
 end
 
 graphite_storage_schema 'carbon' do
   config ({
     pattern: '^carbon.',
-    retentions: '60:90d'
+    retentions: '60:90d',
   })
 end
 
 graphite_storage_schema 'default_1min_for_1day' do
   config ({
     pattern: '.*',
-    retentions: '60s:1d'
+    retentions: '60s:1d',
   })
 end
 

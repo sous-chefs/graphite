@@ -19,7 +19,7 @@ describe ChefGraphite::CarbonConfigConverter do
       config.concat([
                       { type: 'beta', name: 'b', config: {} },
                       { type: 'alpha', name: 'a', config: {} },
-                      { type: 'beta', name: 'g', config: {} }
+                      { type: 'beta', name: 'g', config: {} },
                     ])
 
       expect(converter.to_hash.keys).to eq(['alpha:a', 'beta:b', 'beta:g'])
@@ -29,7 +29,7 @@ describe ChefGraphite::CarbonConfigConverter do
       config.concat([
                       { type: 'beta', name: 'b', config: {} },
                       { type: 'alpha', name: 'a', config: {} },
-                      { type: 'beta', name: 'default', config: {} }
+                      { type: 'beta', name: 'default', config: {} },
                     ])
 
       expect(converter.to_hash.keys).to eq(['alpha:a', 'beta', 'beta:b'])
@@ -40,7 +40,7 @@ describe ChefGraphite::CarbonConfigConverter do
         [
           { type: 'beta', name: 'b', config: { 'A_KEY' => [true, '#.blah', 4] } },
           { type: 'alpha', name: 'a', config: { another_key: 'something' } },
-          { type: 'beta', name: 'default', config: { 'is_frog' => true } }
+          { type: 'beta', name: 'default', config: { 'is_frog' => true } },
         ]
       end
 
