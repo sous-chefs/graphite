@@ -4,20 +4,19 @@
 
 ### `master` branch
 
-The master branch is the current stable released version.
+The master branch is the current comitted changes. These changes may not yet be released although we try to release often.
 
-### `develop` branch
+## Tags
 
-The develop branch is the current edge of development.
+All releases are tagged in git. To see the releases available to you see the changelog or the tags directly.
+
 
 ## Pull requests
 
-- <https://github.com/sous-chefs/graphite-cookbook/pulls>
-
-Please base all pull requests of the `develop` branch. Merges to `master` only occur through the `develop` branch. Pull requests based on `master` will likely be cherry picked.
+- <https://github.com/sous-chefs/graphite/pulls>
 
 ## Issues
 
 Need to report an issue? Use the github issues:
 
-- <https://github.com/sous-chefs/graphite-cookbook/issues>
+- <https://github.com/sous-chefs/graphite/issues>
