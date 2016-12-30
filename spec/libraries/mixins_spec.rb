@@ -8,7 +8,7 @@ describe ChefGraphite::Mixins do
     let(:resources) do
       [
         double(name: 'a', resource_name: :bleh_blah, config: { one: 'two' }),
-        double(name: 'b', resource_name: :wakka, config: { alpha: 'beta' })
+        double(name: 'b', resource_name: :wakka, config: { alpha: 'beta' }),
       ]
     end
 
@@ -25,14 +25,14 @@ describe ChefGraphite::Mixins do
     it 'returns an array of hashes with types set given a whitelist' do
       expect(resources_to_hashes(resources, whitelist)).to eq([
                                                                 { type: 'blah', name: 'a', config: { one: 'two' } },
-                                                                { type: 'wakka', name: 'b', config: { alpha: 'beta' } }
+                                                                { type: 'wakka', name: 'b', config: { alpha: 'beta' } },
                                                               ])
     end
 
     it 'returns an array of hashes with nil types when no whitelist is given' do
       expect(resources_to_hashes(resources)).to eq([
                                                      { type: nil, name: 'a', config: { one: 'two' } },
-                                                     { type: nil, name: 'b', config: { alpha: 'beta' } }
+                                                     { type: nil, name: 'b', config: { alpha: 'beta' } },
                                                    ])
     end
   end

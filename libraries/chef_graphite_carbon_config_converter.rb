@@ -63,7 +63,7 @@ module ChefGraphite
     # @api private
     #
     def sort_tuples(tuples)
-      tuples.sort { |a, b| a.first <=> b.first }
+      tuples.sort_by(&:first)
     end
 
     # Returns an Array of tuples-the first element being the name of the

@@ -33,16 +33,16 @@ default['graphite']['sort_storage_schemas'] = true
 default['graphite']['package_names'] = {
   'whisper' => {
     'package' => 'whisper',
-    'source' => 'https://github.com/graphite-project/whisper/zipball/master'
+    'source' => 'https://github.com/graphite-project/whisper/zipball/master',
   },
   'carbon' => {
     'package' => 'carbon',
-    'source' => 'https://github.com/graphite-project/carbon/zipball/master'
+    'source' => 'https://github.com/graphite-project/carbon/zipball/master',
   },
   'graphite_web' => {
     'package' => 'graphite-web',
-    'source' => 'https://github.com/graphite-project/graphite-web/zipball/master'
-  }
+    'source' => 'https://github.com/graphite-project/graphite-web/zipball/master',
+  },
 }
 
 default['graphite']['graph_templates'] = [
@@ -56,8 +56,8 @@ default['graphite']['graph_templates'] = [
     'fontName' => 'Sans',
     'fontSize' => '10',
     'fontBold' => 'False',
-    'fontItalic' => 'False'
-  }
+    'fontItalic' => 'False',
+  },
 ]
 
 default['graphite']['system_packages'] =

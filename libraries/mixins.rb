@@ -27,7 +27,7 @@ module ChefGraphite
         {
           type: type,
           name: resource.name,
-          config: resource.config
+          config: resource.config,
         }
       end
     end

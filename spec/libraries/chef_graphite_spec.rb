@@ -7,7 +7,7 @@ describe ChefGraphite do
       [
         { type: 'beta', name: 'b', config: { 'A_KEY' => [true, '#.blah', 4] } },
         { type: 'alpha', name: 'a', config: { another_key: 'something' } },
-        { type: 'beta', name: 'default', config: { 'is_frog' => true } }
+        { type: 'beta', name: 'default', config: { 'is_frog' => true } },
       ]
     end
 
@@ -19,7 +19,7 @@ describe ChefGraphite do
       input = [
         { type: 'beta', name: 'b', config: {} },
         { type: 'alpha', name: 'a', config: {} },
-        { type: 'beta', name: 'g', config: {} }
+        { type: 'beta', name: 'g', config: {} },
       ]
       data = ChefGraphite.generate_conf_data(input)
 
@@ -78,7 +78,7 @@ describe ChefGraphite do
       [
         { type: 'beta', name: 'b', config: { 'A_KEY' => [true, '#.blah', 4] } },
         { type: 'alpha', name: 'a', config: { another_key: 'something' } },
-        { type: 'beta', name: 'default', config: { 'is_frog' => true } }
+        { type: 'beta', name: 'default', config: { 'is_frog' => true } },
       ]
     end
 
