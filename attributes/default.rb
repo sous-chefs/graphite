@@ -19,7 +19,7 @@
 
 default['graphite']['version'] = '0.9.15'
 default['graphite']['twisted_version'] = '13.2.0'
-default['graphite']['django_version'] = '1.9.0'
+default['graphite']['django_version'] = '1.6.1'
 default['graphite']['password'] = 'change_me'
 default['graphite']['user'] = 'graphite'
 default['graphite']['group'] = 'graphite'
@@ -69,7 +69,7 @@ default['graphite']['system_packages'] =
     when 'amazon'
       %w(python-devel cairo-devel libffi-devel python-rrdtool bitmap)
     else
-      %w(python-devel cairo-devel libffi-devel python-rrdtool bitmap-fonts)
+      %w(python-devel cairo-devel libffi-devel python-rrdtool bitmap bitmap-fonts)
     end
   else
     []

@@ -17,7 +17,7 @@ Consult the Graphite documentation for more information:
 
 - Ubuntu
 - Debian
-- RHEL 7+ (RHEL 6 lacks Python 2.7)
+- RHEL
 
 ### Chef
 
