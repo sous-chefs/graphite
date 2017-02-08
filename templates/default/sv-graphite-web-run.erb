@@ -5,6 +5,7 @@ ulimit -n <%= node['graphite']['limits']['nofile'] %>
 
 exec 2>&1
 exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
+--plugin-dir /usr/lib/uwsgi/plugins \
 <% if node['graphite']['uwsgi']['carbon'] -%>
 --plugins carbon --carbon <%= node['graphite']['uwsgi']['carbon'] %> \
 <% end -%>
