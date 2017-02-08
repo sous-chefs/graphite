@@ -41,7 +41,12 @@ end
   end
 end
 
-execute 'config selinux context' do
+execute 'config selinux context for base dir' do
+  command "chcon -R -h -t httpd_sys_content_t #{basedir}"
+  only_if 'sestatus | grep enabled'
+end
+
+execute 'config selinux context for log dir' do
   command "chcon -R -h -t httpd_log_t #{storagedir}/log/webapp"
   only_if 'sestatus | grep enabled'
 end
