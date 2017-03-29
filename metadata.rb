@@ -14,7 +14,7 @@ supports 'amazon'
 supports 'scientific'
 supports 'oracle'
 
-depends  'poise-python'
+depends  'poise-python', '~> 1.5.1'
 depends  'runit', '>= 1.2'
 depends  'build-essential'
 
