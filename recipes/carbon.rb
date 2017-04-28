@@ -17,8 +17,11 @@
 # limitations under the License.
 #
 
-include_recipe 'python'
-include_recipe 'python::pip'
+python_runtime 'carbon' do
+  provider :system
+  version '2.7'
+  options pip_version: true
+end
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_carbon_packages'
