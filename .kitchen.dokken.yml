@@ -70,7 +70,7 @@ platforms:
 suites:
 - name: default
   run_list:
-  - recipe[graphite_example::single_node]
+  - recipe[test::single_node]
   attributes:
     graphite:
       listen_port: "8080"
