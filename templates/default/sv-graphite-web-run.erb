@@ -17,6 +17,7 @@ exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
 --uid <%= node['graphite']['user'] %> --gid <%= node['graphite']['group'] %> \
 --chmod-socket=<%= node['graphite']['uwsgi']['socket_permissions'] %> \
 --no-orphans --master \
+--buffer-size <%= node['graphite']['uwsgi']['buffer-size'] %> \
 --procname graphite-web \
 --die-on-term \
 --socket <%= node['graphite']['uwsgi']['socket'] %>

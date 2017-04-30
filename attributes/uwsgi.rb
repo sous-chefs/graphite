@@ -24,3 +24,4 @@ default['graphite']['uwsgi']['carbon'] = '127.0.0.1:2003'
 default['graphite']['uwsgi']['listen_http'] = false
 default['graphite']['uwsgi']['port'] = 8080
 default['graphite']['uwsgi']['service_type'] = 'runit'
+default['graphite']['uwsgi']['buffer-size'] = '4096'
