@@ -19,6 +19,10 @@
 
 include_recipe 'runit'
 
+service 'carbon-cache' do
+  action [:stop, :disable]
+end
+
 node['graphite']['carbon']['caches'].each do |key,data|
   runit_service "carbon-cache-#{key}" do
     run_template_name 'carbon'

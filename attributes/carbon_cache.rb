@@ -31,9 +31,4 @@ default['graphite']['storage_schemas'] = [
 ]
 default['graphite']['storage_aggregation'] = nil
 
-case node['platform_family']
-when 'debian'
-  default['graphite']['carbon']['service_type'] = 'runit'
-when 'rhel', 'fedora'
-  default['graphite']['carbon']['service_type'] = 'init'
-end
+default['graphite']['carbon']['service_type'] = 'runit'
