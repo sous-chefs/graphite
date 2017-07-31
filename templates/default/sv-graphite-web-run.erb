@@ -1,4 +1,8 @@
 #!/bin/sh
+
+<% if ['centos', 'redhat'].include?(node[:platform]) -%>
+  chown graphite:graphite /var/run/uwsgi
+<% end -%>
 exec 2>&1
 exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
   --plugin python \
@@ -9,7 +13,11 @@ exec uwsgi --processes <%= node['graphite']['uwsgi']['workers'] %> \
   --http-socket :<%= node['graphite']['listen_port'] %> \
 <% end -%>
   -t <%= node['graphite']['uwsgi']['timeout'] %> \
+<% if ['centos', 'redhat'].include?(node[:platform]) -%>
+  --wsgi-file /usr/share/graphite/graphite-web.wsgi \
+<% else -%>
   --wsgi-file /usr/share/graphite-web/graphite.wsgi \
+<% end -%>
   --uid <%= node['graphite']['user_account'] %> --gid <%= node['graphite']['group_account'] %> \
   --no-orphans --master \
   --procname graphite-web \
