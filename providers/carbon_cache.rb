@@ -24,18 +24,9 @@ end
 use_inline_resources
 
 action :create do
-  set_updated { install_python_pip }
-end
-
-def install_python_pip
   python_package new_resource.backend_name do
     new_resource.backend_attributes.each { |attr, value| send(attr, value) }
     Chef::Log.info "Installing storage backend: #{package_name}"
     action :install
   end
-end
-
-def set_updated
-  r = yield
-  new_resource.updated_by_last_action(r.updated_by_last_action?)
 end
