@@ -65,7 +65,7 @@ default['graphite']['system_packages'] =
   when 'debian'
     %w(python-dev libcairo2-dev libffi-dev python-rrdtool libxml2-dev)
   when 'rhel'
-    %w(python-devel cairo-devel libffi-devel python-rrdtool bitmap bitmap-fonts)
+    %w(python-devel cairo-devel libffi-devel python-rrdtool bitmap-fonts)
   else
     []
   end
