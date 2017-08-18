@@ -1,6 +1,6 @@
 #
 # Cookbook:: graphite
-# Attributes:: uwsgi
+# Recipe:: uwsgi
 #
 # Copyright:: 2014-2016, Heavy Water Software Inc.
 #
