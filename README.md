@@ -15,13 +15,13 @@ Consult the Graphite documentation for more information:
 
 ### Platforms
 
-- Ubuntu
-- Debian
+- Ubuntu 16.04+
+- Debian 8+
 - RHEL 7+
 
 ### Chef
 
-- Chef 12.7+
+- Chef 12.11+
 
 ### Cookbooks
 

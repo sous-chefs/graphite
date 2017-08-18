@@ -20,30 +20,47 @@
 property :name, String, name_property: true
 
 action :enable do
-  manage_runit_service(:enable)
+  manage_systemd_service(:enable)
 end
 
 action :disable do
-  manage_runit_service(:disable)
+  manage_systemd_service(:disable)
 end
 
 action :restart do
-  manage_runit_service(:restart)
+  manage_systemd_service(:restart)
 end
 
 action :reload do
-  manage_runit_service(:reload)
+  manage_systemd_service(:reload)
 end
 
 action_class do
-  def manage_runit_service(resource_action)
-    runit_service(service_name) do
-      cookbook 'graphite'
-      run_template_name 'carbon'
-      default_logger true
-      finish_script_template_name 'carbon'
-      finish true
-      options(type: type, instance: instance)
+  def manage_systemd_service(resource_action)
+    service_unit_content = {
+      'Unit' => {
+        'Description' => "Graphite Carbon #{type} #{instance}",
+        'After' => 'network.target auditd.service',
+      },
+      'Service' => {
+        'Type' => 'forking',
+        'ExecStartPre' => "/bin/rm -f #{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
+        'ExecStart' => "#{node['graphite']['base_dir']}/bin/carbon-#{type}.py --pidfile=#{node['graphite']['storage_dir']}/carbon#{type}#{instance} --debug start",
+        'User' => node['graphite']['user'],
+        'LimitNOFILE' => node['graphite']['limits']['nofile'],
+        'PIDFile' => "#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
+      },
+      'Install' => { 'WantedBy' => 'multi-user.target' },
+    }
+
+    systemd_unit "#{service_name}.service" do
+      content service_unit_content
+      action :create
+      notifies(:restart, "service[#{service_name}]")
+    end
+
+    service service_name do
+      supports status: true
       action resource_action
     end
   end
