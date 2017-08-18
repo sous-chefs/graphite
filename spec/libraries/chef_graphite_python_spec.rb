@@ -2,8 +2,8 @@ require 'rspec'
 require_relative '../../libraries/chef_graphite_python'
 
 describe ChefGraphite::PythonWriter do
-  let(:config) { Hash.new }
-  let(:options) { Hash.new }
+  let(:config) { {} }
+  let(:options) { {} }
   let(:writer) { ChefGraphite::PythonWriter.new(config, options) }
 
   describe '#to_s' do
