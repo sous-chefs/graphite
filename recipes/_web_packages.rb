@@ -17,9 +17,7 @@
 # limitations under the License.
 #
 
-Array(node['graphite']['system_packages']).each do |p|
-  package p
-end
+package Array(node['graphite']['system_packages'])
 
 python_package 'django' do
   version lazy { node['graphite']['django_version'] }
