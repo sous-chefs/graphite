@@ -17,7 +17,7 @@ Consult the Graphite documentation for more information:
 
 - Ubuntu
 - Debian
-- RHEL
+- RHEL 7+
 
 ### Chef
 

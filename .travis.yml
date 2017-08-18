@@ -18,7 +18,6 @@ services: docker
 
 env:
   matrix:
-  - INSTANCE=default-centos-6
   - INSTANCE=default-centos-7
   - INSTANCE=default-centos-7 CHEF_VERSION=12.19.36
   - INSTANCE=default-debian-8
