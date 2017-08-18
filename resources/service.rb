@@ -58,6 +58,7 @@ action_class do
     systemd_unit "#{service_name}.service" do
       content service_unit_content
       action :create
+      verify false
       notifies(:restart, "service[#{service_name}]")
     end
 
