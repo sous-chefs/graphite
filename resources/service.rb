@@ -40,13 +40,15 @@ action_class do
     service_unit_content = {
       'Unit' => {
         'Description' => "Graphite Carbon #{type} #{instance}",
-        'After' => 'network.target auditd.service',
+        'After' => 'network.target',
       },
       'Service' => {
-        'Type' => 'forking',
+        'Type' => 'simple',
+        'Environment' => "VIRTUAL_ENV=#{node['graphite']['base_dir']}/.venv" "PATH=#{node['graphite']['base_dir']}/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
         'ExecStartPre' => "/bin/rm -f #{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
-        'ExecStart' => "#{node['graphite']['base_dir']}/bin/carbon-#{type}.py --pidfile=#{node['graphite']['storage_dir']}/carbon#{type}#{instance} --debug start",
+        'ExecStart' => "#{node['graphite']['base_dir']}/bin/carbon-#{type}.py --pidfile=#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid --debug start",
         'User' => node['graphite']['user'],
+        'Restart' => 'on-abort',
         'LimitNOFILE' => node['graphite']['limits']['nofile'],
         'PIDFile' => "#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
       },
