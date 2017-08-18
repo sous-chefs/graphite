@@ -21,7 +21,7 @@ Consult the Graphite documentation for more information:
 
 ### Chef
 
-- Chef 11+
+- Chef 12.1+
 
 ### Cookbooks
 
@@ -82,7 +82,7 @@ View the code for additional stub recipes that perform smaller pieces of functio
 
 It's like a treasure hunt.
 
-## Custom Resources
+## Resources
 
 ### Carbon daemons
 
