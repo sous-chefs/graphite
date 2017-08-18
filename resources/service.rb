@@ -17,26 +17,48 @@
 # limitations under the License.
 #
 
-actions :enable, :disable, :restart, :reload
-default_action :enable
+property :name, String, name_property: true
 
-attribute :name, kind_of: String, name_attribute: true
-
-def initialize(*args)
-  super
-  @provider = Chef::Provider::GraphiteServiceRunit
+action :enable do
+  manage_runit_service(:enable)
 end
 
-def service_name
-  'carbon-' + name.tr(':', '-')
+action :disable do
+  manage_runit_service(:disable)
 end
 
-def type
-  t, = name.split(':')
-  t
+action :restart do
+  manage_runit_service(:restart)
 end
 
-def instance
-  _, i = name.split(':')
-  i
+action :reload do
+  manage_runit_service(:reload)
+end
+
+action_class do
+  def manage_runit_service(resource_action)
+    runit_service(service_name) do
+      cookbook 'graphite'
+      run_template_name 'carbon'
+      default_logger true
+      finish_script_template_name 'carbon'
+      finish true
+      options(type: type, instance: instance)
+      action resource_action
+    end
+  end
+
+  def service_name
+    'carbon-' + new_resource.name.tr(':', '-')
+  end
+
+  def type
+    t, = new_resource.name.split(':')
+    t
+  end
+
+  def instance
+    _, i = new_resource.name.split(':')
+    i
+  end
 end
