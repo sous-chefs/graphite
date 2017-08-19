@@ -17,11 +17,13 @@
 # limitations under the License.
 #
 
-python_runtime 'carbon' do
+python_runtime 'carbons_python' do
   provider :system
   version '2.7'
   options pip_version: true
 end
+
+python_virtualenv '/opt/graphite'
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_carbon_packages'
