@@ -21,6 +21,7 @@ package Array(node['graphite']['system_packages'])
 
 python_package 'django' do
   version lazy { node['graphite']['django_version'] }
+  virtualenv '/opt/graphite'
 end
 
 # The latest version is 0.4, which causes an importError
@@ -28,17 +29,17 @@ end
 # with `python manage.py syncdb --noinput`
 python_package 'django-tagging' do
   version '0.3.6'
+  virtualenv '/opt/graphite'
 end
 
-python_package 'pytz'
-python_package 'pyparsing'
-python_package 'python-memcached'
+python_package %w(pytz pyparsing python-memcached cairocffi) do
+  virtualenv '/opt/graphite'
+end
 
 python_package 'uwsgi' do
   options '--isolated'
+  virtualenv '/opt/graphite'
 end
-
-python_package 'cairocffi'
 
 python_package 'graphite_web' do
   package_name lazy {
@@ -48,4 +49,5 @@ python_package 'graphite_web' do
   version lazy {
     node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
+  virtualenv '/opt/graphite'
 end
