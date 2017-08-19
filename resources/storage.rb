@@ -17,10 +17,41 @@
 # limitations under the License.
 #
 
-actions :create, :delete, :upgrade
-default_action :create
+property :prefix, String, name_property: true
+property :package_name, String, default: 'whisper'
+property :version, String
+property :type, String, default: 'whisper'
 
-attribute :prefix, kind_of: String, name_attribute: true
-attribute :package_name, kind_of: String, default: 'whisper'
-attribute :version, kind_of: String, default: nil
-attribute :type, kind_of: String, default: 'whisper'
+action :create do
+  manage_python_pip(:install)
+  manage_directory(:create)
+end
+
+action :upgrade do
+  manage_python_pip(:upgrade)
+  manage_directory(:create)
+end
+
+action :delete do
+  manage_python_pip(:remove)
+  manage_directory(:delete)
+end
+
+action_class do
+  def manage_python_pip(resource_action)
+    python_package ew_resource.package_name do
+      version new_resource.version if new_resource.version
+      Chef::Log.info 'Installing whisper pip package'
+      action resource_action
+      virtualenv '/opt/graphite'
+    end
+  end
+
+  def manage_directory(resource_action)
+    directory new_resource.prefix do
+      recursive true
+      Chef::Log.info "Removing storage path: #{new_resource.prefix}"
+      action resource_action
+    end
+  end
+end
