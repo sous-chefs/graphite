@@ -26,7 +26,6 @@ Consult the Graphite documentation for more information:
 ### Cookbooks
 
 - poise-python
-- runit
 - build-essential
 - yum-epel
 
