@@ -117,7 +117,7 @@ Due to the graphite config file format, the data driven resources use an accumul
 - `graphite_carbon_conf_accumulator`: lookup named carbon resources in run context and gather config
 - `graphite_storage_conf_accumulator`: lookup named storage schema resources in run context and gather config
 
-If you look at the [example cookbook recipe](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L6) you probably notice that many of the resources simply take a single `config` attribute, which is basically a hash of the configuration to be written.
+If you look at the [example cookbook recipe](https://github.com/sous-chefs/graphite/blob/master/test/fixtures/cookbooks/test/recipes/single_node.rb#L9) you probably notice that many of the resources simply take a single `config` attribute, which is basically a hash of the configuration to be written.
 
 This can come from attributes in a wrapper cookbook or via data bags if you like. Be as creative as you can tolerate.
 
@@ -129,11 +129,11 @@ It's a library cookbook, intended to be used in your custom wrapper cookbook to 
 
 We have purposefully left out web server configuration to remove the dependency, so you're free to use whatever works in your environment. This avoids the need for this cookbook to keep up to date with configuration that isn't really graphite specific.
 
-For example usage consult the reference cookbook [example](https://github.com/sous-chefs/graphite/tree/master/example/graphite_example/recipes)
+For example usage consult the reference cookbook [example](https://github.com/sous-chefs/graphite/tree/master/test/fixtures/cookbooks/test/recipes)
 
 ## Examples
 
-You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb).
+You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/sous-chefs/graphite/blob/master/test/fixtures/cookbooks/test/recipes/single_node.rb).
 
 ## Data Bags
 
