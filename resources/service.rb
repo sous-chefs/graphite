@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-property :name, String, name_property: true
-
 action :enable do
   manage_systemd_service(:enable)
 end

@@ -17,7 +17,6 @@
 # limitations under the License.
 #
 
-property :name, String, name_property: true
 property :backend, [String, Hash], default: 'whisper'
 property :config, [Hash, nil], default: nil
 
