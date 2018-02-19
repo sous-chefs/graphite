@@ -17,11 +17,13 @@
 # limitations under the License.
 #
 
-python_runtime 'web' do
+python_runtime 'webs_python' do
   provider :system
   version '2.7'
   options pip_version: true
 end
+
+python_virtualenv '/opt/graphite'
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_web_packages'

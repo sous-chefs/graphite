@@ -10,14 +10,12 @@ supports 'ubuntu'
 supports 'debian'
 supports 'redhat'
 supports 'centos'
-supports 'amazon'
 supports 'scientific'
 supports 'oracle'
 
 depends  'poise-python', '>= 1.5'
-depends  'runit', '>= 1.2'
 depends  'build-essential'
 
-source_url 'https://github.com/sous-chefs/graphite' if respond_to?(:source_url)
-issues_url 'https://github.com/sous-chefs/graphite/issues' if respond_to?(:issues_url)
-chef_version '>= 11.0' if respond_to?(:chef_version)
+source_url 'https://github.com/sous-chefs/graphite'
+issues_url 'https://github.com/sous-chefs/graphite/issues'
+chef_version '>= 12.11' if respond_to?(:chef_version)

@@ -17,23 +17,30 @@
 # limitations under the License.
 #
 
-actions :create, :delete
-default_action :create
+property :backend, [String, Hash], default: 'whisper'
+property :config, [Hash, nil], default: nil
 
-attribute :name, kind_of: String, name_attribute: true
-attribute :backend, kind_of: [String, Hash], default: 'whisper'
-attribute :config, kind_of: Hash, default: nil
-
-def backend_name
-  backend.is_a?(Hash) ? backend['name'] : backend
+action :create do
+  python_package backend_name do
+    backend_attributes.each { |attr, value| send(attr, value) }
+    Chef::Log.info "Installing storage backend: #{package_name}"
+    action :install
+    virtualenv '/opt/graphite'
+  end
 end
 
-def backend_attributes
-  if backend.is_a?(Hash)
-    attrs = backend.dup
-    attrs.delete('name')
-    attrs
-  else
-    {}
+action_class do
+  def backend_name
+    new_resource.backend.is_a?(Hash) ? backend['name'] : new_resource.backend
+  end
+
+  def backend_attributes
+    if new_resource.backend.is_a?(Hash)
+      attrs = new_resource.backend.dup
+      attrs.delete('name')
+      attrs
+    else
+      {}
+    end
   end
 end

@@ -17,26 +17,66 @@
 # limitations under the License.
 #
 
-actions :enable, :disable, :restart, :reload
-default_action :enable
-
-attribute :name, kind_of: String, name_attribute: true
-
-def initialize(*args)
-  super
-  @provider = Chef::Provider::GraphiteServiceRunit
+action :enable do
+  manage_systemd_service(:enable)
 end
 
-def service_name
-  'carbon-' + name.tr(':', '-')
+action :disable do
+  manage_systemd_service(:disable)
 end
 
-def type
-  t, = name.split(':')
-  t
+action :restart do
+  manage_systemd_service(:restart)
 end
 
-def instance
-  _, i = name.split(':')
-  i
+action :reload do
+  manage_systemd_service(:reload)
+end
+
+action_class do
+  def manage_systemd_service(resource_action)
+    service_unit_content = {
+      'Unit' => {
+        'Description' => "Graphite Carbon #{type} #{instance}",
+        'After' => 'network.target',
+      },
+      'Service' => {
+        'Type' => 'simple',
+        'Environment' => "VIRTUAL_ENV=#{node['graphite']['base_dir']}/.venv" "PATH=#{node['graphite']['base_dir']}/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        'ExecStartPre' => "/bin/rm -f #{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
+        'ExecStart' => "#{node['graphite']['base_dir']}/bin/carbon-#{type}.py --pidfile=#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid --debug start",
+        'User' => node['graphite']['user'],
+        'Restart' => 'on-abort',
+        'LimitNOFILE' => node['graphite']['limits']['nofile'],
+        'PIDFile' => "#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
+      },
+      'Install' => { 'WantedBy' => 'multi-user.target' },
+    }
+
+    systemd_unit "#{service_name}.service" do
+      content service_unit_content
+      action :create
+      verify false
+      notifies(:restart, "service[#{service_name}]")
+    end
+
+    service service_name do
+      supports status: true
+      action resource_action
+    end
+  end
+
+  def service_name
+    'carbon-' + new_resource.name.tr(':', '-')
+  end
+
+  def type
+    t, = new_resource.name.split(':')
+    t
+  end
+
+  def instance
+    _, i = new_resource.name.split(':')
+    i
+  end
 end

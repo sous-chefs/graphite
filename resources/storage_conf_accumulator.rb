@@ -20,7 +20,6 @@
 actions :create
 default_action :create
 
-attribute :name, kind_of: String, name_attribute: true
 attribute :file_resource, kind_of: String, default: 'file[storage-schemas.conf]'
 attribute :sort_schemas, kind_of: [TrueClass, FalseClass], default: true
 

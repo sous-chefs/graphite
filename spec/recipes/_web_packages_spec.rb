@@ -4,7 +4,7 @@ describe 'graphite::_web_packages' do
   context 'on centos' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
-        platform: 'centos', version: '6.7'
+        platform: 'centos', version: '7.3'
       ).converge(described_recipe)
     end
 

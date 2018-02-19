@@ -15,18 +15,17 @@ Consult the Graphite documentation for more information:
 
 ### Platforms
 
-- Ubuntu
-- Debian
-- RHEL
+- Ubuntu 16.04+
+- Debian 8+
+- RHEL 7+
 
 ### Chef
 
-- Chef 11+
+- Chef 12.11+
 
 ### Cookbooks
 
 - poise-python
-- runit
 - build-essential
 - yum-epel
 
@@ -82,7 +81,7 @@ View the code for additional stub recipes that perform smaller pieces of functio
 
 It's like a treasure hunt.
 
-## Custom Resources
+## Resources
 
 ### Carbon daemons
 
@@ -139,10 +138,6 @@ You can find example usage in the graphite_example cookbook that is included in 
 
 Sure, use em if you like. Even encrypt them.
 
-## Amazon Web Services
-
-Due to the old version of Chef used on Amazon Web Services in order to successfully run this cookbook you may need to add the [`delayed_evaluator`](http://community.opscode.com/cookbooks/delayed_evaluator) recipe to your run list before the `graphite` recipe.
-
 ## Development / Contributing
 
 - Source hosted at [GitHub][repo]
@@ -152,7 +147,7 @@ Pull requests are very welcome! Make sure your patches are well tested. Ideally 
 
 1. Fork the repo
 2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Write some tests, see [ChefSpec](https://github.com/sethvargo/chefspec)
+3. Write some tests, see [ChefSpec](https://github.com/chefspec/chefspec)
 4. Commit your awesome changes (`git commit -am 'Added some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create a new Pull Request and tell us about it your changes.

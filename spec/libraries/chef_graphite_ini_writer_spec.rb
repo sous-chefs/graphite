@@ -2,7 +2,7 @@ require 'rspec'
 require_relative '../../libraries/chef_graphite_ini_writer'
 
 describe ChefGraphite::INIWriter do
-  let(:config) { Hash.new }
+  let(:config) { {} }
   let(:writer) { ChefGraphite::INIWriter.new(config) }
 
   describe '#to_s' do

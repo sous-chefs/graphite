@@ -16,9 +16,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-actions :create, :delete
-default_action :create
+property :path, String, name_property: true
+property :config, [Hash, nil], default: nil
+property :dynamic_template, String, default: 'local_settings_dynamic.py'
 
-attribute :path, kind_of: String, name_attribute: true
-attribute :config, kind_of: Hash, default: nil
-attribute :dynamic_template, kind_of: String, default: 'local_settings_dynamic.py'
+action :create do
+  manage_file(:create)
+end
+
+action :delete do
+  manage_file(:delete)
+end
+
+action_class do
+  def manage_file(resource_action)
+    contents = "# This file is managed by Chef, your changes *will* be overwritten!\n\n"
+    contents << ChefGraphite::PythonWriter.new(new_resource.config, upcase_root_keys: true).to_s
+    contents << optimistic_loader_code
+
+    file new_resource.path do
+      content contents
+      action resource_action
+    end
+  end
+
+  def optimistic_loader_code
+    <<-EOF
+
+try:
+  from graphite.#{dynamic_template_name} import *
+except ImportError:
+  pass
+
+  EOF
+  end
+
+  def dynamic_template_name
+    ::File.basename(new_resource.dynamic_template, '.py')
+  end
+end

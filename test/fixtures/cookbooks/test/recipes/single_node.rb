@@ -1,7 +1,6 @@
 apt_update 'update' if platform_family?('debian')
-include_recipe 'runit'
 include_recipe 'graphite::carbon'
-include_recipe 'graphite::_web_packages'
+include_recipe 'graphite::web'
 
 storage_dir = node['graphite']['storage_dir']
 
@@ -62,12 +61,6 @@ graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
            },
          })
   notifies :restart, 'service[graphite-web]', :delayed
-end
-
-directory "#{storage_dir}/log/webapp" do
-  owner node['graphite']['user']
-  group node['graphite']['group']
-  recursive true
 end
 
 execute 'python manage.py syncdb --noinput' do
