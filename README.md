@@ -27,7 +27,6 @@ Consult the Graphite documentation for more information:
 
 - poise-python
 - build-essential
-- yum-epel
 
 ## Attributes
 
