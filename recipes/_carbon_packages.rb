@@ -23,7 +23,7 @@ include_recipe 'build-essential'
 # install before carbon so it's used
 python_package 'Twisted' do
   version lazy { node['graphite']['twisted_version'] }
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'carbon' do
@@ -33,5 +33,5 @@ python_package 'carbon' do
   version lazy {
     node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
