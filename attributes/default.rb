@@ -63,7 +63,7 @@ default['graphite']['graph_templates'] = [
 default['graphite']['system_packages'] =
   case node['platform_family']
   when 'debian'
-    %w(libcairo2-dev libffi-dev build-essential python-rrdtool)
+    %w(libcairo2-dev libffi-dev python-rrdtool)
   when 'rhel'
     %w(cairo-devel libffi-devel python-rrdtool bitmap-fonts)
   else
