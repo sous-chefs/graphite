@@ -1,9 +1,6 @@
 Lint/ParenthesesAsGroupedExpression:
   Exclude:
-    - 'test/fixtures/cookbooks/test/recipes/carbon_aggregator.rb'
-    - 'test/fixtures/cookbooks/test/recipes/carbon_cache.rb'
-    - 'test/fixtures/cookbooks/test/recipes/carbon_relay.rb'
-    - 'test/fixtures/cookbooks/test/recipes/single_node.rb'
+    - 'test/**/*'
 
 Style/GuardClause:
   Exclude:
