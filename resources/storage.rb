@@ -43,7 +43,7 @@ action_class do
       version new_resource.version if new_resource.version
       Chef::Log.info 'Installing whisper pip package'
       action resource_action
-      virtualenv '/opt/graphite'
+      virtualenv node['graphite']['base_dir']
     end
   end
 

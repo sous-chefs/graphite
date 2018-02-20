@@ -25,7 +25,7 @@ action :create do
     backend_attributes.each { |attr, value| send(attr, value) }
     Chef::Log.info "Installing storage backend: #{package_name}"
     action :install
-    virtualenv '/opt/graphite'
+    virtualenv node['graphite']['base_dir']
   end
 end
 
