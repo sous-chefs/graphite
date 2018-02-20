@@ -33,7 +33,7 @@ python_package 'django-tagging' do
 end
 
 python_package %w(pytz pyparsing python-memcached cairocffi) do
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'uwsgi' do
@@ -49,5 +49,5 @@ python_package 'graphite_web' do
   version lazy {
     node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
