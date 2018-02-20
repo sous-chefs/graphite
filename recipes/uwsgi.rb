@@ -17,43 +17,4 @@
 # limitations under the License.
 #
 
-command = "/usr/local/bin/uwsgi --processes #{node['graphite']['uwsgi']['workers']}"
-command << " --plugins carbon --carbon #{node['graphite']['uwsgi']['carbon']}" if node['graphite']['uwsgi']['carbon']
-command << " --http :#{node['graphite']['uwsgi']['port']}" if node['graphite']['uwsgi']['listen_http']
-command << " --pythonpath #{node['graphite']['base_dir']}/lib \
---pythonpath #{node['graphite']['base_dir']}/webapp/graphite \
---wsgi-file #{node['graphite']['base_dir']}/conf/graphite.wsgi.example \
---chmod-socket=#{node['graphite']['uwsgi']['socket_permissions']} \
---no-orphans --master \
---buffer-size #{node['graphite']['uwsgi']['buffer-size']} \
---procname graphite-web \
---die-on-term \
---socket #{node['graphite']['uwsgi']['socket']}"
-
-service_unit_content = {
-  'Unit' => {
-    'Description' => 'Graphite Web',
-    'After' => 'network.target',
-  },
-  'Service' => {
-    'Type' => 'simple',
-    'ExecStart' => command,
-    'User' => node['graphite']['user'],
-    'Group' => node['graphite']['group'],
-    'Restart' => 'on-abort',
-    'LimitNOFILE' => node['graphite']['limits']['nofile'],
-  },
-  'Install' => { 'WantedBy' => 'multi-user.target' },
-}
-
-systemd_unit 'graphite-web.service' do
-  content service_unit_content
-  action :create
-  verify false
-  notifies(:restart, 'service[graphite-web]')
-end
-
-service 'graphite-web' do
-  supports status: true
-  action [:start, :enable]
-end
+raise 'The graphite cookbook no longer includes a uwsgi recipe. Please remove this recipe from any roles/runlists.'
