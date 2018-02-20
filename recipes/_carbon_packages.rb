@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'build-essential'
-
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used
 python_package 'Twisted' do

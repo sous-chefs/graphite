@@ -14,7 +14,6 @@ supports 'scientific'
 supports 'oracle'
 
 depends  'poise-python', '>= 1.5'
-depends  'build-essential'
 
 source_url 'https://github.com/sous-chefs/graphite'
 issues_url 'https://github.com/sous-chefs/graphite/issues'

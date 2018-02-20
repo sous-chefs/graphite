@@ -26,7 +26,6 @@ Consult the Graphite documentation for more information:
 ### Cookbooks
 
 - poise-python
-- build-essential
 
 ## Attributes
 

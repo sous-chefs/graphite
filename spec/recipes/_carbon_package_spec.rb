@@ -3,10 +3,6 @@ require 'spec_helper'
 describe 'graphite::carbon' do
   let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
 
-  it 'includes build-essential for python_pip usage' do
-    expect(chef_run).to include_recipe('build-essential')
-  end
-
   it 'installs python Twisted package' do
     expect(chef_run).to install_python_pip('Twisted')
   end
