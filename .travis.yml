@@ -19,10 +19,13 @@ services: docker
 env:
   matrix:
   - INSTANCE=default-centos-7
-  - INSTANCE=default-centos-7 CHEF_VERSION=12.21.4
+  - INSTANCE=default-centos-7 CHEF_VERSION=13
   - INSTANCE=default-debian-8
+  - INSTANCE=default-debian-8 CHEF_VERSION=13
   - INSTANCE=default-debian-9
+  - INSTANCE=default-debian-9 CHEF_VERSION=13
   - INSTANCE=default-ubuntu-1604
+  - INSTANCE=default-ubuntu-1604 CHEF_VERSION=13
 
 # Ensure we make ChefDK's Ruby the default
 before_script:
@@ -35,6 +38,11 @@ before_script:
 script: KITCHEN_LOCAL_YAML=.kitchen.dokken.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
 matrix:
+  allow_failures:
+    - env: INSTANCE=default-centos-7
+    - env: INSTANCE=default-debian-8
+    - env: INSTANCE=default-debian-9
+    - env: INSTANCE=default-ubuntu-1604
   include:
     - script:
       - /opt/chefdk/bin/chef exec delivery local all

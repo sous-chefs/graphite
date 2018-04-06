@@ -17,4 +17,4 @@ depends  'poise-python', '>= 1.5'
 
 source_url 'https://github.com/sous-chefs/graphite'
 issues_url 'https://github.com/sous-chefs/graphite/issues'
-chef_version '>= 12.11' if respond_to?(:chef_version)
+chef_version '>= 12.11', '< 14'
