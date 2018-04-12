@@ -39,7 +39,7 @@ end
 
 action_class do
   def manage_python_pip(resource_action)
-    python_package ew_resource.package_name do
+    python_package new_resource.package_name do
       version new_resource.version if new_resource.version
       Chef::Log.info 'Installing whisper pip package'
       action resource_action
