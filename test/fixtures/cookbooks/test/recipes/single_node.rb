@@ -96,5 +96,3 @@ except Exception,err:
     print "died with error: %s" % str(err)
   PYTHON
 end
-
-include_recipe 'graphite::uwsgi'

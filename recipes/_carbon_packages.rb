@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+# we need a compiler before we can install twisted
+package platform_family?('debian') ? 'build-essential' : 'gcc'
+
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used
 python_package 'Twisted' do

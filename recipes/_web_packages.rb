@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-package Array(node['graphite']['system_packages'])
+package node['graphite']['system_packages']
 
 python_package 'django' do
   version lazy { node['graphite']['django_version'] }
@@ -33,7 +33,7 @@ python_package 'django-tagging' do
 end
 
 python_package %w(pytz pyparsing python-memcached cairocffi) do
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'uwsgi' do
@@ -49,5 +49,5 @@ python_package 'graphite_web' do
   version lazy {
     node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
