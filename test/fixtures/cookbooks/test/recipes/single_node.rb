@@ -63,38 +63,13 @@ graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
   notifies :restart, 'service[graphite-web]', :delayed
 end
 
-execute 'python manage.py syncdb --noinput' do
+python_execute 'bin/django-admin.py migrate --run-syncdb --settings="graphite.settings" --pythonpath=webapp' do
   user node['graphite']['user']
   group node['graphite']['group']
-  cwd "#{base_dir}/webapp/graphite"
+  cwd node['graphite']['base_dir']
+  python 'webs_python'
+  virtualenv node['graphite']['base_dir']
   creates "#{storage_dir}/graphite.db"
-  notifies :run, 'python[set admin password]'
-end
-
-# creates an initial user, doesn't require the set_admin_password
-# script. But srsly, how ugly is this? could be
-# crazy and wrap this as a graphite_user resource with a few
-# improvements...
-python 'set admin password' do
-  action :nothing
-  cwd "#{base_dir}/webapp/graphite"
-  user node['graphite']['user']
-  code <<-PYTHON
-import os,sys
-sys.path.append("#{base_dir}/webapp/graphite")
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
-from django.contrib.auth.models import User
-
-username = "#{node['graphite']['user']}"
-password = "#{node['graphite']['password']}"
-
-try:
-    u = User.objects.create_user(username, password=password)
-    u.save()
-except Exception,err:
-    print "could not create %s" % username
-    print "died with error: %s" % str(err)
-  PYTHON
 end
 
 include_recipe 'graphite::uwsgi'
