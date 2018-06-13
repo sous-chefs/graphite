@@ -23,7 +23,7 @@ python_runtime 'webs_python' do
   options pip_version: true
 end
 
-python_virtualenv '/opt/graphite'
+python_virtualenv node['graphite']['base_dir']
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_web_packages'

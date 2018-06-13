@@ -23,7 +23,7 @@ python_package 'django' do
   user node['graphite']['user']
   group node['graphite']['group']
   version lazy { node['graphite']['django_version'] }
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 # The latest version is 0.4, which causes an importError
@@ -33,20 +33,20 @@ python_package 'django-tagging' do
   user node['graphite']['user']
   group node['graphite']['group']
   version '0.3.6'
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package %w(pytz pyparsing python-memcached cairocffi) do
   user node['graphite']['user']
   group node['graphite']['group']
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'uwsgi' do
   user node['graphite']['user']
   group node['graphite']['group']
   options '--isolated'
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'graphite_web' do
@@ -60,5 +60,5 @@ python_package 'graphite_web' do
   user node['graphite']['user']
   group node['graphite']['group']
   install_options '--no-binary=:all:'
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
