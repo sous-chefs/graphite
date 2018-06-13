@@ -19,6 +19,10 @@
 
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used
+
+# Compliler is needed to build Twisted gem on this step
+package platform_family?('debian') ? 'build-essential' : 'gcc'
+
 python_package 'Twisted' do
   user node['graphite']['user']
   group node['graphite']['group']
