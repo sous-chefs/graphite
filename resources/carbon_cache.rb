@@ -27,6 +27,7 @@ action :create do
     action :install
     user node['graphite']['user']
     group node['graphite']['group']
+    install_options '--no-binary=:all:'
     virtualenv '/opt/graphite'
   end
 end

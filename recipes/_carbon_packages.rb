@@ -35,5 +35,6 @@ python_package 'carbon' do
   }
   user node['graphite']['user']
   group node['graphite']['group']
+  install_options '--no-binary=:all:'
   virtualenv node['graphite']['base_dir']
 end
