@@ -18,8 +18,10 @@
 #
 
 default['graphite']['version'] = '1.1.3'
-default['graphite']['twisted_version'] = '13.2.0'
-default['graphite']['django_version'] = '1.6.1'
+# You may set versions of Twisted and Django packages explicitly, otherwise it
+# installs actual versions of these packages as dependecies
+default['graphite']['twisted_version'] = ''
+default['graphite']['django_version'] = ''
 default['graphite']['password'] = 'change_me'
 default['graphite']['user'] = 'graphite'
 default['graphite']['group'] = 'graphite'
