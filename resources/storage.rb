@@ -31,7 +31,7 @@ action :upgrade do
   manage_python_pip(:upgrade)
   manage_directory(:create)
 end
-
+ 
 action :delete do
   manage_python_pip(:remove)
   manage_directory(:delete)
@@ -43,6 +43,8 @@ action_class do
       version new_resource.version if new_resource.version
       Chef::Log.info 'Installing whisper pip package'
       action resource_action
+      user node['graphite']['user']
+      group node['graphite']['group']
       virtualenv '/opt/graphite'
     end
   end

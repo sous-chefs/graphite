@@ -27,5 +27,6 @@ user node['graphite']['user'] do
   group node['graphite']['group']
   home '/var/lib/graphite'
   shell '/bin/false'
+  manage_home true
   action :create
 end

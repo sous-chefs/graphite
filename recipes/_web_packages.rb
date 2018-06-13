@@ -20,6 +20,8 @@
 package Array(node['graphite']['system_packages'])
 
 python_package 'django' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   version lazy { node['graphite']['django_version'] }
   virtualenv '/opt/graphite'
 end
@@ -28,15 +30,21 @@ end
 # ImportError: No module named fields
 # with `python manage.py syncdb --noinput`
 python_package 'django-tagging' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   version '0.3.6'
   virtualenv '/opt/graphite'
 end
 
 python_package %w(pytz pyparsing python-memcached cairocffi) do
+  user node['graphite']['user']
+  group node['graphite']['group']
   virtualenv '/opt/graphite'
 end
 
 python_package 'uwsgi' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   options '--isolated'
   virtualenv '/opt/graphite'
 end
@@ -49,5 +57,7 @@ python_package 'graphite_web' do
   version lazy {
     node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
+  user node['graphite']['user']
+  group node['graphite']['group']
   virtualenv '/opt/graphite'
 end

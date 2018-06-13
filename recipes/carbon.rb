@@ -23,7 +23,17 @@ python_runtime 'carbons_python' do
   options pip_version: true
 end
 
-python_virtualenv node['graphite']['base_dir']
+include_recipe 'graphite::_user'
+
+directory node['graphite']['base_dir'] do
+  owner node['graphite']['user']
+  group node['graphite']['group']
+end
+
+python_virtualenv node['graphite']['base_dir'] do
+  user node['graphite']['user']
+  group node['graphite']['group']
+end
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_carbon_packages'

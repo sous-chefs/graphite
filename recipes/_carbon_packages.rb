@@ -20,6 +20,8 @@
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used
 python_package 'Twisted' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   version lazy { node['graphite']['twisted_version'] }
   virtualenv node['graphite']['base_dir']
 end
@@ -31,5 +33,7 @@ python_package 'carbon' do
   version lazy {
     node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
+  user node['graphite']['user']
+  group node['graphite']['group']
   virtualenv node['graphite']['base_dir']
 end
