@@ -49,7 +49,6 @@ service_unit_content = {
 systemd_unit 'graphite-web.service' do
   content service_unit_content
   action :create
-  verify false
   notifies(:restart, 'service[graphite-web]')
 end
 
