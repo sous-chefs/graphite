@@ -43,8 +43,9 @@ class Chef
         file_resource.content contents
 
         file_resource.run_action(:create)
-
-        new_resource.updated_by_last_action(true) if file_resource.updated_by_last_action?
+        # While we are not using sub-resources, state of current resource
+        # should use updated_by_last_action method, so FC085 disabled
+        new_resource.updated_by_last_action(file_resource.updated_by_last_action?) # ~FC085
       end
     end
   end
