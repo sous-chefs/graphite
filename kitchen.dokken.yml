@@ -8,11 +8,22 @@ transport:
 
 provisioner:
   name: dokken
+  deprecations_as_errors: true
 
 verifier:
   name: inspec
 
 platforms:
+- name: amazonlinux
+  driver:
+    image: dokken/amazonlinux
+    pid_one_command: /sbin/init
+
+- name: amazonlinux-2
+  driver:
+    image: dokken/amazonlinux-2
+    pid_one_command: /usr/lib/systemd/systemd
+
 - name: debian-8
   driver:
     image: dokken/debian-8
@@ -40,6 +51,13 @@ platforms:
 - name: ubuntu-16.04
   driver:
     image: dokken/ubuntu-16.04
+    pid_one_command: /bin/systemd
+    intermediate_instructions:
+      - RUN /usr/bin/apt-get update
+
+- name: ubuntu-18.04
+  driver:
+    image: dokken/ubuntu-18.04
     pid_one_command: /bin/systemd
     intermediate_instructions:
       - RUN /usr/bin/apt-get update
