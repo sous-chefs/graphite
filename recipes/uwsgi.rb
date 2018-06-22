@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-command = "/usr/local/bin/uwsgi --processes #{node['graphite']['uwsgi']['workers']}"
+command = "#{node['graphite']['base_dir']}/bin/uwsgi --processes #{node['graphite']['uwsgi']['workers']}"
 command << " --plugins carbon --carbon #{node['graphite']['uwsgi']['carbon']}" if node['graphite']['uwsgi']['carbon']
 command << " --http :#{node['graphite']['uwsgi']['port']}" if node['graphite']['uwsgi']['listen_http']
 command << " --pythonpath #{node['graphite']['base_dir']}/lib \
@@ -49,7 +49,6 @@ service_unit_content = {
 systemd_unit 'graphite-web.service' do
   content service_unit_content
   action :create
-  verify false
   notifies(:restart, 'service[graphite-web]')
 end
 

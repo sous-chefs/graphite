@@ -19,9 +19,21 @@
 
 # sadly, have to pin Twisted to known good version
 # install before carbon so it's used
+
+# Compliler is needed to build Twisted gem on this step
+package platform_family?('debian') ? 'build-essential' : 'gcc'
+
 python_package 'Twisted' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   version lazy { node['graphite']['twisted_version'] }
   virtualenv node['graphite']['base_dir']
+  only_if do
+    # Install explicit version of Twisted only if it is specified in attributes
+    # Otherwise the actual version will be installed as a dependency
+    version = node['graphite']['django_version']
+    version.nil? || version.empty?
+  end
 end
 
 python_package 'carbon' do
@@ -31,5 +43,8 @@ python_package 'carbon' do
   version lazy {
     node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
+  user node['graphite']['user']
+  group node['graphite']['group']
+  install_options '--no-binary=:all:'
   virtualenv node['graphite']['base_dir']
 end

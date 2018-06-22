@@ -17,9 +17,11 @@
 # limitations under the License.
 #
 
-default['graphite']['version'] = '0.9.15'
-default['graphite']['twisted_version'] = '13.2.0'
-default['graphite']['django_version'] = '1.6.1'
+default['graphite']['version'] = '1.1.3'
+# You may set versions of Twisted and Django packages explicitly, otherwise it
+# installs actual versions of these packages as dependecies
+default['graphite']['twisted_version'] = ''
+default['graphite']['django_version'] = ''
 default['graphite']['password'] = 'change_me'
 default['graphite']['user'] = 'graphite'
 default['graphite']['group'] = 'graphite'
@@ -63,7 +65,7 @@ default['graphite']['graph_templates'] = [
 default['graphite']['system_packages'] =
   case node['platform_family']
   when 'debian'
-    %w(libcairo2-dev libffi-dev build-essential python-rrdtool)
+    %w(libcairo2-dev libffi-dev python-rrdtool)
   when 'rhel'
     %w(cairo-devel libffi-devel python-rrdtool bitmap-fonts)
   else

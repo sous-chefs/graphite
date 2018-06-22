@@ -20,25 +20,38 @@
 package Array(node['graphite']['system_packages'])
 
 python_package 'django' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   version lazy { node['graphite']['django_version'] }
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
+  only_if do
+    # Install explicit version of django only if it is specified in attributes
+    version = node['graphite']['django_version']
+    version.nil? || version.empty?
+  end
 end
 
 # The latest version is 0.4, which causes an importError
 # ImportError: No module named fields
 # with `python manage.py syncdb --noinput`
 python_package 'django-tagging' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   version '0.3.6'
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package %w(pytz pyparsing python-memcached cairocffi) do
-  virtualenv '/opt/graphite'
+  user node['graphite']['user']
+  group node['graphite']['group']
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'uwsgi' do
+  user node['graphite']['user']
+  group node['graphite']['group']
   options '--isolated'
-  virtualenv '/opt/graphite'
+  virtualenv node['graphite']['base_dir']
 end
 
 python_package 'graphite_web' do
@@ -49,5 +62,8 @@ python_package 'graphite_web' do
   version lazy {
     node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
-  virtualenv '/opt/graphite'
+  user node['graphite']['user']
+  group node['graphite']['group']
+  install_options '--no-binary=:all:'
+  virtualenv node['graphite']['base_dir']
 end
