@@ -90,7 +90,7 @@ class Chef
         end
 
         let(:version) do
-          '12.04'
+          '16.04'
         end
       end
     end

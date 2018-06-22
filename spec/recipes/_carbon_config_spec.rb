@@ -19,7 +19,7 @@ describe 'graphite::_carbon_config' do
     end
 
     it 'has correct mode' do
-      expect(dir_resource.mode).to eq(0755)
+      expect(dir_resource.mode).to eq('755')
     end
 
     it 'has recursive set' do
@@ -41,7 +41,7 @@ describe 'graphite::_carbon_config' do
     end
 
     it 'has correct mode' do
-      expect(file_resource.mode).to eq(0644)
+      expect(file_resource.mode).to eq('644')
     end
 
     it 'has action :nothing' do
