@@ -30,10 +30,31 @@ command << " --pythonpath #{node['graphite']['base_dir']}/lib \
 --die-on-term \
 --socket #{node['graphite']['uwsgi']['socket']}"
 
+socket_unit_content = {
+  'Unit' => {
+    'Description' => 'Socket for uWSGI app'
+  },
+  'Socket' => {
+    'ListenStream' => node['graphite']['uwsgi']['socket'],
+    "SocketUser" => node['graphite']['uwsgi']['socket_user'],
+    "SocketGroup" => node['graphite']['uwsgi']['socket_group'],
+    "SocketMode" => node['graphite']['uwsgi']['socket_permissions']
+  },
+  'Install' => { 'WantedBy' => 'multi-user.target' },
+}
+
+systemd_unit 'graphite-web.socket' do
+  content socket_unit_content
+  verify false
+  action :create
+  notifies(:restart, 'service[graphite-web]')
+end
+
 service_unit_content = {
   'Unit' => {
     'Description' => 'Graphite Web',
     'After' => 'network.target',
+    'Requires' => 'graphite-web.socket'
   },
   'Service' => {
     'Type' => 'simple',
