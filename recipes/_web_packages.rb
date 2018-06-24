@@ -31,22 +31,6 @@ python_package 'django' do
   end
 end
 
-# The latest version is 0.4, which causes an importError
-# ImportError: No module named fields
-# with `python manage.py syncdb --noinput`
-python_package 'django-tagging' do
-  user node['graphite']['user']
-  group node['graphite']['group']
-  version '0.3.6'
-  virtualenv node['graphite']['base_dir']
-end
-
-python_package %w(pytz pyparsing python-memcached cairocffi) do
-  user node['graphite']['user']
-  group node['graphite']['group']
-  virtualenv node['graphite']['base_dir']
-end
-
 python_package 'uwsgi' do
   user node['graphite']['user']
   group node['graphite']['group']

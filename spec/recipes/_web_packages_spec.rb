@@ -28,12 +28,6 @@ describe 'graphite::_web_packages' do
     )
   end
 
-  %w(django-tagging pytz pyparsing python-memcached uwsgi).each do |pkg|
-    it "installs the #{pkg} pip package" do
-      expect(chef_run).to install_python_pip(pkg)
-    end
-  end
-
   it 'installs a specific version of graphite_web from a package' do
     node.override['graphite']['install_type'] = 'package'
     node.override['graphite']['version'] = '9.8.7'
