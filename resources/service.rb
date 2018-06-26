@@ -36,6 +36,8 @@ end
 action_class do
   def manage_systemd_service(resource_action)
     virtual_env_path = "#{node['graphite']['base_dir']}/bin"
+    exec_attrs = instance ? "--instance #{instance}" : ''
+    exec_attrs << ' --debug start'
 
     service_unit_content = {
       'Unit' => {
@@ -44,7 +46,7 @@ action_class do
       },
       'Service' => {
         'Type' => 'simple',
-        'ExecStart' => "#{virtual_env_path}/python #{virtual_env_path}/carbon-#{type}.py --debug start",
+        'ExecStart' => "#{virtual_env_path}/python #{virtual_env_path}/carbon-#{type}.py #{exec_attrs}",
         'User' => node['graphite']['user'],
         'Group' => node['graphite']['group'],
         'Restart' => 'on-abort',
