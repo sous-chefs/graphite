@@ -35,6 +35,10 @@ end
 
 action_class do
   def manage_systemd_service(resource_action)
+    virtual_env_path = "#{node['graphite']['base_dir']}/bin"
+    exec_attrs = instance ? "--instance #{instance}" : ''
+    exec_attrs << ' --debug start'
+
     service_unit_content = {
       'Unit' => {
         'Description' => "Graphite Carbon #{type} #{instance}",
@@ -42,13 +46,12 @@ action_class do
       },
       'Service' => {
         'Type' => 'simple',
-        'Environment' => "VIRTUAL_ENV=#{node['graphite']['base_dir']}/.venv" "PATH=#{node['graphite']['base_dir']}/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-        'ExecStartPre' => "/bin/rm -f #{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
-        'ExecStart' => "#{node['graphite']['base_dir']}/bin/carbon-#{type}.py --pidfile=#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid --debug start",
+        'ExecStart' => "#{virtual_env_path}/python #{virtual_env_path}/carbon-#{type}.py #{exec_attrs}",
         'User' => node['graphite']['user'],
+        'Group' => node['graphite']['group'],
         'Restart' => 'on-abort',
         'LimitNOFILE' => node['graphite']['limits']['nofile'],
-        'PIDFile' => "#{node['graphite']['storage_dir']}/carbon#{type}#{instance}.pid",
+        'PIDFile' => "#{node['graphite']['storage_dir']}/#{service_name}.pid",
       },
       'Install' => { 'WantedBy' => 'multi-user.target' },
     }
