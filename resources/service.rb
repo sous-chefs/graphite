@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+property :debug, [true, false], default: false
+
 action :enable do
   manage_systemd_service(:enable)
 end
@@ -36,8 +38,10 @@ end
 action_class do
   def manage_systemd_service(resource_action)
     virtual_env_path = "#{node['graphite']['base_dir']}/bin"
-    exec_attrs = instance ? "--instance #{instance}" : ''
-    exec_attrs << ' --debug start'
+    exec_attrs = instance ? ["--instance #{instance}"] : []
+    exec_attrs.append(new_resource.debug ? '--debug' : '--nodaemon')
+    exec_attrs.append('start')
+    exec_attrs = exec_attrs.join(' ')
 
     service_unit_content = {
       'Unit' => {
