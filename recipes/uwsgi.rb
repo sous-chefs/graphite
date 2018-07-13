@@ -32,13 +32,13 @@ command << " --pythonpath #{node['graphite']['base_dir']}/lib \
 
 socket_unit_content = {
   'Unit' => {
-    'Description' => 'Socket for uWSGI app'
+    'Description' => 'Socket for uWSGI app',
   },
   'Socket' => {
     'ListenStream' => node['graphite']['uwsgi']['socket'],
-    "SocketUser" => node['graphite']['uwsgi']['socket_user'],
-    "SocketGroup" => node['graphite']['uwsgi']['socket_group'],
-    "SocketMode" => node['graphite']['uwsgi']['socket_permissions']
+    'SocketUser' => node['graphite']['uwsgi']['socket_user'],
+    'SocketGroup' => node['graphite']['uwsgi']['socket_group'],
+    'SocketMode' => node['graphite']['uwsgi']['socket_permissions'],
   },
   'Install' => { 'WantedBy' => 'multi-user.target' },
 }
@@ -54,7 +54,7 @@ service_unit_content = {
   'Unit' => {
     'Description' => 'Graphite Web',
     'After' => 'network.target',
-    'Requires' => 'graphite-web.socket'
+    'Requires' => 'graphite-web.socket',
   },
   'Service' => {
     'Type' => 'simple',
