@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'Dangerfile'
+
 Lint/ParenthesesAsGroupedExpression:
   Exclude:
     - 'test/fixtures/cookbooks/test/recipes/carbon_aggregator.rb'
