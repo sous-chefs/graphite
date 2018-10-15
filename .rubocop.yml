@@ -1,3 +1,16 @@
 AllCops:
   Exclude:
     - 'Dangerfile'
+
+Lint/ParenthesesAsGroupedExpression:
+  Exclude:
+    - 'test/fixtures/cookbooks/test/recipes/carbon_aggregator.rb'
+    - 'test/fixtures/cookbooks/test/recipes/carbon_cache.rb'
+    - 'test/fixtures/cookbooks/test/recipes/carbon_relay.rb'
+    - 'test/fixtures/cookbooks/test/recipes/single_node.rb'
+
+Style/GuardClause:
+  Exclude:
+    - 'libraries/provider_carbon_conf_accumulator.rb'
+    - 'spec/spec_helper.rb'
+    - 'spec/support/example_groups/provider_example_group.rb'
