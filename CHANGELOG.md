@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version of the graphite cookbook.
 
+
+## 1.0.6 
+
+- Syntax and styling updates
+- Compatibility with Chef 13 (.[@oscar123mendoza])
+
 ## 1.0.4
 
 - Syntax and styling updates
@@ -40,3 +46,4 @@ This file is used to list changes made in each version of the graphite cookbook.
 [@fnichol]: https://github.com/fnichol
 [@obazoud]: https://github.com/obazoud
 [@webframp]: https://github.com/webframp
+[@oscar123mendoza]: https://github.com/oscar123mendoza

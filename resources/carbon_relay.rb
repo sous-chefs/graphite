@@ -20,4 +20,4 @@
 actions :create, :delete
 default_action :create
 
-attribute :config, kind_of: Hash, default: nil
+attribute :config, kind_of: Hash
