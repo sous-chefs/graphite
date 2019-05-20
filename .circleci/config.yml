@@ -9,5 +9,5 @@ workflows:
       - kitchen/danger:
           name: danger
           context: Danger
-      - kitchen/lint:
-          name: lint
+      - kitchen/delivery:
+          name: Delivery
