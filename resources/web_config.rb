@@ -48,7 +48,7 @@ try:
 except ImportError:
   pass
 
-  EOF
+    EOF
   end
 
   def dynamic_template_name
