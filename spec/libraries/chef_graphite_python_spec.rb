@@ -48,7 +48,7 @@ describe ChefGraphite::PythonWriter do
           flushrrdcached = 'unix:/var/run/rrdcached.sock'
           whisper_dir = '/opt/graphite/storage/whisper'
           ldap_base_user = 'CN=some_readonly_account,DC=mycompany,DC=com'
-       EOF
+      EOF
     end
 
     it 'takes a hash and writes the python config with uppercase root keys' do
@@ -74,7 +74,7 @@ describe ChefGraphite::PythonWriter do
           FLUSHRRDCACHED = 'unix:/var/run/rrdcached.sock'
           WHISPER_DIR = '/opt/graphite/storage/whisper'
           LDAP_BASE_USER = 'CN=some_readonly_account,DC=mycompany,DC=com'
-       EOF
+      EOF
     end
   end
   describe '#pythonize' do
