@@ -2,8 +2,15 @@
 
 This file is used to list changes made in each version of the graphite cookbook.
 
+## 1.1.0
 
-## 1.0.6 
+- Require Chef Infra Client 13 or later
+- Remove the unused long_description metadata from metadata.rb
+- Remove if respond_to?(:chef_version) from the metadata.rb as this is no longer necessary
+- Remove use_inline_resources from the provider as this is no longer necessary
+- Remove whyrun_supported? method from the provider as this is no longer necessary
+
+## 1.0.6
 
 - Syntax and styling updates
 - Compatibility with Chef 13 (.[@oscar123mendoza])
