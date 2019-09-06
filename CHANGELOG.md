@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the graphite cookbook.
 
-## 1.1.0
+## 1.2.0
 
 - Require Chef Infra Client 13 or later
 - Remove the unused long_description metadata from metadata.rb
