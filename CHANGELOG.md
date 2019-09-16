@@ -10,6 +10,11 @@ This file is used to list changes made in each version of the graphite cookbook.
 - Remove use_inline_resources from the provider as this is no longer necessary
 - Remove whyrun_supported? method from the provider as this is no longer necessary
 
+## 1.1.0
+
+- Fix cookstyle issues
+- Should now work with Chef 13, 14 and 15
+
 ## 1.0.6
 
 - Syntax and styling updates
