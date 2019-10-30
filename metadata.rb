@@ -3,7 +3,7 @@ maintainer       'Sous Chefs'
 maintainer_email 'help@sous-chefs.org'
 license          'Apache-2.0'
 description      'Installs/Configures graphite'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+
 version          '1.1.0'
 
 supports 'ubuntu'
@@ -17,4 +17,4 @@ depends  'poise-python', '>= 1.5'
 
 source_url 'https://github.com/sous-chefs/graphite'
 issues_url 'https://github.com/sous-chefs/graphite/issues'
-chef_version '>= 12.11' if respond_to?(:chef_version)
+chef_version '>= 13'
