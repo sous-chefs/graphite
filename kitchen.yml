@@ -1,3 +1,4 @@
+---
 driver:
   name: vagrant
 
@@ -20,12 +21,12 @@ platforms:
   - name: ubuntu-18.04
 
 suites:
-- name: default
-  run_list:
-  - recipe[test::single_node]
-  attributes:
-    graphite:
-      listen_port: "8080"
-      uwsgi:
-        workers: 4
-        listen_http: true
+  - name: default
+    run_list:
+      - recipe[test::single_node]
+    attributes:
+      graphite:
+        listen_port: "8080"
+        uwsgi:
+          workers: 4
+          listen_http: true

@@ -152,11 +152,11 @@ Sure, use em if you like. Even encrypt them.
 Pull requests are very welcome! Make sure your patches are well tested. Ideally create a topic branch for every separate change you make. For example:
 
 1. Fork the repo
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Write some tests, see [ChefSpec](https://github.com/chefspec/chefspec)
-4. Commit your awesome changes (`git commit -am 'Added some feature'`)
-5. Push to the branch (`git push origin my-new-feature`)
-6. Create a new Pull Request and tell us about it your changes.
+1. Create your feature branch (`git checkout -b my-new-feature`)
+1. Write some tests, see [ChefSpec](https://github.com/chefspec/chefspec)
+1. Commit your awesome changes (`git commit -am 'Added some feature'`)
+1. Push to the branch (`git push origin my-new-feature`)
+1. Create a new Pull Request and tell us about it your changes.
 
 ## Contributors
 
