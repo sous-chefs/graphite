@@ -1,4 +1,12 @@
 ---
+jobs:
+  final:
+    docker:
+      - image: bash:latest
+    steps:
+      - run:
+          name: Finish cooking
+          command: echo "Finished cooking"
 lint_and_unit: &lint_and_unit
   - delivery
   - danger
@@ -19,3 +27,40 @@ workflows:
           context: Danger
       - kitchen/delivery:
           name: delivery
+      - kitchen/dokken-single:
+          name: default-amazonlinux
+          suite: default-amazonlinux
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-amazonlinux-2
+          suite: default-amazonlinux-2
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-debian-8
+          suite: default-debian-8
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-debian-9
+          suite: default-debian-9
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-centos-7
+          suite: default-centos-7
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-ubuntu-1604
+          suite: default-ubuntu-1604
+          requires: *lint_and_unit
+      - kitchen/dokken-single:
+          name: default-ubuntu-1804
+          suite: default-ubuntu-1804
+          requires: *lint_and_unit
+      - final:
+          requires:
+            - default-amazonlinux
+            - default-amazonlinux-2
+            - default-debian-8
+            - default-debian-9
+            - default-centos-7
+            - default-ubuntu-1604
+            - default-ubuntu-1804
