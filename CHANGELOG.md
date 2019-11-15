@@ -1,41 +1,59 @@
-# Graphite CHANGELOG
+# Changelog
 
-This file is used to list changes made in each version of the graphite cookbook.
+All notable changes to this project will be documented in this file.
 
-## 1.1.0
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Fixed
+
+- Ran linters and addressed issues
+- Ran latest cookstyle
+
+## [1.1.0] - 2019-09-05
+
+### Fixed
 
 - Fix cookstyle issues
 - Should now work with Chef 13, 14 and 15
-
-## 1.0.6
-
 - Syntax and styling updates
 - Compatibility with Chef 13 (.[@oscar123mendoza])
 
-## 1.0.4
+## [1.0.4] - 2016-01-29
+
+### Added
+
+- Adds License and Code of Conduct
+
+### Fixed
 
 - Syntax and styling updates
 - Use full Twisted version number
 - Manage graphite nofile ulimit
 - Fixes carbon source
-- Adds License and Code of Conduct
 
 ### Known Issues
 
 - Reordering of Carbon .ini [241](https://github.com/sous-chefs/graphite/issues/241)
 - Graphite web timeout when restarting [224](https://github.com/sous-chefs/graphite/issues/224)
 
-## 1.0.2
+## [1.0.2] - 2014-11-18
+
+### Fixed
 
 - README improvements to address resource usage and removal of Apache dependency ([@webframp], [#187])
 - restart graphite-web in graphite_example sample recipe ([@obazoud], [#182])
 - remove unused `['graphite']['web_server']` attribute ([@obazoud], [#181])
 
-## 1.0.1
+## [1.0.1] - 2014-08-27
+
+### Fixed
 
 - Readme improvements.
 
-## 1.0.0
+## [1.0.0] - 2014-08-27
 
 ### Breaking Changes
 
