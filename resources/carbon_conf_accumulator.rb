@@ -16,8 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-actions :create
 default_action :create
 
 attribute :file_resource, kind_of: String, default: 'file[carbon.conf]'
