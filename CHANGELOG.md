@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ran linters and addressed issues
 - Ran latest cookstyle
+- Remove unnecessary actions method in the resources
 
 ## [1.1.0] - 2019-09-05
 
