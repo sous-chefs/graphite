@@ -21,14 +21,10 @@ property :backend, [String, Hash], default: 'whisper'
 property :config, [Hash, nil], default: nil
 
 action :create do
-  python_package backend_name do
-    backend_attributes.each { |attr, value| send(attr, value) }
-    Chef::Log.info "Installing storage backend: #{package_name}"
-    action :install
-    user node['graphite']['user']
-    group node['graphite']['group']
-    install_options '--no-binary=:all:'
+  pyenv_pip backend_name do
     virtualenv node['graphite']['base_dir']
+    user node['graphite']['user']
+    options '--no-binary=:all:'
   end
 end
 

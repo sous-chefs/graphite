@@ -39,14 +39,14 @@ end
 
 action_class do
   def manage_python_pip(resource_action)
-    python_package new_resource.package_name do
+    pyenv_pip new_resource.package_name do
+      action resource_action
+
+      virtualenv node['graphite']['base_dir']
+      user node['graphite']['user']
       version new_resource.version if new_resource.version
       Chef::Log.info 'Installing whisper pip package'
-      action resource_action
-      user node['graphite']['user']
-      group node['graphite']['group']
-      install_options '--no-binary=:all:'
-      virtualenv node['graphite']['base_dir']
+      options '--no-binary=:all:'
     end
   end
 

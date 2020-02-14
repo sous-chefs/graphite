@@ -17,13 +17,26 @@
 # limitations under the License.
 #
 
-python_runtime 'webs_python' do
-  provider :system
-  version '2.7'
-  options pip_version: true
+pyenv_user_install 'webs_pyenv' do
+  user node['graphite']['user']
 end
 
-python_virtualenv node['graphite']['base_dir']
+pyenv_python node['graphite']['pyenv']['python_version'] do
+  user node['graphite']['user']
+end
+
+pyenv_global node['graphite']['pyenv']['python_version'] do
+  user node['graphite']['user']
+end
+
+pyenv_pip 'virtualenv' do
+  user node['graphite']['user']
+end
+
+pyenv_script 'setup graphite virtualenv' do
+  code "virtualenv #{node['graphite']['base_dir']}"
+  user node['graphite']['user']
+end
 
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_web_packages'

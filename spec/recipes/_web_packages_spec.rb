@@ -13,11 +13,11 @@ describe 'graphite::_web_packages' do
     end
 
     it 'installs a django python package' do
-      expect(chef_run).to install_python_package('django')
+      expect(chef_run).to install_pyenv_pip('django')
     end
 
     it 'installs a specific version of graphite_web python package' do
-      expect(chef_run).to install_python_package('graphite_web').with(
+      expect(chef_run).to install_pyenv_pip('graphite_web').with(
         package_name: 'graphite-web',
         version: '1.1.3'
       )

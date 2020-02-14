@@ -23,22 +23,21 @@
 # Compliler is needed to build Twisted gem on this step
 package platform_family?('debian') ? 'build-essential' : 'gcc'
 
-python_package 'Twisted' do
-  user node['graphite']['user']
-  group node['graphite']['group']
-  version node['graphite']['twisted_version']
+pyenv_pip 'twisted' do
   virtualenv node['graphite']['base_dir']
+  user node['graphite']['user']
+  version node['graphite']['twisted_version']
 end
 
-python_package 'carbon' do
+pyenv_pip 'carbon' do
   package_name lazy {
     node['graphite']['package_names']['carbon'][node['graphite']['install_type']]
   }
+
+  virtualenv node['graphite']['base_dir']
+  user node['graphite']['user']
   version lazy {
     node['graphite']['install_type'] == 'package' ? node['graphite']['version'] : nil
   }
-  user node['graphite']['user']
-  group node['graphite']['group']
-  install_options '--no-binary=:all:'
-  virtualenv node['graphite']['base_dir']
+  options '--no-binary=:all:'
 end

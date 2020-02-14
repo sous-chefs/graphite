@@ -13,7 +13,7 @@ supports 'centos'
 supports 'scientific'
 supports 'oracle'
 
-depends  'poise-python', '>= 1.5'
+depends  'pyenv', '~> 3.1'
 
 source_url 'https://github.com/sous-chefs/graphite'
 issues_url 'https://github.com/sous-chefs/graphite/issues'

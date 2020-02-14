@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+directory node['graphite']['base_dir'] do
+  owner node['graphite']['user']
+  group node['graphite']['group']
+end
+
 directory node['graphite']['storage_dir'] do
   owner node['graphite']['user']
   group node['graphite']['group']

@@ -19,30 +19,28 @@
 
 package Array(node['graphite']['system_packages'])
 
-python_package 'django' do
+pyenv_pip 'django' do
+  virtualenv node['graphite']['base_dir']
   user node['graphite']['user']
-  group node['graphite']['group']
   version node['graphite']['django_version']
-  virtualenv node['graphite']['base_dir']
 end
 
-python_package 'uwsgi' do
+pyenv_pip 'uwsgi' do
+  virtualenv node['graphite']['base_dir']
   user node['graphite']['user']
-  group node['graphite']['group']
   options '--isolated'
-  virtualenv node['graphite']['base_dir']
 end
 
-python_package 'graphite_web' do
+pyenv_pip 'graphite_web' do
   package_name lazy {
     key = node['graphite']['install_type']
     node['graphite']['package_names']['graphite_web'][key]
   }
+
+  virtualenv node['graphite']['base_dir']
+  user node['graphite']['user']
   version lazy {
     node['graphite']['version'] if node['graphite']['install_type'] == 'package'
   }
-  user node['graphite']['user']
-  group node['graphite']['group']
-  install_options '--no-binary=:all:'
-  virtualenv node['graphite']['base_dir']
+  options '--no-binary=:all:'
 end

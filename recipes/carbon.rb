@@ -17,25 +17,29 @@
 # limitations under the License.
 #
 
-python_runtime 'carbons_python' do
-  provider :system
-  version '2.7'
-  options pip_version: true
-end
-
 include_recipe 'graphite::_user'
-
-directory node['graphite']['base_dir'] do
-  owner node['graphite']['user']
-  group node['graphite']['group']
-end
-
-python_virtualenv node['graphite']['base_dir'] do
-  user node['graphite']['user']
-  group node['graphite']['group']
-end
-
-include_recipe 'graphite::_user'
-include_recipe 'graphite::_carbon_packages'
 include_recipe 'graphite::_directories'
+
+pyenv_user_install 'carbons_pyenv' do
+  user node['graphite']['user']
+end
+
+pyenv_python node['graphite']['pyenv']['python_version'] do
+  user node['graphite']['user']
+end
+
+pyenv_global node['graphite']['pyenv']['python_version'] do
+  user node['graphite']['user']
+end
+
+pyenv_pip 'virtualenv' do
+  user node['graphite']['user']
+end
+
+pyenv_script 'setup graphite virtualenv' do
+  code "virtualenv #{node['graphite']['base_dir']}"
+  user node['graphite']['user']
+end
+
+include_recipe 'graphite::_carbon_packages'
 include_recipe 'graphite::_carbon_config'

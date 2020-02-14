@@ -33,7 +33,7 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ### Cookbooks
 
-- poise-python
+- pyenv
 
 ## Attributes
 
@@ -79,7 +79,7 @@ Some of this weirdness may not really be needed, so send us a PR if you fix it b
 
 ### uwsgi
 
-Start a uwsgi runit service for graphite-web. That's it.
+Start a uwsgi systemd service for graphite-web. That's it.
 
 ### Various internal recipes
 
@@ -93,7 +93,7 @@ It's like a treasure hunt.
 
 Management for the various [Carbon](https://github.com/graphite-project/carbon) services which receive your metrics and write them to disk.
 
-- `graphite_service`: sets up a carbon service with runit, essentially a glorified `runit_service`. Carbon configuration should be defined first with one of the `graphite_carbon_*` resources. Multiple daemons can be run by using multiple resources with names such as `cache:a`, `cache:b`, etc..
+- `graphite_service`: sets up a carbon service with systemd, essentially a glorified `systemd_unit`. Carbon configuration should be defined first with one of the `graphite_carbon_*` resources. Multiple daemons can be run by using multiple resources with names such as `cache:a`, `cache:b`, etc..
 - `graphite_carbon_aggregator`: data driven resource for carbon-aggregator configuration
 - `graphite_carbon_cache`: data driven resource for carbon-cache configuration
 - `graphite_carbon_relay`: data driven resource for carbon-cache configuration
@@ -113,7 +113,7 @@ Write the configuration file for [Graphite Web](https://github.com/graphite-proj
 
 Yes it's [writing python via ruby](https://github.com/sous-chefs/graphite/blob/master/libraries/chef_graphite_python.rb#L14).
 
-A runit service definition is provided to [start a uwsgi process](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L105), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
+A systemd service unit definition is provided to [start a uwsgi process](https://github.com/sous-chefs/graphite/blob/master/recipes/uwsgi.rb), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
 
 ### Accumulators
 

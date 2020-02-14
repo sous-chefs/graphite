@@ -16,17 +16,20 @@ platforms:
   - name: centos-7
   - name: debian-8
   - name: debian-9
-  - name: ubuntu-14.04
+  - name: debian-10
   - name: ubuntu-16.04
   - name: ubuntu-18.04
 
 suites:
-  - name: default
-    run_list:
-      - recipe[test::single_node]
-    attributes:
-      graphite:
-        listen_port: "8080"
-        uwsgi:
-          workers: 4
-          listen_http: true
+- name: default
+  driver:
+    network:
+      - ["forwarded_port", {guest: 8080, host: 8080}]
+  run_list:
+  - recipe[test::single_node]
+  attributes:
+    graphite:
+      listen_port: "8080"
+      uwsgi:
+        workers: 4
+        listen_http: true
