@@ -8,7 +8,7 @@ describe 'graphite::_web_packages' do
 
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
-        platform: 'centos', version: '7.4.1708'
+        platform: 'centos', version: '7'
       ).converge('graphite::web', described_recipe)
     end
 
