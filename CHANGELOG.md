@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+- resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:50:83 convention: `Layout/TrailingWhitespace`
+- resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:50:84 refactor: `ChefModernize/FoodcriticComments`
+- resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:48:83 convention: `Layout/TrailingWhitespace`
+- resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:48:84 refactor: `ChefModernize/FoodcriticComments`
+
 ## [Unreleased]
 
 - Migrate to github actions
