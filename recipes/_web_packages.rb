@@ -22,13 +22,8 @@ package Array(node['graphite']['system_packages'])
 python_package 'django' do
   user node['graphite']['user']
   group node['graphite']['group']
-  version lazy { node['graphite']['django_version'] }
+  version node['graphite']['django_version']
   virtualenv node['graphite']['base_dir']
-  only_if do
-    # Install explicit version of django only if it is specified in attributes
-    version = node['graphite']['django_version']
-    version.nil? || version.empty?
-  end
 end
 
 python_package 'uwsgi' do
