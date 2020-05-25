@@ -4,9 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 1.1.2 - (2020-05-22)
 
-### Fixed
-
-- install Django/Twisted overrided version ([#318])
+- Fix Django/Twisted overridden version ([#318])
 
 ## 1.1.1 - (2020-05-14)
 
