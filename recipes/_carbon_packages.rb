@@ -26,14 +26,8 @@ package platform_family?('debian') ? 'build-essential' : 'gcc'
 python_package 'Twisted' do
   user node['graphite']['user']
   group node['graphite']['group']
-  version lazy { node['graphite']['twisted_version'] }
+  version node['graphite']['twisted_version']
   virtualenv node['graphite']['base_dir']
-  only_if do
-    # Install explicit version of Twisted only if it is specified in attributes
-    # Otherwise the actual version will be installed as a dependency
-    version = node['graphite']['django_version']
-    version.nil? || version.empty?
-  end
 end
 
 python_package 'carbon' do
