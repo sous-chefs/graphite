@@ -17,4 +17,4 @@ depends  'pyenv', '~> 3.1'
 
 source_url 'https://github.com/sous-chefs/graphite'
 issues_url 'https://github.com/sous-chefs/graphite/issues'
-chef_version '>= 13'
+chef_version '>= 14'

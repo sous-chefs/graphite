@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+include_recipe 'graphite::_user'
+include_recipe 'graphite::_directories'
+
 pyenv_user_install 'webs_pyenv' do
   user node['graphite']['user']
 end
@@ -38,9 +41,7 @@ pyenv_script 'setup graphite virtualenv' do
   user node['graphite']['user']
 end
 
-include_recipe 'graphite::_user'
 include_recipe 'graphite::_web_packages'
-include_recipe 'graphite::_directories'
 
 basedir = node['graphite']['base_dir']
 docroot = node['graphite']['doc_root']

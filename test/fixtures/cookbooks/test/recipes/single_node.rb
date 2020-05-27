@@ -1,10 +1,7 @@
-apt_update 'update' do
-  action :update
-end
+apt_update 'update' if platform_family?('debian')
 
 node.default['graphite']['version'] = '1.1.6'
 node.default['graphite']['twisted_version'] = '19.7.0'
-
 node.default['graphite']['django_version'] = '1.11.28'
 
 include_recipe 'graphite::carbon'
@@ -69,6 +66,11 @@ graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
            },
          })
   notifies :restart, 'service[graphite-web]', :delayed
+end
+
+pyenv_script 'django migrate' do
+  code "#{node['graphite']['base_dir']}/bin/python #{node['graphite']['base_dir']}/bin/django-admin.py migrate --run-syncdb --settings=\"graphite.settings\" --pythonpath=#{node['graphite']['base_dir']}/webapp"
+  user node['graphite']['user']
 end
 
 include_recipe 'graphite::uwsgi'
