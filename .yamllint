@@ -1,1 +1,6 @@
-ignore: .github/workflows
+---
+extends: default
+rules:
+  line-length:
+    max: 256
+    level: warning
