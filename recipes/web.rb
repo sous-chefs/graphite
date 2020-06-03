@@ -20,26 +20,7 @@
 include_recipe 'graphite::_user'
 include_recipe 'graphite::_directories'
 
-pyenv_user_install 'webs_pyenv' do
-  user node['graphite']['user']
-end
-
-pyenv_python node['graphite']['pyenv']['python_version'] do
-  user node['graphite']['user']
-end
-
-pyenv_global node['graphite']['pyenv']['python_version'] do
-  user node['graphite']['user']
-end
-
-pyenv_pip 'virtualenv' do
-  user node['graphite']['user']
-end
-
-pyenv_script 'setup graphite virtualenv' do
-  code "virtualenv #{node['graphite']['base_dir']}"
-  user node['graphite']['user']
-end
+graphite_python 'webs_python'
 
 include_recipe 'graphite::_web_packages'
 
