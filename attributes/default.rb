@@ -71,5 +71,3 @@ default['graphite']['system_packages'] =
   else
     []
   end
-
-default['graphite']['pyenv']['python_version'] = '2.7.17'
