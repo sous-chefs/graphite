@@ -40,7 +40,6 @@ jobs:
     strategy:
       matrix:
         os:
-          - 'amazonlinux'
           - 'amazonlinux-2'
           - 'debian-8'
           - 'debian-9'

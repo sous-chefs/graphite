@@ -10,7 +10,6 @@ verifier:
   name: inspec
 
 platforms:
-  - name: amazonlinux
   - name: amazonlinux-2
   - name: centos-7
   - name: debian-8
