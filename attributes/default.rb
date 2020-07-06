@@ -66,7 +66,7 @@ default['graphite']['system_packages'] =
   case node['platform_family']
   when 'debian'
     %w(libcairo2-dev libffi-dev python-rrdtool)
-  when 'rhel'
+  when 'rhel', 'amazon'
     %w(cairo-devel libffi-devel python-rrdtool bitmap-fonts)
   else
     []
