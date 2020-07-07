@@ -2,7 +2,7 @@
 driver:
   name: dokken
   privileged: true  # because Docker and SystemD/Upstart
-  chef_version: 14
+  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
   env: [CHEF_LICENSE=accept]
 
 transport:
