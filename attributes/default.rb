@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default['graphite']['version'] = '1.1.3'
+default['graphite']['version'] = '1.1.7'
 # You may set versions of Twisted and Django packages explicitly, otherwise it
 # installs actual versions of these packages as dependecies
 default['graphite']['twisted_version'] = ''

@@ -1,6 +1,5 @@
 apt_update 'update' if platform_family?('debian')
 
-node.default['graphite']['version'] = '1.1.6'
 node.default['graphite']['twisted_version'] = '19.7.0'
 node.default['graphite']['django_version'] = '1.11.28'
 

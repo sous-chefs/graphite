@@ -1,5 +1,3 @@
-default_action :install
-
 property :pyenv_name, String, name_property: true
 property :python_version, String, default: '2.7.17'
 property :user, String, default: lazy { node['graphite']['user'] }

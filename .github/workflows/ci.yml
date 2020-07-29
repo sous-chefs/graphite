@@ -41,7 +41,6 @@ jobs:
       matrix:
         os:
           - 'amazonlinux-2'
-          - 'debian-8'
           - 'debian-9'
           - 'debian-10'
           - 'ubuntu-1604'

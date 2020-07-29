@@ -6,14 +6,12 @@ description      'Installs/Configures graphite'
 
 version          '2.0.0'
 
-supports 'ubuntu'
-supports 'debian'
-supports 'redhat'
-supports 'centos'
-supports 'scientific'
-supports 'oracle'
+supports 'ubuntu', '>= 16.0'
+supports 'debian', '>= 9.0'
+supports 'redhat', '>= 7.0'
+supports 'centos', '>= 7.0'
 
-depends  'pyenv', '~> 3.1'
+depends  'pyenv', '>= 3.1'
 
 source_url 'https://github.com/sous-chefs/graphite'
 issues_url 'https://github.com/sous-chefs/graphite/issues'
