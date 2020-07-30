@@ -34,7 +34,7 @@ class Chef
         @current_resource = new_resource
       end
 
-      def action_create
+      action :create do
         resources = run_context.resource_collection.select { |x| x.resource_name == :graphite_storage_schema }
         file_resource = run_context.resource_collection.find(new_resource.file_resource)
 
