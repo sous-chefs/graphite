@@ -15,6 +15,6 @@ describe port(8080) do
   its('protocols') { should include 'tcp' }
 end
 
-describe command('curl -fs http://localhost:8080/metrics/find?query=carbon.*') do
-  its(:exit_status) { should eq(0) }
+describe http('http://localhost:8080/metrics/find?query=carbon.*', enable_remote_worker: true) do
+  its('status') { should cmp 200 }
 end

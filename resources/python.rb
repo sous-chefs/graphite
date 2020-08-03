@@ -1,5 +1,5 @@
 property :pyenv_name, String, name_property: true
-property :python_version, String, default: '2.7.17'
+property :python_version, String, default: '3.8.5'
 property :user, String, default: lazy { node['graphite']['user'] }
 property :graphite_dir, String, default: lazy { node['graphite']['base_dir'] }
 

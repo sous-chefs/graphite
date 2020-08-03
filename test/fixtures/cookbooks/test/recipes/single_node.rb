@@ -1,7 +1,7 @@
 apt_update 'update' if platform_family?('debian')
 
-node.default['graphite']['twisted_version'] = '19.7.0'
-node.default['graphite']['django_version'] = '1.11.28'
+node.default['graphite']['twisted_version'] = '19.10.0'
+node.default['graphite']['django_version'] = '3.0.9'
 
 include_recipe 'graphite::carbon'
 include_recipe 'graphite::web'
