@@ -19,7 +19,7 @@ describe 'graphite::_web_packages' do
     it 'installs a specific version of graphite_web python package' do
       expect(chef_run).to install_pyenv_pip('graphite_web').with(
         package_name: 'graphite-web',
-        version: '1.1.3'
+        version: '1.1.7'
       )
     end
   end
