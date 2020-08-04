@@ -122,7 +122,7 @@ module ChefGraphite
         obj.map { |o| normalize_value(o) }.join(', ')
       else
         value = obj.to_s
-        value.capitalize! if %w(true false).include?(value)
+        value = value.capitalize if %w(true false).include?(value)
         value
       end
     end
