@@ -48,7 +48,7 @@ graphite_service 'cache'
 
 base_dir = (node['graphite']['base_dir']).to_s
 
-graphite_web_config "#{base_dir}/webapp/graphite/local_settings.py" do
+graphite_web_config "#{base_dir}/lib/python3.8/site-packages/graphite/local_settings.py" do
   config(secret_key: 'a_very_secret_key_jeah!',
          time_zone: 'America/Chicago',
          conf_dir: "#{base_dir}/conf",

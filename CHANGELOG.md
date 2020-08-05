@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.0 (2020-08-05)
+
+- Replace poise-python cookbook with sous-chef pyenv cookbook ([#350])
+- Default Python version installed is latest (v3.8.5)
+- Default Graphite version installed is latest (v1.1.7)
+- Default Django version installed is latest (v3.0.9)
+
 ## 1.3.0 (2020-06-06)
 
 - Fix bug with changing a frozen string in ruby 2.7.0

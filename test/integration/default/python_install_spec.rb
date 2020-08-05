@@ -8,5 +8,5 @@ describe file('/opt/graphite/bin/python') do
 end
 
 describe command('/opt/graphite/bin/python --version') do
-  its(:stderr) { should match(/2\.7\.17/) }
+  its(:stdout) { should match(/3\.8\.5/) }
 end
