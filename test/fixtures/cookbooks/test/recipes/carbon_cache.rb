@@ -1,7 +1,7 @@
 include_recipe 'graphite::carbon'
 
 graphite_carbon_cache 'default' do
-  config ({
+  config({
     enable_logrotation: true,
     user: 'graphite',
     max_cache_size: 'inf',
@@ -22,7 +22,7 @@ graphite_carbon_cache 'default' do
 end
 
 graphite_carbon_cache 'a' do
-  config ({
+  config({
     line_receiver_port: 2004,
     udp_receiver_port: 2004,
     pickle_receiver_port: 2005,
@@ -31,7 +31,7 @@ graphite_carbon_cache 'a' do
 end
 
 graphite_carbon_cache 'b' do
-  config ({
+  config({
     line_receiver_port: 2006,
     udp_receiver_port: 2006,
     pickle_receiver_port: 2007,
@@ -40,14 +40,14 @@ graphite_carbon_cache 'b' do
 end
 
 graphite_storage_schema 'carbon' do
-  config ({
+  config({
     pattern: '^carbon.',
     retentions: '60:90d',
   })
 end
 
 graphite_storage_schema 'default_1min_for_1day' do
-  config ({
+  config({
     pattern: '.*',
     retentions: '60s:1d',
   })
