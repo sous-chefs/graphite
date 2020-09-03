@@ -1,7 +1,7 @@
 include_recipe 'graphite::carbon'
 
 graphite_carbon_relay 'default' do
-  config ({
+  config({
     line_receiver_interface: '0.0.0.0',
     line_receiver_port: 2003,
     relay_method: 'consistent-hashing',

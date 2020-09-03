@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
 - resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
 - Fix frozen method error in libraries/chef_graphite_carbon_config_converter.rb
+- Cookstyle Bot Auto Corrections with Cookstyle 6.16.8
 
 ## 1.3.0 (2020-06-06)
 

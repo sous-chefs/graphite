@@ -5,7 +5,7 @@ include_recipe 'graphite::web'
 storage_dir = node['graphite']['storage_dir']
 
 graphite_carbon_cache 'default' do
-  config ({
+  config({
     enable_logrotation: true,
     user: 'graphite',
     max_cache_size: 'inf',
@@ -27,14 +27,14 @@ graphite_carbon_cache 'default' do
 end
 
 graphite_storage_schema 'carbon' do
-  config ({
+  config({
     pattern: '^carbon.',
     retentions: '60:90d',
   })
 end
 
 graphite_storage_schema 'default_1min_for_1day' do
-  config ({
+  config({
     pattern: '.*',
     retentions: '60s:1d',
   })
