@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.3.1 (2020-09-16)
 
 - resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
 - resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
