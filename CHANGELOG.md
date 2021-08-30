@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- Standardise files with files in sous-chefs/repo-management
+
 ## 1.3.1 (2020-09-16)
 
 - resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
