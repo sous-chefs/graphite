@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Remove delivery folder
+
 ## 1.3.3 - *2021-08-30*
 
 - Standardise files with files in sous-chefs/repo-management
