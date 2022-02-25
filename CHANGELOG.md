@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- resolved cookstyle error: .foodcritic:1:7 convention: `Layout/TrailingEmptyLines`
 ## 1.3.4 - *2022-02-17*
 
 - Standardise files with files in sous-chefs/repo-management
