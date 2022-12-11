@@ -4,7 +4,7 @@ maintainer_email 'help@sous-chefs.org'
 license          'Apache-2.0'
 description      'Installs/Configures graphite'
 
-version          '1.3.4'
+version          '1.3.5'
 
 supports 'ubuntu'
 supports 'debian'
