@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
 ## 1.3.6 - *2023-02-14*
 
 ## 1.3.5 - *2022-12-11*
