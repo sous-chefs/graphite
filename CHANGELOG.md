@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+Remove Delivery
+
 ## 1.3.7 - *2023-02-14*
 
 Standardise files with files in sous-chefs/repo-management
