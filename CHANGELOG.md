@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file.
 
 Standardise files with files in sous-chefs/repo-management
 
-Standardise files with files in sous-chefs/repo-management
+## 1.3.8 - *2023-02-20*
+
+Remove Delivery
 
 ## 1.3.7 - *2023-02-14*
 
