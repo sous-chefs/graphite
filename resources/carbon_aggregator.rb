@@ -1,4 +1,5 @@
-#
+unified_mode true
+
 # Cookbook:: graphite
 # Resource:: carbon_aggregator
 #

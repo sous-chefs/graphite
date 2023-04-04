@@ -1,3 +1,4 @@
+unified_mode true
 #
 # Cookbook:: graphite
 # Resource:: web_config
