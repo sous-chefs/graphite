@@ -1,7 +1,7 @@
 # Graphite Cookbook
 
 [![Cookbook Version](https://img.shields.io/cookbook/v/graphite.svg)](https://supermarket.chef.io/cookbooks/graphite)
-[![Build Status](https://img.shields.io/circleci/project/graphite/sous-chefs/apache2/master.svg)](https://circleci.com/gh/sous-chefs/graphite)
+[![Build Status](https://img.shields.io/circleci/project/graphite/sous-chefs/apache2/main.svg)](https://circleci.com/gh/sous-chefs/graphite)
 [![OpenCollective](https://opencollective.com/sous-chefs/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/sous-chefs/sponsors/badge.svg)](#sponsors)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -37,7 +37,7 @@ This cookbook is maintained by the Sous Chefs. The Sous Chefs are a community of
 
 ## Attributes
 
-See [default attributes](https://github.com/sous-chefs/graphite/blob/master/attributes/default.rb#L48) for platform specific packages installed.
+See [default attributes](https://github.com/sous-chefs/graphite/blob/main/attributes/default.rb#L48) for platform specific packages installed.
 
 - `node['graphite']['version']` - package version to install, defaults to '0.9.12'
 - `node['graphite']['twisted_version']` - twisted version to pin to, defaults to '13.1'
@@ -47,7 +47,7 @@ See [default attributes](https://github.com/sous-chefs/graphite/blob/master/attr
 - `node['graphite']['base_dir']` - default base dir, '/opt/graphite'
 - `node['graphite']['doc_root']` - doc root for graphite-web, '/opt/graphite/webapp'
 - `node['graphite']['storage_dir']` - storage dir, '/opt/graphite/storage'
-- `node['graphite']['install_type']` - 'package' or 'source'. Setting this to source will use latest github master branch
+- `node['graphite']['install_type']` - 'package' or 'source'. Setting this to source will use latest github main branch
 - `default['graphite']['package_names']` - package name hash, indexed by 'install_type' attribute.
 - `default['graphite']['graph_templates']` - graphite template config hash
 - `default['graphite']['sort_storage_schemas']` - Boolean attribute to specify whether or not storage schemas should be sorted in alphabetical order
@@ -55,7 +55,7 @@ See [default attributes](https://github.com/sous-chefs/graphite/blob/master/attr
 
 ### Adjusting package source location
 
-You can override the `node['graphite']['package_names'][#{name}]['source']` attribute, where `#{name}` is one of `whisper`, `carbon` or `graphite_web`, to set a custom install path. By default a source install will use the github master branch.
+You can override the `node['graphite']['package_names'][#{name}]['source']` attribute, where `#{name}` is one of `whisper`, `carbon` or `graphite_web`, to set a custom install path. By default a source install will use the github main branch.
 
 ## Recipes
 
@@ -111,9 +111,9 @@ Write the configuration file for [Graphite Web](https://github.com/graphite-proj
 
 - `graphite_web_config`: data driven python config file writer for graphite web. Assumes the whole file is managed, typically this is the path to local_settings.py. Custom python code can be placed in the optional 'dynamic template', by default a file named 'local_settings_dynamic.py' that is optimistically loaded if present.
 
-Yes it's [writing python via ruby](https://github.com/sous-chefs/graphite/blob/master/libraries/chef_graphite_python.rb#L14).
+Yes it's [writing python via ruby](https://github.com/sous-chefs/graphite/blob/main/libraries/chef_graphite_python.rb#L14).
 
-A runit service definition is provided to [start a uwsgi process](https://github.com/sous-chefs/graphite/blob/master/example/graphite_example/recipes/single_node.rb#L105), but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
+A runit service definition is provided to start a uwsgi process, but note that choice of web server for proxying to the application server is left up to you. No more hard Apache dependency!
 
 ### Accumulators
 
@@ -122,7 +122,7 @@ Due to the graphite config file format, the data driven resources use an accumul
 - `graphite_carbon_conf_accumulator`: lookup named carbon resources in run context and gather config
 - `graphite_storage_conf_accumulator`: lookup named storage schema resources in run context and gather config
 
-If you look at the [example cookbook recipe](https://github.com/sous-chefs/graphite/blob/master/test/fixtures/cookbooks/test/recipes/single_node.rb#L9) you probably notice that many of the resources simply take a single `config` attribute, which is basically a hash of the configuration to be written.
+If you look at the [example cookbook recipe](https://github.com/sous-chefs/graphite/blob/main/test/fixtures/cookbooks/test/recipes/single_node.rb#L9) you probably notice that many of the resources simply take a single `config` attribute, which is basically a hash of the configuration to be written.
 
 This can come from attributes in a wrapper cookbook or via data bags if you like. Be as creative as you can tolerate.
 
@@ -138,7 +138,7 @@ For example usage consult the reference cookbook [example](https://github.com/so
 
 ## Examples
 
-You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/sous-chefs/graphite/blob/master/test/fixtures/cookbooks/test/recipes/single_node.rb).
+You can find example usage in the graphite_example cookbook that is included in the [git repository](https://github.com/sous-chefs/graphite/blob/main/test/fixtures/cookbooks/test/recipes/single_node.rb).
 
 ## Data Bags
 

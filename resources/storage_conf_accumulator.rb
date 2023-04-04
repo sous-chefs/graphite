@@ -1,3 +1,4 @@
+unified_mode true
 #
 # Cookbook:: graphite
 # Resource:: resource_storage_conf

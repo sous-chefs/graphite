@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 - Standardise files with files in sous-chefs/repo-management
 - Stop running broken rspec tests
+- Require Chef 15.3+ for unified_mode
+  - Require unified_mode for all resources
 
 ## 1.3.11 - *2023-04-01*
 
