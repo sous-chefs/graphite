@@ -10,15 +10,12 @@ verifier:
   name: inspec
 
 platforms:
-  - name: amazonlinux
-    driver_config:
-      box: mvbcoding/awslinux
   - name: centos-7
   - name: debian-8
   - name: debian-9
-  - name: ubuntu-14.04
-  - name: ubuntu-16.04
   - name: ubuntu-18.04
+  - name: ubuntu-20.04
+  - name: ubuntu-22.04
 
 suites:
   - name: default
