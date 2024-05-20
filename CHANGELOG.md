@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+Standardise files with files in sous-chefs/repo-management
+
 ## 2.0.6 - *2024-05-03*
 
 ## 2.0.5 - *2024-05-03*
