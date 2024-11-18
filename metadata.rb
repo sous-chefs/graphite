@@ -5,7 +5,7 @@ license          'Apache-2.0'
 description      'Installs/Configures graphite'
 source_url       'https://github.com/sous-chefs/graphite'
 issues_url       'https://github.com/sous-chefs/graphite/issues'
-version          '2.0.6'
+version          '2.0.7'
 chef_version     '>= 15.3'
 
 supports 'ubuntu'
