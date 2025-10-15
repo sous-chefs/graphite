@@ -2,13 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-
 Standardise files with files in sous-chefs/repo-management
-
 Standardise files with files in sous-chefs/repo-management
-
-## 2.0.9 - *2025-09-04*
 
 ## 2.0.8 - *2025-06-08*
 
@@ -26,26 +21,16 @@ Standardise files with files in sous-chefs/repo-management
 
 Standardise files with files in sous-chefs/repo-management
 
-## 2.0.6 - *2024-05-03*
-
 ## 2.0.5 - *2024-05-03*
 
 Standardise files with files in sous-chefs/repo-management
 
-## 2.0.4 - *2023-09-28*
-
-## 2.0.3 - *2023-09-04*
-
-## 2.0.2 - *2023-07-10*
-
-## 2.0.1 - *2023-05-17*
-
 ## 2.0.0 - *2023-04-04*
 
-- Standardise files with files in sous-chefs/repo-management
-- Stop running broken rspec tests
-- Require Chef 15.3+ for unified_mode
-  - Require unified_mode for all resources
+* Standardise files with files in sous-chefs/repo-management
+* Stop running broken rspec tests
+* Require Chef 15.3+ for unified_mode
+  * Require unified_mode for all resources
 
 ## 1.3.11 - *2023-04-01*
 
@@ -67,91 +52,89 @@ Remove Delivery
 
 Standardise files with files in sous-chefs/repo-management
 
-## 1.3.6 - *2023-02-14*
-
 ## 1.3.5 - *2022-12-11*
 
 Standardise files with files in sous-chefs/repo-management
 
 ## 1.3.4 - *2022-02-17*
 
-- Standardise files with files in sous-chefs/repo-management
-- Remove delivery folder
+* Standardise files with files in sous-chefs/repo-management
+* Remove delivery folder
 
 ## 1.3.3 - *2021-08-30*
 
-- Standardise files with files in sous-chefs/repo-management
+* Standardise files with files in sous-chefs/repo-management
 
 ## 1.3.1 (2020-09-16)
 
-- resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
-- resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
-- Fix frozen method error in libraries/chef_graphite_carbon_config_converter.rb
-- Cookstyle Bot Auto Corrections with Cookstyle 6.16.8
+* resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
+* resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:37:7 refactor: `ChefModernize/ActionMethodInResource`
+* Fix frozen method error in libraries/chef_graphite_carbon_config_converter.rb
+* Cookstyle Bot Auto Corrections with Cookstyle 6.16.8
 
 ## 1.3.0 (2020-06-06)
 
-- Fix bug with changing a frozen string in ruby 2.7.0
+* Fix bug with changing a frozen string in ruby 2.7.0
 
 ## 1.2.0 (2020-05-27)
 
-- Fix Django/Twisted overridden version ([#318])
+* Fix Django/Twisted overridden version ([#318])
 
 ## 1.1.1 - (2020-05-14)
 
-- resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:50:83 convention: `Layout/TrailingWhitespace`
-- resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:50:84 refactor: `ChefModernize/FoodcriticComments`
-- resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:48:83 convention: `Layout/TrailingWhitespace`
-- resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:48:84 refactor: `ChefModernize/FoodcriticComments`
-- Migrate to github actions
-- Ran linters and addressed issues
-- Ran latest cookstyle
-- Remove unnecessary actions method in the resources
+* resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:50:83 convention: `Layout/TrailingWhitespace`
+* resolved cookstyle error: libraries/provider_carbon_conf_accumulator.rb:50:84 refactor: `ChefModernize/FoodcriticComments`
+* resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:48:83 convention: `Layout/TrailingWhitespace`
+* resolved cookstyle error: libraries/provider_storage_conf_accumulator.rb:48:84 refactor: `ChefModernize/FoodcriticComments`
+* Migrate to github actions
+* Ran linters and addressed issues
+* Ran latest cookstyle
+* Remove unnecessary actions method in the resources
 
 ## [1.1.0] - 2019-09-05
 
-- Fix cookstyle issues
-- Should now work with Chef 13, 14 and 15
-- Syntax and styling updates
-- Compatibility with Chef 13 (.[@oscar123mendoza])
+* Fix cookstyle issues
+* Should now work with Chef 13, 14 and 15
+* Syntax and styling updates
+* Compatibility with Chef 13 (.[@oscar123mendoza])
 
 ## [1.0.4] - 2016-01-29
 
 ### Added
 
-- Adds License and Code of Conduct
+* Adds License and Code of Conduct
 
 ### Fixed
 
-- Syntax and styling updates
-- Use full Twisted version number
-- Manage graphite nofile ulimit
-- Fixes carbon source
+* Syntax and styling updates
+* Use full Twisted version number
+* Manage graphite nofile ulimit
+* Fixes carbon source
 
 ### Known Issues
 
-- Reordering of Carbon .ini [241](https://github.com/sous-chefs/graphite/issues/241)
-- Graphite web timeout when restarting [224](https://github.com/sous-chefs/graphite/issues/224)
+* Reordering of Carbon .ini [241](https://github.com/sous-chefs/graphite/issues/241)
+* Graphite web timeout when restarting [224](https://github.com/sous-chefs/graphite/issues/224)
 
 ## [1.0.2] - 2014-11-18
 
 ### Fixed
 
-- README improvements to address resource usage and removal of Apache dependency ([@webframp], [#187])
-- restart graphite-web in graphite_example sample recipe ([@obazoud], [#182])
-- remove unused `['graphite']['web_server']` attribute ([@obazoud], [#181])
+* README improvements to address resource usage and removal of Apache dependency ([@webframp], [#187])
+* restart graphite-web in graphite_example sample recipe ([@obazoud], [#182])
+* remove unused `['graphite']['web_server']` attribute ([@obazoud], [#181])
 
 ## [1.0.1] - 2014-08-27
 
 ### Fixed
 
-- Readme improvements.
+* Readme improvements.
 
 ## [1.0.0] - 2014-08-27
 
 ### Breaking Changes
 
-- Initial release of graphite library style cookbook. Complete rewrite of cookbook to provide reusable resources. Breaks backward compatibility with cookbook version prior 1.0\. ([@webframp], [@fnichol], [@agoddard])
+* Initial release of graphite library style cookbook. Complete rewrite of cookbook to provide reusable resources. Breaks backward compatibility with cookbook version prior 1.0\. ([@webframp], [@fnichol], [@agoddard])
 
 <!-- - The following link definition list is generated by PimpMyChangelog - -->
 
