@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [2.0.10](https://github.com/sous-chefs/graphite/compare/2.0.9...v2.0.10) (2025-10-15)
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#406](https://github.com/sous-chefs/graphite/issues/406)) ([28928ad](https://github.com/sous-chefs/graphite/commit/28928ad9aad096e5b02118778868246cbdfa4acc))
+
 ## 2.0.8 - *2025-06-08*
 
 Standardise files with files in sous-chefs/repo-management
