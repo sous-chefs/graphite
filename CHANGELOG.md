@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 Standardise files with files in sous-chefs/repo-management
 Standardise files with files in sous-chefs/repo-management
 
+## [3.0.0](https://github.com/sous-chefs/graphite/compare/v2.0.10...v3.0.0) (2026-05-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* migrate graphite to custom resources ([#412](https://github.com/sous-chefs/graphite/issues/412))
+
+### Features
+
+* migrate graphite to custom resources ([#412](https://github.com/sous-chefs/graphite/issues/412)) ([301c37f](https://github.com/sous-chefs/graphite/commit/301c37f07b2052057d1b574368d6fc124e5fc1b8))
+
+
+### Bug Fixes
+
+* **ci:** Update workflows to use release pipeline ([#406](https://github.com/sous-chefs/graphite/issues/406)) ([28928ad](https://github.com/sous-chefs/graphite/commit/28928ad9aad096e5b02118778868246cbdfa4acc))
+* close block in matchers ([a3b661e](https://github.com/sous-chefs/graphite/commit/a3b661e50cce2fa4081467fab97fc9e1116c6bb3))
+* install django/twisted versions override ([#347](https://github.com/sous-chefs/graphite/issues/347)) ([fb4462d](https://github.com/sous-chefs/graphite/commit/fb4462db5e42b1ad1cc98ff8c068c3b4d63fe96d))
+
 ## [2.0.10](https://github.com/sous-chefs/graphite/compare/2.0.9...v2.0.10) (2025-10-15)
 
 
