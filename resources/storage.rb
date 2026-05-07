@@ -1,61 +1,49 @@
-unified_mode true
-#
-# Cookbook:: graphite
-# Resource:: storage
-#
-# Copyright:: 2014-2016, Heavy Water Software Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+# frozen_string_literal: true
 
-property :prefix, String, name_property: true
+provides :graphite_storage
+unified_mode true
+
+use '_partial/_paths'
+
+property :path, String, name_property: true
 property :package_name, String, default: 'whisper'
 property :version, String
-property :type, String, default: 'whisper'
+property :backend_type, String, default: 'whisper'
+property :install_type, Symbol, equal_to: %i(package pip source), default: :package
+
+default_action :create
 
 action :create do
-  manage_python_pip(:install)
-  manage_directory(:create)
-end
+  directory new_resource.path do
+    owner new_resource.user
+    group new_resource.group
+    recursive true
+  end
 
-action :upgrade do
-  manage_python_pip(:upgrade)
-  manage_directory(:create)
+  package 'python3-whisper' do
+    only_if { new_resource.install_type == :package && platform_family?('debian') }
+  end
+
+  execute "install #{new_resource.package_name} into #{new_resource.base_dir}" do
+    command lazy {
+      package_name = new_resource.package_name
+      package_name = "#{package_name}==#{new_resource.version}" if new_resource.version
+      "#{new_resource.base_dir}/bin/pip install --no-binary=:all: #{package_name}"
+    }
+    user new_resource.user
+    group new_resource.group
+    only_if { %i(pip source).include?(new_resource.install_type) }
+  end
 end
 
 action :delete do
-  manage_python_pip(:remove)
-  manage_directory(:delete)
-end
-
-action_class do
-  def manage_python_pip(resource_action)
-    python_package new_resource.package_name do
-      version new_resource.version if new_resource.version
-      Chef::Log.info 'Installing whisper pip package'
-      action resource_action
-      user node['graphite']['user']
-      group node['graphite']['group']
-      install_options '--no-binary=:all:'
-      virtualenv node['graphite']['base_dir']
-    end
+  execute "remove #{new_resource.package_name} from #{new_resource.base_dir}" do
+    command "#{new_resource.base_dir}/bin/pip uninstall -y #{new_resource.package_name}"
+    only_if { %i(pip source).include?(new_resource.install_type) }
   end
 
-  def manage_directory(resource_action)
-    directory new_resource.prefix do
-      recursive true
-      Chef::Log.info "Removing storage path: #{new_resource.prefix}"
-      action resource_action
-    end
+  directory new_resource.path do
+    recursive true
+    action :delete
   end
 end
