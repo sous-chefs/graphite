@@ -4,7 +4,10 @@ rules:
   line-length:
     max: 256
     level: warning
-  document-start: disable
+  truthy:
+    allowed-values: ['true', 'false', 'on']
+  document-start:
+    present: true
   braces:
     forbid: false
     min-spaces-inside: 0

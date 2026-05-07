@@ -2,28 +2,38 @@
 driver:
   name: vagrant
 
+transport:
+  max_wait_until_ready: 600
+  connection_retries: 10
+  connection_retry_sleep: 10
+
 provisioner:
-  name: chef_zero
+  name: chef_infra
+  product_name: chef
+  product_version: latest
+  channel: stable
+  chef_license: accept
   deprecations_as_errors: true
 
 verifier:
   name: inspec
+  sudo: true
 
 platforms:
-  - name: centos-7
-  - name: debian-8
-  - name: debian-9
-  - name: ubuntu-18.04
-  - name: ubuntu-20.04
+  - name: debian-12
   - name: ubuntu-22.04
+  - name: ubuntu-24.04
+
+x-run_lists:
+  default: &default_run_list
+    - recipe[test::default]
+
+x-verifiers:
+  default: &default_verifier
+    inspec_tests:
+      - path: test/integration/default
 
 suites:
   - name: default
-    run_list:
-      - recipe[test::single_node]
-    attributes:
-      graphite:
-        listen_port: "8080"
-        uwsgi:
-          workers: 4
-          listen_http: true
+    run_list: *default_run_list
+    verifier: *default_verifier

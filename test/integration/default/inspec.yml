@@ -1,0 +1,7 @@
+---
+name: default
+title: Graphite Default Tests
+maintainer: Sous Chefs
+license: Apache-2.0
+summary: Smoke tests for the graphite cookbook
+version: 1.0.0

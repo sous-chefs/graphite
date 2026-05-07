@@ -2,6 +2,7 @@
 AllCops:
   Exclude:
     - 'Dangerfile'
+    - 'vendor/**/*'
 
 Lint/ParenthesesAsGroupedExpression:
   Exclude:

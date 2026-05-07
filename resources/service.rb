@@ -1,89 +1,113 @@
-unified_mode true
-#
-# Cookbook:: graphite
-# Resource:: carbon_service
-#
-# Copyright:: 2014-2016, Heavy Water Software Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+# frozen_string_literal: true
 
+provides :graphite_service
+unified_mode true
+
+use '_partial/_paths'
+
+property :service, String, name_property: true
 property :debug, [true, false], default: false
+property :limit_nofile, Integer, default: 1024
+property :bin_dir, String, default: '/usr/bin'
+
+default_action %i(create enable start)
+
+action :create do
+  systemd_unit "#{service_name}.service" do
+    content service_unit_content
+    action :create
+  end
+end
 
 action :enable do
-  manage_systemd_service(:enable)
+  service service_name do
+    supports status: true
+    action :enable
+  end
+end
+
+action :start do
+  service service_name do
+    supports status: true
+    action :start
+  end
 end
 
 action :disable do
-  manage_systemd_service(:disable)
+  service service_name do
+    supports status: true
+    action :disable
+  end
+end
+
+action :stop do
+  service service_name do
+    supports status: true
+    action :stop
+  end
 end
 
 action :restart do
-  manage_systemd_service(:restart)
+  service service_name do
+    supports status: true
+    action :restart
+  end
 end
 
 action :reload do
-  manage_systemd_service(:reload)
+  service service_name do
+    supports status: true
+    action :reload
+  end
+end
+
+action :delete do
+  service service_name do
+    supports status: true
+    action %i(stop disable)
+  end
+
+  systemd_unit "#{service_name}.service" do
+    action :delete
+  end
 end
 
 action_class do
-  def manage_systemd_service(resource_action)
-    virtual_env_path = "#{node['graphite']['base_dir']}/bin"
-    exec_attrs = instance ? ["--instance #{instance}"] : []
-    exec_attrs << (new_resource.debug ? '--debug' : '--nodaemon')
-    exec_attrs << 'start'
-    exec_attrs = exec_attrs.join(' ')
-
-    service_unit_content = {
+  def service_unit_content
+    {
       'Unit' => {
-        'Description' => "Graphite Carbon #{type} #{instance}",
+        'Description' => "Graphite Carbon #{carbon_type} #{carbon_instance}",
         'After' => 'network.target',
       },
       'Service' => {
         'Type' => 'simple',
-        'ExecStart' => "#{virtual_env_path}/python #{virtual_env_path}/carbon-#{type}.py #{exec_attrs}",
-        'User' => node['graphite']['user'],
-        'Group' => node['graphite']['group'],
+        'ExecStart' => "#{new_resource.bin_dir}/carbon-#{carbon_type} --config=#{new_resource.base_dir}/conf/carbon.conf --pidfile=#{new_resource.storage_dir}/#{service_name}.pid #{exec_attrs}",
+        'User' => new_resource.user,
+        'Group' => new_resource.group,
         'Restart' => 'on-abort',
-        'LimitNOFILE' => node['graphite']['limits']['nofile'],
-        'PIDFile' => "#{node['graphite']['storage_dir']}/#{service_name}.pid",
+        'LimitNOFILE' => new_resource.limit_nofile,
+        'PIDFile' => "#{new_resource.storage_dir}/#{service_name}.pid",
       },
       'Install' => { 'WantedBy' => 'multi-user.target' },
     }
+  end
 
-    systemd_unit "#{service_name}.service" do
-      content service_unit_content
-      action :create
-      notifies(:restart, "service[#{service_name}]")
-    end
-
-    service service_name do
-      supports status: true
-      action resource_action
-    end
+  def exec_attrs
+    attrs = carbon_instance ? ["--instance #{carbon_instance}"] : []
+    attrs << (new_resource.debug ? '--debug' : '--nodaemon')
+    attrs << 'start'
+    attrs.join(' ')
   end
 
   def service_name
-    'carbon-' + new_resource.name.tr(':', '-')
+    'carbon-' + new_resource.service.tr(':', '-')
   end
 
-  def type
-    t, = new_resource.name.split(':')
-    t
+  def carbon_type
+    new_resource.service.split(':').first
   end
 
-  def instance
-    _, i = new_resource.name.split(':')
-    i
+  def carbon_instance
+    new_resource.service.split(':')[1]
   end
 end
